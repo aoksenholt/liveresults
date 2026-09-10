@@ -23,13 +23,13 @@ $_NOCLASSCHOSEN = "Ingen klasse valgt!";
 $_HELPREDRESULTS = "Nylig oppdaterte resultater er markert med rødt.";
 $_NOTICE = "Merk at resultatene på denne siden ikke er offisielle. For offisielle resultat henvises det til arrangørens hjemmeside.";
 
-$_STATUSDNS = "ikke startet";
+$_STATUSDNS = "ikke start";
 $_STATUSDNF = "brutt";
 $_STATUSWO = "avmeldt";
 $_STATUSMOVEDUP = "oppflyttet";
-$_STATUSNOTSTARTED = "ikke startet";
+$_STATUSNOTSTARTED = "ikke start";
 $_STATUSOK = "OK";
-$_STATUSMP = "disket";
+$_STATUSMP = "feilst.";
 $_STATUSDSQ = "disket";
 $_STATUSOT =  "over makstid";
 $_STATUSNC =  "utenfor konk.";

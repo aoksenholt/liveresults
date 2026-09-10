@@ -197,9 +197,9 @@ echo ("<?xml version=\"1.0\" encoding=\"$CHARSET\" ?>\n");
   <link rel="stylesheet" href="css/style-liveres.css?v=20260830">
   <script src="<?= $DataTablesURL ?>datatables.min.js"></script>
   <script language="javascript" type="text/javascript" src="js/liveresults.js?v=20260830"></script>
-  <script language="javascript" type="text/javascript" src="js/liveresults.common.js?v=20260830"></script>
+  <script language="javascript" type="text/javascript" src="js/liveresults.common.js?v=20260910"></script>
   <?php if ($isTime4oComp) { ?>
-    <script language="javascript" type="text/javascript" src="js/liveresults.time4o.js?v=20260830"></script>
+    <script language="javascript" type="text/javascript" src="js/liveresults.time4o.js?v=20260910"></script>
   <?php } ?>
   <script language="javascript" type="text/javascript" src="js/FileSaver.js"></script>
   <script type="module" src="https://hstrekk.ru-stad.name/hstrekk.js"></script>
