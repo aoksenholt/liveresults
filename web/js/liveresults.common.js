@@ -391,6 +391,8 @@
       return this.resources["_FREESTART"];
     else if (time == -1)
       return "";
+    else if (time == -10)
+      return this.resources["_STATUSNOTSHOWN"];
     else if (time < 0)
       return "*"
     else {

@@ -74,7 +74,8 @@ echo ("<?xml version=\"1.0\" encoding=\"$CHARSET\" ?>\n");
 
     var res = null;
     var Resources = {
-      _FREESTART: "<?= $_FREESTART ?>"
+      _FREESTART: "<?= $_FREESTART ?>",
+      _STATUSNOTSHOWN: "<?= $_STATUSNOTSHOWN ?>"
     };
     var runnerStatus = Array();
     runnerStatus[0] = "<?= $_STATUSOK ?>";

@@ -24,8 +24,9 @@
     const relay = (classEntry.eventForm == "Relay");
     const resultListMode = classEntry.resultListMode ?? null;
     const chaseStart = (classEntry.startType == "Chasing");
-    const unordered = (resultListMode == "Unordered");
-    const ordered = !["Unordered", "UnorderedNoTimes"].includes(resultListMode);
+    const unordered = ["Unordered", "UnorderedNoTimes"].includes(resultListMode);
+    const noTimes = (resultListMode === "UnorderedNoTimes");
+    const ordered = !unordered;
     const showLapTimes = (classEntry.showLapTimes && ordered) ?? false;
 
     var intermediateControls = [];
@@ -79,7 +80,7 @@
       }
 
       // Add control for showing time of unordered classes
-      if (unordered)
+      if (unordered && !noTimes)
         splitcontrols.push({
           code: -999,
           order: 999,
@@ -302,6 +303,7 @@
     }
 
     const unordered = ["Unordered", "UnorderedNoTimes"].includes(classInfo.resultListMode);
+    const noTimes = (classInfo.resultListMode === "UnorderedNoTimes");
     const chaseStart = (classInfo.startType == "Chasing");
     var splits = {};
     var rawResult, rawBehind, place, statusKey, statusValue;
@@ -371,8 +373,8 @@
         continue;
       const changedSplit = val?.updated ? Math.floor(Date.parse(val.updated) / 1000) : 0;
       const code = (Number(key.split('-')[1]) * 1000 + Number(key.split('-')[0])) * (unordered ? -1 : 1);
-      var timeHundredths = val?.time != null ? Math.floor(val.time / 10) : "";
-      var behindHundredths = val?.behind != null ? Math.floor(val.behind / 10) : "";
+      var timeHundredths = noTimes ? -10 : (val?.time != null ? Math.floor(val.time / 10) : "");
+      var behindHundredths = noTimes ? "" : (val?.behind != null ? Math.floor(val.behind / 10) : "");
 
       // Leg times relay
       if (classInfo.isRelay && entry.leg?.number >= 2) {
@@ -415,11 +417,13 @@
     const changed = changedIso ? Math.floor(Date.parse(changedIso) / 1000) : 0;
 
     if (statusValue == 13) { // Finished OK in unordered class
-      splits["-999"] = result > 0 ? result : "";
-      splits["-999_status"] = 13;
-      splits["-999_changed"] = changed;
-      splits["-999_timeplus"] = 0;
-      splits["-999_place"] = "F";
+      if (!noTimes) {
+        splits["-999"] = result > 0 ? result : "";
+        splits["-999_status"] = 13;
+        splits["-999_changed"] = changed;
+        splits["-999_timeplus"] = 0;
+        splits["-999_place"] = "F";
+      }
       result = entry.person?.id != null ? entry.person.id : 100;
       place = "F";
     }

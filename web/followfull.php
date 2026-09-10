@@ -265,6 +265,7 @@ echo ("<?xml version=\"1.0\" encoding=\"$CHARSET\" ?>\n");
       _TOTAL: "<?= $_TOTAL ?>",
       _CLASS: "<?= $_CLASS ?>",
       _FREESTART: "<?= $_FREESTART ?>",
+      _STATUSNOTSHOWN: "<?= $_STATUSNOTSHOWN ?>",
       _NEWSTATUS: "<?= $_NEWSTATUS ?>",
       _LASTPASSWITHSTATUS: "<?= $_LASTPASSWITHSTATUS ?>"
     };
