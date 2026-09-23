@@ -1,4 +1,4 @@
-import type { ResultRow, SplitControl, SplitValue } from './model';
+import type { ResultRow, SplitControl, SplitEntry } from './model';
 
 interface Sortable {
   order?: number | null;
@@ -70,7 +70,7 @@ export function startListSorter(a: ResultRow, b: ResultRow): number {
   return a.dbid - b.dbid;
 }
 
-export function isMissing(v: SplitValue | undefined): v is undefined | '' {
+export function isMissing(v: SplitEntry): v is undefined | '' {
   return v == undefined || v === '';
 }
 

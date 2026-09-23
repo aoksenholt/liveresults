@@ -160,3 +160,12 @@ export function findRank(sorted: number[], val: number): number {
   }
   return rank;
 }
+
+/** What list views need to format times and shorten names like the legacy viewer. */
+export interface DisplayFormat {
+  labels: TimeLabels;
+  language: string;
+  showTenths?: boolean;
+  maxNameLength: number;
+  maxClubLength: number;
+}

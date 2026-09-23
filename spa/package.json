@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "record-fixtures": "node --use-system-ca scripts/record-fixtures.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "convert-lang": "node scripts/convert-lang.mjs"
   },
   "dependencies": {
     "react": "^19.3.0",

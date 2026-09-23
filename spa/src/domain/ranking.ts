@@ -1,4 +1,4 @@
-import type { ResultRow, SplitControl, SplitValue } from './model';
+import type { ResultRow, SplitControl, SplitEntry, SplitValue } from './model';
 import { isMissing, resultSorter, splitSort } from './sorting';
 
 export interface RankingContext {
@@ -67,7 +67,7 @@ export function sortByDistAndSplitPlace(
   return b.progress - a.progress;
 }
 
-const isNumberAbove = (v: SplitValue | undefined, than: SplitValue) =>
+const isNumberAbove = (v: SplitEntry, than: SplitEntry) =>
   typeof v === 'number' && v > (than as number);
 
 /**
@@ -166,7 +166,7 @@ export function updateSplitPlaces(
 
       const spVal = row.splits[code];
       if (!isMissing(spVal)) {
-        spTime = spVal;
+        spTime = spVal as SplitValue;
         if ((bestSplitTime as number) < 0 && isRankable(status)) {
           bestSplitTime = spTime;
           bestSplitKey = j;
@@ -200,4 +200,46 @@ export function updateSplitPlaces(
       }
     }
   }
+}
+
+/** Legacy `setQualLimit` for Time4o races, where limits only come from the class; -1 means none. */
+export function qualificationLimit(cls: { qualificationLimit: number | null } | null): number {
+  return cls?.qualificationLimit ?? -1;
+}
+
+/**
+ * Index of the first runner outside the qualification limit, ported from the
+ * legacy `updateQualLimMarks`; -1 when there is no limit or it is not reached.
+ * A limit below 1 is a fraction of the runners that started. `results` are in
+ * table order, `virtualPositions` override their `virtual_position` while predicting.
+ */
+export function firstNonQualifier(
+  results: ResultRow[],
+  qualLim: number | null,
+  rankedStartlist: boolean,
+  virtualPositions: number[] | null = null,
+): number {
+  if (qualLim == null || qualLim <= 0) return -1;
+  const qualNo =
+    qualLim < 1
+      ? Math.ceil(qualLim * (results.length - results.filter((r) => r.status == 1).length))
+      : qualLim;
+  let curPos: string | null = null;
+  let instaRanked = false;
+  for (let i = 0; i < results.length; i++) {
+    const r = results[i]!;
+    const lastPos: string | null = curPos;
+    curPos = r.place;
+    const vp = virtualPositions?.[i] ?? r.virtual_position!;
+    if (vp != i) instaRanked = true;
+    if (
+      (rankedStartlist || r.progress > 0) &&
+      ((curPos == '-' && vp <= qualNo - 1) ||
+        (!instaRanked && vp > qualNo - 1 && curPos != lastPos) ||
+        (instaRanked && vp == qualNo))
+    )
+      return i;
+    if (curPos == '') curPos = '-';
+  }
+  return -1;
 }

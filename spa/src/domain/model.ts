@@ -35,9 +35,11 @@ export type SplitValue = number | string;
 
 /**
  * Split times keyed by control code, with companion keys
- * `<code>_status`, `<code>_place`, `<code>_timeplus` and `<code>_changed`.
+ * `<code>_status`, `<code>_place`, `<code>_timeplus`, `<code>_changed` and `<code>_estimate`.
  */
-export type Splits = Record<string, SplitValue>;
+export type SplitEntry = SplitValue | boolean | undefined;
+
+export type Splits = Record<string, SplitEntry>;
 
 export interface SplitControl {
   code: number;
