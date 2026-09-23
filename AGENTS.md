@@ -61,6 +61,8 @@ Shared by client, PHP and JS (see `Doc/createOnlineDatabase.sql.txt`; schema cha
 
 ## Time4o SPA (in progress – `spa/`)
 
+The phased plan and progress are in `spa/PLAN.md` (Norwegian); tick off steps there when they are done.
+
 A standalone React SPA that shows live results for **Time4o races only**, inspired by [mattias242/liveresults](https://github.com/mattias242/liveresults) (which forks petlof upstream, not this repo – its code targets the old `web/api.php` and cannot be copied as-is). It talks directly to the public Time4o API from the browser; it does **not** use the C# client, MySQL or any PHP in this repo. The legacy site in `web/` is untouched and keeps working.
 
 Stack: React + TypeScript + Vite + Vitest + Testing Library, Node 24. Hosted as static files (Cloudflare Pages). CI: `.github/workflows/spa.yml`.
