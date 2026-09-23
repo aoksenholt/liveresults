@@ -1,16 +1,16 @@
 name: Time4o SPA
 on:
   push:
-    branches: [master]
+    branches: ["**"]
     paths:
       - "spa/**"
       - "web/js/liveresults*.js"
       - ".github/workflows/spa.yml"
-  pull_request:
-    paths:
-      - "spa/**"
-      - "web/js/liveresults*.js"
-      - ".github/workflows/spa.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: spa-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   check:
