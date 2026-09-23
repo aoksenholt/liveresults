@@ -408,7 +408,8 @@ export function clubResults(
   return { clubName: rows[0]?.organisation ?? '', results: rows };
 }
 
-export type ListType = 'startlist' | 'plainresults';
+/** `sprint` keeps runners on course, for the heats of one sprint class. */
+export type ListType = 'startlist' | 'plainresults' | 'sprint';
 
 export function groupedResults(
   entries: Entry[],

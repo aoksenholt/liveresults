@@ -1,87 +1,63 @@
-import type { Entry, RaceClass } from '../api/types';
-import chase from '../api/__fixtures__/chase.json';
-import interval from '../api/__fixtures__/interval.json';
-import lapTimes from '../api/__fixtures__/lap-times.json';
-import massStart from '../api/__fixtures__/mass-start.json';
-import relay from '../api/__fixtures__/relay.json';
-import unorderedNoTimes from '../api/__fixtures__/unordered-no-times.json';
-import unordered from '../api/__fixtures__/unordered.json';
-import { createLegacyViewer } from '../test/legacy';
+import {
+  cases,
+  damagedSplits,
+  FIXTURES,
+  midRace,
+  multiPass,
+  runLegacyPipeline,
+} from '../test/fixtures';
+import type { Entry } from '../api/types';
 import type { ClassInfo, ResultRow } from './model';
 import {
   checkForMassStart,
+  firstNonQualifier,
+  qualificationLimit,
   sortByDist,
   updateResultVirtualPosition,
   updateSplitPlaces,
 } from './ranking';
-import { classResults, normalizeClasses } from './time4o';
+import { buildClassView } from './pipeline';
+import { createLegacyViewer } from '../test/legacy';
 
-const FIXTURES = {
-  interval,
-  massStart,
-  chase,
-  unordered,
-  unorderedNoTimes,
-  lapTimes,
-  relay,
-} as unknown as Record<string, { raceClass: RaceClass; entries: Entry[] }>;
-
-const cases = Object.entries(FIXTURES).flatMap(([name, f]) =>
-  normalizeClasses([f.raceClass]).map((cls) => {
-    const entries = f.entries.filter((e) => !cls.isRelay || e.raceClassId === cls.id);
-    return [`${name} ${cls.className}`, cls, entries] as const;
-  }),
-);
-
-function runPipeline(cls: ClassInfo, entries: Entry[]): ResultRow[] {
-  const data = classResults(entries, cls);
-  if (data.updatedSplits.some(Boolean))
-    updateSplitPlaces(data.results, data.splitcontrols, data.updatedSplits);
-  const isMassStart = checkForMassStart(data.results) || cls.isRelay;
-  updateResultVirtualPosition(data.results, { isMassStart, splits: data.splitcontrols });
-  return data.results;
-}
-
-function runLegacyPipeline(cls: ClassInfo, entries: Entry[]): ResultRow[] {
-  const legacy = createLegacyViewer();
-  const data = legacy.Time4oResultsToLiveres({ type: 'results', data: entries }, cls);
-  if (data.updatedSplits.some(Boolean)) legacy.updateSplitPlaces(data, data.updatedSplits);
-  legacy.curClassSplits = data.splitcontrols;
-  legacy.curClassIsMassStart = legacy.checkForMassStart(data) || cls.isRelay;
-  legacy.updateResultVirtualPosition(data.results);
-  return data.results;
-}
-
-// Fixtures are recorded after the races finished; strip results to get runners still on course.
-function midRace(entries: Entry[]): Entry[] {
-  return entries.map((e, i) => {
-    if (i % 3 === 0) return e;
-    const splits = Array.isArray(e.intermediateTimes) ? {} : { ...e.intermediateTimes };
-    const keep = i % 4;
-    Object.keys(splits)
-      .slice(keep)
-      .forEach((k) => delete splits[k]);
-    const onCourse = { status: i % 5 === 0 ? 'Inactive' : 'Active' };
-    return {
-      ...e,
-      status: onCourse,
-      overallStatus: onCourse,
-      position: null,
-      time: { ...e.time, time: null, behind: null },
-      overallResult: { ...e.overallResult, position: null, time: null, behind: null },
-      intermediateTimes: splits,
-    } as Entry;
-  });
-}
+const viewOf = (cls: ClassInfo, entries: Entry[]) => {
+  const { results, splitsStatus, splitsBest, shortSprint } = buildClassView(cls, entries);
+  return { results, splitsStatus, splitsBest, shortSprint };
+};
 
 describe.each(cases)('legacy parity: %s', (_name, cls, entries) => {
   it('ranks results and split places like the legacy viewer', () => {
-    expect(runPipeline(cls, entries)).toEqual(runLegacyPipeline(cls, entries));
+    expect(viewOf(cls, entries)).toEqual(runLegacyPipeline(cls, entries));
   });
 
   it('ranks runners on course like the legacy viewer', () => {
     const live = midRace(entries);
-    expect(runPipeline(cls, live)).toEqual(runLegacyPipeline(cls, live));
+    expect(viewOf(cls, live)).toEqual(runLegacyPipeline(cls, live));
+  });
+
+  it('estimates missing and unlikely split times like the legacy viewer', () => {
+    const damaged = damagedSplits(entries);
+    expect(viewOf(cls, damaged)).toEqual(runLegacyPipeline(cls, damaged));
+    const live = midRace(damaged);
+    expect(viewOf(cls, live)).toEqual(runLegacyPipeline(cls, live));
+  });
+});
+
+describe('legacy parity: multi-pass controls', () => {
+  it('moves split times to the matching pass like the legacy viewer', () => {
+    const { cls, entries } = multiPass(FIXTURES.interval!);
+    expect(cls.splitcontrols.map((s) => s.code)).toContain(2031);
+    const damaged = damagedSplits(entries).map((e, i) => {
+      const splits = e.intermediateTimes as Record<string, { time: number | null }>;
+      if (i % 2 === 1 || !splits?.['31-1'] || !splits['31-2']) return e;
+      // Only the second pass registered, delivered as the first.
+      const { ['31-2']: second, ...rest } = splits;
+      return { ...e, intermediateTimes: { ...rest, '31-1': second } } as unknown as Entry;
+    });
+    const view = viewOf(cls, damaged);
+    expect(view).toEqual(runLegacyPipeline(cls, damaged));
+    expect(
+      view.results.some((r) => Object.keys(r.splits).some((k) => k.endsWith('_estimate'))),
+    ).toBe(true);
   });
 });
 
@@ -177,5 +153,65 @@ describe('updateSplitPlaces', () => {
     expect(byId[1]).toMatchObject({ '101031_place': 2, '101031_timeplus': 1000 });
     expect(byId[3]).toMatchObject({ '101031_place': '-', '101031_status': 3 });
     expect(byId[4]).toMatchObject({ '101031_timeplus': -2 });
+  });
+});
+
+describe.each(cases)('legacy parity: qualification limit %s', (_name, cls, entries) => {
+  it.each([
+    ['finished', entries],
+    ['mid race', midRace(entries)],
+    [
+      'with DNS',
+      entries.map((e, i) =>
+        i % 3 == 1 ? ({ ...e, status: { status: 'DidNotStart' } } as Entry) : e,
+      ),
+    ],
+  ])('marks the first non-qualifier like updateQualLimMarks (%s)', (_variant, live) => {
+    const { results } = buildClassView(cls, live);
+    for (const qualLim of [-1, 1, 3, 10, 0.5])
+      for (const rankedStartlist of [false, true]) {
+        const legacy = structuredClone(results) as (ResultRow & { DT_RowClass?: string })[];
+        createLegacyViewer({ rankedStartlist }).updateQualLimMarks(legacy, qualLim);
+        expect(firstNonQualifier(results, qualLim, rankedStartlist)).toBe(
+          legacy.findIndex((r) => r.DT_RowClass == 'firstnonqualifier'),
+        );
+      }
+  });
+});
+
+describe('firstNonQualifier', () => {
+  const row = (place: string, vp: number, status = 0, progress = 100) =>
+    ({ place, virtual_position: vp, status, progress }) as ResultRow;
+
+  it.each([
+    ['count', [row('1', 0), row('2', 1), row('3', 2), row('4', 3)], 2],
+    ['tie at the limit', [row('1', 0), row('2', 1), row('2', 2), row('4', 3)], 2],
+    ['fraction', [row('1', 0), row('2', 1), row('3', 2), row('', 3, 1, 0)], 0.5],
+    ['on course', [row('1', 0), row('', 2, 9, 50), row('2', 1), row('3', 3)], 2],
+    ['unranked', [row('-', 0), row('-', 1), row('-', 2)], 2],
+    ['off', [row('1', 0)], -1],
+  ])('matches legacy updateQualLimMarks (%s)', (_name, results, qualLim) => {
+    const legacy = createLegacyViewer({ rankedStartlist: true });
+    const copy = structuredClone(results);
+    legacy.updateQualLimMarks(copy, qualLim);
+    const expected = copy.findIndex(
+      (r) => (r as { DT_RowClass?: string }).DT_RowClass == 'firstnonqualifier',
+    );
+    expect(firstNonQualifier(results, qualLim, true)).toBe(expected);
+  });
+
+  it('follows predicted positions', () => {
+    const row = (place: string, progress: number) =>
+      ({ place, progress, virtual_position: 0 }) as ResultRow;
+    const results = [row('1', 100), row('2', 100), row('', 50), row('3', 100)];
+    results.forEach((r, i) => (r.virtual_position = i));
+    expect(firstNonQualifier(results, 2, false)).toBe(2);
+    expect(firstNonQualifier(results, 2, false, [0, 2, 1, 3])).toBe(1);
+  });
+
+  it('takes the limit from the class', () => {
+    expect(qualificationLimit({ qualificationLimit: 6 })).toBe(6);
+    expect(qualificationLimit({ qualificationLimit: null })).toBe(-1);
+    expect(qualificationLimit(null)).toBe(-1);
   });
 });
