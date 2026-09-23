@@ -57,7 +57,6 @@ paritetstestene dekker.
 
 - [ ] Cloudflare Pages koblet til forken: `main` publiseres automatisk og hver PR får en forhåndsvisning
 - [ ] Eget domene (valgfritt)
-- [ ] Lenke eller videresending fra `followfull.php?time4o&comp=<uuid>` til `spa/?comp=<uuid>`
 - [ ] Test under et ekte løp, side om side med den gamle siden
 
 ## Løse tråder
@@ -70,3 +69,6 @@ paritetstestene dekker.
 
 Dette krever LiveRes-databasen og C#-klienten: strekkanalyse (`getclasscoursesplits`),
 radio- og speakervisninger via `radioapi.php`, meldinger og brikkebytte.
+
+Vi lenker ikke til og videresender ikke fra palkitt sin versjon (`liveres.live`). SPA-en
+lanseres på egen adresse.
