@@ -1,0 +1,3044 @@
+{
+ "race": {
+  "id": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+  "public": true,
+  "date": "2026-09-20",
+  "title": "NC dag 2 jaktstart",
+  "name": "NC dag 2 jaktstart",
+  "raceNumber": 2,
+  "eventForm": "Individual",
+  "event": {
+   "id": "a2a5f44a-1496-48d0-b1a1-f9948c3b6e6a",
+   "organisers": [
+    {
+     "id": "9fe3b20d-b389-4ffd-bea4-a1413f58ac43",
+     "name": "Frol il"
+    }
+   ],
+   "name": "NC/NM/O-idol 2026",
+   "test": false,
+   "startDate": "2026-09-18",
+   "startTime": "17:00:00",
+   "locale": "nb",
+   "timezone": "Europe/Oslo"
+  },
+  "identifierType": "Norway",
+  "identifier": "22775"
+ },
+ "raceClass": {
+  "cardTypes": [
+   {
+    "id": 1,
+    "name": "emiTag",
+    "punchingSystem": "emiTag"
+   }
+  ],
+  "created_at": "2026-09-17T06:24:53.511868Z",
+  "eventForm": "Individual",
+  "firstStart": "2026-09-20T07:00:00Z",
+  "intermediateControls": {
+   "155-1": {
+    "counter": 1,
+    "id": "155",
+    "name": "9.2 km",
+    "order": 6
+   },
+   "175-1": {
+    "name": "2.0 km",
+    "order": 1,
+    "id": "175",
+    "counter": 1
+   },
+   "131-1": {
+    "order": 2,
+    "name": "4.8 km",
+    "id": "131",
+    "counter": 1
+   },
+   "141-1": {
+    "counter": 1,
+    "name": "6.4 km",
+    "order": 3,
+    "id": "141"
+   },
+   "159-1": {
+    "order": 4,
+    "name": "7.7 km",
+    "id": "159",
+    "counter": 1
+   },
+   "148-1": {
+    "id": "148",
+    "counter": 1,
+    "order": 5,
+    "name": "8.0 km"
+   }
+  },
+  "minAge": 15,
+  "name": "H 21-",
+  "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+  "resultListMode": "Default",
+  "sex": "M",
+  "showLapTimes": false,
+  "startType": "Chasing",
+  "table": "TimeWithOverall",
+  "timingResolution": "Seconds",
+  "timingStartTimeSource": "StartList",
+  "updated_at": "2026-09-19T13:29:47.652887Z",
+  "id": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc"
+ },
+ "entries": [
+  {
+   "cards": {
+    "card1": {
+     "id": 212,
+     "cardNo": "1000001",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.982979Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "175-1": {
+     "behind": 194000,
+     "time": 3375846,
+     "intermediateControl": "175",
+     "updated": "2026-09-20T07:19:28+00:00",
+     "position": 6,
+     "counter": 1
+    },
+    "159-1": {
+     "behind": 1165000,
+     "counter": 1,
+     "updated": "2026-09-20T07:57:10+00:00",
+     "intermediateControl": "159",
+     "time": 5638119,
+     "position": 4
+    },
+    "141-1": {
+     "behind": 1322000,
+     "updated": "2026-09-20T07:48:28+00:00",
+     "intermediateControl": "141",
+     "time": 5114501,
+     "position": 3,
+     "counter": 1
+    },
+    "131-1": {
+     "time": 4400377,
+     "behind": 132000,
+     "intermediateControl": "131",
+     "counter": 1,
+     "position": 3,
+     "updated": "2026-09-20T07:36:35+00:00"
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "behind": 1138000,
+     "time": 5738038,
+     "counter": 1,
+     "position": 4,
+     "updated": "2026-09-20T07:58:50+00:00"
+    },
+    "155-1": {
+     "updated": "2026-09-20T08:08:13+00:00",
+     "intermediateControl": "155",
+     "behind": 835000,
+     "position": 3,
+     "counter": 1,
+     "time": 6300099
+    }
+   },
+   "organisation": {
+    "id": 10,
+    "name": "Frol IL"
+   },
+   "overallResult": {
+    "position": 2,
+    "time": 6369000,
+    "behind": 116000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 216,
+    "name": "Løper 1"
+   },
+   "position": 1,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:03:38+02:00",
+    "bibNo": 709,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 9,
+    "time": 2427000,
+    "behind": 218000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:09:56+00:00"
+   },
+   "time": {
+    "startTime": "2026-09-20T09:03:38+02:00",
+    "behind": 0,
+    "finishTime": "2026-09-20T10:09:20+02:00",
+    "time": 3942000,
+    "restart": false,
+    "updated": "2026-09-20T08:09:56+00:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.953272Z",
+   "id": "a2b23cba-78c5-4878-86c9-5a0d98b9971f"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardNo": "1000002",
+     "cardTypeId": 1,
+     "rental": false,
+     "id": 42
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.766403Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "counter": 1,
+     "updated": "2026-09-20T07:59:10+00:00",
+     "position": 5,
+     "time": 5758605,
+     "behind": 1158000,
+     "intermediateControl": "148"
+    },
+    "175-1": {
+     "updated": "2026-09-20T07:19:07+00:00",
+     "position": 4,
+     "counter": 1,
+     "intermediateControl": "175",
+     "time": 3354866,
+     "behind": 173000
+    },
+    "131-1": {
+     "position": 5,
+     "updated": "2026-09-20T07:37:44+00:00",
+     "counter": 1,
+     "time": 4472169,
+     "behind": 204000,
+     "intermediateControl": "131"
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "time": 5181505,
+     "updated": "2026-09-20T07:49:34+00:00",
+     "counter": 1,
+     "behind": 1389000,
+     "position": 6
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "counter": 1,
+     "time": 5663678,
+     "position": 5,
+     "behind": 1190000,
+     "updated": "2026-09-20T07:57:37+00:00"
+    },
+    "155-1": {
+     "intermediateControl": "155",
+     "time": 6335534,
+     "behind": 870000,
+     "position": 4,
+     "counter": 1,
+     "updated": "2026-09-20T08:08:47+00:00"
+    }
+   },
+   "organisation": {
+    "id": 4,
+    "name": "Tyrving IL"
+   },
+   "overallResult": {
+    "position": 3,
+    "time": 6400000,
+    "behind": 147000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 44,
+    "name": "Løper 2"
+   },
+   "position": 2,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:03:26+02:00",
+    "bibNo": 707,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 7,
+    "time": 2415000,
+    "behind": 206000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:10:04+00:00"
+   },
+   "time": {
+    "behind": 43000,
+    "updated": "2026-09-20T08:10:04+00:00",
+    "restart": false,
+    "finishTime": "2026-09-20T10:09:51+02:00",
+    "startTime": "2026-09-20T09:03:26+02:00",
+    "time": 3985000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.802774Z",
+   "id": "a2a5fc79-0806-4867-ab72-ae5a56fe8763"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 213,
+     "cardNo": "1000003",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.993866Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "175-1": {
+     "behind": 0,
+     "updated": "2026-09-20T07:16:16+00:00",
+     "position": 1,
+     "counter": 1,
+     "intermediateControl": "175",
+     "time": 3181504
+    },
+    "155-1": {
+     "counter": 1,
+     "intermediateControl": "155",
+     "time": 6182671,
+     "behind": 717000,
+     "position": 2,
+     "updated": "2026-09-20T08:06:16+00:00"
+    },
+    "131-1": {
+     "intermediateControl": "131",
+     "counter": 1,
+     "behind": 0,
+     "position": 1,
+     "time": 4268728,
+     "updated": "2026-09-20T07:34:22+00:00"
+    },
+    "159-1": {
+     "updated": "2026-09-20T07:54:35+00:00",
+     "position": 2,
+     "intermediateControl": "159",
+     "counter": 1,
+     "time": 5482622,
+     "behind": 1009000
+    },
+    "148-1": {
+     "counter": 1,
+     "behind": 976000,
+     "updated": "2026-09-20T07:56:10+00:00",
+     "position": 2,
+     "time": 5576358,
+     "intermediateControl": "148"
+    },
+    "141-1": {
+     "position": 2,
+     "intermediateControl": "141",
+     "updated": "2026-09-20T07:46:04+00:00",
+     "behind": 1179000,
+     "time": 4971696,
+     "counter": 1
+    }
+   },
+   "organisation": {
+    "id": 21,
+    "name": "Freidig"
+   },
+   "overallResult": {
+    "position": 1,
+    "time": 6253000,
+    "behind": 0
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 217,
+    "name": "Løper 3"
+   },
+   "position": 3,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:00:00+02:00",
+    "bibNo": 701,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 1,
+    "time": 2209000,
+    "behind": 0
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:09:22+00:00"
+   },
+   "time": {
+    "restart": false,
+    "time": 4044000,
+    "updated": "2026-09-20T08:09:22+00:00",
+    "startTime": "2026-09-20T09:00:00+02:00",
+    "finishTime": "2026-09-20T10:07:24+02:00",
+    "behind": 102000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.964082Z",
+   "id": "a2b23cba-b6f5-40b2-a9a3-74daeb9dead2"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 187,
+     "cardNo": "1000004",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.004842Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "131-1": {
+     "counter": 1,
+     "behind": 520000,
+     "position": 12,
+     "intermediateControl": "131",
+     "time": 4788992,
+     "updated": "2026-09-20T07:43:00+00:00"
+    },
+    "159-1": {
+     "updated": "2026-09-20T08:02:56+00:00",
+     "intermediateControl": "159",
+     "time": 5983816,
+     "behind": 1510000,
+     "counter": 1,
+     "position": 12
+    },
+    "175-1": {
+     "time": 3667879,
+     "counter": 1,
+     "behind": 486000,
+     "position": 12,
+     "intermediateControl": "175",
+     "updated": "2026-09-20T07:24:22+00:00"
+    },
+    "148-1": {
+     "behind": 1483000,
+     "updated": "2026-09-20T08:04:35+00:00",
+     "position": 11,
+     "counter": 1,
+     "intermediateControl": "148",
+     "time": 6083393
+    },
+    "155-1": {
+     "time": 6675294,
+     "behind": 1210000,
+     "updated": "2026-09-20T08:14:28+00:00",
+     "intermediateControl": "155",
+     "counter": 1,
+     "position": 9
+    },
+    "141-1": {
+     "counter": 1,
+     "time": 5476329,
+     "behind": 1684000,
+     "updated": "2026-09-20T07:54:28+00:00",
+     "position": 12,
+     "intermediateControl": "141"
+    }
+   },
+   "organisation": {
+    "id": 9,
+    "name": "Nydalens SK"
+   },
+   "overallResult": {
+    "position": 9,
+    "time": 6740000,
+    "behind": 487000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 191,
+    "name": "Løper 4"
+   },
+   "position": 4,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:08:04+02:00",
+    "bibNo": 723,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 23,
+    "time": 2693000,
+    "behind": 484000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:15:43+00:00"
+   },
+   "time": {
+    "time": 4047000,
+    "behind": 105000,
+    "updated": "2026-09-20T08:15:43+00:00",
+    "restart": false,
+    "startTime": "2026-09-20T09:08:04+02:00",
+    "finishTime": "2026-09-20T10:15:31+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.974936Z",
+   "id": "a2b23cba-f6e2-4bd4-aa81-95fb66b307f2"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardNo": "1000005",
+     "id": 253,
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.105491Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "175-1": {
+     "counter": 1,
+     "intermediateControl": "175",
+     "position": 2,
+     "time": 3284920,
+     "behind": 103000,
+     "updated": "2026-09-20T07:17:59+00:00"
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "updated": "2026-09-20T07:57:07+00:00",
+     "position": 3,
+     "time": 5634851,
+     "counter": 1,
+     "behind": 1161000
+    },
+    "131-1": {
+     "intermediateControl": "131",
+     "counter": 1,
+     "time": 4354390,
+     "behind": 86000,
+     "position": 2,
+     "updated": "2026-09-20T07:35:46+00:00"
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "counter": 1,
+     "time": 5735962,
+     "position": 3,
+     "updated": "2026-09-20T07:58:50+00:00",
+     "behind": 1135000
+    },
+    "155-1": {
+     "position": 5,
+     "updated": "2026-09-20T08:08:53+00:00",
+     "behind": 875000,
+     "counter": 1,
+     "time": 6340904,
+     "intermediateControl": "155"
+    },
+    "141-1": {
+     "updated": "2026-09-20T07:48:28+00:00",
+     "time": 5117143,
+     "intermediateControl": "141",
+     "behind": 1325000,
+     "position": 4,
+     "counter": 1
+    }
+   },
+   "organisation": {
+    "id": 9,
+    "name": "Nydalens SK"
+   },
+   "overallResult": {
+    "position": 4,
+    "time": 6414000,
+    "behind": 161000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 256,
+    "name": "Løper 5"
+   },
+   "position": 5,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:02:14+02:00",
+    "bibNo": 704,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 4,
+    "time": 2343000,
+    "behind": 134000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:10:22+00:00"
+   },
+   "time": {
+    "behind": 129000,
+    "updated": "2026-09-20T08:10:22+00:00",
+    "restart": false,
+    "startTime": "2026-09-20T09:02:14+02:00",
+    "finishTime": "2026-09-20T10:10:05+02:00",
+    "time": 4071000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.566984Z",
+   "id": "a2b6d401-d558-4c1e-86ed-295d01557baa"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 245,
+     "cardNo": "1000006",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.083671Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "intermediateControl": "148",
+     "updated": "2026-09-20T08:04:56+00:00",
+     "behind": 1503000,
+     "counter": 1,
+     "position": 13,
+     "time": 6103795
+    },
+    "155-1": {
+     "counter": 1,
+     "intermediateControl": "155",
+     "position": 11,
+     "time": 6683391,
+     "updated": "2026-09-20T08:14:38+00:00",
+     "behind": 1218000
+    },
+    "175-1": {
+     "position": 15,
+     "behind": 518000,
+     "counter": 1,
+     "time": 3699719,
+     "intermediateControl": "175",
+     "updated": "2026-09-20T07:24:53+00:00"
+    },
+    "131-1": {
+     "behind": 532000,
+     "updated": "2026-09-20T07:43:13+00:00",
+     "intermediateControl": "131",
+     "position": 13,
+     "time": 4800896,
+     "counter": 1
+    },
+    "141-1": {
+     "position": 14,
+     "updated": "2026-09-20T07:54:37+00:00",
+     "behind": 1692000,
+     "counter": 1,
+     "time": 5484246,
+     "intermediateControl": "141"
+    },
+    "159-1": {
+     "behind": 1525000,
+     "time": 5998928,
+     "counter": 1,
+     "position": 13,
+     "intermediateControl": "159",
+     "updated": "2026-09-20T08:03:13+00:00"
+    }
+   },
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "position": 11,
+    "time": 6758000,
+    "behind": 505000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 248,
+    "name": "Løper 6"
+   },
+   "position": 6,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:07:09+02:00",
+    "bibNo": 720,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 20,
+    "time": 2638000,
+    "behind": 429000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:16:00+00:00"
+   },
+   "time": {
+    "restart": false,
+    "time": 4120000,
+    "updated": "2026-09-20T08:16:00+00:00",
+    "finishTime": "2026-09-20T10:15:49+02:00",
+    "behind": 178000,
+    "startTime": "2026-09-20T09:07:09+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.543323Z",
+   "id": "a2b6d401-9c6f-4c93-96e1-b8cd3fca2bfe"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 107,
+     "cardNo": "1000007",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.891864Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "intermediateControl": "141",
+     "counter": 1,
+     "time": 5482948,
+     "behind": 1690000,
+     "updated": "2026-09-20T07:54:34+00:00",
+     "position": 13
+    },
+    "159-1": {
+     "position": 14,
+     "counter": 1,
+     "intermediateControl": "159",
+     "behind": 1527000,
+     "updated": "2026-09-20T08:03:13+00:00",
+     "time": 6000571
+    },
+    "175-1": {
+     "behind": 433000,
+     "time": 3614796,
+     "updated": "2026-09-20T07:23:28+00:00",
+     "intermediateControl": "175",
+     "counter": 1,
+     "position": 11
+    },
+    "148-1": {
+     "position": 13,
+     "intermediateControl": "148",
+     "time": 6103154,
+     "updated": "2026-09-20T08:04:56+00:00",
+     "counter": 1,
+     "behind": 1503000
+    },
+    "131-1": {
+     "counter": 1,
+     "time": 4779658,
+     "behind": 511000,
+     "updated": "2026-09-20T07:42:53+00:00",
+     "position": 11,
+     "intermediateControl": "131"
+    },
+    "155-1": {
+     "updated": "2026-09-20T08:14:32+00:00",
+     "position": 10,
+     "counter": 1,
+     "intermediateControl": "155",
+     "time": 6679126,
+     "behind": 1214000
+    }
+   },
+   "organisation": {
+    "id": 30,
+    "name": "OK Moss"
+   },
+   "overallResult": {
+    "position": 10,
+    "time": 6742000,
+    "behind": 489000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 109,
+    "name": "Løper 7"
+   },
+   "position": 7,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:06:50+02:00",
+    "bibNo": 718,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 18,
+    "time": 2619000,
+    "behind": 410000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:15:53+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-20T10:15:33+02:00",
+    "restart": false,
+    "startTime": "2026-09-20T09:06:50+02:00",
+    "updated": "2026-09-20T08:15:53+00:00",
+    "time": 4123000,
+    "behind": 181000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.889041Z",
+   "id": "a2a5fc7d-d3a2-47d3-81e5-85d9362d3336"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 170,
+     "cardNo": "1000008",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.925817Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "position": 7,
+     "time": 5829292,
+     "updated": "2026-09-20T08:00:22+00:00",
+     "counter": 1,
+     "behind": 1229000,
+     "intermediateControl": "148"
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "updated": "2026-09-20T07:58:38+00:00",
+     "time": 5725242,
+     "counter": 1,
+     "position": 7,
+     "behind": 1252000
+    },
+    "175-1": {
+     "intermediateControl": "175",
+     "time": 3373304,
+     "updated": "2026-09-20T07:19:25+00:00",
+     "position": 5,
+     "behind": 192000,
+     "counter": 1
+    },
+    "131-1": {
+     "intermediateControl": "131",
+     "counter": 1,
+     "position": 4,
+     "behind": 161000,
+     "updated": "2026-09-20T07:37:03+00:00",
+     "time": 4429717
+    },
+    "155-1": {
+     "counter": 1,
+     "time": 6472889,
+     "intermediateControl": "155",
+     "behind": 1007000,
+     "position": 6,
+     "updated": "2026-09-20T08:11:07+00:00"
+    },
+    "141-1": {
+     "position": 7,
+     "time": 5186378,
+     "behind": 1394000,
+     "updated": "2026-09-20T07:49:40+00:00",
+     "counter": 1,
+     "intermediateControl": "141"
+    }
+   },
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "position": 5,
+    "time": 6549000,
+    "behind": 296000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 173,
+    "name": "Løper 8"
+   },
+   "position": 8,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:03:17+02:00",
+    "bibNo": 706,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 6,
+    "time": 2406000,
+    "behind": 197000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:12:43+00:00"
+   },
+   "time": {
+    "restart": false,
+    "updated": "2026-09-20T08:12:43+00:00",
+    "startTime": "2026-09-20T09:03:17+02:00",
+    "behind": 201000,
+    "finishTime": "2026-09-20T10:12:20+02:00",
+    "time": 4143000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.910811Z",
+   "id": "a2b23cb8-a5aa-4ef6-af51-e7591839cfe6"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 190,
+     "rental": false,
+     "cardNo": "1000009",
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.016018Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "intermediateControl": "141",
+     "position": 8,
+     "behind": 1454000,
+     "updated": "2026-09-20T07:50:38+00:00",
+     "counter": 1,
+     "time": 5246370
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "behind": 1301000,
+     "updated": "2026-09-20T07:59:29+00:00",
+     "counter": 1,
+     "position": 9,
+     "time": 5774455
+    },
+    "148-1": {
+     "position": 8,
+     "behind": 1280000,
+     "counter": 1,
+     "updated": "2026-09-20T08:01:13+00:00",
+     "time": 5880128,
+     "intermediateControl": "148"
+    },
+    "131-1": {
+     "counter": 1,
+     "behind": 286000,
+     "updated": "2026-09-20T07:39:07+00:00",
+     "intermediateControl": "131",
+     "time": 4554588,
+     "position": 7
+    },
+    "175-1": {
+     "counter": 1,
+     "position": 8,
+     "time": 3433802,
+     "behind": 252000,
+     "updated": "2026-09-20T07:20:28+00:00",
+     "intermediateControl": "175"
+    }
+   },
+   "organisation": {
+    "id": 10,
+    "name": "Frol IL"
+   },
+   "overallResult": {
+    "position": 7,
+    "time": 6720000,
+    "behind": 467000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 194,
+    "name": "Løper 9"
+   },
+   "position": 9,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:05:08+02:00",
+    "bibNo": 713,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 13,
+    "time": 2517000,
+    "behind": 308000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:15:23+00:00"
+   },
+   "time": {
+    "time": 4203000,
+    "updated": "2026-09-20T08:15:23+00:00",
+    "finishTime": "2026-09-20T10:15:11+02:00",
+    "behind": 261000,
+    "startTime": "2026-09-20T09:05:08+02:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:31:48.856199Z",
+   "id": "a2b23cbb-3561-4aab-87dc-0ef46c6a6604"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 174,
+     "cardNo": "1000010",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.948604Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "175-1": {
+     "intermediateControl": "175",
+     "counter": 1,
+     "time": 3437494,
+     "updated": "2026-09-20T07:20:31+00:00",
+     "position": 9,
+     "behind": 256000
+    },
+    "159-1": {
+     "counter": 1,
+     "intermediateControl": "159",
+     "behind": 1299000,
+     "updated": "2026-09-20T07:59:25+00:00",
+     "position": 8,
+     "time": 5772825
+    },
+    "155-1": {
+     "time": 6657885,
+     "counter": 1,
+     "intermediateControl": "155",
+     "position": 8,
+     "behind": 1192000,
+     "updated": "2026-09-20T08:14:10+00:00"
+    },
+    "148-1": {
+     "counter": 1,
+     "position": 9,
+     "time": 5882031,
+     "updated": "2026-09-20T08:01:14+00:00",
+     "behind": 1282000,
+     "intermediateControl": "148"
+    },
+    "131-1": {
+     "time": 4557791,
+     "intermediateControl": "131",
+     "behind": 289000,
+     "updated": "2026-09-20T07:39:10+00:00",
+     "position": 8,
+     "counter": 1
+    },
+    "141-1": {
+     "behind": 1456000,
+     "time": 5248018,
+     "position": 9,
+     "updated": "2026-09-20T07:50:41+00:00",
+     "counter": 1,
+     "intermediateControl": "141"
+    }
+   },
+   "organisation": {
+    "id": 3,
+    "name": "Bækkelagets SK"
+   },
+   "overallResult": {
+    "position": 8,
+    "time": 6724000,
+    "behind": 471000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 177,
+    "name": "Løper 10"
+   },
+   "position": 10,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:05:06+02:00",
+    "bibNo": 712,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 12,
+    "time": 2515000,
+    "behind": 306000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:15:30+00:00"
+   },
+   "time": {
+    "behind": 267000,
+    "finishTime": "2026-09-20T10:15:15+02:00",
+    "restart": false,
+    "updated": "2026-09-20T08:15:30+00:00",
+    "startTime": "2026-09-20T09:05:06+02:00",
+    "time": 4209000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.932094Z",
+   "id": "a2b23cb9-4bb1-4e13-bc26-5d9175601861"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 74,
+     "cardNo": "1000011",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.811732Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "131-1": {
+     "time": 4485468,
+     "behind": 217000,
+     "intermediateControl": "131",
+     "counter": 1,
+     "position": 6,
+     "updated": "2026-09-20T07:37:59+00:00"
+    },
+    "148-1": {
+     "position": 6,
+     "intermediateControl": "148",
+     "counter": 1,
+     "behind": 1200000,
+     "time": 5800657,
+     "updated": "2026-09-20T07:59:53+00:00"
+    },
+    "155-1": {
+     "behind": 1031000,
+     "updated": "2026-09-20T08:11:28+00:00",
+     "position": 7,
+     "counter": 1,
+     "intermediateControl": "155",
+     "time": 6496624
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "behind": 1212000,
+     "position": 6,
+     "updated": "2026-09-20T07:58:01+00:00",
+     "time": 5685890,
+     "counter": 1
+    },
+    "141-1": {
+     "position": 5,
+     "intermediateControl": "141",
+     "counter": 1,
+     "time": 5164497,
+     "behind": 1372000,
+     "updated": "2026-09-20T07:49:16+00:00"
+    },
+    "175-1": {
+     "time": 3352721,
+     "intermediateControl": "175",
+     "position": 3,
+     "updated": "2026-09-20T07:19:07+00:00",
+     "counter": 1,
+     "behind": 171000
+    }
+   },
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "position": 6,
+    "time": 6584000,
+    "behind": 331000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 76,
+    "name": "Løper 11"
+   },
+   "position": 11,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:02:17+02:00",
+    "bibNo": 705,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 5,
+    "time": 2346000,
+    "behind": 137000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:13:07+00:00"
+   },
+   "time": {
+    "restart": false,
+    "time": 4238000,
+    "updated": "2026-09-20T08:13:07+00:00",
+    "startTime": "2026-09-20T09:02:17+02:00",
+    "finishTime": "2026-09-20T10:12:55+02:00",
+    "behind": 296000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.834670Z",
+   "id": "a2a5fc7a-f6df-4b29-a047-f6c9d2f016fd"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 351,
+     "cardNo": "1000012",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.332053Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "position": 10,
+     "counter": 1,
+     "behind": 1577000,
+     "time": 5369296,
+     "updated": "2026-09-20T07:52:40+00:00",
+     "intermediateControl": "141"
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "time": 6049784,
+     "behind": 1449000,
+     "updated": "2026-09-20T08:04:04+00:00",
+     "position": 10,
+     "counter": 1
+    },
+    "155-1": {
+     "position": 12,
+     "intermediateControl": "155",
+     "behind": 1221000,
+     "updated": "2026-09-20T08:14:38+00:00",
+     "time": 6686202,
+     "counter": 1
+    },
+    "131-1": {
+     "time": 4580249,
+     "behind": 312000,
+     "intermediateControl": "131",
+     "updated": "2026-09-20T07:39:34+00:00",
+     "position": 9,
+     "counter": 1
+    },
+    "159-1": {
+     "updated": "2026-09-20T08:02:13+00:00",
+     "behind": 1466000,
+     "time": 5939863,
+     "counter": 1,
+     "position": 10,
+     "intermediateControl": "159"
+    },
+    "175-1": {
+     "intermediateControl": "175",
+     "time": 3389730,
+     "position": 7,
+     "counter": 1,
+     "behind": 208000,
+     "updated": "2026-09-20T07:19:43+00:00"
+    }
+   },
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "position": 12,
+    "time": 6765000,
+    "behind": 512000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 357,
+    "name": "Løper 12"
+   },
+   "position": 12,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:03:34+02:00",
+    "bibNo": 708,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 8,
+    "time": 2423000,
+    "behind": 214000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:16:12+00:00"
+   },
+   "time": {
+    "startTime": "2026-09-20T09:03:34+02:00",
+    "time": 4342000,
+    "restart": false,
+    "updated": "2026-09-20T08:16:12+00:00",
+    "finishTime": "2026-09-20T10:15:56+02:00",
+    "behind": 400000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.716043Z",
+   "id": "a2bde291-44c5-402f-91ef-a8627f4358ed"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 143,
+     "cardNo": "1000013",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.869013Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "intermediateControl": "155",
+     "time": 6708013,
+     "behind": 1243000,
+     "position": 13,
+     "updated": "2026-09-20T08:15:00+00:00",
+     "counter": 1
+    },
+    "141-1": {
+     "position": 11,
+     "intermediateControl": "141",
+     "time": 5399215,
+     "behind": 1607000,
+     "updated": "2026-09-20T07:53:13+00:00",
+     "counter": 1
+    },
+    "148-1": {
+     "updated": "2026-09-20T08:04:47+00:00",
+     "intermediateControl": "148",
+     "time": 6093822,
+     "position": 12,
+     "counter": 1,
+     "behind": 1493000
+    },
+    "159-1": {
+     "updated": "2026-09-20T08:02:31+00:00",
+     "counter": 1,
+     "position": 11,
+     "behind": 1485000,
+     "intermediateControl": "159",
+     "time": 5958772
+    },
+    "131-1": {
+     "updated": "2026-09-20T07:40:31+00:00",
+     "position": 10,
+     "counter": 1,
+     "time": 4638934,
+     "behind": 370000,
+     "intermediateControl": "131"
+    },
+    "175-1": {
+     "counter": 1,
+     "position": 10,
+     "time": 3484827,
+     "intermediateControl": "175",
+     "behind": 303000,
+     "updated": "2026-09-20T07:21:19+00:00"
+    }
+   },
+   "organisation": {
+    "id": 4,
+    "name": "Tyrving IL"
+   },
+   "overallResult": {
+    "position": 13,
+    "time": 6795000,
+    "behind": 542000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 145,
+    "name": "Løper 13"
+   },
+   "position": 13,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:03:50+02:00",
+    "bibNo": 710,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 10,
+    "time": 2439000,
+    "behind": 230000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:16:40+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-20T10:16:26+02:00",
+    "restart": false,
+    "behind": 414000,
+    "startTime": "2026-09-20T09:03:50+02:00",
+    "updated": "2026-09-20T08:16:40+00:00",
+    "time": 4356000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.867584Z",
+   "id": "a2a5fc7d-03b0-4480-90ca-6fa1c4338534"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 270,
+     "cardNo": "1000014",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.149862Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "131-1": {
+     "behind": 532000,
+     "position": 13,
+     "intermediateControl": "131",
+     "counter": 1,
+     "time": 4800054,
+     "updated": "2026-09-20T07:43:13+00:00"
+    },
+    "148-1": {
+     "position": 15,
+     "behind": 1633000,
+     "updated": "2026-09-20T08:07:07+00:00",
+     "intermediateControl": "148",
+     "counter": 1,
+     "time": 6233030
+    },
+    "175-1": {
+     "intermediateControl": "175",
+     "behind": 489000,
+     "counter": 1,
+     "position": 13,
+     "time": 3670864,
+     "updated": "2026-09-20T07:24:25+00:00"
+    },
+    "159-1": {
+     "position": 15,
+     "updated": "2026-09-20T08:05:07+00:00",
+     "counter": 1,
+     "time": 6113017,
+     "intermediateControl": "159",
+     "behind": 1640000
+    },
+    "141-1": {
+     "position": 15,
+     "counter": 1,
+     "time": 5571810,
+     "updated": "2026-09-20T07:56:04+00:00",
+     "intermediateControl": "141",
+     "behind": 1779000
+    },
+    "155-1": {
+     "counter": 1,
+     "updated": "2026-09-20T08:18:50+00:00",
+     "intermediateControl": "155",
+     "time": 6937781,
+     "behind": 1472000,
+     "position": 14
+    }
+   },
+   "organisation": {
+    "id": 21,
+    "name": "Freidig"
+   },
+   "overallResult": {
+    "behind": 772000,
+    "time": 7025000,
+    "position": 14
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 274,
+    "name": "Løper 14"
+   },
+   "position": 14,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:06:13+02:00",
+    "bibNo": 716,
+    "updated": "2026-09-19T13:00:10+00:00"
+   },
+   "startOverallResult": {
+    "position": 16,
+    "time": 2582000,
+    "behind": 373000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:20:33+00:00"
+   },
+   "time": {
+    "time": 4443000,
+    "behind": 501000,
+    "finishTime": "2026-09-20T10:20:16+02:00",
+    "restart": false,
+    "updated": "2026-09-20T08:20:33+00:00",
+    "startTime": "2026-09-20T09:06:13+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.591337Z",
+   "id": "a2bde28b-5a5c-41c5-b28d-390819c79e52"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 317,
+     "cardTypeId": 1,
+     "cardNo": "1000015",
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.320382Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "counter": 1,
+     "intermediateControl": "141",
+     "position": 18,
+     "time": 5777205,
+     "behind": 1985000,
+     "updated": "2026-09-20T07:59:31+00:00"
+    },
+    "175-1": {
+     "intermediateControl": "175",
+     "time": 3842201,
+     "behind": 661000,
+     "updated": "2026-09-20T07:27:16+00:00",
+     "counter": 1,
+     "position": 19
+    },
+    "148-1": {
+     "counter": 1,
+     "intermediateControl": "148",
+     "position": 17,
+     "updated": "2026-09-20T08:10:47+00:00",
+     "behind": 1855000,
+     "time": 6455778
+    },
+    "155-1": {
+     "time": 7091339,
+     "position": 16,
+     "intermediateControl": "155",
+     "updated": "2026-09-20T08:21:25+00:00",
+     "behind": 1626000,
+     "counter": 1
+    },
+    "159-1": {
+     "updated": "2026-09-20T08:08:50+00:00",
+     "position": 17,
+     "counter": 1,
+     "intermediateControl": "159",
+     "time": 6337697,
+     "behind": 1864000
+    },
+    "131-1": {
+     "counter": 1,
+     "updated": "2026-09-20T07:46:25+00:00",
+     "intermediateControl": "131",
+     "behind": 722000,
+     "time": 4990986,
+     "position": 18
+    }
+   },
+   "organisation": {
+    "id": 23,
+    "name": "Vang OL"
+   },
+   "overallResult": {
+    "position": 16,
+    "time": 7174000,
+    "behind": 921000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 321,
+    "name": "Løper 15"
+   },
+   "position": 15,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:08:36+02:00",
+    "bibNo": 725,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 25,
+    "time": 2725000,
+    "behind": 516000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:23:10+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-20T10:22:45+02:00",
+    "restart": false,
+    "updated": "2026-09-20T08:23:10+00:00",
+    "startTime": "2026-09-20T09:08:36+02:00",
+    "behind": 507000,
+    "time": 4449000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.704427Z",
+   "id": "a2bde291-10c0-4014-beed-5473cf370934"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 294,
+     "cardNo": "1000016",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.274166Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "behind": 1619000,
+     "position": 15,
+     "updated": "2026-09-20T08:21:16+00:00",
+     "intermediateControl": "155",
+     "counter": 1,
+     "time": 7084293
+    },
+    "131-1": {
+     "position": 15,
+     "behind": 714000,
+     "intermediateControl": "131",
+     "counter": 1,
+     "time": 4982345,
+     "updated": "2026-09-20T07:46:16+00:00"
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "time": 6452983,
+     "behind": 1852000,
+     "counter": 1,
+     "updated": "2026-09-20T08:10:47+00:00",
+     "position": 16
+    },
+    "141-1": {
+     "time": 5775783,
+     "counter": 1,
+     "intermediateControl": "141",
+     "behind": 1983000,
+     "updated": "2026-09-20T07:59:28+00:00",
+     "position": 17
+    },
+    "175-1": {
+     "time": 3839654,
+     "behind": 658000,
+     "position": 18,
+     "intermediateControl": "175",
+     "counter": 1,
+     "updated": "2026-09-20T07:27:13+00:00"
+    },
+    "159-1": {
+     "time": 6332806,
+     "behind": 1859000,
+     "counter": 1,
+     "updated": "2026-09-20T08:08:47+00:00",
+     "position": 16,
+     "intermediateControl": "159"
+    }
+   },
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "position": 15,
+    "time": 7152000,
+    "behind": 899000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 298,
+    "name": "Løper 16"
+   },
+   "position": 16,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:07:35+02:00",
+    "bibNo": 721,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 21,
+    "time": 2664000,
+    "behind": 455000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:22:50+00:00"
+   },
+   "time": {
+    "startTime": "2026-09-20T09:07:35+02:00",
+    "behind": 546000,
+    "restart": false,
+    "updated": "2026-09-20T08:22:50+00:00",
+    "finishTime": "2026-09-20T10:22:23+02:00",
+    "time": 4488000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.682247Z",
+   "id": "a2bde28e-aeca-40ca-b164-7bd8820b9914"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 328,
+     "cardNo": "1000017",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.183594Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "131-1": {
+     "time": 4988669,
+     "updated": "2026-09-20T07:46:22+00:00",
+     "intermediateControl": "131",
+     "behind": 720000,
+     "counter": 1,
+     "position": 17
+    },
+    "148-1": {
+     "counter": 1,
+     "position": 18,
+     "updated": "2026-09-20T08:11:16+00:00",
+     "behind": 1884000,
+     "intermediateControl": "148",
+     "time": 6484481
+    },
+    "155-1": {
+     "position": 17,
+     "updated": "2026-09-20T08:23:25+00:00",
+     "counter": 1,
+     "time": 7212360,
+     "behind": 1747000,
+     "intermediateControl": "155"
+    },
+    "141-1": {
+     "counter": 1,
+     "updated": "2026-09-20T07:59:28+00:00",
+     "time": 5774881,
+     "intermediateControl": "141",
+     "behind": 1982000,
+     "position": 16
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "time": 6361464,
+     "behind": 1888000,
+     "counter": 1,
+     "updated": "2026-09-20T08:09:13+00:00",
+     "position": 18
+    },
+    "175-1": {
+     "intermediateControl": "175",
+     "updated": "2026-09-20T07:27:10+00:00",
+     "counter": 1,
+     "position": 17,
+     "time": 3838042,
+     "behind": 657000
+    }
+   },
+   "organisation": {
+    "id": 8,
+    "name": "Oppsal Orientering"
+   },
+   "overallResult": {
+    "position": 17,
+    "time": 7300000,
+    "behind": 1047000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 333,
+    "name": "Løper 17"
+   },
+   "position": 17,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:09:04+02:00",
+    "bibNo": 726,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 26,
+    "time": 2753000,
+    "behind": 544000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:25:03+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-20T10:24:51+02:00",
+    "startTime": "2026-09-20T09:09:04+02:00",
+    "behind": 605000,
+    "restart": false,
+    "updated": "2026-09-20T08:25:03+00:00",
+    "time": 4547000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.603164Z",
+   "id": "a2bde28c-8423-4403-aea1-60f7db89d7fe"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 353,
+     "cardNo": "1000018",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.343220Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "131-1": {
+     "intermediateControl": "131",
+     "time": 5329540,
+     "behind": 1061000,
+     "updated": "2026-09-20T07:52:03+00:00",
+     "counter": 1,
+     "position": 24
+    },
+    "141-1": {
+     "behind": 2336000,
+     "updated": "2026-09-20T08:05:22+00:00",
+     "counter": 1,
+     "time": 6128131,
+     "intermediateControl": "141",
+     "position": 25
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "counter": 1,
+     "behind": 2237000,
+     "updated": "2026-09-20T08:15:04+00:00",
+     "time": 6710593,
+     "position": 24
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "time": 6814488,
+     "counter": 1,
+     "updated": "2026-09-20T08:16:47+00:00",
+     "behind": 2214000,
+     "position": 23
+    },
+    "155-1": {
+     "time": 7488858,
+     "intermediateControl": "155",
+     "position": 21,
+     "counter": 1,
+     "updated": "2026-09-20T08:28:01+00:00",
+     "behind": 2023000
+    },
+    "175-1": {
+     "counter": 1,
+     "intermediateControl": "175",
+     "position": 26,
+     "time": 4095345,
+     "updated": "2026-09-20T07:31:28+00:00",
+     "behind": 914000
+    }
+   },
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "position": 20,
+    "time": 7559000,
+    "behind": 1306000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 359,
+    "name": "Løper 18"
+   },
+   "position": 18,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:12:15+02:00",
+    "bibNo": 738,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 38,
+    "time": 2944000,
+    "behind": 735000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:29:22+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-20T10:29:10+02:00",
+    "startTime": "2026-09-20T09:12:15+02:00",
+    "behind": 673000,
+    "updated": "2026-09-20T08:29:22+00:00",
+    "restart": false,
+    "time": 4615000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.728019Z",
+   "id": "a2bde291-a731-4daf-b972-2071d97c3724"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 383,
+     "cardNo": "1000019",
+     "cardTypeId": 1,
+     "rental": true
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.388585Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "counter": 1,
+     "position": 23,
+     "time": 6707778,
+     "updated": "2026-09-20T08:14:59+00:00",
+     "intermediateControl": "159",
+     "behind": 2234000
+    },
+    "141-1": {
+     "counter": 1,
+     "time": 6120437,
+     "behind": 2328000,
+     "updated": "2026-09-20T08:05:13+00:00",
+     "intermediateControl": "141",
+     "position": 23
+    },
+    "148-1": {
+     "updated": "2026-09-20T08:16:50+00:00",
+     "time": 6816233,
+     "behind": 2216000,
+     "intermediateControl": "148",
+     "position": 24,
+     "counter": 1
+    },
+    "175-1": {
+     "behind": 911000,
+     "time": 4092579,
+     "intermediateControl": "175",
+     "counter": 1,
+     "updated": "2026-09-20T07:54:30+00:00",
+     "position": 25
+    },
+    "131-1": {
+     "time": 5312058,
+     "behind": 1044000,
+     "counter": 1,
+     "intermediateControl": "131",
+     "updated": "2026-09-20T07:54:30+00:00",
+     "position": 22
+    },
+    "155-1": {
+     "position": 19,
+     "updated": "2026-09-20T08:27:38+00:00",
+     "intermediateControl": "155",
+     "behind": 1999000,
+     "counter": 1,
+     "time": 7464548
+    }
+   },
+   "organisation": {
+    "id": 8,
+    "name": "Oppsal Orientering"
+   },
+   "overallResult": {
+    "position": 18,
+    "time": 7536000,
+    "behind": 1283000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 376,
+    "name": "Løper 19"
+   },
+   "position": 19,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:11:28+02:00",
+    "bibNo": 734,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 34,
+    "time": 2897000,
+    "behind": 688000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:29:02+00:00"
+   },
+   "time": {
+    "restart": false,
+    "updated": "2026-09-20T08:29:02+00:00",
+    "behind": 697000,
+    "startTime": "2026-09-20T09:11:28+02:00",
+    "finishTime": "2026-09-20T10:28:47+02:00",
+    "time": 4639000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.750103Z",
+   "id": "a2c26817-6b95-4738-b884-105b07ce1285"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardNo": "1000020",
+     "id": 61,
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.777552Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "behind": 2272000,
+     "updated": "2026-09-20T08:04:16+00:00",
+     "time": 6064116,
+     "intermediateControl": "141",
+     "position": 22,
+     "counter": 1
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "position": 22,
+     "behind": 2210000,
+     "time": 6810338,
+     "counter": 1,
+     "updated": "2026-09-20T08:16:44+00:00"
+    },
+    "175-1": {
+     "updated": "2026-09-20T07:29:25+00:00",
+     "time": 3971220,
+     "intermediateControl": "175",
+     "behind": 790000,
+     "counter": 1,
+     "position": 21
+    },
+    "155-1": {
+     "intermediateControl": "155",
+     "time": 7485023,
+     "behind": 2020000,
+     "updated": "2026-09-20T08:28:00+00:00",
+     "position": 20,
+     "counter": 1
+    },
+    "131-1": {
+     "behind": 985000,
+     "counter": 1,
+     "updated": "2026-09-20T07:50:47+00:00",
+     "time": 5253122,
+     "position": 21,
+     "intermediateControl": "131"
+    },
+    "159-1": {
+     "updated": "2026-09-20T08:14:59+00:00",
+     "position": 22,
+     "intermediateControl": "159",
+     "behind": 2233000,
+     "counter": 1,
+     "time": 6706383
+    }
+   },
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "position": 20,
+    "time": 7559000,
+    "behind": 1306000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 63,
+    "name": "Løper 20"
+   },
+   "position": 20,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:10:30+02:00",
+    "bibNo": 730,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 30,
+    "time": 2839000,
+    "behind": 630000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:29:28+00:00"
+   },
+   "time": {
+    "time": 4720000,
+    "startTime": "2026-09-20T09:10:30+02:00",
+    "finishTime": "2026-09-20T10:29:10+02:00",
+    "restart": false,
+    "behind": 778000,
+    "updated": "2026-09-20T08:29:28+00:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.813624Z",
+   "id": "a2a5fc79-df3a-43f2-a1e7-93e24377aa0d"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 6,
+     "cardNo": "1000021",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.721365Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "intermediateControl": "159",
+     "behind": 2238000,
+     "position": 25,
+     "updated": "2026-09-20T08:15:04+00:00",
+     "counter": 1,
+     "time": 6711726
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "position": 24,
+     "updated": "2026-09-20T08:05:19+00:00",
+     "counter": 1,
+     "time": 6125543,
+     "behind": 2333000
+    },
+    "148-1": {
+     "time": 6817494,
+     "counter": 1,
+     "position": 25,
+     "updated": "2026-09-20T08:16:50+00:00",
+     "intermediateControl": "148",
+     "behind": 2217000
+    },
+    "175-1": {
+     "counter": 1,
+     "updated": "2026-09-20T07:31:16+00:00",
+     "time": 4083058,
+     "behind": 902000,
+     "intermediateControl": "175",
+     "position": 22
+    },
+    "131-1": {
+     "counter": 1,
+     "behind": 1049000,
+     "intermediateControl": "131",
+     "updated": "2026-09-20T07:51:50+00:00",
+     "position": 23,
+     "time": 5317788
+    },
+    "155-1": {
+     "behind": 2169000,
+     "intermediateControl": "155",
+     "counter": 1,
+     "position": 24,
+     "time": 7634564,
+     "updated": "2026-09-20T08:30:29+00:00"
+    }
+   },
+   "organisation": {
+    "id": 6,
+    "name": "Byåsen IL"
+   },
+   "overallResult": {
+    "time": 7711000,
+    "behind": 1458000,
+    "position": 24
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 6,
+    "name": "Løper 21"
+   },
+   "position": 21,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:11:15+02:00",
+    "bibNo": 733,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 33,
+    "time": 2884000,
+    "behind": 675000
+   },
+   "status": {
+    "updated": "2026-09-20T08:32:32+00:00",
+    "status": "OK"
+   },
+   "time": {
+    "behind": 885000,
+    "restart": false,
+    "time": 4827000,
+    "updated": "2026-09-20T08:32:32+00:00",
+    "finishTime": "2026-09-20T10:31:42+02:00",
+    "startTime": "2026-09-20T09:11:15+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.771277Z",
+   "id": "a2a5fc76-3f71-4219-bddd-cdeddc3b3916"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 120,
+     "cardNo": "1000022",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.687022Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "intermediateControl": "141",
+     "counter": 1,
+     "position": 21,
+     "behind": 2166000,
+     "time": 5958418,
+     "updated": "2026-09-20T08:02:31+00:00"
+    },
+    "148-1": {
+     "updated": "2026-09-20T08:15:01+00:00",
+     "intermediateControl": "148",
+     "counter": 1,
+     "time": 6705931,
+     "position": 19,
+     "behind": 2105000
+    },
+    "131-1": {
+     "time": 5127228,
+     "counter": 1,
+     "behind": 859000,
+     "position": 20,
+     "intermediateControl": "131",
+     "updated": "2026-09-20T07:48:40+00:00"
+    },
+    "155-1": {
+     "behind": 1995000,
+     "counter": 1,
+     "time": 7460559,
+     "position": 18,
+     "updated": "2026-09-20T08:27:35+00:00",
+     "intermediateControl": "155"
+    },
+    "159-1": {
+     "position": 19,
+     "time": 6577165,
+     "intermediateControl": "159",
+     "behind": 2104000,
+     "updated": "2026-09-20T08:12:50+00:00",
+     "counter": 1
+    },
+    "175-1": {
+     "counter": 1,
+     "position": 20,
+     "intermediateControl": "175",
+     "time": 3904657,
+     "behind": 723000,
+     "updated": "2026-09-20T07:28:19+00:00"
+    }
+   },
+   "organisation": {
+    "id": 21,
+    "name": "Freidig"
+   },
+   "overallResult": {
+    "position": 19,
+    "time": 7541000,
+    "behind": 1288000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 122,
+    "name": "Løper 22"
+   },
+   "position": 22,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:07:39+02:00",
+    "bibNo": 722,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 22,
+    "time": 2668000,
+    "behind": 459000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:29:16+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-20T10:28:52+02:00",
+    "updated": "2026-09-20T08:29:16+00:00",
+    "time": 4873000,
+    "restart": false,
+    "startTime": "2026-09-20T09:07:39+02:00",
+    "behind": 931000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.878335Z",
+   "id": "a2a5fc75-77b0-48b0-888a-3096dd95d22f"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 329,
+     "cardNo": "1000023",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.194732Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "intermediateControl": "148",
+     "time": 6946430,
+     "counter": 1,
+     "behind": 2346000,
+     "updated": "2026-09-20T08:18:59+00:00",
+     "position": 26
+    },
+    "131-1": {
+     "intermediateControl": "131",
+     "behind": 1090000,
+     "counter": 1,
+     "time": 5358507,
+     "updated": "2026-09-20T07:52:31+00:00",
+     "position": 25
+    },
+    "159-1": {
+     "behind": 2349000,
+     "intermediateControl": "159",
+     "position": 26,
+     "time": 6822444,
+     "counter": 1,
+     "updated": "2026-09-20T08:16:56+00:00"
+    },
+    "155-1": {
+     "intermediateControl": "155",
+     "time": 7683657,
+     "updated": "2026-09-20T08:31:16+00:00",
+     "counter": 1,
+     "behind": 2218000,
+     "position": 25
+    },
+    "141-1": {
+     "updated": "2026-09-20T08:06:44+00:00",
+     "intermediateControl": "141",
+     "counter": 1,
+     "position": 26,
+     "time": 6210981,
+     "behind": 2418000
+    },
+    "175-1": {
+     "counter": 1,
+     "intermediateControl": "175",
+     "time": 4087278,
+     "updated": "2026-09-20T07:31:19+00:00",
+     "position": 23,
+     "behind": 906000
+    }
+   },
+   "organisation": {
+    "id": 54,
+    "name": "IL Leik"
+   },
+   "overallResult": {
+    "time": 7775000,
+    "behind": 1522000,
+    "position": 25
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 334,
+    "name": "Løper 23"
+   },
+   "position": 23,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:11:29+02:00",
+    "bibNo": 735,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 35,
+    "time": 2898000,
+    "behind": 689000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:32:58+00:00"
+   },
+   "time": {
+    "behind": 935000,
+    "finishTime": "2026-09-20T10:32:46+02:00",
+    "startTime": "2026-09-20T09:11:29+02:00",
+    "restart": false,
+    "updated": "2026-09-20T08:32:58+00:00",
+    "time": 4877000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.615286Z",
+   "id": "a2bde28c-c0a9-4db5-8d0d-821d9fbc6bd3"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 348,
+     "cardNo": "1000024",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.296686Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "updated": "2026-09-20T08:19:31+00:00",
+     "intermediateControl": "159",
+     "counter": 1,
+     "position": 31,
+     "behind": 2716000,
+     "time": 7189927
+    },
+    "148-1": {
+     "time": 7302817,
+     "intermediateControl": "148",
+     "position": 31,
+     "behind": 2702000,
+     "counter": 1,
+     "updated": "2026-09-20T08:21:22+00:00"
+    },
+    "155-1": {
+     "time": 8168770,
+     "intermediateControl": "155",
+     "updated": "2026-09-20T08:35:50+00:00",
+     "counter": 1,
+     "behind": 2703000,
+     "position": 33
+    },
+    "175-1": {
+     "updated": "2026-09-20T07:34:44+00:00",
+     "position": 35,
+     "behind": 1320000,
+     "counter": 1,
+     "intermediateControl": "175",
+     "time": 4501667
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "updated": "2026-09-20T08:09:37+00:00",
+     "counter": 1,
+     "time": 6596647,
+     "position": 31,
+     "behind": 2804000
+    },
+    "131-1": {
+     "behind": 1511000,
+     "time": 5779166,
+     "intermediateControl": "131",
+     "counter": 1,
+     "position": 34,
+     "updated": "2026-09-20T07:55:59+00:00"
+    }
+   },
+   "organisation": {
+    "id": 6,
+    "name": "Byåsen IL"
+   },
+   "overallResult": {
+    "position": 33,
+    "time": 8273000,
+    "behind": 2020000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 354,
+    "name": "Løper 24"
+   },
+   "position": 24,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:15:00+02:00",
+    "bibNo": 754,
+    "updated": "2026-09-19T13:00:12+00:00"
+   },
+   "startOverallResult": {
+    "position": 54,
+    "time": 3321000,
+    "behind": 1112000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:37:45+00:00"
+   },
+   "time": {
+    "behind": 1010000,
+    "time": 4952000,
+    "startTime": "2026-09-20T09:15:00+02:00",
+    "restart": false,
+    "updated": "2026-09-20T08:37:45+00:00",
+    "finishTime": "2026-09-20T10:37:32+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.693641Z",
+   "id": "a2bde290-5def-4887-8fe3-19935e3fb90a"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 385,
+     "cardNo": "1000025",
+     "cardTypeId": 1,
+     "rental": true
+    }
+   },
+   "created_at": "2026-09-17T06:24:58.061555Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "175-1": {
+     "updated": "2026-09-20T07:24:44+00:00",
+     "intermediateControl": "175",
+     "time": 3691507,
+     "position": 14,
+     "counter": 1,
+     "behind": 510000
+    },
+    "155-1": {
+     "time": 7573834,
+     "behind": 2108000,
+     "intermediateControl": "155",
+     "counter": 1,
+     "position": 22,
+     "updated": "2026-09-20T08:29:25+00:00"
+    },
+    "131-1": {
+     "behind": 717000,
+     "intermediateControl": "131",
+     "updated": "2026-09-20T07:46:19+00:00",
+     "counter": 1,
+     "position": 16,
+     "time": 4985384
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "position": 19,
+     "time": 5913073,
+     "updated": "2026-09-20T08:01:47+00:00",
+     "counter": 1,
+     "behind": 2121000
+    },
+    "159-1": {
+     "updated": "2026-09-20T08:13:37+00:00",
+     "time": 6623440,
+     "counter": 1,
+     "position": 21,
+     "behind": 2150000,
+     "intermediateControl": "159"
+    },
+    "148-1": {
+     "time": 6748739,
+     "position": 20,
+     "counter": 1,
+     "updated": "2026-09-20T08:15:41+00:00",
+     "behind": 2148000,
+     "intermediateControl": "148"
+    }
+   },
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "position": 22,
+    "time": 7666000,
+    "behind": 1413000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 229,
+    "name": "Løper 25"
+   },
+   "position": 25,
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:08:17+02:00",
+    "bibNo": 724,
+    "updated": "2026-09-19T13:00:11+00:00"
+   },
+   "startOverallResult": {
+    "position": 24,
+    "time": 2706000,
+    "behind": 497000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T08:31:10+00:00"
+   },
+   "time": {
+    "restart": false,
+    "updated": "2026-09-20T08:31:10+00:00",
+    "finishTime": "2026-09-20T10:30:57+02:00",
+    "behind": 1018000,
+    "time": 4960000,
+    "startTime": "2026-09-20T09:08:17+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:46:10.530316Z",
+   "id": "a2b3d610-8700-4712-ad25-b3a69079d459"
+  },
+  {
+   "cards": {
+    "card1": {
+     "rental": false,
+     "cardTypeId": 1,
+     "id": 119,
+     "cardNo": "1000026"
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.673458Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "behind": null,
+    "position": null,
+    "time": 0
+   },
+   "overallStatus": {
+    "status": "DidNotFinish",
+    "updated": null
+   },
+   "person": {
+    "id": 121,
+    "name": "Løper 26"
+   },
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "bibNo": 781,
+    "updated": "2026-09-19T13:00:13+00:00",
+    "startTime": "2026-09-20T09:15:00+02:00"
+   },
+   "startOverallResult": {
+    "position": null,
+    "time": 0,
+    "behind": null
+   },
+   "status": {
+    "updated": "2026-09-20T08:14:38+00:00",
+    "status": "DidNotStart"
+   },
+   "time": {
+    "startTime": null,
+    "updated": null,
+    "finishTime": null,
+    "time": null,
+    "behind": null,
+    "restart": false
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:14:40.042596Z",
+   "id": "a2a5fc75-479f-4349-94c9-264420d43093"
+  },
+  {
+   "cards": {
+    "card1": {
+     "rental": false,
+     "id": 3,
+     "cardTypeId": 1,
+     "cardNo": "1000027"
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.709903Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 3,
+    "name": "Bækkelagets SK"
+   },
+   "overallResult": {
+    "time": 0,
+    "position": null,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "DidNotFinish",
+    "updated": null
+   },
+   "person": {
+    "id": 3,
+    "name": "Løper 27"
+   },
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:15:00+02:00",
+    "bibNo": 786,
+    "updated": "2026-09-19T13:00:13+00:00"
+   },
+   "startOverallResult": {
+    "time": 0,
+    "position": null,
+    "behind": null
+   },
+   "status": {
+    "updated": "2026-09-20T08:14:39+00:00",
+    "status": "DidNotStart"
+   },
+   "time": {
+    "time": null,
+    "updated": null,
+    "restart": false,
+    "startTime": null,
+    "behind": null,
+    "finishTime": null
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:14:40.665710Z",
+   "id": "a2a5fc75-ee50-4562-a40d-03ba89c8ef47"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 11,
+     "cardNo": "1000028",
+     "rental": false,
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.732519Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 8,
+    "name": "Oppsal Orientering"
+   },
+   "overallResult": {
+    "position": null,
+    "time": 0,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "DidNotFinish",
+    "updated": null
+   },
+   "person": {
+    "id": 11,
+    "name": "Løper 28"
+   },
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:15:00+02:00",
+    "bibNo": 788,
+    "updated": "2026-09-19T13:00:13+00:00"
+   },
+   "startOverallResult": {
+    "position": null,
+    "time": 0,
+    "behind": null
+   },
+   "status": {
+    "status": "DidNotStart",
+    "updated": "2026-09-20T08:14:39+00:00"
+   },
+   "time": {
+    "behind": null,
+    "finishTime": null,
+    "startTime": null,
+    "updated": null,
+    "time": null,
+    "restart": false
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:14:40.647397Z",
+   "id": "a2a5fc76-9293-4c73-9edb-39af1d5d2de0"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 370,
+     "cardNo": "1000029",
+     "cardTypeId": 1,
+     "rental": true
+    }
+   },
+   "created_at": "2026-09-17T06:24:51.377794Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 17,
+    "name": "Emblem IL"
+   },
+   "overallResult": {
+    "behind": null,
+    "position": null,
+    "time": 14366000
+   },
+   "overallStatus": {
+    "status": "DidNotFinish",
+    "updated": null
+   },
+   "person": {
+    "id": 26,
+    "name": "Løper 29"
+   },
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "startTime": "2026-09-20T09:15:00+02:00",
+    "bibNo": 776,
+    "updated": "2026-09-19T13:00:13+00:00"
+   },
+   "startOverallResult": {
+    "position": 76,
+    "time": 5903000,
+    "behind": 3694000
+   },
+   "status": {
+    "status": "DidNotFinish",
+    "updated": "2026-09-20T09:37:36+00:00"
+   },
+   "time": {
+    "updated": "2026-09-20T09:37:36+00:00",
+    "time": 8463000,
+    "startTime": "2026-09-20T09:15:00+02:00",
+    "restart": false,
+    "behind": null,
+    "finishTime": "2026-09-20T11:36:03+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:37:38.472979Z",
+   "id": "a2a5fc77-a4f0-4169-a36d-fa32e8762e52"
+  },
+  {
+   "cards": {
+    "card1": {
+     "rental": false,
+     "cardNo": "1000030",
+     "id": 63,
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-17T06:24:57.800448Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 25,
+    "name": "NTNUI"
+   },
+   "overallResult": {
+    "behind": null,
+    "position": null,
+    "time": 0
+   },
+   "overallStatus": {
+    "status": "DidNotFinish",
+    "updated": null
+   },
+   "person": {
+    "id": 65,
+    "name": "Løper 30"
+   },
+   "raceClassId": "a2a5fba2-f173-40b2-b00c-32dfa19c39bc",
+   "raceId": "a2a5faf3-b4ad-4a3b-9a81-303021d04239",
+   "start": {
+    "bibNo": 777,
+    "updated": "2026-09-19T13:00:13+00:00",
+    "startTime": "2026-09-20T09:15:00+02:00"
+   },
+   "startOverallResult": {
+    "behind": null,
+    "position": null,
+    "time": 0
+   },
+   "status": {
+    "status": "DidNotStart",
+    "updated": "2026-09-20T08:14:39+00:00"
+   },
+   "time": {
+    "startTime": null,
+    "time": null,
+    "behind": null,
+    "restart": false,
+    "finishTime": null,
+    "updated": null
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T08:14:40.656786Z",
+   "id": "a2a5fc7a-4385-4200-b0fd-ecafb397f9f9"
+  }
+ ]
+}

@@ -1,0 +1,1216 @@
+{
+ "race": {
+  "id": "a2be8026-147e-4f2b-8299-1580c37a1320",
+  "public": true,
+  "date": "2026-09-22",
+  "title": "Klubbmesterskap natt 2026 KOL",
+  "name": "Klubbmesterskap natt 2026 KOL",
+  "raceNumber": null,
+  "eventForm": "Individual",
+  "event": {
+   "id": "a2be7ffd-69d0-460e-8e1d-7193d5d63af7",
+   "organisers": [
+    {
+     "id": "9f41ad92-e285-499b-879c-80649d6c60be",
+     "name": "Kongsberg OL"
+    }
+   ],
+   "name": "Klubbmesterskap natt 2026 KOL",
+   "test": false,
+   "startDate": "2026-09-22",
+   "startTime": "18:00:00",
+   "locale": "nb",
+   "timezone": "Europe/Oslo"
+  },
+  "identifierType": "Norway",
+  "identifier": "24775"
+ },
+ "raceClass": {
+  "cardTypes": [
+   {
+    "id": 1,
+    "name": "Emit",
+    "punchingSystem": "Emit"
+   }
+  ],
+  "created_at": "2026-09-14T12:59:37.987501Z",
+  "eventForm": "Individual",
+  "firstStart": "2026-09-22T16:00:00Z",
+  "minAge": 5,
+  "name": "Nybegynner",
+  "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+  "resultListMode": "UnorderedNoTimes",
+  "sex": "B",
+  "showLapTimes": false,
+  "startType": "Free",
+  "table": "Time",
+  "timingResolution": "Seconds",
+  "timingStartTimeSource": "Timing",
+  "updated_at": "2026-09-22T17:21:36.462071Z",
+  "id": "a2be8027-b966-4afc-bd65-d2c50784a8a6"
+ },
+ "entries": [
+  {
+   "cards": {
+    "card1": {
+     "id": 86,
+     "cardNo": "1000001",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-18T17:19:50.462119Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 39,
+    "name": "Løper 1"
+   },
+   "position": 1,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T18:20:34+00:00"
+   },
+   "time": {
+    "time": 517000,
+    "finishTime": "2026-09-22T20:19:23+02:00",
+    "updated": "2026-09-22T18:20:34+00:00",
+    "restart": false,
+    "startTime": "2026-09-22T20:10:46+02:00",
+    "behind": 0
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.826915Z",
+   "id": "a2c6e926-c770-454e-98cb-4eeb6ed2dcb1"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 27,
+     "cardNo": "1000002",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-18T17:19:50.446621Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 27,
+    "name": "Løper 2"
+   },
+   "position": 2,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T18:03:41+00:00"
+   },
+   "time": {
+    "time": 595000,
+    "updated": "2026-09-22T18:03:41+00:00",
+    "restart": false,
+    "startTime": "2026-09-22T19:52:12+02:00",
+    "behind": 78000,
+    "finishTime": "2026-09-22T20:02:07+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.842608Z",
+   "id": "a2c6e924-431b-48fa-8099-1db0e2b874d8"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardNo": "1000003",
+     "id": 41,
+     "rental": false,
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-18T17:19:50.477810Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 41,
+    "name": "Løper 3"
+   },
+   "position": 3,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:30:41+00:00"
+   },
+   "time": {
+    "updated": "2026-09-22T17:30:41+00:00",
+    "finishTime": "2026-09-22T19:26:53+02:00",
+    "time": 643000,
+    "startTime": "2026-09-22T19:16:10+02:00",
+    "behind": 126000,
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.810921Z",
+   "id": "a2c6e927-2cfb-4a98-9ef4-97455515388e"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 28,
+     "cardNo": "1000004",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-18T17:19:50.454280Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 28,
+    "name": "Løper 4"
+   },
+   "position": 4,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:23:14+00:00"
+   },
+   "time": {
+    "updated": "2026-09-22T17:23:14+00:00",
+    "startTime": "2026-09-22T19:11:07+02:00",
+    "finishTime": "2026-09-22T19:22:00+02:00",
+    "restart": false,
+    "time": 653000,
+    "behind": 136000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.835000Z",
+   "id": "a2c6e924-6f25-4447-84c5-a956083ba434"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 14,
+     "rental": false,
+     "cardNo": "1000005",
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-16T09:21:58.371036Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 14,
+    "name": "Løper 5"
+   },
+   "position": 5,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T18:02:30+00:00"
+   },
+   "time": {
+    "time": 715000,
+    "startTime": "2026-09-22T19:49:35+02:00",
+    "finishTime": "2026-09-22T20:01:30+02:00",
+    "restart": false,
+    "updated": "2026-09-22T18:02:30+00:00",
+    "behind": 198000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.850462Z",
+   "id": "a2c23847-3f35-4eac-9a16-ff4a6d172875"
+  },
+  {
+   "cards": {
+    "card1": {
+     "rental": false,
+     "cardTypeId": 1,
+     "cardNo": "1000006",
+     "id": 77
+    }
+   },
+   "created_at": "2026-09-21T12:06:22.140234Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 58,
+    "name": "Løper 6"
+   },
+   "position": 6,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:03:58+00:00"
+   },
+   "time": {
+    "restart": false,
+    "updated": "2026-09-22T17:03:58+00:00",
+    "behind": 321000,
+    "finishTime": "2026-09-22T19:02:11+02:00",
+    "startTime": "2026-09-22T18:48:13+02:00",
+    "time": 838000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.769454Z",
+   "id": "a2cc81fe-4a63-4bd3-b67a-c967cce4db29"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 61,
+     "cardNo": "1000007",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:17:49.966990Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 66,
+    "name": "Løper 7"
+   },
+   "position": 7,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T16:47:25+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-22T18:46:32+02:00",
+    "time": 863000,
+    "startTime": "2026-09-22T18:32:09+02:00",
+    "behind": 346000,
+    "updated": "2026-09-22T16:47:25+00:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.752359Z",
+   "id": "a2cedeeb-de3a-4564-bde1-cb8aeac96e8d"
+  },
+  {
+   "cards": {
+    "card1": {
+     "rental": false,
+     "cardNo": "1000008",
+     "id": 62,
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-22T16:18:19.383802Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 50,
+    "name": "Løper 8"
+   },
+   "position": 8,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T16:47:47+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-22T18:46:29+02:00",
+    "restart": false,
+    "behind": 351000,
+    "startTime": "2026-09-22T18:32:01+02:00",
+    "time": 868000,
+    "updated": "2026-09-22T16:47:47+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.615286Z",
+   "id": "a2cedf18-1092-4e35-9afa-0bb862454ca4"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 87,
+     "cardNo": "1000009",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T17:10:39.729090Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 84,
+    "name": "Løper 9"
+   },
+   "position": 9,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:55:03+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-22T19:49:15+02:00",
+    "behind": 397000,
+    "startTime": "2026-09-22T19:34:01+02:00",
+    "time": 914000,
+    "restart": false,
+    "updated": "2026-09-22T17:55:03+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.643934Z",
+   "id": "a2cef1d0-4ace-4ac4-921d-6d80b21bbcc1"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 66,
+     "cardNo": "1000010",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:21:30.967349Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 71,
+    "name": "Løper 10"
+   },
+   "position": 10,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:27:11+00:00"
+   },
+   "time": {
+    "behind": 504000,
+    "updated": "2026-09-22T17:27:11+00:00",
+    "startTime": "2026-09-22T19:06:15+02:00",
+    "time": 1021000,
+    "finishTime": "2026-09-22T19:23:16+02:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.719300Z",
+   "id": "a2cee03d-090b-43af-82bb-d93a9d82f287"
+  },
+  {
+   "cards": {
+    "card1": {
+     "rental": false,
+     "cardNo": "1000011",
+     "id": 98,
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-22T17:36:37.622962Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "person": {
+    "id": 92,
+    "name": "Løper 11"
+   },
+   "position": 11,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T18:02:57+00:00"
+   },
+   "time": {
+    "updated": "2026-09-22T18:02:57+00:00",
+    "time": 1041000,
+    "behind": 524000,
+    "startTime": "2026-09-22T19:44:50+02:00",
+    "finishTime": "2026-09-22T20:02:11+02:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.624030Z",
+   "id": "a2cefb19-bae9-49af-9ac2-466faedbcff5"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardNo": "1000012",
+     "cardTypeId": 1,
+     "id": 65,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:21:03.414502Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 70,
+    "name": "Løper 12"
+   },
+   "position": 12,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T16:52:24+00:00"
+   },
+   "time": {
+    "startTime": "2026-09-22T18:31:42+02:00",
+    "finishTime": "2026-09-22T18:50:21+02:00",
+    "restart": false,
+    "time": 1119000,
+    "updated": "2026-09-22T16:52:24+00:00",
+    "behind": 602000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.726949Z",
+   "id": "a2cee012-fea8-47a0-94e1-490ce976a419"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 70,
+     "cardNo": "1000013",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:27:25.987396Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 74,
+    "name": "Løper 13"
+   },
+   "position": 13,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T16:59:57+00:00"
+   },
+   "time": {
+    "time": 1120000,
+    "behind": 603000,
+    "startTime": "2026-09-22T18:39:50+02:00",
+    "restart": false,
+    "updated": "2026-09-22T16:59:57+00:00",
+    "finishTime": "2026-09-22T18:58:30+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.694507Z",
+   "id": "a2cee25a-b6fc-40ae-8c10-b9f998daeb05"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardTypeId": 1,
+     "cardNo": "1000014",
+     "rental": false,
+     "id": 88
+    }
+   },
+   "created_at": "2026-09-22T17:11:40.555713Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 85,
+    "name": "Løper 14"
+   },
+   "position": 14,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:43:47+00:00"
+   },
+   "time": {
+    "time": 1145000,
+    "startTime": "2026-09-22T19:21:40+02:00",
+    "restart": false,
+    "finishTime": "2026-09-22T19:40:45+02:00",
+    "updated": "2026-09-22T17:43:47+00:00",
+    "behind": 628000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.634908Z",
+   "id": "a2cef22d-5065-44b7-b106-41a71266277d"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardNo": "1000015",
+     "rental": false,
+     "cardTypeId": 1,
+     "id": 76
+    }
+   },
+   "created_at": "2026-09-21T12:06:22.131838Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 56,
+    "name": "Løper 15"
+   },
+   "position": 15,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:04:43+00:00"
+   },
+   "time": {
+    "restart": false,
+    "finishTime": "2026-09-22T19:02:00+02:00",
+    "behind": 630000,
+    "updated": "2026-09-22T17:04:43+00:00",
+    "startTime": "2026-09-22T18:42:53+02:00",
+    "time": 1147000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.777806Z",
+   "id": "a2cc81fd-d239-4cd4-8e36-a58e5c88e3ba"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardNo": "1000016",
+     "id": 100,
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-21T12:06:22.114992Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 51,
+    "name": "Løper 16"
+   },
+   "position": 16,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "updated": null,
+    "bibNo": null,
+    "startTime": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T18:05:46+00:00"
+   },
+   "time": {
+    "time": 1149000,
+    "updated": "2026-09-22T18:05:46+00:00",
+    "startTime": "2026-09-22T19:45:16+02:00",
+    "restart": false,
+    "behind": 632000,
+    "finishTime": "2026-09-22T20:04:25+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.793680Z",
+   "id": "a2cc81fc-610d-4f74-b7e2-c8333731e56d"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 40,
+     "cardNo": "1000017",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-18T17:19:50.470081Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 40,
+    "name": "Løper 17"
+   },
+   "position": 17,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:55:34+00:00"
+   },
+   "time": {
+    "behind": 671000,
+    "restart": false,
+    "startTime": "2026-09-22T19:34:11+02:00",
+    "finishTime": "2026-09-22T19:53:59+02:00",
+    "updated": "2026-09-22T17:55:34+00:00",
+    "time": 1188000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.819089Z",
+   "id": "a2c6e926-f9c2-4477-af78-ce2210b884ae"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardTypeId": 1,
+     "cardNo": "1000018",
+     "rental": false,
+     "id": 69
+    }
+   },
+   "created_at": "2026-09-21T12:06:22.098183Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 43,
+    "name": "Løper 18"
+   },
+   "position": 18,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T16:56:36+00:00"
+   },
+   "time": {
+    "startTime": "2026-09-22T18:33:21+02:00",
+    "finishTime": "2026-09-22T18:54:08+02:00",
+    "behind": 730000,
+    "time": 1247000,
+    "restart": false,
+    "updated": "2026-09-22T16:56:36+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.802893Z",
+   "id": "a2cc81fa-0760-4396-9d7b-5a707e274998"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 72,
+     "cardNo": "1000019",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:28:51.196954Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 76,
+    "name": "Løper 19"
+   },
+   "position": 19,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:56:04+00:00"
+   },
+   "time": {
+    "restart": false,
+    "updated": "2026-09-22T17:56:04+00:00",
+    "time": 1307000,
+    "finishTime": "2026-09-22T19:51:52+02:00",
+    "behind": 790000,
+    "startTime": "2026-09-22T19:30:05+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.678082Z",
+   "id": "a2cee2dc-bcdb-40a8-8420-8dc5cb0c1c6e"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 83,
+     "cardNo": "1000020",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:22:45.783376Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 72,
+    "name": "Løper 20"
+   },
+   "position": 20,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:03:14+00:00"
+   },
+   "time": {
+    "finishTime": "2026-09-22T19:01:24+02:00",
+    "time": 1345000,
+    "startTime": "2026-09-22T18:38:59+02:00",
+    "behind": 828000,
+    "restart": false,
+    "updated": "2026-09-22T17:03:14+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.711247Z",
+   "id": "a2cee0ae-f5c6-4e2a-9f9b-45f3fdf35c1f"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 52,
+     "cardNo": "1000021",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-21T12:06:22.123367Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 55,
+    "name": "Løper 21"
+   },
+   "position": 21,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:03:26+00:00"
+   },
+   "time": {
+    "startTime": "2026-09-22T18:38:58+02:00",
+    "restart": false,
+    "finishTime": "2026-09-22T19:01:27+02:00",
+    "behind": 832000,
+    "time": 1349000,
+    "updated": "2026-09-22T17:03:26+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.785640Z",
+   "id": "a2cc81fd-93ad-4927-a6f5-5568c8405268"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 60,
+     "cardNo": "1000022",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:16:20.905720Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 65,
+    "name": "Løper 22"
+   },
+   "position": 22,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T16:52:58+00:00"
+   },
+   "time": {
+    "restart": false,
+    "behind": 927000,
+    "updated": "2026-09-22T16:52:58+00:00",
+    "finishTime": "2026-09-22T18:51:24+02:00",
+    "startTime": "2026-09-22T18:27:20+02:00",
+    "time": 1444000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.760949Z",
+   "id": "a2cede63-d013-49f4-802a-bf531b164869"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 75,
+     "cardNo": "1000023",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:23:24.476777Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 73,
+    "name": "Løper 23"
+   },
+   "position": 23,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:06:26+00:00"
+   },
+   "time": {
+    "time": 1650000,
+    "updated": "2026-09-22T17:06:26+00:00",
+    "finishTime": "2026-09-22T19:05:42+02:00",
+    "behind": 1133000,
+    "startTime": "2026-09-22T18:38:12+02:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.702716Z",
+   "id": "a2cee0ea-4b88-4c7e-94ce-af9fb94ac7a4"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 74,
+     "cardNo": "1000024",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-22T16:28:54.110491Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 77,
+    "name": "Løper 24"
+   },
+   "position": 23,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:06:39+00:00"
+   },
+   "time": {
+    "behind": 1133000,
+    "updated": "2026-09-22T17:06:39+00:00",
+    "startTime": "2026-09-22T18:38:16+02:00",
+    "restart": false,
+    "finishTime": "2026-09-22T19:05:46+02:00",
+    "time": 1650000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.669829Z",
+   "id": "a2cee2e1-1b99-4d97-a476-849ae52f9179"
+  },
+  {
+   "cards": {
+    "card1": {
+     "rental": false,
+     "id": 73,
+     "cardNo": "1000025",
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-22T16:28:18.733492Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 75,
+    "name": "Løper 25"
+   },
+   "position": 25,
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T17:06:48+00:00"
+   },
+   "time": {
+    "time": 1654000,
+    "finishTime": "2026-09-22T19:05:48+02:00",
+    "restart": false,
+    "updated": "2026-09-22T17:06:48+00:00",
+    "startTime": "2026-09-22T18:38:14+02:00",
+    "behind": 1137000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:20:35.686200Z",
+   "id": "a2cee2ab-2cca-4afc-afa7-7af870596e3d"
+  },
+  {
+   "created_at": "2026-09-21T12:06:22.106602Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "organisation": {
+    "id": 1,
+    "name": "Kongsberg OL"
+   },
+   "person": {
+    "id": 50,
+    "name": "Løper 8"
+   },
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "updated": null,
+    "startTime": null,
+    "bibNo": null
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-22T18:57:28+00:00"
+   },
+   "time": {
+    "startTime": null,
+    "time": null,
+    "finishTime": null,
+    "behind": null,
+    "restart": false,
+    "updated": null
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:57:29.732139Z",
+   "id": "a2cc81fc-36e2-4598-ab75-bdb4a40e42e1"
+  },
+  {
+   "created_at": "2026-09-22T16:20:25.650064Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "person": {
+    "id": 69,
+    "name": "Løper 26"
+   },
+   "raceClassId": "a2be8027-b966-4afc-bd65-d2c50784a8a6",
+   "raceId": "a2be8026-147e-4f2b-8299-1580c37a1320",
+   "start": {
+    "startTime": null,
+    "bibNo": null,
+    "updated": null
+   },
+   "status": {
+    "updated": "2026-09-22T18:57:48+00:00",
+    "status": "OK"
+   },
+   "time": {
+    "startTime": null,
+    "finishTime": null,
+    "time": null,
+    "restart": false,
+    "updated": null,
+    "behind": null
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-22T18:57:50.144941Z",
+   "id": "a2cedfd9-87c4-4162-9ab3-54358a551fa8"
+  }
+ ]
+}
