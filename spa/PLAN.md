@@ -59,6 +59,15 @@ paritetstestene dekker.
 - [ ] Eget domene (valgfritt)
 - [ ] Test under et ekte løp, side om side med den gamle siden
 
+## Synk med upstream
+
+Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene genereres fra
+`web/templates/emmalang_*.php`. Endringer i upstream som påvirker SPA-en, gir derfor røde tester.
+
+- [ ] Planlagt GitHub Actions-workflow som henter `upstream/master` og åpner en PR fra `upstream-sync` når det finnes nye commits, med liste over endrede filer i `web/js/liveresults*.js` og `emmalang_*.php`. Workflowen stopper ved merge-konflikter
+- [ ] Workflowen kjører `npm run convert-lang` og legger oppdaterte `lang/*.json` inn i PR-en
+- [ ] (Valgfritt) Claude Code GitHub Action som foreslår portering til `src/domain/` når paritetstestene feiler. Krever API-nøkkel som secret og koster litt per kjøring
+
 ## Løse tråder
 
 - [ ] Spørre Time4o om grenser for antall forespørsler og vilkår for å bruke API-et
