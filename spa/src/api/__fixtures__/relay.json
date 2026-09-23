@@ -1,0 +1,3557 @@
+{
+ "race": {
+  "id": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+  "public": true,
+  "date": "2026-09-20",
+  "title": "NM junior stafett",
+  "name": "NM junior stafett",
+  "raceNumber": null,
+  "eventForm": "Relay",
+  "event": {
+   "id": "a2a5f44a-1496-48d0-b1a1-f9948c3b6e6a",
+   "organisers": [
+    {
+     "id": "9fe3b20d-b389-4ffd-bea4-a1413f58ac43",
+     "name": "Frol il"
+    }
+   ],
+   "name": "NC/NM/O-idol 2026",
+   "test": false,
+   "startDate": "2026-09-18",
+   "startTime": "17:00:00",
+   "locale": "nb",
+   "timezone": "Europe/Oslo"
+  },
+  "identifierType": "Norway",
+  "identifier": "19381"
+ },
+ "raceClass": {
+  "timingStartTimeSource": "Timing",
+  "created_at": "2026-09-17T06:24:53.800674Z",
+  "startType": "Common",
+  "legs": {
+   "1": {
+    "id": 4,
+    "optional": false,
+    "intermediateControls": {
+     "141-1": {
+      "counter": 1,
+      "order": 1,
+      "name": "1.4 km",
+      "id": "141"
+     },
+     "159-1": {
+      "id": "159",
+      "order": 2,
+      "counter": 1,
+      "name": "2.7 km"
+     },
+     "155-1": {
+      "order": 4,
+      "counter": 1,
+      "name": "4.0 km",
+      "id": "155"
+     },
+     "148-1": {
+      "counter": 1,
+      "id": "148",
+      "name": "3.0 km",
+      "order": 3
+     }
+    },
+    "number": 1,
+    "order": 1
+   },
+   "2": {
+    "optional": false,
+    "intermediateControls": {
+     "148-1": {
+      "counter": 1,
+      "name": "3.0 km",
+      "order": 3,
+      "id": "148"
+     },
+     "141-1": {
+      "id": "141",
+      "name": "1.3 km",
+      "order": 1,
+      "counter": 1
+     },
+     "159-1": {
+      "id": "159",
+      "counter": 1,
+      "name": "2.7 km",
+      "order": 2
+     },
+     "155-1": {
+      "counter": 1,
+      "name": "3.9 km",
+      "id": "155",
+      "order": 4
+     }
+    },
+    "order": 1,
+    "id": 5,
+    "number": 2
+   },
+   "3": {
+    "id": 6,
+    "optional": false,
+    "intermediateControls": {
+     "141-1": {
+      "order": 1,
+      "name": "1.4 km",
+      "id": "141",
+      "counter": 1
+     },
+     "155-1": {
+      "id": "155",
+      "order": 4,
+      "name": "4.0 km",
+      "counter": 1
+     },
+     "148-1": {
+      "name": "3.0 km",
+      "id": "148",
+      "order": 3,
+      "counter": 1
+     },
+     "159-1": {
+      "name": "2.8 km",
+      "counter": 1,
+      "order": 2,
+      "id": "159"
+     }
+    },
+    "order": 1,
+    "number": 3
+   }
+  },
+  "sex": "M",
+  "table": "Time",
+  "maxAge": 20,
+  "name": "H17-20",
+  "timingResolution": "Seconds",
+  "minAge": 16,
+  "updated_at": "2026-09-17T06:24:53.800674Z",
+  "resultListMode": "Default",
+  "firstStart": "2026-09-20T08:45:00Z",
+  "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+  "cardTypes": [
+   {
+    "punchingSystem": "emiTag",
+    "id": 1,
+    "name": "emiTag"
+   }
+  ],
+  "eventForm": "Relay",
+  "id": "a2a5fba4-0515-48a4-b1ab-9221974ebd35"
+ },
+ "entries": [
+  {
+   "cards": {
+    "card1": {
+     "id": 498,
+     "cardNo": "1000001",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.123264Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "behind": 0,
+     "updated": "2026-09-20T09:07:04+00:00",
+     "time": 1320848,
+     "counter": 1,
+     "intermediateControl": "148",
+     "position": 1
+    },
+    "141-1": {
+     "position": 1,
+     "behind": 0,
+     "updated": "2026-09-20T08:54:59+00:00",
+     "time": 598703,
+     "counter": 1,
+     "intermediateControl": "141"
+    },
+    "159-1": {
+     "updated": "2026-09-20T09:05:22+00:00",
+     "position": 1,
+     "time": 1218888,
+     "intermediateControl": "159",
+     "counter": 1,
+     "behind": 0
+    },
+    "155-1": {
+     "time": 1998408,
+     "behind": 95000,
+     "position": 18,
+     "counter": 1,
+     "updated": "2026-09-20T09:18:19+00:00",
+     "intermediateControl": "155"
+    }
+   },
+   "leg": {
+    "number": 1,
+    "intermediateControls": null,
+    "order": 1,
+    "id": 4,
+    "optional": false
+   },
+   "organisation": {
+    "id": 2,
+    "name": "Konnerud IL"
+   },
+   "overallResult": {
+    "position": 18,
+    "time": 2077000,
+    "behind": 107000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 25,
+    "name": "Løper 1"
+   },
+   "position": 18,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 118,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:19:50+00:00"
+   },
+   "team": {
+    "id": 1,
+    "name": "Konnerud IL 1"
+   },
+   "time": {
+    "updated": "2026-09-20T09:19:50+00:00",
+    "finishTime": "2026-09-20T11:19:37+02:00",
+    "time": 2077000,
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "behind": 107000,
+    "restart": false
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:20:33.657688Z",
+   "id": "a2a5fc80-19f3-4ed3-b508-bacdf85ebdef"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardTypeId": 1,
+     "rental": false,
+     "cardNo": "1000002",
+     "id": 37
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.134502Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "behind": 416000,
+     "position": 16,
+     "time": 4225239,
+     "updated": "2026-09-20T09:55:28+00:00",
+     "intermediateControl": "155",
+     "counter": 1
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "counter": 1,
+     "position": 17,
+     "time": 3700837,
+     "behind": 388000,
+     "updated": "2026-09-20T09:46:45+00:00"
+    },
+    "159-1": {
+     "position": 17,
+     "time": 3595226,
+     "behind": 377000,
+     "updated": "2026-09-20T09:44:56+00:00",
+     "counter": 1,
+     "intermediateControl": "159"
+    },
+    "141-1": {
+     "time": 2840068,
+     "behind": 262000,
+     "intermediateControl": "141",
+     "position": 18,
+     "updated": "2026-09-20T09:32:22+00:00",
+     "counter": 1
+    }
+   },
+   "leg": {
+    "order": 1,
+    "number": 2,
+    "id": 5,
+    "intermediateControls": null,
+    "optional": false
+   },
+   "organisation": {
+    "id": 2,
+    "name": "Konnerud IL"
+   },
+   "overallResult": {
+    "position": 16,
+    "time": 4313000,
+    "behind": 432000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 39,
+    "name": "Løper 2"
+   },
+   "position": 17,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 118,
+    "updated": "2026-09-14T08:02:24+00:00"
+   },
+   "startOverallResult": {
+    "position": 18,
+    "time": 2077000,
+    "behind": 107000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:57:05+00:00"
+   },
+   "team": {
+    "id": 1,
+    "name": "Konnerud IL 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T11:19:37+02:00",
+    "time": 2236000,
+    "restart": false,
+    "behind": 437000,
+    "updated": "2026-09-20T09:57:05+00:00",
+    "finishTime": "2026-09-20T11:56:53+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:00:21.046754Z",
+   "id": "a2a5fc80-2c07-4de4-87fc-212af1315f4a"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardTypeId": 1,
+     "rental": false,
+     "id": 247,
+     "cardNo": "1000003"
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.145511Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "leg": {
+    "order": 1,
+    "intermediateControls": null,
+    "number": 3,
+    "optional": false,
+    "id": 6
+   },
+   "organisation": {
+    "id": 2,
+    "name": "Konnerud IL"
+   },
+   "overallResult": {
+    "position": null,
+    "time": 6533000,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "MissingPunch",
+    "updated": null
+   },
+   "person": {
+    "id": 250,
+    "name": "Løper 3"
+   },
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 118,
+    "updated": "2026-09-14T08:02:24+00:00"
+   },
+   "startOverallResult": {
+    "position": 16,
+    "time": 4313000,
+    "behind": 432000
+   },
+   "status": {
+    "status": "MissingPunch",
+    "updated": "2026-09-20T10:34:27+00:00"
+   },
+   "team": {
+    "id": 1,
+    "name": "Konnerud IL 1"
+   },
+   "time": {
+    "updated": "2026-09-20T10:34:27+00:00",
+    "behind": null,
+    "time": 2220000,
+    "startTime": "2026-09-20T11:56:53+02:00",
+    "finishTime": "2026-09-20T12:33:53+02:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:34:34.458217Z",
+   "id": "a2a5fc80-3de0-4733-8f59-8d0dcce5dece"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 24,
+     "cardNo": "1000004",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.809891Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "intermediateControl": "155",
+     "time": 1973952,
+     "behind": 70000,
+     "position": 11,
+     "updated": "2026-09-20T09:17:56+00:00",
+     "counter": 1
+    },
+    "141-1": {
+     "behind": 142000,
+     "position": 24,
+     "intermediateControl": "141",
+     "updated": "2026-09-20T08:57:22+00:00",
+     "time": 740251,
+     "counter": 1
+    },
+    "148-1": {
+     "behind": 157000,
+     "intermediateControl": "148",
+     "position": 14,
+     "updated": "2026-09-20T09:09:38+00:00",
+     "time": 1477016,
+     "counter": 1
+    },
+    "159-1": {
+     "position": 13,
+     "behind": 157000,
+     "time": 1375868,
+     "intermediateControl": "159",
+     "counter": 1,
+     "updated": "2026-09-20T09:07:59+00:00"
+    }
+   },
+   "leg": {
+    "id": 4,
+    "number": 1,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 16,
+    "name": "Sturla, IF"
+   },
+   "overallResult": {
+    "behind": 77000,
+    "position": 11,
+    "time": 2047000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 24,
+    "name": "Løper 4"
+   },
+   "position": 11,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 122,
+    "updated": "2026-09-14T08:02:24+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:19:28+00:00"
+   },
+   "team": {
+    "id": 3,
+    "name": "Sturla, IF 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "updated": "2026-09-20T09:19:28+00:00",
+    "finishTime": "2026-09-20T11:19:07+02:00",
+    "time": 2047000,
+    "behind": 77000,
+    "restart": false
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:19:31.065480Z",
+   "id": "a2a5fc80-b2e5-4b74-bad8-7fafc00fa177"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 39,
+     "cardNo": "1000005",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.830713Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "counter": 1,
+     "position": 19,
+     "time": 2857458,
+     "behind": 279000,
+     "intermediateControl": "141",
+     "updated": "2026-09-20T09:32:40+00:00"
+    },
+    "155-1": {
+     "intermediateControl": "155",
+     "updated": "2026-09-20T10:01:22+00:00",
+     "counter": 1,
+     "position": 26,
+     "behind": 770000,
+     "time": 4579221
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "updated": "2026-09-20T09:47:50+00:00",
+     "behind": 551000,
+     "position": 22,
+     "counter": 1,
+     "time": 3769267
+    },
+    "148-1": {
+     "counter": 1,
+     "intermediateControl": "148",
+     "behind": 584000,
+     "updated": "2026-09-20T09:49:59+00:00",
+     "position": 22,
+     "time": 3896293
+    }
+   },
+   "leg": {
+    "number": 2,
+    "order": 1,
+    "id": 5,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 16,
+    "name": "Sturla, IF"
+   },
+   "overallResult": {
+    "position": 26,
+    "time": 4662000,
+    "behind": 781000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 41,
+    "name": "Løper 5"
+   },
+   "position": 34,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 122,
+    "updated": "2026-09-14T08:02:24+00:00"
+   },
+   "startOverallResult": {
+    "position": 11,
+    "time": 2047000,
+    "behind": 77000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:03:04+00:00"
+   },
+   "team": {
+    "id": 3,
+    "name": "Sturla, IF 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T11:19:07+02:00",
+    "updated": "2026-09-20T10:03:04+00:00",
+    "behind": 816000,
+    "finishTime": "2026-09-20T12:02:42+02:00",
+    "time": 2615000,
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:16:43.592903Z",
+   "id": "a2a5fc80-c9a5-4378-8cfb-d598655671ad"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 38,
+     "cardNo": "1000006",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.820310Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "behind": 936000,
+     "intermediateControl": "155",
+     "counter": 1,
+     "updated": "2026-09-20T10:35:50+00:00",
+     "position": 18,
+     "time": 6647697
+    },
+    "159-1": {
+     "time": 6035236,
+     "behind": 883000,
+     "updated": "2026-09-20T10:25:38+00:00",
+     "counter": 1,
+     "intermediateControl": "159",
+     "position": 20
+    },
+    "148-1": {
+     "counter": 1,
+     "intermediateControl": "148",
+     "time": 6149790,
+     "behind": 904000,
+     "updated": "2026-09-20T10:27:32+00:00",
+     "position": 20
+    },
+    "141-1": {
+     "position": 21,
+     "updated": "2026-09-20T10:13:59+00:00",
+     "time": 5336358,
+     "intermediateControl": "141",
+     "counter": 1,
+     "behind": 787000
+    }
+   },
+   "leg": {
+    "id": 6,
+    "number": 3,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 16,
+    "name": "Sturla, IF"
+   },
+   "overallResult": {
+    "position": 19,
+    "time": 6724000,
+    "behind": 954000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 40,
+    "name": "Løper 6"
+   },
+   "position": 8,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 122,
+    "updated": "2026-09-14T08:02:24+00:00"
+   },
+   "startOverallResult": {
+    "position": 26,
+    "time": 4662000,
+    "behind": 781000
+   },
+   "status": {
+    "updated": "2026-09-20T10:37:26+00:00",
+    "status": "OK"
+   },
+   "team": {
+    "id": 3,
+    "name": "Sturla, IF 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T12:02:42+02:00",
+    "restart": false,
+    "time": 2062000,
+    "behind": 232000,
+    "updated": "2026-09-20T10:37:26+00:00",
+    "finishTime": "2026-09-20T12:37:04+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:40:46.156971Z",
+   "id": "a2a5fc80-dd43-402a-afbf-f06aae4309bb"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 101,
+     "cardTypeId": 1,
+     "cardNo": "1000007",
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.795311Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "updated": "2026-09-20T09:18:59+00:00",
+     "counter": 1,
+     "behind": 134000,
+     "time": 2037564,
+     "intermediateControl": "155",
+     "position": 22
+    },
+    "148-1": {
+     "counter": 1,
+     "intermediateControl": "148",
+     "position": 13,
+     "time": 1476094,
+     "updated": "2026-09-20T09:09:38+00:00",
+     "behind": 156000
+    },
+    "141-1": {
+     "counter": 1,
+     "intermediateControl": "141",
+     "time": 729733,
+     "position": 16,
+     "behind": 131000,
+     "updated": "2026-09-20T08:57:13+00:00"
+    },
+    "159-1": {
+     "position": 14,
+     "counter": 1,
+     "behind": 161000,
+     "intermediateControl": "159",
+     "updated": "2026-09-20T09:08:01+00:00",
+     "time": 1379041
+    }
+   },
+   "leg": {
+    "id": 4,
+    "number": 1,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 10,
+    "name": "Frol IL"
+   },
+   "overallResult": {
+    "position": 22,
+    "time": 2110000,
+    "behind": 140000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 103,
+    "name": "Løper 7"
+   },
+   "position": 22,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 107,
+    "updated": "2026-09-14T08:02:22+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:20:21+00:00"
+   },
+   "team": {
+    "id": 5,
+    "name": "Frol IL 1"
+   },
+   "time": {
+    "time": 2110000,
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "finishTime": "2026-09-20T11:20:10+02:00",
+    "restart": false,
+    "behind": 140000,
+    "updated": "2026-09-20T09:20:21+00:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:20:36.886893Z",
+   "id": "a2a5fc81-92a4-4334-90e6-0eec595a93aa"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 126,
+     "rental": false,
+     "cardTypeId": 1,
+     "cardNo": "1000008"
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.806057Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "intermediateControl": "148",
+     "behind": 60000,
+     "position": 2,
+     "counter": 1,
+     "time": 3372060,
+     "updated": "2026-09-20T09:41:13+00:00"
+    },
+    "141-1": {
+     "counter": 1,
+     "position": 7,
+     "time": 2700895,
+     "behind": 122000,
+     "intermediateControl": "141",
+     "updated": "2026-09-20T09:30:03+00:00"
+    },
+    "159-1": {
+     "position": 2,
+     "updated": "2026-09-20T09:39:41+00:00",
+     "time": 3279135,
+     "behind": 61000,
+     "intermediateControl": "159",
+     "counter": 1
+    },
+    "155-1": {
+     "intermediateControl": "155",
+     "counter": 1,
+     "position": 3,
+     "time": 3841180,
+     "behind": 32000,
+     "updated": "2026-09-20T09:49:04+00:00"
+    }
+   },
+   "leg": {
+    "number": 2,
+    "intermediateControls": null,
+    "id": 5,
+    "order": 1,
+    "optional": false
+   },
+   "organisation": {
+    "id": 10,
+    "name": "Frol IL"
+   },
+   "overallResult": {
+    "time": 3909000,
+    "position": 2,
+    "behind": 28000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 128,
+    "name": "Løper 8"
+   },
+   "position": 1,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 107,
+    "updated": "2026-09-14T08:02:22+00:00"
+   },
+   "startOverallResult": {
+    "position": 22,
+    "time": 2110000,
+    "behind": 140000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:50:22+00:00"
+   },
+   "team": {
+    "id": 5,
+    "name": "Frol IL 1"
+   },
+   "time": {
+    "restart": false,
+    "updated": "2026-09-20T09:50:22+00:00",
+    "finishTime": "2026-09-20T11:50:09+02:00",
+    "behind": 0,
+    "startTime": "2026-09-20T11:20:10+02:00",
+    "time": 1799000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T09:50:24.997856Z",
+   "id": "a2a5fc81-a4d4-44bc-bf93-2e91c3829bde"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardTypeId": 1,
+     "id": 12,
+     "rental": false,
+     "cardNo": "1000009"
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.816897Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "intermediateControl": "155",
+     "behind": 215000,
+     "position": 3,
+     "time": 5926344,
+     "counter": 1,
+     "updated": "2026-09-20T10:23:47+00:00"
+    },
+    "141-1": {
+     "counter": 1,
+     "position": 3,
+     "time": 4573115,
+     "updated": "2026-09-20T10:01:16+00:00",
+     "intermediateControl": "141",
+     "behind": 24000
+    },
+    "148-1": {
+     "behind": 93000,
+     "counter": 1,
+     "position": 3,
+     "updated": "2026-09-20T10:13:59+00:00",
+     "time": 5338692,
+     "intermediateControl": "148"
+    },
+    "159-1": {
+     "updated": "2026-09-20T10:12:16+00:00",
+     "time": 5234333,
+     "intermediateControl": "159",
+     "counter": 1,
+     "position": 4,
+     "behind": 82000
+    }
+   },
+   "leg": {
+    "intermediateControls": null,
+    "number": 3,
+    "id": 6,
+    "order": 1,
+    "optional": false
+   },
+   "organisation": {
+    "id": 10,
+    "name": "Frol IL"
+   },
+   "overallResult": {
+    "position": 4,
+    "time": 6003000,
+    "behind": 233000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 12,
+    "name": "Løper 9"
+   },
+   "position": 12,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 107,
+    "updated": "2026-09-14T08:02:22+00:00"
+   },
+   "startOverallResult": {
+    "position": 2,
+    "time": 3909000,
+    "behind": 28000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:25:48+00:00"
+   },
+   "team": {
+    "id": 5,
+    "name": "Frol IL 1"
+   },
+   "time": {
+    "finishTime": "2026-09-20T12:25:03+02:00",
+    "behind": 264000,
+    "updated": "2026-09-20T10:25:48+00:00",
+    "time": 2094000,
+    "restart": false,
+    "startTime": "2026-09-20T11:50:09+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:40:46.141533Z",
+   "id": "a2a5fc81-b9d7-4d0d-b257-5e7ce986d184"
+  },
+  {
+   "cards": {
+    "card1": {
+     "cardTypeId": 1,
+     "id": 363,
+     "cardNo": "1000010",
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.156631Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "intermediateControl": "148",
+     "counter": 1,
+     "position": 29,
+     "time": 1579509,
+     "behind": 259000,
+     "updated": "2026-09-20T09:11:22+00:00"
+    },
+    "141-1": {
+     "time": 802206,
+     "updated": "2026-09-20T08:58:25+00:00",
+     "intermediateControl": "141",
+     "position": 37,
+     "counter": 1,
+     "behind": 204000
+    },
+    "159-1": {
+     "updated": "2026-09-20T09:09:28+00:00",
+     "counter": 1,
+     "behind": 249000,
+     "intermediateControl": "159",
+     "position": 29,
+     "time": 1467586
+    },
+    "155-1": {
+     "behind": 368000,
+     "position": 30,
+     "counter": 1,
+     "intermediateControl": "155",
+     "updated": "2026-09-20T09:22:53+00:00",
+     "time": 2271328
+    }
+   },
+   "leg": {
+    "id": 4,
+    "number": 1,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 1,
+    "name": "Lillomarka OL"
+   },
+   "overallResult": {
+    "position": 31,
+    "time": 2343000,
+    "behind": 373000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 370,
+    "name": "Løper 10"
+   },
+   "position": 31,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 119,
+    "updated": "2026-09-14T08:02:24+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:24:35+00:00"
+   },
+   "team": {
+    "id": 7,
+    "name": "Lillomarka OL 1"
+   },
+   "time": {
+    "finishTime": "2026-09-20T11:24:03+02:00",
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "restart": false,
+    "behind": 373000,
+    "updated": "2026-09-20T09:24:35+00:00",
+    "time": 2343000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:25:08.538349Z",
+   "id": "a2a5fc82-36cc-4ddb-919c-b3235feea959"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 48,
+     "cardNo": "1000011",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.167437Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "position": 27,
+     "counter": 1,
+     "time": 3878940,
+     "behind": 660000,
+     "updated": "2026-09-20T09:49:41+00:00",
+     "intermediateControl": "159"
+    },
+    "155-1": {
+     "counter": 1,
+     "intermediateControl": "155",
+     "time": 4577964,
+     "position": 25,
+     "updated": "2026-09-20T10:01:19+00:00",
+     "behind": 768000
+    },
+    "148-1": {
+     "position": 30,
+     "behind": 698000,
+     "updated": "2026-09-20T09:51:53+00:00",
+     "time": 4010338,
+     "counter": 1,
+     "intermediateControl": "148"
+    },
+    "141-1": {
+     "counter": 1,
+     "position": 28,
+     "time": 3125718,
+     "intermediateControl": "141",
+     "behind": 547000,
+     "updated": "2026-09-20T09:37:07+00:00"
+    }
+   },
+   "leg": {
+    "id": 5,
+    "number": 2,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 1,
+    "name": "Lillomarka OL"
+   },
+   "overallResult": {
+    "position": 26,
+    "time": 4662000,
+    "behind": 781000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 50,
+    "name": "Løper 11"
+   },
+   "position": 23,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 119,
+    "updated": "2026-09-14T08:02:24+00:00"
+   },
+   "startOverallResult": {
+    "position": 31,
+    "time": 2343000,
+    "behind": 373000
+   },
+   "status": {
+    "updated": "2026-09-20T10:03:26+00:00",
+    "status": "OK"
+   },
+   "team": {
+    "id": 7,
+    "name": "Lillomarka OL 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T11:24:03+02:00",
+    "behind": 520000,
+    "restart": false,
+    "time": 2319000,
+    "updated": "2026-09-20T10:03:26+00:00",
+    "finishTime": "2026-09-20T12:02:42+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:03:43.489859Z",
+   "id": "a2a5fc82-47f9-47b2-94a3-69104bd3f4b3"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 267,
+     "cardNo": "1000012",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.178001Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "behind": 835000,
+     "counter": 1,
+     "time": 5384755,
+     "position": 22,
+     "intermediateControl": "141",
+     "updated": "2026-09-20T10:14:47+00:00"
+    },
+    "148-1": {
+     "updated": "2026-09-20T10:27:28+00:00",
+     "behind": 901000,
+     "intermediateControl": "148",
+     "counter": 1,
+     "position": 19,
+     "time": 6146056
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "position": 19,
+     "time": 6033817,
+     "counter": 1,
+     "updated": "2026-09-20T10:25:34+00:00",
+     "behind": 881000
+    },
+    "155-1": {
+     "position": 19,
+     "time": 6710205,
+     "behind": 999000,
+     "counter": 1,
+     "updated": "2026-09-20T10:36:53+00:00",
+     "intermediateControl": "155"
+    }
+   },
+   "leg": {
+    "id": 6,
+    "number": 3,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 1,
+    "name": "Lillomarka OL"
+   },
+   "overallResult": {
+    "time": 6801000,
+    "behind": 1031000,
+    "position": 20
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 271,
+    "name": "Løper 12"
+   },
+   "position": 16,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 119,
+    "updated": "2026-09-14T08:02:24+00:00"
+   },
+   "startOverallResult": {
+    "position": 26,
+    "time": 4662000,
+    "behind": 781000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:38:44+00:00"
+   },
+   "team": {
+    "id": 7,
+    "name": "Lillomarka OL 1"
+   },
+   "time": {
+    "behind": 309000,
+    "finishTime": "2026-09-20T12:38:21+02:00",
+    "time": 2139000,
+    "startTime": "2026-09-20T12:02:42+02:00",
+    "restart": false,
+    "updated": "2026-09-20T10:38:44+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:40:46.126241Z",
+   "id": "a2a5fc82-59b8-48ce-88a1-93a3bdaeb039"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 472,
+     "cardNo": "1000013",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.590055Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "counter": 1,
+     "position": 33,
+     "updated": "2026-09-20T09:23:07+00:00",
+     "time": 2286093,
+     "behind": 383000,
+     "intermediateControl": "155"
+    },
+    "148-1": {
+     "updated": "2026-09-20T09:13:16+00:00",
+     "behind": 375000,
+     "intermediateControl": "148",
+     "time": 1695937,
+     "counter": 1,
+     "position": 39
+    },
+    "141-1": {
+     "time": 813606,
+     "intermediateControl": "141",
+     "counter": 1,
+     "updated": "2026-09-20T08:58:34+00:00",
+     "position": 42,
+     "behind": 215000
+    },
+    "159-1": {
+     "counter": 1,
+     "intermediateControl": "159",
+     "time": 1572697,
+     "behind": 354000,
+     "position": 37,
+     "updated": "2026-09-20T09:11:13+00:00"
+    }
+   },
+   "leg": {
+    "id": 4,
+    "number": 1,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 1,
+    "name": "Lillomarka OL"
+   },
+   "overallResult": {
+    "position": 34,
+    "time": 2361000,
+    "behind": 391000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 377,
+    "name": "Løper 13"
+   },
+   "position": 34,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 134,
+    "updated": "2026-09-14T08:02:25+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:25:37+00:00"
+   },
+   "team": {
+    "id": 8,
+    "name": "Lillomarka OL 2"
+   },
+   "time": {
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "behind": 391000,
+    "updated": "2026-09-20T09:25:37+00:00",
+    "restart": false,
+    "time": 2361000,
+    "finishTime": "2026-09-20T11:24:21+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:25:41.887634Z",
+   "id": "a2a5fc82-7b12-41f6-86a6-7a6ff0bf48b3"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 522,
+     "cardNo": "1000014",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.601564Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "updated": "2026-09-20T10:16:28+00:00",
+     "counter": 1,
+     "time": 5486476,
+     "intermediateControl": "155",
+     "behind": 1677000,
+     "position": 42
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "updated": "2026-09-20T10:03:19+00:00",
+     "position": 42,
+     "time": 4696686,
+     "behind": 1384000,
+     "counter": 1
+    },
+    "159-1": {
+     "updated": "2026-09-20T10:01:10+00:00",
+     "behind": 1349000,
+     "position": 42,
+     "intermediateControl": "159",
+     "time": 4567349,
+     "counter": 1
+    },
+    "141-1": {
+     "time": 3740098,
+     "position": 44,
+     "counter": 1,
+     "behind": 1162000,
+     "intermediateControl": "141",
+     "updated": "2026-09-20T09:47:22+00:00"
+    }
+   },
+   "leg": {
+    "id": 5,
+    "number": 2,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 1,
+    "name": "Lillomarka OL"
+   },
+   "overallResult": {
+    "behind": 1690000,
+    "position": 41,
+    "time": 5571000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 384,
+    "name": "Løper 14"
+   },
+   "position": 45,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 134,
+    "updated": "2026-09-14T08:02:25+00:00"
+   },
+   "startOverallResult": {
+    "position": 34,
+    "time": 2361000,
+    "behind": 391000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:18:19+00:00"
+   },
+   "team": {
+    "id": 8,
+    "name": "Lillomarka OL 2"
+   },
+   "time": {
+    "updated": "2026-09-20T10:18:19+00:00",
+    "behind": 1411000,
+    "startTime": "2026-09-20T11:24:21+02:00",
+    "finishTime": "2026-09-20T12:17:51+02:00",
+    "time": 3210000,
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:29:23.315818Z",
+   "id": "a2a5fc82-8d20-4500-a1af-f0adad229fa3"
+  },
+  {
+   "created_at": "2026-09-17T06:24:54.612608Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "leg": {
+    "number": 3,
+    "intermediateControls": null,
+    "id": 6,
+    "optional": false,
+    "order": 1
+   },
+   "organisation": {
+    "id": 1,
+    "name": "Lillomarka OL"
+   },
+   "overallStatus": {
+    "updated": null,
+    "status": "DidNotStart"
+   },
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 134,
+    "updated": "2026-09-14T08:02:25+00:00"
+   },
+   "startOverallResult": {
+    "position": 41,
+    "behind": 1690000,
+    "time": 5571000
+   },
+   "status": {
+    "status": "DidNotStart",
+    "updated": "2026-09-20T10:38:50+00:00"
+   },
+   "team": {
+    "id": 8,
+    "name": "Lillomarka OL 2"
+   },
+   "time": {
+    "startTime": "2026-09-20T12:17:51+02:00",
+    "restart": false,
+    "finishTime": null,
+    "updated": null,
+    "behind": null,
+    "time": null
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:38:51.679361Z",
+   "id": "a2a5fc82-9e92-4906-91d9-b7bcd6f5a4f7"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 375,
+     "cardNo": "1000015",
+     "cardTypeId": 1,
+     "rental": true
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.893642Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "intermediateControl": "159",
+     "position": 7,
+     "updated": "2026-09-20T09:07:44+00:00",
+     "counter": 1,
+     "time": 1360634,
+     "behind": 142000
+    },
+    "148-1": {
+     "position": 7,
+     "updated": "2026-09-20T09:09:25+00:00",
+     "intermediateControl": "148",
+     "behind": 143000,
+     "counter": 1,
+     "time": 1463498
+    },
+    "141-1": {
+     "updated": "2026-09-20T08:56:03+00:00",
+     "intermediateControl": "141",
+     "counter": 1,
+     "position": 4,
+     "time": 661325,
+     "behind": 63000
+    },
+    "155-1": {
+     "intermediateControl": "155",
+     "position": 9,
+     "time": 1942904,
+     "behind": 39000,
+     "counter": 1,
+     "updated": "2026-09-20T09:17:25+00:00"
+    }
+   },
+   "leg": {
+    "id": 4,
+    "number": 1,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "behind": 46000,
+    "position": 9,
+    "time": 2016000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 180,
+    "name": "Løper 15"
+   },
+   "position": 9,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 110,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:18:54+00:00"
+   },
+   "team": {
+    "id": 10,
+    "name": "Sandnes IL (Rogaland) 1"
+   },
+   "time": {
+    "behind": 46000,
+    "restart": false,
+    "updated": "2026-09-20T09:18:54+00:00",
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "finishTime": "2026-09-20T11:18:36+02:00",
+    "time": 2016000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:19:16.388877Z",
+   "id": "a2a5fc83-0456-4bd6-8ae6-8e4d6510b71f"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 53,
+     "cardNo": "1000016",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.904279Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "intermediateControl": "148",
+     "counter": 1,
+     "behind": 130000,
+     "time": 3442989,
+     "updated": "2026-09-20T09:42:26+00:00",
+     "position": 6
+    },
+    "141-1": {
+     "counter": 1,
+     "updated": "2026-09-20T09:30:13+00:00",
+     "intermediateControl": "141",
+     "behind": 134000,
+     "position": 8,
+     "time": 2712318
+    },
+    "159-1": {
+     "time": 3339219,
+     "counter": 1,
+     "updated": "2026-09-20T09:40:41+00:00",
+     "intermediateControl": "159",
+     "behind": 121000,
+     "position": 6
+    },
+    "155-1": {
+     "intermediateControl": "155",
+     "time": 3915859,
+     "counter": 1,
+     "behind": 106000,
+     "updated": "2026-09-20T09:50:16+00:00",
+     "position": 5
+    }
+   },
+   "leg": {
+    "id": 5,
+    "number": 2,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": 5,
+    "time": 3986000,
+    "behind": 105000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 55,
+    "name": "Løper 16"
+   },
+   "position": 5,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 110,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "startOverallResult": {
+    "position": 9,
+    "time": 2016000,
+    "behind": 46000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:51:38+00:00"
+   },
+   "team": {
+    "id": 10,
+    "name": "Sandnes IL (Rogaland) 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T11:18:36+02:00",
+    "updated": "2026-09-20T09:51:38+00:00",
+    "time": 1970000,
+    "behind": 171000,
+    "restart": false,
+    "finishTime": "2026-09-20T11:51:26+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T09:51:40.404728Z",
+   "id": "a2a5fc83-1818-42bd-b7b8-6050a2c53a95"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 52,
+     "cardNo": "1000017",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.915128Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "updated": "2026-09-20T10:26:13+00:00",
+     "time": 6069909,
+     "intermediateControl": "155",
+     "counter": 1,
+     "behind": 358000,
+     "position": 5
+    },
+    "159-1": {
+     "position": 6,
+     "counter": 1,
+     "time": 5384676,
+     "intermediateControl": "159",
+     "behind": 232000,
+     "updated": "2026-09-20T10:14:47+00:00"
+    },
+    "148-1": {
+     "time": 5488727,
+     "intermediateControl": "148",
+     "updated": "2026-09-20T10:16:32+00:00",
+     "counter": 1,
+     "position": 6,
+     "behind": 243000
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "time": 4701866,
+     "position": 5,
+     "behind": 152000,
+     "counter": 1,
+     "updated": "2026-09-20T10:03:25+00:00"
+    }
+   },
+   "leg": {
+    "id": 6,
+    "number": 3,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": 6,
+    "time": 6140000,
+    "behind": 370000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 54,
+    "name": "Løper 17"
+   },
+   "position": 18,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 110,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "startOverallResult": {
+    "position": 5,
+    "time": 3986000,
+    "behind": 105000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:27:33+00:00"
+   },
+   "team": {
+    "id": 10,
+    "name": "Sandnes IL (Rogaland) 1"
+   },
+   "time": {
+    "time": 2154000,
+    "behind": 324000,
+    "finishTime": "2026-09-20T12:27:20+02:00",
+    "restart": false,
+    "startTime": "2026-09-20T11:51:26+02:00",
+    "updated": "2026-09-20T10:27:33+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:40:46.111129Z",
+   "id": "a2a5fc83-2a4e-46d9-bd07-5befaff6231b"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 54,
+     "cardNo": "1000018",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.760323Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "counter": 1,
+     "updated": "2026-09-20T09:17:56+00:00",
+     "behind": 70000,
+     "time": 1973349,
+     "position": 11,
+     "intermediateControl": "155"
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "counter": 1,
+     "updated": "2026-09-20T09:07:41+00:00",
+     "behind": 141000,
+     "position": 6,
+     "time": 1359399
+    },
+    "141-1": {
+     "updated": "2026-09-20T08:56:13+00:00",
+     "time": 671747,
+     "behind": 73000,
+     "intermediateControl": "141",
+     "position": 7,
+     "counter": 1
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "time": 1461823,
+     "counter": 1,
+     "position": 6,
+     "behind": 141000,
+     "updated": "2026-09-20T09:09:22+00:00"
+    }
+   },
+   "leg": {
+    "id": 4,
+    "number": 1,
+    "optional": false,
+    "order": 1,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "behind": 76000,
+    "position": 10,
+    "time": 2046000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 56,
+    "name": "Løper 18"
+   },
+   "position": 10,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 139,
+    "updated": "2026-09-14T08:02:26+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:19:19+00:00"
+   },
+   "team": {
+    "id": 11,
+    "name": "Sandnes IL (Rogaland) 2"
+   },
+   "time": {
+    "finishTime": "2026-09-20T11:19:06+02:00",
+    "behind": 76000,
+    "time": 2046000,
+    "updated": "2026-09-20T09:19:19+00:00",
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:19:26.482554Z",
+   "id": "a2a5fc83-4c6d-45a9-aa74-36e307005687"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 141,
+     "cardNo": "1000019",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.771889Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "behind": 263000,
+     "counter": 1,
+     "updated": "2026-09-20T09:43:04+00:00",
+     "time": 3481400,
+     "intermediateControl": "159",
+     "position": 11
+    },
+    "155-1": {
+     "intermediateControl": "155",
+     "counter": 1,
+     "time": 4172603,
+     "position": 12,
+     "behind": 363000,
+     "updated": "2026-09-20T09:54:34+00:00"
+    },
+    "148-1": {
+     "updated": "2026-09-20T09:44:50+00:00",
+     "counter": 1,
+     "behind": 275000,
+     "position": 11,
+     "intermediateControl": "148",
+     "time": 3587260
+    },
+    "141-1": {
+     "counter": 1,
+     "position": 12,
+     "intermediateControl": "141",
+     "time": 2779457,
+     "behind": 201000,
+     "updated": "2026-09-20T09:31:22+00:00"
+    }
+   },
+   "leg": {
+    "order": 1,
+    "intermediateControls": null,
+    "optional": false,
+    "number": 2,
+    "id": 5
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": 12,
+    "time": 4242000,
+    "behind": 361000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 143,
+    "name": "Løper 19"
+   },
+   "position": 16,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 139,
+    "updated": "2026-09-14T08:02:26+00:00"
+   },
+   "startOverallResult": {
+    "position": 10,
+    "time": 2046000,
+    "behind": 76000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:56:05+00:00"
+   },
+   "team": {
+    "id": 11,
+    "name": "Sandnes IL (Rogaland) 2"
+   },
+   "time": {
+    "startTime": "2026-09-20T11:19:06+02:00",
+    "updated": "2026-09-20T09:56:05+00:00",
+    "finishTime": "2026-09-20T11:55:42+02:00",
+    "behind": 397000,
+    "restart": false,
+    "time": 2196000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:00:21.069278Z",
+   "id": "a2a5fc83-5e3c-47d9-ba3f-8725cc3251f4"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 485,
+     "cardNo": "1000020",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.783108Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "counter": 1,
+     "time": 5625505,
+     "behind": 473000,
+     "updated": "2026-09-20T10:18:46+00:00",
+     "position": 10,
+     "intermediateControl": "159"
+    },
+    "155-1": {
+     "position": 9,
+     "time": 6282528,
+     "behind": 571000,
+     "intermediateControl": "155",
+     "counter": 1,
+     "updated": "2026-09-20T10:29:44+00:00"
+    },
+    "141-1": {
+     "time": 4902249,
+     "behind": 353000,
+     "updated": "2026-09-20T10:06:43+00:00",
+     "intermediateControl": "141",
+     "counter": 1,
+     "position": 10
+    },
+    "148-1": {
+     "time": 5728995,
+     "behind": 483000,
+     "intermediateControl": "148",
+     "updated": "2026-09-20T10:20:31+00:00",
+     "position": 10,
+     "counter": 1
+    }
+   },
+   "leg": {
+    "id": 6,
+    "number": 3,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": 10,
+    "time": 6349000,
+    "behind": 579000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 99,
+    "name": "Løper 20"
+   },
+   "position": 14,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 139,
+    "updated": "2026-09-14T08:02:26+00:00"
+   },
+   "startOverallResult": {
+    "position": 12,
+    "time": 4242000,
+    "behind": 361000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:31:01+00:00"
+   },
+   "team": {
+    "id": 11,
+    "name": "Sandnes IL (Rogaland) 2"
+   },
+   "time": {
+    "time": 2107000,
+    "finishTime": "2026-09-20T12:30:49+02:00",
+    "behind": 277000,
+    "restart": false,
+    "startTime": "2026-09-20T11:55:42+02:00",
+    "updated": "2026-09-20T10:31:01+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:40:46.095684Z",
+   "id": "a2a5fc83-6e0a-4e19-bd18-2c4042fd74f0"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 94,
+     "cardNo": "1000021",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.581978Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "leg": {
+    "order": 1,
+    "number": 1,
+    "intermediateControls": null,
+    "id": 4,
+    "optional": false
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": null,
+    "time": 2341000,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "MissingPunch",
+    "updated": null
+   },
+   "person": {
+    "id": 96,
+    "name": "Løper 21"
+   },
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 144,
+    "updated": "2026-09-14T08:02:26+00:00"
+   },
+   "status": {
+    "status": "MissingPunch",
+    "updated": "2026-09-20T09:24:14+00:00"
+   },
+   "team": {
+    "id": 12,
+    "name": "Sandnes IL (Rogaland) 3"
+   },
+   "time": {
+    "time": 2341000,
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "updated": "2026-09-20T09:24:14+00:00",
+    "behind": null,
+    "restart": false,
+    "finishTime": "2026-09-20T11:24:01+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:24:19.912294Z",
+   "id": "a2a5fc83-8d43-4b86-9e90-b4d842bf973c"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 104,
+     "cardNo": "1000022",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.593533Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "behind": 774000,
+     "intermediateControl": "155",
+     "counter": 1,
+     "position": 27,
+     "time": 4583546,
+     "updated": "2026-09-20T10:01:25+00:00"
+    },
+    "159-1": {
+     "counter": 1,
+     "position": 31,
+     "intermediateControl": "159",
+     "behind": 684000,
+     "updated": "2026-09-20T09:50:04+00:00",
+     "time": 3902432
+    },
+    "148-1": {
+     "counter": 1,
+     "position": 31,
+     "time": 4016050,
+     "updated": "2026-09-20T09:51:59+00:00",
+     "intermediateControl": "148",
+     "behind": 704000
+    },
+    "141-1": {
+     "position": 29,
+     "intermediateControl": "141",
+     "counter": 1,
+     "updated": "2026-09-20T09:37:16+00:00",
+     "time": 3134961,
+     "behind": 556000
+    }
+   },
+   "leg": {
+    "id": 5,
+    "order": 1,
+    "number": 2,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": null,
+    "time": 4658000,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "MissingPunch",
+    "updated": null
+   },
+   "person": {
+    "id": 106,
+    "name": "Løper 22"
+   },
+   "position": 22,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 144,
+    "updated": "2026-09-14T08:02:26+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:03:15+00:00"
+   },
+   "team": {
+    "id": 12,
+    "name": "Sandnes IL (Rogaland) 3"
+   },
+   "time": {
+    "startTime": "2026-09-20T11:24:01+02:00",
+    "updated": "2026-09-20T10:03:15+00:00",
+    "behind": 518000,
+    "restart": false,
+    "finishTime": "2026-09-20T12:02:38+02:00",
+    "time": 2317000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:03:17.333327Z",
+   "id": "a2a5fc83-a44e-422b-bab4-231e574941ba"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 155,
+     "cardNo": "1000023",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.604565Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "updated": "2026-09-20T11:05:28+00:00",
+     "intermediateControl": "155",
+     "position": 34,
+     "time": 8425346,
+     "behind": 2714000,
+     "counter": 1
+    },
+    "159-1": {
+     "behind": 2286000,
+     "intermediateControl": "159",
+     "position": 34,
+     "updated": "2026-09-20T10:48:59+00:00",
+     "counter": 1,
+     "time": 7438451
+    },
+    "141-1": {
+     "updated": "2026-09-20T10:31:25+00:00",
+     "position": 34,
+     "time": 6383397,
+     "intermediateControl": "141",
+     "behind": 1834000,
+     "counter": 1
+    },
+    "148-1": {
+     "behind": 2316000,
+     "updated": "2026-09-20T10:51:04+00:00",
+     "intermediateControl": "148",
+     "time": 7561620,
+     "position": 33,
+     "counter": 1
+    }
+   },
+   "leg": {
+    "id": 6,
+    "number": 3,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": null,
+    "time": 8493000,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "MissingPunch",
+    "updated": null
+   },
+   "person": {
+    "id": 157,
+    "name": "Løper 23"
+   },
+   "position": 42,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 144,
+    "updated": "2026-09-14T08:02:26+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T11:06:53+00:00"
+   },
+   "team": {
+    "id": 12,
+    "name": "Sandnes IL (Rogaland) 3"
+   },
+   "time": {
+    "startTime": "2026-09-20T12:02:38+02:00",
+    "finishTime": "2026-09-20T13:06:33+02:00",
+    "updated": "2026-09-20T11:06:53+00:00",
+    "time": 3835000,
+    "behind": 2005000,
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T11:35:19.245699Z",
+   "id": "a2a5fc83-b785-4f58-90a1-444a774a97db"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 312,
+     "cardNo": "1000024",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.682731Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "counter": 1,
+     "position": 31,
+     "time": 764152,
+     "behind": 166000,
+     "intermediateControl": "141",
+     "updated": "2026-09-20T08:57:46+00:00"
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "time": 1534640,
+     "counter": 1,
+     "behind": 316000,
+     "position": 35,
+     "updated": "2026-09-20T09:10:38+00:00"
+    },
+    "148-1": {
+     "counter": 1,
+     "intermediateControl": "148",
+     "position": 34,
+     "time": 1641972,
+     "updated": "2026-09-20T09:12:22+00:00",
+     "behind": 321000
+    },
+    "155-1": {
+     "time": 2298724,
+     "updated": "2026-09-20T09:23:19+00:00",
+     "behind": 395000,
+     "counter": 1,
+     "intermediateControl": "155",
+     "position": 41
+    }
+   },
+   "leg": {
+    "id": 4,
+    "number": 1,
+    "intermediateControls": null,
+    "optional": false,
+    "order": 1
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "time": 2369000,
+    "position": 40,
+    "behind": 399000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 316,
+    "name": "Løper 24"
+   },
+   "position": 40,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 147,
+    "updated": "2026-09-14T08:02:27+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:25:46+00:00"
+   },
+   "team": {
+    "id": 13,
+    "name": "Sandnes IL (Rogaland) 4"
+   },
+   "time": {
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "updated": "2026-09-20T09:25:46+00:00",
+    "restart": false,
+    "time": 2369000,
+    "finishTime": "2026-09-20T11:24:29+02:00",
+    "behind": 399000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:26:57.617564Z",
+   "id": "a2a5fc83-e1ee-4835-a3f4-8d2b3c2e29af"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 43,
+     "cardNo": "1000025",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.694088Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "leg": {
+    "number": 2,
+    "optional": false,
+    "intermediateControls": null,
+    "order": 1,
+    "id": 5
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": null,
+    "time": 5238000,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "MissingPunch",
+    "updated": null
+   },
+   "person": {
+    "id": 45,
+    "name": "Løper 25"
+   },
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 147,
+    "updated": "2026-09-14T08:02:27+00:00"
+   },
+   "startOverallResult": {
+    "position": 40,
+    "time": 2369000,
+    "behind": 399000
+   },
+   "status": {
+    "status": "MissingPunch",
+    "updated": "2026-09-20T10:16:43+00:00"
+   },
+   "team": {
+    "id": 13,
+    "name": "Sandnes IL (Rogaland) 4"
+   },
+   "time": {
+    "behind": null,
+    "finishTime": "2026-09-20T12:12:18+02:00",
+    "startTime": "2026-09-20T11:24:29+02:00",
+    "time": 2869000,
+    "updated": "2026-09-20T10:16:43+00:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:16:44.623863Z",
+   "id": "a2a5fc83-f382-4544-94d0-5f7f6ca699bf"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 296,
+     "cardNo": "1000026",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.704655Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "updated": "2026-09-20T11:06:19+00:00",
+     "intermediateControl": "148",
+     "behind": 3232000,
+     "counter": 1,
+     "position": 42,
+     "time": 8477636
+    },
+    "141-1": {
+     "counter": 1,
+     "updated": "2026-09-20T10:40:44+00:00",
+     "intermediateControl": "141",
+     "time": 6942709,
+     "behind": 2393000,
+     "position": 41
+    },
+    "159-1": {
+     "behind": 3152000,
+     "intermediateControl": "159",
+     "counter": 1,
+     "time": 8304555,
+     "position": 42,
+     "updated": "2026-09-20T11:03:25+00:00"
+    },
+    "155-1": {
+     "time": 9260066,
+     "behind": 3549000,
+     "intermediateControl": "155",
+     "updated": "2026-09-20T11:19:22+00:00",
+     "counter": 1,
+     "position": 40
+    }
+   },
+   "leg": {
+    "id": 6,
+    "number": 3,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 26,
+    "name": "Sandnes IL (Rogaland)"
+   },
+   "overallResult": {
+    "position": null,
+    "time": 9373000,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "MissingPunch",
+    "updated": null
+   },
+   "person": {
+    "id": 300,
+    "name": "Løper 26"
+   },
+   "position": 43,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 147,
+    "updated": "2026-09-14T08:02:27+00:00"
+   },
+   "startOverallResult": {
+    "time": 2369000,
+    "position": 40,
+    "behind": 399000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T11:22:31+00:00"
+   },
+   "team": {
+    "id": 13,
+    "name": "Sandnes IL (Rogaland) 4"
+   },
+   "time": {
+    "time": 4135000,
+    "startTime": "2026-09-20T12:12:18+02:00",
+    "finishTime": "2026-09-20T13:21:13+02:00",
+    "behind": 2305000,
+    "restart": false,
+    "updated": "2026-09-20T11:22:31+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T11:35:19.260939Z",
+   "id": "a2a5fc84-05ca-43a9-9b9c-2beefd913ab2"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 68,
+     "rental": false,
+     "cardNo": "1000027",
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.715530Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": [],
+   "leg": {
+    "id": 4,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null,
+    "number": 1
+   },
+   "organisation": {
+    "id": 16,
+    "name": "Sturla, IF"
+   },
+   "overallResult": {
+    "position": null,
+    "behind": null,
+    "time": 2974000
+   },
+   "overallStatus": {
+    "status": "DidNotFinish",
+    "updated": null
+   },
+   "person": {
+    "id": 70,
+    "name": "Løper 27"
+   },
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 148,
+    "updated": "2026-09-14T08:02:27+00:00"
+   },
+   "status": {
+    "status": "DidNotFinish",
+    "updated": "2026-09-20T09:35:45+00:00"
+   },
+   "team": {
+    "id": 14,
+    "name": "Kongsberg OL / Notodden OL / Sturla, IF 5"
+   },
+   "time": {
+    "behind": null,
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "finishTime": "2026-09-20T11:34:34+02:00",
+    "time": 2974000,
+    "restart": false,
+    "updated": "2026-09-20T09:35:45+00:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:35:47.400422Z",
+   "id": "a2a5fc84-2749-4c8e-b67e-8cfaad6c5288"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 78,
+     "cardNo": "1000028",
+     "rental": false,
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.726353Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "155-1": {
+     "updated": "2026-09-20T10:18:07+00:00",
+     "position": 44,
+     "intermediateControl": "155",
+     "counter": 1,
+     "time": 5585753,
+     "behind": 1776000
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "counter": 1,
+     "behind": 1260000,
+     "position": 45,
+     "time": 3838256,
+     "updated": "2026-09-20T09:48:59+00:00"
+    },
+    "148-1": {
+     "updated": "2026-09-20T10:06:59+00:00",
+     "behind": 1604000,
+     "counter": 1,
+     "position": 44,
+     "intermediateControl": "148",
+     "time": 4916534
+    },
+    "159-1": {
+     "intermediateControl": "159",
+     "position": 44,
+     "behind": 1552000,
+     "updated": "2026-09-20T10:04:31+00:00",
+     "time": 4770469,
+     "counter": 1
+    }
+   },
+   "leg": {
+    "id": 5,
+    "number": 2,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 12,
+    "name": "Kongsberg OL"
+   },
+   "overallResult": {
+    "position": null,
+    "time": 5668000,
+    "behind": null
+   },
+   "overallStatus": {
+    "status": "DidNotFinish",
+    "updated": null
+   },
+   "person": {
+    "id": 80,
+    "name": "Løper 28"
+   },
+   "position": 38,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 148,
+    "updated": "2026-09-14T08:02:27+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:19:48+00:00"
+   },
+   "team": {
+    "id": 14,
+    "name": "Kongsberg OL / Notodden OL / Sturla, IF 5"
+   },
+   "time": {
+    "behind": 895000,
+    "startTime": "2026-09-20T11:34:34+02:00",
+    "time": 2694000,
+    "updated": "2026-09-20T10:19:48+00:00",
+    "restart": false,
+    "finishTime": "2026-09-20T12:19:28+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:19:52.037810Z",
+   "id": "a2a5fc84-37c8-4b85-8004-5dbecbbbde8b"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 114,
+     "cardNo": "1000029",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:56.754100Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "updated": "2026-09-20T11:03:35+00:00",
+     "position": 40,
+     "time": 8313449,
+     "intermediateControl": "148",
+     "behind": 3068000,
+     "counter": 1
+    },
+    "159-1": {
+     "behind": 2990000,
+     "position": 41,
+     "counter": 1,
+     "intermediateControl": "159",
+     "time": 8142395,
+     "updated": "2026-09-20T11:00:44+00:00"
+    },
+    "141-1": {
+     "updated": "2026-09-20T10:41:43+00:00",
+     "time": 7000688,
+     "position": 42,
+     "intermediateControl": "141",
+     "counter": 1,
+     "behind": 2451000
+    },
+    "155-1": {
+     "counter": 1,
+     "intermediateControl": "155",
+     "position": 39,
+     "time": 9212203,
+     "behind": 3501000,
+     "updated": "2026-09-20T11:18:34+00:00"
+    }
+   },
+   "leg": {
+    "id": 6,
+    "intermediateControls": null,
+    "number": 3,
+    "optional": false,
+    "order": 1
+   },
+   "organisation": {
+    "id": 40,
+    "name": "Notodden OL"
+   },
+   "overallResult": {
+    "time": 9312000,
+    "behind": null,
+    "position": null
+   },
+   "overallStatus": {
+    "status": "DidNotFinish",
+    "updated": null
+   },
+   "person": {
+    "id": 116,
+    "name": "Løper 29"
+   },
+   "position": 37,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 148,
+    "updated": "2026-09-14T08:02:27+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T11:20:24+00:00"
+   },
+   "team": {
+    "id": 14,
+    "name": "Kongsberg OL / Notodden OL / Sturla, IF 5"
+   },
+   "time": {
+    "updated": "2026-09-20T11:20:24+00:00",
+    "time": 3644000,
+    "finishTime": "2026-09-20T13:20:12+02:00",
+    "startTime": "2026-09-20T12:19:28+02:00",
+    "restart": false,
+    "behind": 1814000
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T11:35:19.273547Z",
+   "id": "a2a5fc84-479d-4456-8d7c-66756c3c458d"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 320,
+     "cardNo": "1000030",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.959702Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "position": 38,
+     "behind": 357000,
+     "updated": "2026-09-20T09:11:16+00:00",
+     "counter": 1,
+     "time": 1575320,
+     "intermediateControl": "159"
+    },
+    "155-1": {
+     "time": 2291182,
+     "position": 36,
+     "behind": 388000,
+     "updated": "2026-09-20T09:23:13+00:00",
+     "intermediateControl": "155",
+     "counter": 1
+    },
+    "148-1": {
+     "updated": "2026-09-20T09:13:16+00:00",
+     "time": 1694991,
+     "intermediateControl": "148",
+     "counter": 1,
+     "position": 38,
+     "behind": 374000
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "updated": "2026-09-20T08:57:25+00:00",
+     "behind": 145000,
+     "counter": 1,
+     "time": 743474,
+     "position": 25
+    }
+   },
+   "leg": {
+    "number": 1,
+    "order": 1,
+    "intermediateControls": null,
+    "optional": false,
+    "id": 4
+   },
+   "organisation": {
+    "id": 29,
+    "name": "Heming Orientering"
+   },
+   "overallResult": {
+    "time": 2370000,
+    "behind": 400000,
+    "position": 41
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 325,
+    "name": "Løper 30"
+   },
+   "position": 41,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 113,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:25:31+00:00"
+   },
+   "team": {
+    "id": 15,
+    "name": "Heming Orientering 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "restart": false,
+    "time": 2370000,
+    "behind": 400000,
+    "updated": "2026-09-20T09:25:31+00:00",
+    "finishTime": "2026-09-20T11:24:30+02:00"
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:26:57.632019Z",
+   "id": "a2a5fc84-69ae-437f-b998-723a0ea1076c"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 202,
+     "cardNo": "1000031",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.970447Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "time": 3146564,
+     "behind": 568000,
+     "updated": "2026-09-20T09:37:28+00:00",
+     "counter": 1,
+     "intermediateControl": "141",
+     "position": 30
+    },
+    "148-1": {
+     "position": 29,
+     "behind": 695000,
+     "time": 4007707,
+     "intermediateControl": "148",
+     "counter": 1,
+     "updated": "2026-09-20T09:51:50+00:00"
+    },
+    "159-1": {
+     "updated": "2026-09-20T09:49:50+00:00",
+     "counter": 1,
+     "position": 29,
+     "behind": 671000,
+     "intermediateControl": "159",
+     "time": 3889404
+    },
+    "155-1": {
+     "counter": 1,
+     "updated": "2026-09-20T10:01:19+00:00",
+     "position": 24,
+     "time": 4576620,
+     "intermediateControl": "155",
+     "behind": 767000
+    }
+   },
+   "leg": {
+    "id": 5,
+    "number": 2,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 29,
+    "name": "Heming Orientering"
+   },
+   "overallResult": {
+    "behind": 778000,
+    "time": 4659000,
+    "position": 25
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 206,
+    "name": "Løper 31"
+   },
+   "position": 21,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 113,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "startOverallResult": {
+    "position": 41,
+    "time": 2370000,
+    "behind": 400000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:03:19+00:00"
+   },
+   "team": {
+    "id": 15,
+    "name": "Heming Orientering 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T11:24:30+02:00",
+    "finishTime": "2026-09-20T12:02:39+02:00",
+    "time": 2289000,
+    "behind": 490000,
+    "restart": false,
+    "updated": "2026-09-20T10:03:19+00:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:03:21.676143Z",
+   "id": "a2a5fc84-7b81-4df9-b0a0-094b18820902"
+  },
+  {
+   "cards": {
+    "card1": {
+     "rental": false,
+     "id": 490,
+     "cardNo": "1000032",
+     "cardTypeId": 1
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.981280Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "position": 36,
+     "counter": 1,
+     "updated": "2026-09-20T10:50:43+00:00",
+     "behind": 2390000,
+     "intermediateControl": "159",
+     "time": 7542556
+    },
+    "148-1": {
+     "intermediateControl": "148",
+     "position": 37,
+     "time": 7714262,
+     "behind": 2469000,
+     "counter": 1,
+     "updated": "2026-09-20T10:53:35+00:00"
+    },
+    "155-1": {
+     "counter": 1,
+     "time": 8383823,
+     "behind": 2672000,
+     "updated": "2026-09-20T11:04:47+00:00",
+     "intermediateControl": "155",
+     "position": 32
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "updated": "2026-09-20T10:31:40+00:00",
+     "time": 6399541,
+     "position": 35,
+     "behind": 1850000,
+     "counter": 1
+    }
+   },
+   "leg": {
+    "id": 6,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null,
+    "number": 3
+   },
+   "organisation": {
+    "id": 29,
+    "name": "Heming Orientering"
+   },
+   "overallResult": {
+    "position": 31,
+    "time": 8483000,
+    "behind": 2713000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 281,
+    "name": "Løper 32"
+   },
+   "position": 41,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 113,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "startOverallResult": {
+    "position": 25,
+    "time": 4659000,
+    "behind": 778000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T11:07:03+00:00"
+   },
+   "team": {
+    "id": 15,
+    "name": "Heming Orientering 1"
+   },
+   "time": {
+    "updated": "2026-09-20T11:07:03+00:00",
+    "time": 3824000,
+    "finishTime": "2026-09-20T13:06:23+02:00",
+    "behind": 1994000,
+    "startTime": "2026-09-20T12:02:39+02:00",
+    "restart": false
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T11:35:19.286210Z",
+   "id": "a2a5fc84-99c9-4340-93df-34718d6fa4d1"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 7,
+     "cardNo": "1000033",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:53.992153Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "159-1": {
+     "counter": 1,
+     "intermediateControl": "159",
+     "behind": 147000,
+     "time": 1365037,
+     "updated": "2026-09-20T09:07:47+00:00",
+     "position": 9
+    },
+    "148-1": {
+     "behind": 143000,
+     "position": 7,
+     "intermediateControl": "148",
+     "time": 1463118,
+     "updated": "2026-09-20T09:09:25+00:00",
+     "counter": 1
+    },
+    "155-1": {
+     "counter": 1,
+     "behind": 34000,
+     "intermediateControl": "155",
+     "position": 8,
+     "time": 1937839,
+     "updated": "2026-09-20T09:17:19+00:00"
+    },
+    "141-1": {
+     "position": 18,
+     "behind": 134000,
+     "counter": 1,
+     "intermediateControl": "141",
+     "updated": "2026-09-20T08:57:13+00:00",
+     "time": 732289
+    }
+   },
+   "leg": {
+    "id": 4,
+    "number": 1,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 7,
+    "name": "Fana IL"
+   },
+   "overallResult": {
+    "position": 7,
+    "time": 2005000,
+    "behind": 35000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 7,
+    "name": "Løper 33"
+   },
+   "position": 7,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.1",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 114,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:19:13+00:00"
+   },
+   "team": {
+    "id": 16,
+    "name": "Fana IL 1"
+   },
+   "time": {
+    "updated": "2026-09-20T09:19:13+00:00",
+    "restart": false,
+    "finishTime": "2026-09-20T11:18:25+02:00",
+    "startTime": "2026-09-20T10:45:00+02:00",
+    "time": 2005000,
+    "behind": 35000
+   },
+   "timingStartTimeSource": "StartList",
+   "updated_at": "2026-09-20T09:19:22.874936Z",
+   "id": "a2a5fc84-ca6b-4651-b711-99f3b57b1124"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 336,
+     "cardNo": "1000034",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.002866Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "141-1": {
+     "counter": 1,
+     "intermediateControl": "141",
+     "behind": 96000,
+     "time": 2674935,
+     "position": 5,
+     "updated": "2026-09-20T09:29:37+00:00"
+    },
+    "155-1": {
+     "counter": 1,
+     "position": 6,
+     "time": 3998594,
+     "behind": 189000,
+     "updated": "2026-09-20T09:51:41+00:00",
+     "intermediateControl": "155"
+    },
+    "148-1": {
+     "behind": 136000,
+     "position": 7,
+     "intermediateControl": "148",
+     "time": 3448316,
+     "updated": "2026-09-20T09:42:29+00:00",
+     "counter": 1
+    },
+    "159-1": {
+     "position": 7,
+     "counter": 1,
+     "time": 3341360,
+     "behind": 123000,
+     "updated": "2026-09-20T09:40:44+00:00",
+     "intermediateControl": "159"
+    }
+   },
+   "leg": {
+    "id": 5,
+    "number": 2,
+    "order": 1,
+    "optional": false,
+    "intermediateControls": null
+   },
+   "organisation": {
+    "id": 7,
+    "name": "Fana IL"
+   },
+   "overallResult": {
+    "position": 6,
+    "behind": 193000,
+    "time": 4074000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 341,
+    "name": "Løper 34"
+   },
+   "position": 6,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.2",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 114,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "startOverallResult": {
+    "position": 7,
+    "time": 2005000,
+    "behind": 35000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T09:53:06+00:00"
+   },
+   "team": {
+    "id": 16,
+    "name": "Fana IL 1"
+   },
+   "time": {
+    "time": 2069000,
+    "restart": false,
+    "updated": "2026-09-20T09:53:06+00:00",
+    "finishTime": "2026-09-20T11:52:54+02:00",
+    "behind": 270000,
+    "startTime": "2026-09-20T11:18:25+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T09:53:08.518391Z",
+   "id": "a2a5fc84-ea1e-4fe0-a0c3-a0cff81dad0a"
+  },
+  {
+   "cards": {
+    "card1": {
+     "id": 56,
+     "cardNo": "1000035",
+     "cardTypeId": 1,
+     "rental": false
+    }
+   },
+   "created_at": "2026-09-17T06:24:54.013828Z",
+   "entryStatus": "Entered",
+   "intermediateTimes": {
+    "148-1": {
+     "intermediateControl": "148",
+     "behind": 218000,
+     "counter": 1,
+     "position": 5,
+     "time": 5463803,
+     "updated": "2026-09-20T10:16:07+00:00"
+    },
+    "155-1": {
+     "counter": 1,
+     "intermediateControl": "155",
+     "behind": 232000,
+     "time": 5943115,
+     "updated": "2026-09-20T10:24:04+00:00",
+     "position": 4
+    },
+    "159-1": {
+     "time": 5355283,
+     "position": 5,
+     "updated": "2026-09-20T10:14:16+00:00",
+     "behind": 203000,
+     "counter": 1,
+     "intermediateControl": "159"
+    },
+    "141-1": {
+     "intermediateControl": "141",
+     "time": 4702443,
+     "updated": "2026-09-20T10:03:25+00:00",
+     "position": 6,
+     "counter": 1,
+     "behind": 153000
+    }
+   },
+   "leg": {
+    "order": 1,
+    "intermediateControls": null,
+    "id": 6,
+    "number": 3,
+    "optional": false
+   },
+   "organisation": {
+    "id": 7,
+    "name": "Fana IL"
+   },
+   "overallResult": {
+    "position": 5,
+    "time": 6012000,
+    "behind": 242000
+   },
+   "overallStatus": {
+    "status": "OK",
+    "updated": null
+   },
+   "person": {
+    "id": 58,
+    "name": "Løper 35"
+   },
+   "position": 5,
+   "raceClassId": "a2a5fba4-0515-48a4-b1ab-9221974ebd35.3",
+   "raceId": "a2a5f738-8332-4ea1-ae2b-2a85ccf1d7ac",
+   "start": {
+    "startTime": null,
+    "bibNo": 114,
+    "updated": "2026-09-14T08:02:23+00:00"
+   },
+   "startOverallResult": {
+    "position": 6,
+    "time": 4074000,
+    "behind": 193000
+   },
+   "status": {
+    "status": "OK",
+    "updated": "2026-09-20T10:25:53+00:00"
+   },
+   "team": {
+    "id": 16,
+    "name": "Fana IL 1"
+   },
+   "time": {
+    "startTime": "2026-09-20T11:52:54+02:00",
+    "behind": 108000,
+    "updated": "2026-09-20T10:25:53+00:00",
+    "restart": false,
+    "time": 1938000,
+    "finishTime": "2026-09-20T12:25:12+02:00"
+   },
+   "timingStartTimeSource": "Timing",
+   "updated_at": "2026-09-20T10:34:11.338201Z",
+   "id": "a2a5fc85-0bbd-4e9e-a5f9-60a3336de7a2"
+  }
+ ]
+}
