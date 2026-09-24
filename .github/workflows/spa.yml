@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version-file: spa/.node-version
           cache: npm
           cache-dependency-path: spa/package-lock.json
 
