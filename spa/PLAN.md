@@ -53,6 +53,19 @@ paritetstestene dekker.
 - [x] Tilpasse fargene for markeringer (nye resultater, beste tid, plass 1, kvalifiseringsgrense, estimater) så de er lesbare på mørk bakgrunn: dempet oransje for nye resultater, mørkegrønn kvalifisering, lysere rødt for beste tid og sen start, og mykere gult i startvisningen
 - [x] Følger `prefers-color-scheme` som standard, med en bryter i topplinjen (og nederst på løpslisten og arrangørvisningene) som veksler mellom som enheten, lyst og mørkt. Valget huskes i nettleseren, og `?theme=auto|classic|dark` virker fortsatt
 
+## Fase 4b – Utseende som den nye liveresultat-betaen
+
+Utseendet til betaen av den nye svenske liveresultat.orientering.se (for eksempel
+`live.eoc2026.lt/beta/follow/40449`). Kildekoden er ikke offentlig, så stilen er skrevet selv.
+Det nye utseendet erstatter det mørke temaet fra fase 4 og har både lys og mørk variant. Det
+gamle LiveRes-utseendet kan fortsatt velges med `?theme=classic`. Tallene og innholdet er de
+samme som før.
+
+- [x] Farger (papirhvit/blågrå bakgrunn, hvite kort, skogsgrønn og oransje), systemfont, svart topplinje med løpsnavn og dato, innhold i en midtstilt kolonne og tabeller som kort med runde hjørner. Bryteren veksler mellom som enheten, lyst og mørkt
+- [ ] Navn og klubb i samme kolonne, med klubben på en mindre linje under navnet
+- [ ] Klassevalg med knapper på forsiden, nedtrekksmeny når en klasse er valgt, og valgte klasser som faner
+- [ ] Søk etter løper eller klubb, og visning av 1–4 klasser side om side
+
 ## Fase 5 – Publisering
 
 - [x] Cloudflare Pages koblet til forken: `main` publiseres automatisk og hver PR får en forhåndsvisning
