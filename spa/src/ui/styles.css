@@ -892,3 +892,20 @@ tr.yellow_row .club {
 :root[data-look='new'] :is(table.results, table.lists) a:hover {
   text-decoration-color: var(--orange);
 }
+
+:root[data-look='new'] table.results .runner-name {
+  font-weight: 600;
+}
+
+:root[data-look='new'] table.results a.club:is(:link, :visited) {
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+:root[data-look='new'] table.results a.relayclub:is(:link, :visited) {
+  font-weight: 600;
+}
+
+:root[data-look='new'] table.results a.relayclub ~ .runner-name {
+  font-weight: normal;
+}

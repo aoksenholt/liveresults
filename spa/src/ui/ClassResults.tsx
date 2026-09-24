@@ -20,6 +20,7 @@ import { useDisplay } from './context';
 import { useControllerState } from './hooks';
 import type { RaceProps } from './RaceView';
 import { routeHash } from './route';
+import { useNewLook } from './ThemeToggle';
 
 export function ClassResults({
   className,
@@ -66,7 +67,7 @@ export function ClubLink({
 
 function RunnerCell({ column, row }: { column: Column; row: ResultRow }) {
   const { format } = useDisplay();
-  const name = runnerName(row, format.maxNameLength);
+  const name = <span className="runner-name">{runnerName(row, format.maxNameLength)}</span>;
   const club = runnerClub(row, format.maxClubLength);
   switch (column.layout) {
     case 'club':
@@ -88,8 +89,28 @@ function RunnerCell({ column, row }: { column: Column; row: ResultRow }) {
         </>
       );
     default:
-      return <>{name}</>;
+      return name;
   }
+}
+
+type IndexedColumn = readonly [Column, number];
+
+/**
+ * The new look shows the name and club in one column, like the liveresultat beta. The table
+ * keeps both columns so the column numbers of the highlights still match.
+ */
+function stackRunnerColumns(columns: IndexedColumn[]): IndexedColumn[] {
+  const runners = columns.filter(([c]) => c.kind == 'runner');
+  if (runners.length != 2) return columns;
+  const [[first, index], [second]] = runners as [IndexedColumn, IndexedColumn];
+  const stacked: Column = {
+    ...first,
+    layout: first.layout == 'club' ? 'clubName' : 'nameClub',
+    title: `${first.title} / ${second.title}`,
+  };
+  return columns
+    .filter(([c]) => c != second)
+    .map(([c, i]) => (c == first ? ([stacked, index] as const) : ([c, i] as const)));
 }
 
 function ClassTableView(props: {
@@ -130,6 +151,7 @@ export function ClassTable(props: {
 }) {
   const { cls, view, predictions, serverNow, error, isRelayClass, highTime } = props;
   const { res, format } = useDisplay();
+  const newLook = useNewLook();
   const options = useMemo<TableOptions>(
     () => ({
       labels: format.labels,
@@ -178,7 +200,8 @@ export function ClassTable(props: {
   const order = rows.map((_, i) => i);
   if (positions) order.sort((a, b) => positions[a]! - positions[b]! || a - b);
   const fnq = firstNonQualifier(rows, qualificationLimit(cls), false, positions);
-  const visible = table.columns.map((c, i) => [c, i] as const).filter(([c]) => c.visible);
+  const shown = table.columns.map((c, i) => [c, i] as const).filter(([c]) => c.visible);
+  const visible = newLook ? stackRunnerColumns(shown) : shown;
 
   return (
     <>
