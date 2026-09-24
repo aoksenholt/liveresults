@@ -1,5 +1,4 @@
-import { Fragment, useEffect, useMemo, useState, type MouseEvent, type ReactNode } from 'react';
-import type { ClassListItem } from '../domain/classList';
+import { useEffect, useMemo, useState, type MouseEvent } from 'react';
 import { summarize } from '../domain/races';
 import {
   classListController,
@@ -7,6 +6,7 @@ import {
   type ClassList,
   type RaceInfo,
 } from '../state/controllers';
+import { ClassMenu, ClassPicker } from './ClassMenu';
 import { ClassResults } from './ClassResults';
 import { ClubResults } from './ClubResults';
 import { Info, Loading, Message } from './common';
@@ -15,8 +15,8 @@ import { useControllerState, useHashRoute } from './hooks';
 import { LastPassings } from './LastPassings';
 import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
-import { routeHash, type Route } from './route';
-import { ThemeToggle } from './ThemeToggle';
+import type { Route } from './route';
+import { ThemeToggle, useNewLook } from './ThemeToggle';
 
 export interface RaceProps {
   raceId: string;
@@ -40,6 +40,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
   );
   const { data: classList, error } = useControllerState(controller);
   const route = useHashRoute();
+  const newLook = useNewLook();
   const mobile = deviceType() == 'mobile';
   const [menuOpen, setMenuOpen] = useState(!mobile);
   const { name, date } = summarize(info.race);
@@ -52,42 +53,60 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
     if (mobile && (e.target as HTMLElement).closest('a')) setMenuOpen(false);
   };
 
+  const content = (
+    <>
+      {info.live && classList && classList.classes.length > 0 && (
+        <LastPassings raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />
+      )}
+      {!classList ? (
+        <Loading error={error} text={res._LOADINGCLASSES ?? ''} />
+      ) : classList.classes.length == 0 ? (
+        <Message>{res._NOCLASSESYET}</Message>
+      ) : newLook && route.kind == 'none' ? null : (
+        <RouteView route={route} raceId={raceId} info={info} classList={classList} />
+      )}
+      <Info themeToggle={false} />
+    </>
+  );
+
   return (
     <>
       <div className="bar">
         <a className="navbtn" href={`?lang=${lang}`} title={res._CHOOSECMP}>
           ☰
         </a>
-        <button
-          className="navbtn"
-          onClick={() => setMenuOpen((open) => !open)}
-          title={res._CHOOSECLASS}
-          aria-expanded={menuOpen}
-        >
-          ▤
-        </button>
+        {!newLook && (
+          <button
+            className="navbtn"
+            onClick={() => setMenuOpen((open) => !open)}
+            title={res._CHOOSECLASS}
+            aria-expanded={menuOpen}
+          >
+            ▤
+          </button>
+        )}
         <span className="title">{name}</span>
         <span className="date">{date}</span>
         <ThemeToggle className="navbtn theme-toggle" />
       </div>
-      <div className="container">
-        <nav className={menuOpen ? 'class-column' : 'class-column closed'} onClick={closeOnMobile}>
-          {classList && <ClassMenu items={classList.items} route={route} />}
-        </nav>
-        <main className="result-column">
-          {info.live && classList && classList.classes.length > 0 && (
-            <LastPassings raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />
+      {newLook ? (
+        <main className="page">
+          {classList && classList.classes.length > 0 && (
+            <ClassPicker items={classList.items} route={route} />
           )}
-          {!classList ? (
-            <Loading error={error} text={res._LOADINGCLASSES ?? ''} />
-          ) : classList.classes.length == 0 ? (
-            <Message>{res._NOCLASSESYET}</Message>
-          ) : (
-            <RouteView route={route} raceId={raceId} info={info} classList={classList} />
-          )}
-          <Info themeToggle={false} />
+          {content}
         </main>
-      </div>
+      ) : (
+        <div className="container">
+          <nav
+            className={menuOpen ? 'class-column' : 'class-column closed'}
+            onClick={closeOnMobile}
+          >
+            {classList && <ClassMenu items={classList.items} route={route} />}
+          </nav>
+          <main className="result-column">{content}</main>
+        </div>
+      )}
     </>
   );
 }
@@ -111,78 +130,4 @@ function RouteView({ route, ...props }: RaceProps & { route: Route }) {
     default:
       return <Message>{res._NOCLASSCHOSEN}</Message>;
   }
-}
-
-function MenuLink({
-  route,
-  current,
-  children,
-}: {
-  route: Route;
-  current: string;
-  children: ReactNode;
-}) {
-  const href = routeHash(route);
-  return (
-    <a href={href} className={href == current ? 'active' : undefined}>
-      {children}
-    </a>
-  );
-}
-
-/** The class menu of the legacy viewer, followed by the lists for all classes. */
-function ClassMenu({ items, route }: { items: ClassListItem[]; route: Route }) {
-  const { res } = useDisplay();
-  const current = routeHash(route);
-  const link = (r: Route, children: ReactNode) => (
-    <MenuLink route={r} current={current}>
-      {children}
-    </MenuLink>
-  );
-  return (
-    <>
-      {items.map((item, i) => (
-        <Fragment key={i}>
-          {item.kind == 'relay' ? (
-            link({ kind: 'relay', className: item.className }, <b>{item.title}</b>)
-          ) : item.kind == 'sprint' ? (
-            link(
-              { kind: 'sprint', key: item.plainKey.replace(/^plainresultsclass_/, '') },
-              <b>{item.title}</b>,
-            )
-          ) : item.kind == 'leg' ? (
-            <>
-              {' '}
-              {link(
-                { kind: 'class', className: item.className },
-                item.label == 'Ⓐ' ? (
-                  item.label
-                ) : (
-                  <span style={{ fontSize: '1.2em' }}>{item.label}</span>
-                ),
-              )}
-            </>
-          ) : item.kind == 'heat' ? (
-            <> {link({ kind: 'class', className: item.className }, item.label)}</>
-          ) : item.kind == 'class' ? (
-            link({ kind: 'class', className: item.className }, item.label)
-          ) : item.kind == 'indent' ? (
-            <>
-              <br />
-              &nbsp;
-            </>
-          ) : item.kind == 'break' ? (
-            <br />
-          ) : (
-            <hr />
-          )}
-        </Fragment>
-      ))}
-      <hr />
-      {link({ kind: 'plainresults' }, res._ALLCLASSES)}
-      <br />
-      {link({ kind: 'startlist' }, res._STARTLIST)}
-      <hr />
-    </>
-  );
 }

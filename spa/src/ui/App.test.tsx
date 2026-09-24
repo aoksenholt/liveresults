@@ -72,6 +72,25 @@ describe('App', () => {
     expect(screen.getByText('Testløpet')).toBeInTheDocument();
   });
 
+  it('opens chosen classes as tabs in the new look', async () => {
+    renderRace('');
+    expect(await screen.findByRole('heading', { name: 'Velg klasse' })).toBeInTheDocument();
+    fireEvent.click(await screen.findByRole('link', { name: interval.raceClass.name }));
+    window.location.hash = `#${encodeURI(interval.raceClass.name!)}`;
+    const select = await screen.findByRole('combobox', { name: 'Velg klasse' });
+    fireEvent.change(select, { target: { value: '#plainresults' } });
+    expect(await screen.findByRole('heading', { name: 'Alle klasser' })).toBeInTheDocument();
+    const close = screen.getAllByRole('button', { name: /^Lukk / });
+    expect(close.map((b) => b.getAttribute('aria-label'))).toEqual([
+      `Lukk ${interval.raceClass.name}`,
+      'Lukk Alle klasser',
+    ]);
+    fireEvent.click(close[1]!);
+    expect(window.location.hash).toBe(`#${encodeURI(interval.raceClass.name!)}`);
+    fireEvent.click(await screen.findByRole('button', { name: `Lukk ${interval.raceClass.name}` }));
+    expect(await screen.findByRole('heading', { name: 'Velg klasse' })).toBeInTheDocument();
+  });
+
   it('shows class results with club links', async () => {
     renderRace(`#${interval.raceClass.name}`);
     const table = await screen.findByRole('table');

@@ -49,6 +49,7 @@ const spaStrings: Record<string, Resources> = {
     _THEMELIGHT: 'light',
     _THEMEDARK: 'dark',
     _THEMECLASSIC: 'classic',
+    _CLOSETAB: 'Close',
   },
   no: {
     _ALLCLASSES: 'Alle klasser',
@@ -79,6 +80,7 @@ const spaStrings: Record<string, Resources> = {
     _THEMELIGHT: 'lyst',
     _THEMEDARK: 'mørkt',
     _THEMECLASSIC: 'klassisk',
+    _CLOSETAB: 'Lukk',
   },
 };
 
