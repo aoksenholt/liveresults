@@ -30,3 +30,9 @@ export function searchRace(rows: ResultRow[], query: string): SearchResult {
     .sort((a, b) => byName(a.name, b.name) || byName(a.class, b.class));
   return { clubs: [...clubs.values()].sort((a, b) => byName(a.name, b.name)), runners };
 }
+
+/** Pages of the class menu whose name match every word of the query. */
+export function searchClasses<T extends { label: string }>(entries: T[], query: string): T[] {
+  if (query.trim() == '') return [];
+  return entries.filter((e) => matchesSearch(e.label.toLowerCase(), query));
+}

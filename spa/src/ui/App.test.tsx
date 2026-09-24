@@ -103,13 +103,42 @@ describe('App', () => {
 
   it('shows the class menu and asks for a class', async () => {
     renderRace('');
-    const menu = await screen.findByRole('navigation');
-    expect(
-      await within(menu).findByRole('link', { name: interval.raceClass.name }),
-    ).toHaveAttribute('href', `#${encodeURI(interval.raceClass.name!)}`);
-    expect(within(menu).getByRole('link', { name: 'Alle klasser' })).toBeInTheDocument();
+    expect(await screen.findByRole('link', { name: interval.raceClass.name })).toHaveAttribute(
+      'href',
+      `#${encodeURI(interval.raceClass.name!)}`,
+    );
+    expect(screen.getByRole('link', { name: 'Alle klasser' })).toBeInTheDocument();
     expect(screen.getByText('Testløpet')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Velg løp' })).toHaveAttribute('href', '?lang=no');
+  });
+
+  it('shows the classes opened last above the class buttons', async () => {
+    renderRace('');
+    expect(await screen.findByRole('heading', { name: 'Velg klasse' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Sist åpnet' })).toBeNull();
+    window.location.hash = `#${encodeURI(interval.raceClass.name!)}`;
+    await screen.findByRole('combobox', { name: 'Velg klasse' });
+    window.location.hash = '';
+    const recent = (await screen.findByRole('heading', { name: 'Sist åpnet' })).closest('section')!;
+    expect(within(recent).getByRole('link', { name: interval.raceClass.name })).toBeInTheDocument();
+    expect(localStorage.getItem('liveres-recent-race-1')).toBe(
+      JSON.stringify([`#${encodeURI(interval.raceClass.name!)}`]),
+    );
+  });
+
+  it('finds classes in the search', async () => {
+    renderRace('');
+    const search = await screen.findByRole('searchbox', {
+      name: 'Søk etter løper, klubb eller klasse',
+    });
+    fireEvent.change(search, { target: { value: interval.raceClass.name!.toLowerCase() } });
+    const found = await screen.findByRole('region', {
+      name: 'Søk etter løper, klubb eller klasse',
+    });
+    const classes = within(found).getByRole('heading', { name: 'Klasser' }).nextElementSibling!;
+    expect(
+      within(classes as HTMLElement).getByRole('link', { name: interval.raceClass.name }),
+    ).toHaveAttribute('href', `#${encodeURI(interval.raceClass.name!)}`);
   });
 
   it('opens chosen classes as tabs in the new look', async () => {
@@ -137,9 +166,13 @@ describe('App', () => {
       allEntries.filter((o) => o.person?.name == e.person?.name).length == 1;
     const runner = relay.entries.find((e) => e.person?.name && e.organisation?.id && unique(e))!;
     const club = runner.organisation!;
-    const search = await screen.findByRole('searchbox', { name: 'Søk etter løper eller klubb' });
+    const search = await screen.findByRole('searchbox', {
+      name: 'Søk etter løper, klubb eller klasse',
+    });
     fireEvent.change(search, { target: { value: runner.person!.name } });
-    const found = await screen.findByRole('region', { name: 'Søk etter løper eller klubb' });
+    const found = await screen.findByRole('region', {
+      name: 'Søk etter løper, klubb eller klasse',
+    });
     const link = await within(found).findByRole('link', { name: runner.person!.name });
     expect(link.getAttribute('href')).toMatch(/^#H17-20-\d$/);
     const href = link.getAttribute('href')!;

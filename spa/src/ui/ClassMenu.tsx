@@ -1,9 +1,10 @@
-import { Fragment, useMemo, useState, type ReactNode } from 'react';
-import type { ClassListItem } from '../domain/classList';
+import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { classGroups, type ClassListItem } from '../domain/classList';
 import { useDisplay } from './context';
 import { useFrozenColumns } from './frozen';
 import { routeHash, type Route } from './route';
-import { closeTab, menuEntries, openTab, type MenuEntry } from './tabs';
+import { useStoredList } from './stored';
+import { closeTab, menuEntries, openTab, rememberPage, type MenuEntry } from './tabs';
 
 function MenuLink({
   route,
@@ -22,60 +23,122 @@ function MenuLink({
   );
 }
 
-/** The class menu of the legacy viewer, followed by the lists for all classes. */
-export function ClassMenu({ items, route }: { items: ClassListItem[]; route: Route }) {
-  const { res } = useDisplay();
-  const current = routeHash(route);
+function MenuItems({ items, current }: { items: ClassListItem[]; current: string }) {
   const link = (r: Route, children: ReactNode) => (
     <MenuLink route={r} current={current}>
       {children}
     </MenuLink>
   );
+  return items.map((item, i) => (
+    <Fragment key={i}>
+      {item.kind == 'relay' ? (
+        link({ kind: 'relay', className: item.className }, <b>{item.title}</b>)
+      ) : item.kind == 'sprint' ? (
+        link(
+          { kind: 'sprint', key: item.plainKey.replace(/^plainresultsclass_/, '') },
+          <b>{item.title}</b>,
+        )
+      ) : item.kind == 'leg' ? (
+        <>
+          {' '}
+          {link(
+            { kind: 'class', className: item.className },
+            item.label == 'Ⓐ' ? (
+              item.label
+            ) : (
+              <span style={{ fontSize: '1.2em' }}>{item.label}</span>
+            ),
+          )}
+        </>
+      ) : item.kind == 'heat' ? (
+        <> {link({ kind: 'class', className: item.className }, item.label)}</>
+      ) : item.kind == 'class' ? (
+        link({ kind: 'class', className: item.className }, item.label)
+      ) : item.kind == 'indent' ? (
+        <>
+          <br />
+          &nbsp;
+        </>
+      ) : item.kind == 'break' ? (
+        <br />
+      ) : (
+        <hr />
+      )}
+    </Fragment>
+  ));
+}
+
+/** The class menu of the legacy viewer, followed by the lists for all classes. */
+export function ClassMenu({ items, route }: { items: ClassListItem[]; route: Route }) {
+  const { res } = useDisplay();
+  const current = routeHash(route);
   return (
     <>
-      {items.map((item, i) => (
-        <Fragment key={i}>
-          {item.kind == 'relay' ? (
-            link({ kind: 'relay', className: item.className }, <b>{item.title}</b>)
-          ) : item.kind == 'sprint' ? (
-            link(
-              { kind: 'sprint', key: item.plainKey.replace(/^plainresultsclass_/, '') },
-              <b>{item.title}</b>,
-            )
-          ) : item.kind == 'leg' ? (
-            <>
-              {' '}
-              {link(
-                { kind: 'class', className: item.className },
-                item.label == 'Ⓐ' ? (
-                  item.label
-                ) : (
-                  <span style={{ fontSize: '1.2em' }}>{item.label}</span>
-                ),
-              )}
-            </>
-          ) : item.kind == 'heat' ? (
-            <> {link({ kind: 'class', className: item.className }, item.label)}</>
-          ) : item.kind == 'class' ? (
-            link({ kind: 'class', className: item.className }, item.label)
-          ) : item.kind == 'indent' ? (
-            <>
-              <br />
-              &nbsp;
-            </>
-          ) : item.kind == 'break' ? (
-            <br />
-          ) : (
-            <hr />
-          )}
-        </Fragment>
-      ))}
+      <MenuItems items={items} current={current} />
       <hr />
-      {link({ kind: 'plainresults' }, res._ALLCLASSES)}
+      <MenuLink route={{ kind: 'plainresults' }} current={current}>
+        {res._ALLCLASSES}
+      </MenuLink>
       <br />
-      {link({ kind: 'startlist' }, res._STARTLIST)}
+      <MenuLink route={{ kind: 'startlist' }} current={current}>
+        {res._STARTLIST}
+      </MenuLink>
       <hr />
     </>
+  );
+}
+
+const GROUP_TITLES = { women: '_WOMEN', men: '_MEN', other: '_OTHERCLASSES' } as const;
+
+/** The class buttons of the new look: the classes opened last, then women, men and the rest. */
+function ClassButtons({
+  items,
+  sexes,
+  current,
+  recent,
+  label,
+}: {
+  items: ClassListItem[];
+  sexes: Map<string, string>;
+  current: string;
+  recent: string[];
+  label: (hash: string) => string;
+}) {
+  const { res } = useDisplay();
+  const groups = useMemo(() => classGroups(items, sexes), [items, sexes]);
+  return (
+    <div className="class-buttons">
+      {recent.length > 0 && (
+        <section className="class-group recent">
+          <h3>{res._RECENTCLASSES}</h3>
+          <nav>
+            {recent.map((hash) => (
+              <a key={hash} href={hash}>
+                {label(hash)}
+              </a>
+            ))}
+          </nav>
+        </section>
+      )}
+      <div className="class-groups">
+        {groups.map((group) => (
+          <section key={group.kind} className={`class-group ${group.kind}`}>
+            {groups.length > 1 && <h3>{res[GROUP_TITLES[group.kind]]}</h3>}
+            <nav>
+              <MenuItems items={group.items} current={current} />
+            </nav>
+          </section>
+        ))}
+      </div>
+      <nav className="class-lists">
+        <MenuLink route={{ kind: 'plainresults' }} current={current}>
+          {res._ALLCLASSES}
+        </MenuLink>
+        <MenuLink route={{ kind: 'startlist' }} current={current}>
+          {res._STARTLIST}
+        </MenuLink>
+      </nav>
+    </div>
   );
 }
 
@@ -182,14 +245,18 @@ function FreezeToggle() {
 }
 
 export function ClassPicker({
+  raceId,
   items,
+  sexes,
   route,
   tabs: { entries, tabs, current, close, label },
   columns,
   setColumns,
   search,
 }: {
+  raceId: string;
   items: ClassListItem[];
+  sexes: Map<string, string>;
   route: Route;
   tabs: Tabs;
   columns: number;
@@ -198,6 +265,11 @@ export function ClassPicker({
 }) {
   const { res } = useDisplay();
   const chosen = route.kind != 'none';
+  const [recent, setRecent] = useStoredList(`liveres-recent-${raceId}`);
+  useEffect(() => {
+    const next = rememberPage(recent, current, entries);
+    if (next != recent) setRecent(next);
+  }, [current, entries, recent, setRecent]);
   const counts = Array.from({ length: MAX_COLUMNS }, (_, i) => i + 1);
   return (
     <section className="class-picker">
@@ -229,9 +301,13 @@ export function ClassPicker({
       {!chosen && (
         <>
           <h2>{res._CHOOSECLASS}</h2>
-          <nav className="class-buttons">
-            <ClassMenu items={items} route={route} />
-          </nav>
+          <ClassButtons
+            items={items}
+            sexes={sexes}
+            current={current}
+            recent={recent}
+            label={label}
+          />
         </>
       )}
       {chosen && columns == 1 && tabs.length > 0 && (

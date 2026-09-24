@@ -1,7 +1,7 @@
 import type { RaceClass } from '../api/types';
 import { createLegacyViewer } from '../test/legacy';
-import { classListItems, sprintStage, type ClassListItem } from './classList';
-import { normalizeClasses } from './time4o';
+import { classGroups, classListItems, sprintStage, type ClassListItem } from './classList';
+import { classSexes, normalizeClasses } from './time4o';
 
 const esc = (s: string) => s.replace("'", "\\'");
 const link = (fn: string, arg: string, body: string, plain = true) =>
@@ -122,4 +122,67 @@ describe('sprintStage', () => {
       expect(sprintStage(name)).toBe(createLegacyViewer().getSprintStage(name));
     },
   );
+});
+
+describe('classGroups', () => {
+  const race = (...classes: [string, string?][]) => {
+    const raw = classes.map(([name, sex], i) => ({ id: `c${i}`, name, sex }));
+    return { items: classListItems(normalizeClasses(raw)), sexes: classSexes(raw) };
+  };
+  const labels = (items: ClassListItem[]) =>
+    items.map((i) => ('label' in i ? i.label : 'title' in i ? i.title.trim() : i.kind));
+  const groups = (...classes: [string, string?][]) => {
+    const { items, sexes } = race(...classes);
+    return classGroups(items, sexes).map((g) => [g.kind, labels(g.items)]);
+  };
+
+  it('splits women, men and other classes by sex, with women and men by age', () => {
+    expect(
+      groups(
+        ['H 21-E', 'M'],
+        ['D 21-E', 'F'],
+        ['H 9-10', 'M'],
+        ['D 35-', 'F'],
+        ['D 17-18E', 'F'],
+        ['N1-åpen', 'B'],
+        ['H 90-', 'M'],
+        ['AK-åpen', 'B'],
+        ['D/H-16', 'B'],
+      ),
+    ).toEqual([
+      ['women', ['D 17-18E', 'D 21-E', 'D 35-']],
+      ['men', ['H 9-10', 'H 21-E', 'H 90-']],
+      ['other', ['D/H-16', 'AK-åpen', 'N1-åpen']],
+    ]);
+  });
+
+  it('trusts the sex of the class rather than its name', () => {
+    expect(groups(['Lang', 'F'], ['Kort', 'M'], ['H 50', 'B'], ['D 50'])).toEqual([
+      ['women', ['Lang']],
+      ['men', ['Kort']],
+      ['other', ['D 50', 'H 50']],
+    ]);
+  });
+
+  it('keeps legs with their relay', () => {
+    const relay = {
+      id: 'r',
+      name: 'H17-20',
+      sex: 'M',
+      eventForm: 'Relay',
+      legs: { 1: { number: 1 }, 2: { number: 2 } },
+    };
+    const raw = [{ id: 'd', name: 'D 21', sex: 'F' }, relay];
+    const found = classGroups(classListItems(normalizeClasses(raw)), classSexes(raw));
+    expect(found.map((g) => [g.kind, labels(g.items)])).toEqual([
+      ['women', ['D 21']],
+      ['men', ['H17-20', '➀', '➁']],
+    ]);
+  });
+
+  it('gives one group in menu order when the race does not tell women and men apart', () => {
+    expect(groups(['Lang', 'B'], ['Kort'], ['H 21'])).toEqual([
+      ['other', ['H 21', 'Kort', 'Lang']],
+    ]);
+  });
 });

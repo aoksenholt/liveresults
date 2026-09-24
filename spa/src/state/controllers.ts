@@ -26,6 +26,7 @@ import {
   clubResults,
   DEFAULT_TIME_ZONE,
   groupedResults,
+  classSexes,
   normalizeClasses,
   relayResults,
   type ListType,
@@ -104,6 +105,7 @@ export interface ClassList {
   classes: ClassInfo[];
   items: ClassListItem[];
   relayClasses: Set<string>;
+  sexes: Map<string, string>;
 }
 
 export const classListController = (api: Time4oApi, raceId: string, live: boolean) =>
@@ -113,7 +115,7 @@ export const classListController = (api: Time4oApi, raceId: string, live: boolea
     (raw: RaceClass[]): ClassList => {
       const classes = normalizeClasses(raw);
       const items = classListItems(classes);
-      return { classes, items, relayClasses: relayClassNames(items) };
+      return { classes, items, relayClasses: relayClassNames(items), sexes: classSexes(raw) };
     },
   );
 

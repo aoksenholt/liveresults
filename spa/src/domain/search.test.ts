@@ -1,7 +1,7 @@
 import { FIXTURES } from '../test/fixtures';
 import type { ResultRow } from './model';
 import { entryRows } from './organizer';
-import { searchRace } from './search';
+import { searchClasses, searchRace } from './search';
 import { normalizeClasses } from './time4o';
 
 const all = Object.values(FIXTURES);
@@ -56,5 +56,15 @@ describe('searchRace', () => {
     expect(searchRace(rows, 'orientering').clubs).toEqual([
       { id: 7, name: 'Ås-NMBU O.', runners: 1 },
     ]);
+  });
+});
+
+describe('searchClasses', () => {
+  const entries = ['H 45-', 'D 45-', 'H 50-', 'B-åpen 10-16'].map((label) => ({ label }));
+
+  it('finds classes whose name has every word of the query', () => {
+    expect(searchClasses(entries, 'h 45').map((e) => e.label)).toEqual(['H 45-']);
+    expect(searchClasses(entries, 'ÅPEN').map((e) => e.label)).toEqual(['B-åpen 10-16']);
+    expect(searchClasses(entries, '  ')).toEqual([]);
   });
 });

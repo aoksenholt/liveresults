@@ -1,5 +1,5 @@
 import type { ClassListItem } from '../domain/classList';
-import { closeTab, menuEntries, openTab, otherColumns } from './tabs';
+import { closeTab, MAX_RECENT, menuEntries, openTab, otherColumns, rememberPage } from './tabs';
 
 const items: ClassListItem[] = [
   { kind: 'class', label: 'H 21', className: 'H 21' },
@@ -54,5 +54,29 @@ describe('tabs', () => {
     expect(otherColumns(['#x', '#y', ''], tabs, '#b', 2)).toEqual(['#x']);
     expect(otherColumns(['#x'], tabs, '#b', 3)).toEqual(['#x', '']);
     expect(otherColumns(['#x'], tabs, '#b', 1)).toEqual([]);
+  });
+});
+
+describe('rememberPage', () => {
+  const entries = menuEntries(items, labels);
+
+  it('puts the class opened last first', () => {
+    expect(rememberPage(['#H%2021', '#H17-20-1'], '#H17-20-1', entries)).toEqual([
+      '#H17-20-1',
+      '#H%2021',
+    ]);
+    expect(rememberPage([], '#relay::H17-20-1', entries)).toEqual(['#relay::H17-20-1']);
+    const recent = ['#H%2021'];
+    expect(rememberPage(recent, '#H%2021', entries)).toBe(recent);
+  });
+
+  it('leaves out the lists, other pages and classes no longer in the menu', () => {
+    for (const hash of ['#plainresults', '#startlist', '#club::12', '#H%2099', ''])
+      expect(rememberPage(['#H%2021'], hash, entries)).toEqual(['#H%2021']);
+  });
+
+  it(`keeps the last ${MAX_RECENT}`, () => {
+    const many = Array.from({ length: MAX_RECENT }, (_, i) => `#old${i}`);
+    expect(rememberPage(many, '#H%2021', entries)).toEqual(['#H%2021', ...many.slice(0, -1)]);
   });
 });

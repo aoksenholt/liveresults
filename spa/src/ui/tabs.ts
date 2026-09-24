@@ -1,5 +1,5 @@
 import type { ClassListItem } from '../domain/classList';
-import { routeHash, type Route } from './route';
+import { parseHash, routeHash, type Route } from './route';
 
 export interface MenuEntry {
   hash: string;
@@ -70,4 +70,15 @@ export function otherColumns(
 ): string[] {
   const pages = others.length > 0 ? others : tabs.filter((t) => t != current);
   return Array.from({ length: columns - 1 }, (_, i) => pages[i] ?? '');
+}
+
+export const MAX_RECENT = 6;
+
+/** The classes opened last come first; other pages, such as the lists for all classes, are left out. */
+export function rememberPage(recent: string[], hash: string, entries: MenuEntry[]): string[] {
+  const kind = parseHash(hash).kind;
+  if (!['class', 'relay', 'sprint'].includes(kind) || !entries.some((e) => e.hash == hash))
+    return recent;
+  if (recent[0] == hash) return recent;
+  return [hash, ...recent.filter((h) => h != hash)].slice(0, MAX_RECENT);
 }

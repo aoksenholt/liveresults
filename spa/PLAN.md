@@ -82,6 +82,7 @@ og kommende løp med filter.
 - [x] På mobil står arrangøren på en egen linje under løpsnavnet
 - [x] Oversette overskrifter som fortsatt er på engelsk, som «LIVE TODAY!» (det klassiske utseendet beholder overskriftene fra den gamle siden)
 - [x] «Siste oppdateringer» kan legges sammen til én linje med den nyeste oppdateringen, og valget huskes i nettleseren (lukket som standard på mobil). Boksen skjules når det ikke er noen oppdateringer
+- [x] Klasseknappene på løpssiden er delt i kort for damer, herrer og andre klasser ut fra kjønnet Time4o oppgir for hver klasse (`sex`: F, M eller B for begge), med damer og herrer sortert etter alder, i stedet for én lang vegg med knapper. Klassene brukeren sist åpnet i løpet står øverst (huskes i nettleseren), og søket finner også klasser
 - [x] På løpssiden går «← logo» tilbake til løpslisten i stedet for ☰, og på mobil står datoen under løpsnavnet. Temaknappen på forsiden blir ikke lenger klemt smal på mobil
 
 ## Fase 5 – Publisering

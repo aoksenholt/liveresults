@@ -145,12 +145,21 @@ function NewLookPage({ route, ...props }: RaceProps & { route: Route }) {
   return (
     <main className={columns > 1 ? 'page wide' : 'page'}>
       <ClassPicker
+        raceId={raceId}
         items={classList.items}
+        sexes={classList.sexes}
         route={route}
         tabs={tabs}
         columns={columns}
         setColumns={chooseColumns}
-        search={<RaceSearch raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />}
+        search={
+          <RaceSearch
+            raceId={raceId}
+            classes={classList.classes}
+            entries={tabs.entries}
+            timeZone={info.timeZone}
+          />
+        }
       />
       {info.live && (
         <LastPassings raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />

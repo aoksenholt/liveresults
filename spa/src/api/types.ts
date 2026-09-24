@@ -57,6 +57,8 @@ export interface RaceClass {
   raceId?: string;
   name?: string;
   order?: number | null;
+  /** F women, M men, B both. */
+  sex?: 'F' | 'M' | 'B' | string | null;
   eventForm?: 'Individual' | 'Relay' | string;
   resultListMode?: ResultListMode | null;
   startType?: StartType | null;
