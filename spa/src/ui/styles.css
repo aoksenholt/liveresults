@@ -456,3 +456,33 @@ tr.yellow_row .bib,
 tr.yellow_row .club {
   color: #000;
 }
+
+/* Latest updates box of followfull.php */
+.last-passings {
+  background-color: var(--bkdark);
+  color: #fff;
+  padding: 5px 8px;
+  margin-bottom: 3px;
+}
+
+.passings-container {
+  overflow: hidden;
+  height: 4.2em;
+  line-height: 1.4em;
+}
+
+.passing-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes passing-in {
+  from {
+    transform: translateY(-1.4em);
+  }
+}
+
+.passing-line.fresh {
+  animation: passing-in 0.4s ease;
+}
