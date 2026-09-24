@@ -632,40 +632,42 @@ tr.yellow_row .club {
   background: #333;
 }
 
-/* Content in a centred column, with the class menu to the left from 720 px. */
-:root[data-look='new'] :is(.container, .race-page, .scroll, .organizer) {
+/* Content in a centred column. */
+:root[data-look='new'] :is(.page, .race-page, .scroll, .organizer) {
   max-width: 1160px;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
-:root[data-look='new'] .container {
-  flex-direction: column;
-  gap: 1.25rem;
+:root[data-look='new'] .page {
   padding: 1.25rem 1rem;
+  overflow-x: auto;
 }
 
-:root[data-look='new'] .class-column {
-  min-width: 0;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  font-size: 1em;
+/* Class picker: buttons on the front page, then a drop-down and a tab per opened class. */
+:root[data-look='new'] .class-picker {
+  margin-bottom: 1.25rem;
+}
+
+:root[data-look='new'] .class-picker h2 {
+  font-size: 1.5rem;
+  margin: 0.2em 0 0.6em;
+}
+
+:root[data-look='new'] .class-buttons {
   line-height: 2.8em;
-  background: none;
-  color: var(--text);
 }
 
-:root[data-look='new'] .class-column br {
+:root[data-look='new'] .class-buttons br {
   display: none;
 }
 
-:root[data-look='new'] .class-column hr {
+:root[data-look='new'] .class-buttons hr {
   border: none;
   margin: 0.3em 0;
 }
 
-:root[data-look='new'] .class-column a:is(:link, :visited) {
+:root[data-look='new'] .class-buttons a:is(:link, :visited) {
   display: inline-block;
   margin: 0 0.4rem 0 0;
   padding: 0 1rem;
@@ -679,42 +681,70 @@ tr.yellow_row .club {
   box-shadow: var(--shadow);
 }
 
-:root[data-look='new'] .class-column a:hover {
+:root[data-look='new'] .class-buttons a:hover {
   border-color: var(--orange);
   text-decoration: none;
 }
 
-:root[data-look='new'] .class-column a.active {
+:root[data-look='new'] .class-toolbar select {
+  font-size: 1rem;
+  min-width: 14rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+:root[data-look='new'] .tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  border-bottom: 2px solid var(--accent);
+}
+
+:root[data-look='new'] .tab {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: var(--card);
+}
+
+:root[data-look='new'] .tab a:is(:link, :visited) {
+  padding: 0.4rem 0.2rem 0.4rem 0.8rem;
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+:root[data-look='new'] .tab button {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+:root[data-look='new'] .tab button:hover {
+  color: var(--orange);
+}
+
+:root[data-look='new'] .tab.active {
   background: var(--accent);
   border-color: var(--accent);
+}
+
+:root[data-look='new'] .tab.active :is(a:link, a:visited, button) {
   color: var(--accent-text);
 }
 
-:root[data-look='new'] .result-column {
-  padding: 0;
-  min-width: 0;
-}
-
-@media (min-width: 720px) {
-  :root[data-look='new'] .container {
-    flex-direction: row;
-  }
-
-  :root[data-look='new'] .class-column {
-    flex: 0 0 220px;
-    line-height: 1.4em;
-  }
-
-  :root[data-look='new'] .class-column br {
-    display: inline;
-  }
-
-  :root[data-look='new'] .class-column a:is(:link, :visited) {
-    margin: 0 0.2rem 0.4rem 0;
-  }
-}
-
-:root[data-look='new'] .result-column .class-header {
+:root[data-look='new'] .page .class-header {
   font-size: 1.5rem;
   margin: 0.2em 0 0.6em;
 }
