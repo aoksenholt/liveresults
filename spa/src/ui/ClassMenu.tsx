@@ -2,7 +2,7 @@ import { Fragment, useMemo, useState, type ReactNode } from 'react';
 import type { ClassListItem } from '../domain/classList';
 import { useDisplay } from './context';
 import { routeHash, type Route } from './route';
-import { closeTab, menuEntries, openTab } from './tabs';
+import { closeTab, menuEntries, openTab, type MenuEntry } from './tabs';
 
 function MenuLink({
   route,
@@ -78,11 +78,16 @@ export function ClassMenu({ items, route }: { items: ClassListItem[]; route: Rou
   );
 }
 
-/**
- * The class picker of the new look: class buttons until a class is chosen, then a drop-down
- * with every page of the menu and a tab for each page opened.
- */
-export function ClassPicker({ items, route }: { items: ClassListItem[]; route: Route }) {
+export interface Tabs {
+  entries: MenuEntry[];
+  tabs: string[];
+  current: string;
+  close: (hash: string) => void;
+  label: (hash: string) => string;
+}
+
+/** The tabs of the new look: every page opened from the menu, until it is closed. */
+export function useTabs(items: ClassListItem[], route: Route): Tabs {
   const { res } = useDisplay();
   const current = routeHash(route);
   const entries = useMemo(
@@ -93,45 +98,107 @@ export function ClassPicker({ items, route }: { items: ClassListItem[]; route: R
   const [{ tabs, shown }, setState] = useState({ tabs: [] as string[], shown: '' });
   // A tab only opens when the page changes, so a closed tab stays closed until the hash follows.
   if (shown != current) setState({ tabs: openTab(tabs, current, entries), shown: current });
-
-  if (route.kind == 'none')
-    return (
-      <section className="class-picker">
-        <h2>{res._CHOOSECLASS}</h2>
-        <nav className="class-buttons">
-          <ClassMenu items={items} route={route} />
-        </nav>
-      </section>
-    );
-
   const close = (hash: string) => {
     const { tabs: rest, next } = closeTab(tabs, hash, current);
     setState({ tabs: rest, shown });
     if (next) window.location.hash = next;
   };
   const label = (hash: string) => entries.find((e) => e.hash == hash)?.label ?? hash;
+  return { entries, tabs, current, close, label };
+}
+
+export const MAX_COLUMNS = 4;
+
+const ICON_WIDTH = 20;
+const ICON_GAP = 2;
+
+function ColumnsIcon({ columns }: { columns: number }) {
+  const width = (ICON_WIDTH - (columns - 1) * ICON_GAP) / columns;
+  return (
+    <svg width={ICON_WIDTH} height="12" viewBox={`0 0 ${ICON_WIDTH} 12`} aria-hidden="true">
+      {Array.from({ length: columns }, (_, i) => (
+        <rect key={i} x={i * (width + ICON_GAP)} width={width} height="12" rx="1.5" />
+      ))}
+    </svg>
+  );
+}
+
+/**
+ * The class picker of the new look: class buttons until a class is chosen, then a drop-down
+ * with every page of the menu, the number of pages side by side and a tab for each page opened.
+ */
+export function ClassPicker({
+  items,
+  route,
+  tabs: { entries, tabs, current, close, label },
+  shown,
+  columns,
+  setColumns,
+  search,
+}: {
+  items: ClassListItem[];
+  route: Route;
+  tabs: Tabs;
+  shown: string[];
+  columns: number;
+  setColumns: (columns: number) => void;
+  search: ReactNode;
+}) {
+  const { res } = useDisplay();
+  const chosen = route.kind != 'none';
+  const counts = Array.from({ length: MAX_COLUMNS }, (_, i) => i + 1);
   return (
     <section className="class-picker">
       <div className="class-toolbar">
-        <select
-          aria-label={res._CHOOSECLASS}
-          value={entries.some((e) => e.hash == current) ? current : ''}
-          onChange={(e) => (window.location.hash = e.target.value)}
-        >
-          <option value="" disabled>
-            {res._CHOOSECLASS}
-          </option>
-          {entries.map((e) => (
-            <option key={e.hash} value={e.hash}>
-              {e.label}
+        {chosen && (
+          <select
+            aria-label={res._CHOOSECLASS}
+            value={entries.some((e) => e.hash == current) ? current : ''}
+            onChange={(e) => (window.location.hash = e.target.value)}
+          >
+            <option value="" disabled>
+              {res._CHOOSECLASS}
             </option>
-          ))}
-        </select>
+            {entries.map((e) => (
+              <option key={e.hash} value={e.hash}>
+                {e.label}
+              </option>
+            ))}
+          </select>
+        )}
+        {search}
+        {chosen && (
+          <div className="columns-choice" role="group" aria-label={res._COLUMNS}>
+            {counts.map((n) => (
+              <button
+                key={n}
+                aria-label={String(n)}
+                aria-pressed={n == columns}
+                onClick={() => setColumns(n)}
+              >
+                <ColumnsIcon columns={n} />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
-      {tabs.length > 0 && (
+      {!chosen && (
+        <>
+          <h2>{res._CHOOSECLASS}</h2>
+          <nav className="class-buttons">
+            <ClassMenu items={items} route={route} />
+          </nav>
+        </>
+      )}
+      {chosen && tabs.length > 0 && (
         <nav className="tabs">
           {tabs.map((hash) => (
-            <span key={hash} className={hash == current ? 'tab active' : 'tab'}>
+            <span
+              key={hash}
+              className={
+                hash == current ? 'tab active' : shown.includes(hash) ? 'tab shown' : 'tab'
+              }
+            >
               <a href={hash}>{label(hash)}</a>
               <button onClick={() => close(hash)} aria-label={`${res._CLOSETAB} ${label(hash)}`}>
                 ×

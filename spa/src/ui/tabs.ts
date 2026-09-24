@@ -57,3 +57,11 @@ export function closeTab(
   if (hash != current) return { tabs: rest, next: null };
   return { tabs: rest, next: rest[Math.min(index, rest.length - 1)] ?? '#' };
 }
+
+/** The tabs shown side by side: `columns` tabs in a row that includes the open one. */
+export function visibleTabs(tabs: string[], current: string, columns: number): string[] {
+  const index = tabs.indexOf(current);
+  if (index < 0) return [current];
+  const start = Math.max(0, Math.min(index, tabs.length - columns));
+  return tabs.slice(start, start + columns);
+}
