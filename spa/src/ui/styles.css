@@ -896,7 +896,7 @@ tr.yellow_row .club {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  overflow: hidden;
+  overflow: clip;
 }
 
 :root[data-look='new'] :is(table.results, table.lists) :is(td, th) {
@@ -1077,6 +1077,40 @@ tr.yellow_row .club {
 
 :root[data-look='new'] table.results a.relayclub ~ .runner-name {
   font-weight: normal;
+}
+
+/* Place and name stay put while the splits scroll sideways, like frozen columns in a sheet. */
+:root[data-look='new'] .table-scroll {
+  overflow-x: auto;
+}
+
+:root[data-look='new'] :where(table.results) :is(.fixed-place, .fixed-name) {
+  position: sticky;
+  z-index: 1;
+}
+
+:root[data-look='new'] :where(table.results td):is(.fixed-place, .fixed-name) {
+  background-color: var(--card);
+}
+
+:root[data-look='new'] table.results .fixed-place {
+  left: 0;
+  box-sizing: border-box;
+  width: 2.6em;
+  min-width: 2.6em;
+}
+
+:root[data-look='new'] table.results .fixed-name {
+  left: 2.6em;
+  border-right: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  :root[data-look='new'] table.results .fixed-name {
+    max-width: 9.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 /* The runner picked in the search lights up for a moment. */
