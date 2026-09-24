@@ -938,6 +938,52 @@ tr.yellow_row .club {
   margin-bottom: 1.25rem;
 }
 
+:root[data-look='new'] .passings-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+:root[data-look='new'] .last-passings:not(.collapsed) .passings-toggle {
+  margin-bottom: 0.25rem;
+}
+
+:root[data-look='new'] .passings-toggle b {
+  flex-shrink: 0;
+}
+
+:root[data-look='new'] .passing-summary {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+:root[data-look='new'] .passings-toggle .chevron {
+  flex-shrink: 0;
+  margin-left: auto;
+  width: 0.5em;
+  height: 0.5em;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: translateY(-25%) rotate(45deg);
+  transition: transform 0.15s;
+}
+
+:root[data-look='new'] .last-passings:not(.collapsed) .chevron {
+  transform: translateY(25%) rotate(-135deg);
+}
+
 :root[data-look='new'] :is(.organizer-head, .tooltip .tooltiptext) {
   background-color: var(--card);
   color: var(--text);

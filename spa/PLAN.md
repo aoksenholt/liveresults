@@ -81,6 +81,7 @@ og kommende løp med filter.
 - [x] Søk etter løp og arrangør i alle år (betaen filtrerer også på land, men Time4o-løpene er stort sett norske)
 - [x] På mobil står arrangøren på en egen linje under løpsnavnet
 - [x] Oversette overskrifter som fortsatt er på engelsk, som «LIVE TODAY!» (det klassiske utseendet beholder overskriftene fra den gamle siden)
+- [x] «Siste oppdateringer» kan legges sammen til én linje med den nyeste oppdateringen, og valget huskes i nettleseren (lukket som standard på mobil). Boksen skjules når det ikke er noen oppdateringer
 
 ## Fase 5 – Publisering
 
