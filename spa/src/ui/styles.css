@@ -486,3 +486,12 @@ tr.yellow_row .club {
 .passing-line.fresh {
   animation: passing-in 0.4s ease;
 }
+
+.scroll .class-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 20px 0 0;
+  padding-left: 10px;
+  background: white;
+}

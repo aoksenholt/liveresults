@@ -21,3 +21,23 @@ export function useHashRoute(): Route {
   const hash = useSyncExternalStore(subscribeHash, getHash);
   return parseHash(hash);
 }
+
+/** Keeps the screen on at the start and finish, taken on a click as browsers require. */
+export function useWakeLock() {
+  useEffect(() => {
+    if (!('wakeLock' in navigator)) return;
+    let lock: WakeLockSentinel | null = null;
+    const request = () => {
+      if (lock && !lock.released) return;
+      navigator.wakeLock
+        .request('screen')
+        .then((l) => (lock = l))
+        .catch(() => {});
+    };
+    document.addEventListener('click', request);
+    return () => {
+      document.removeEventListener('click', request);
+      void lock?.release();
+    };
+  }, []);
+}

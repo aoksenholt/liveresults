@@ -129,4 +129,18 @@ describe('App', () => {
     const box = screen.getByText('Siste oppdateringer').closest('section')!;
     expect(await within(box).findAllByText(/med tiden|fikk ny status/)).toHaveLength(3);
   });
+
+  it('shows every class without splits on the scrolling page', async () => {
+    render(<App api={fakeApi()} search="?comp=race-1&lang=no&scroll" />);
+    const headers = await screen.findAllByRole('heading', { level: 2 });
+    expect(headers.length).toBeGreaterThan(2);
+    expect(headers[0]).toHaveTextContent(interval.raceClass.name!);
+    expect(screen.queryByText('Siste oppdateringer')).not.toBeInTheDocument();
+    const firstTable = screen.getAllByRole('table')[0]!;
+    expect(
+      within(firstTable)
+        .getAllByRole('columnheader')
+        .map((h) => h.textContent),
+    ).toEqual(['#', 'Navn', 'Klubb', '№', 'Start', 'Mål', 'Diff']);
+  });
 });
