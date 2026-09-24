@@ -16,14 +16,14 @@ const race: Race = {
 };
 const allEntries = [...interval.entries, ...relay.entries];
 
-function fakeApi(entries = allEntries) {
+function fakeApi(entries = allEntries, raceInfo = race) {
   const json = (data: unknown) =>
     Promise.resolve(new Response(JSON.stringify({ data }), { status: 200 }));
   return new Time4oApi('https://t/', (url) => {
     const u = new URL(url);
     const path = u.pathname;
-    if (path == '/race') return json([race]);
-    if (path == '/race/race-1') return json(race);
+    if (path == '/race') return json([raceInfo]);
+    if (path == '/race/race-1') return json(raceInfo);
     if (path == '/race/race-1/raceClass') return json([interval.raceClass, relay.raceClass]);
     if (path == '/race/race-1/entry') {
       const classId = u.searchParams.get('raceClassId');
@@ -120,5 +120,13 @@ describe('App', () => {
     expect(await screen.findByRole('table')).toBeInTheDocument();
     const link = screen.getByRole('link', { name: /Bytt starttype/ });
     expect(link.getAttribute('href')).toMatch(/calltime=4.*&openstart$/);
+  });
+
+  it('shows the latest updates on live race pages', async () => {
+    const today = { ...race, date: new Date(Date.now() - 3600000).toISOString() };
+    render(<App api={fakeApi(allEntries, today)} search="?comp=race-1&lang=no" />);
+    expect(await screen.findByText('Siste oppdateringer')).toBeInTheDocument();
+    const box = screen.getByText('Siste oppdateringer').closest('section')!;
+    expect(await within(box).findAllByText(/med tiden|fikk ny status/)).toHaveLength(3);
   });
 });

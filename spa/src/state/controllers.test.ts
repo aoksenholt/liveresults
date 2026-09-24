@@ -3,8 +3,10 @@ import type { Entry } from '../api/types';
 import { normalizeClasses } from '../domain/time4o';
 import { FIXTURES, midRace } from '../test/fixtures';
 import {
+  lastPassingsController,
   leftInForestController,
   ORGANIZER_INTERVAL_MS,
+  PASSINGS_INTERVAL_MS,
   startRegistrationController,
 } from './controllers';
 
@@ -61,6 +63,42 @@ describe('startRegistrationController', () => {
     expect(shown()).toBe(0);
     await vi.advanceTimersByTimeAsync(ORGANIZER_INTERVAL_MS);
     expect(fetch).toHaveBeenCalledTimes(2);
+    controller.stop();
+  });
+});
+
+describe('lastPassingsController', () => {
+  it('marks passings that are new since the previous update', async () => {
+    vi.useFakeTimers();
+    const later = entries.map((e, i) =>
+      i == 0 ? { ...e, time: { ...e.time, updated: '2099-01-01T00:00:00Z' } } : e,
+    );
+    const fetch = vi
+      .fn()
+      .mockImplementationOnce(() =>
+        Promise.resolve(new Response(JSON.stringify({ data: entries }))),
+      )
+      .mockImplementation(() => Promise.resolve(new Response(JSON.stringify({ data: later }))));
+    const controller = lastPassingsController(
+      new Time4oApi('https://t/', fetch),
+      'r',
+      classes,
+      opts,
+    );
+    controller.start();
+    await vi.advanceTimersByTimeAsync(0);
+    const first = controller.store.get().data!;
+    expect(first).toHaveLength(3);
+    expect(first.some((p) => p.fresh)).toBe(false);
+
+    await vi.advanceTimersByTimeAsync(PASSINGS_INTERVAL_MS);
+    const [newest, ...rest] = controller.store.get().data!;
+    expect(newest).toMatchObject({
+      fresh: true,
+      changed: Date.parse('2099-01-01T00:00:00Z') / 1000,
+    });
+    expect(rest.map((p) => p.key)).toEqual(first.slice(0, 2).map((p) => p.key));
+    expect(rest.some((p) => p.fresh)).toBe(false);
     controller.stop();
   });
 });

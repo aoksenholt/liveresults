@@ -10,6 +10,7 @@ import {
   type StartMark,
   type StartWindow,
 } from '../domain/organizer';
+import { lastPassings, type Passing } from '../domain/passings';
 import { buildClassView, type ClassView } from '../domain/pipeline';
 import {
   eventClock,
@@ -35,6 +36,7 @@ export const CLASS_INTERVAL_MS = 3000;
 export const CLASS_LIST_INTERVAL_MS = 60000;
 export const CLUB_INTERVAL_MS = 20000;
 export const ORGANIZER_INTERVAL_MS = 15000;
+export const PASSINGS_INTERVAL_MS = 15000;
 
 export interface Loadable<T> {
   data: T | null;
@@ -340,4 +342,33 @@ export function startRegistrationController(
       filter();
     },
   };
+}
+
+export interface ShownPassing extends Passing {
+  key: string;
+  /** Not in the previous update, so the view can slide it in like the legacy box. */
+  fresh: boolean;
+}
+
+/** The latest updates box of followfull.php, which only polls while the race is live. */
+export function lastPassingsController(
+  api: Time4oApi,
+  raceId: string,
+  classes: ClassInfo[],
+  opts: { timeZone: string },
+) {
+  let seen: Set<string> | null = null;
+  return pollingController(
+    (etag) => api.getEntries(raceId, {}, etag),
+    PASSINGS_INTERVAL_MS,
+    (entries: Entry[]): ShownPassing[] => {
+      const previous = seen;
+      const passings = lastPassings(entryRows(entries, classes, opts), classes).map((p) => {
+        const key = `${p.dbid}:${p.control}:${p.changed}`;
+        return { ...p, key, fresh: previous != null && !previous.has(key) };
+      });
+      seen = new Set(passings.map((p) => p.key));
+      return passings;
+    },
+  );
 }

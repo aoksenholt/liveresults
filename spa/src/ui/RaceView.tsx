@@ -12,6 +12,7 @@ import { ClubResults } from './ClubResults';
 import { Info, Loading, Message } from './common';
 import { deviceType, useDisplay } from './context';
 import { useControllerState, useHashRoute } from './hooks';
+import { LastPassings } from './LastPassings';
 import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
 import { routeHash, type Route } from './route';
@@ -71,6 +72,9 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
           {classList && <ClassMenu items={classList.items} route={route} />}
         </nav>
         <main className="result-column">
+          {info.live && classList && classList.classes.length > 0 && (
+            <LastPassings raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />
+          )}
           {!classList ? (
             <Loading error={error} text={res._LOADINGCLASSES ?? ''} />
           ) : classList.classes.length == 0 ? (
