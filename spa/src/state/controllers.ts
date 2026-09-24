@@ -18,7 +18,7 @@ import {
   updatePredictedTimes,
   type Predictions,
 } from '../domain/predicted';
-import { isRaceToday, localDate, raceList, type RaceList } from '../domain/races';
+import { isRaceToday, localDate, localTime, raceList, type RaceList } from '../domain/races';
 import { relayTeams, type RelayTeam } from '../domain/relay';
 import { scrollViews } from '../domain/scroll';
 import { searchRace, type SearchResult } from '../domain/search';
@@ -77,7 +77,10 @@ export const raceListController = (api: Time4oApi, clock: Clock = systemClock) =
   pollingController(
     (etag) => api.getRaces(etag),
     0,
-    (races: Race[]): RaceList => raceList(races, localDate(clock.now())),
+    (races: Race[]): RaceList => {
+      const now = clock.now();
+      return raceList(races, localDate(now), localTime(now));
+    },
   );
 
 export interface RaceInfo {

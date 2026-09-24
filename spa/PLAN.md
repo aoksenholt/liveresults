@@ -75,8 +75,8 @@ forsiden av betaen (`live.eoc2026.lt/beta`). To PR-er: først toppfelt og dagens
 og kommende løp med filter.
 
 - [x] ☰-knappen («Velg løp») i topplinjen blir klemt smal på mobil når løpsnavnet er langt, og skal ikke krympe
-- [ ] Toppfelt med skogsgrønn bakgrunn, logo, «Liveresultater for orientering» og knapper for tema og språk
-- [ ] «Dagens løp» som et kort med oransje kant til venstre, **LIVE**-merke på løp som pågår, og løpsnavn og arrangør på hver rad
+- [x] Toppfelt med skogsgrønn bakgrunn, logo, «Liveresultater for orientering» og knapper for tema og språk
+- [x] «Dagens løp» som et kort med oransje kant til venstre, **LIVE**-merke på løp som pågår, og løpsnavn og arrangør på hver rad. Time4o har ikke noe eget live-flagg, så et løp regnes som live fra starttiden til arrangementet (`event.startTime`) den første dagen, og hele dagen ellers. Løpene står i rekkefølge etter starttid
 - [ ] «Siste løp» fra de siste sju dagene og kommende løp som egne kort i stedet for én lang tabell per år
 - [ ] Filterknapper eller søk etter løp og arrangør (betaen filtrerer på land, men Time4o-løpene er stort sett norske)
 - [ ] På mobil står arrangøren på en egen linje under løpsnavnet
