@@ -65,7 +65,7 @@ The phased plan and progress are in `spa/PLAN.md` (Norwegian); tick off steps th
 
 A standalone React SPA that shows live results for **Time4o races only**, inspired by [mattias242/liveresults](https://github.com/mattias242/liveresults) (which forks petlof upstream, not this repo – its code targets the old `web/api.php` and cannot be copied as-is). It talks directly to the public Time4o API from the browser; it does **not** use the C# client, MySQL or any PHP in this repo. The legacy site in `web/` is untouched and keeps working.
 
-Stack: React + TypeScript + Vite + Vitest + Testing Library, Node 24 (`spa/.node-version`, used by CI and Cloudflare). Hosted as static files on Cloudflare Pages (root `spa`, build `npm run build`, output `dist`); response headers are in `spa/public/_headers` – extend the CSP `connect-src` if the SPA calls a new host. CI: `.github/workflows/spa.yml`.
+Stack: React + TypeScript + Vite + Vitest + Testing Library, Node 24 (`spa/.node-version`, used by CI and Cloudflare). Hosted as static files on Cloudflare Pages (root `spa`, build `npm run build`, output `dist`); response headers are in `spa/public/_headers` – extend the CSP `connect-src` if the SPA calls a new host. CI: `.github/workflows/spa.yml`. `.github/workflows/upstream-sync.yml` merges `palkitt/liveresults` `master` nightly into the `upstream-sync` branch, regenerates `lang/*.json`, opens or updates a PR against `main` and starts the SPA checks on it; it stops on merge conflicts, which are then merged by hand on that branch.
 ```
 cd spa
 npm ci

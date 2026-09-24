@@ -79,8 +79,9 @@ samme som før.
 Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene genereres fra
 `web/templates/emmalang_*.php`. Endringer i upstream som påvirker SPA-en, gir derfor røde tester.
 
-- [ ] Planlagt GitHub Actions-workflow som henter `upstream/master` og åpner en PR fra `upstream-sync` mot `main` når det finnes nye commits, med liste over endrede filer i `web/js/liveresults*.js` og `emmalang_*.php`. Workflowen stopper ved merge-konflikter
-- [ ] Workflowen kjører `npm run convert-lang` og legger oppdaterte `lang/*.json` inn i PR-en
+- [x] Planlagt GitHub Actions-workflow som henter `upstream/master` og åpner en PR fra `upstream-sync` mot `main` når det finnes nye commits, med liste over endrede filer i `web/js/liveresults*.js` og `emmalang_*.php`. Workflowen stopper ved merge-konflikter
+- [x] Workflowen kjører `npm run convert-lang` og legger oppdaterte `lang/*.json` inn i PR-en
+- [x] Workflowen (`.github/workflows/upstream-sync.yml`) kjører hver natt og kan startes for hånd. Den starter SPA-sjekkene på branchen selv, siden push med `GITHUB_TOKEN` ikke starter andre workflows
 - [ ] (Valgfritt) Claude Code GitHub Action som foreslår portering til `src/domain/` når paritetstestene feiler. Krever API-nøkkel som secret og koster litt per kjøring
 
 ## Løse tråder
