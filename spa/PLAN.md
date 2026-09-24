@@ -64,7 +64,7 @@ samme som før.
 - [x] Farger (papirhvit/blågrå bakgrunn, hvite kort, skogsgrønn og oransje), systemfont, svart topplinje med løpsnavn og dato, innhold i en midtstilt kolonne og tabeller som kort med runde hjørner. Bryteren veksler mellom som enheten, lyst og mørkt
 - [x] Navn og klubb i samme kolonne, med klubben på en mindre linje under navnet
 - [x] Klassevalg med knapper på forsiden, nedtrekksmeny når en klasse er valgt, og valgte klasser som faner som kan lukkes (klassemenyen i sidekolonnen finnes fortsatt i det klassiske utseendet)
-- [ ] Søk etter løper eller klubb, og visning av 1–4 klasser side om side
+- [x] Søk etter løper, klubb eller startnummer i hele løpet (henter alle deltakerne én gang når søket tas i bruk), der løperen man velger, lyser opp en kort stund i klassen, og visning av 1–4 åpne faner side om side fra 900 px
 
 ## Fase 5 – Publisering
 

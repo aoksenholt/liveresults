@@ -1,5 +1,5 @@
 import type { ClassListItem } from '../domain/classList';
-import { closeTab, menuEntries, openTab } from './tabs';
+import { closeTab, menuEntries, openTab, visibleTabs } from './tabs';
 
 const items: ClassListItem[] = [
   { kind: 'class', label: 'H 21', className: 'H 21' },
@@ -44,5 +44,14 @@ describe('tabs', () => {
     expect(closeTab(tabs, '#c', '#c')).toEqual({ tabs: ['#a', '#b'], next: '#b' });
     expect(closeTab(tabs, '#a', '#c')).toEqual({ tabs: ['#b', '#c'], next: null });
     expect(closeTab(['#a'], '#a', '#a')).toEqual({ tabs: [], next: '#' });
+  });
+
+  it('shows the open tab and the ones after it, or before it at the end', () => {
+    const tabs = ['#a', '#b', '#c', '#d', '#e'];
+    expect(visibleTabs(tabs, '#b', 1)).toEqual(['#b']);
+    expect(visibleTabs(tabs, '#b', 3)).toEqual(['#b', '#c', '#d']);
+    expect(visibleTabs(tabs, '#e', 3)).toEqual(['#c', '#d', '#e']);
+    expect(visibleTabs(tabs.slice(0, 2), '#b', 4)).toEqual(['#a', '#b']);
+    expect(visibleTabs(tabs, '#club::1', 3)).toEqual(['#club::1']);
   });
 });

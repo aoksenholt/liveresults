@@ -17,6 +17,7 @@ import { firstNonQualifier, qualificationLimit } from '../domain/ranking';
 import { classResultsController } from '../state/controllers';
 import { html, Loading, Message } from './common';
 import { useDisplay } from './context';
+import { clearFound, scrollToRow, useFound } from './found';
 import { useControllerState } from './hooks';
 import type { RaceProps } from './RaceView';
 import { routeHash } from './route';
@@ -152,6 +153,7 @@ export function ClassTable(props: {
   const { cls, view, predictions, serverNow, error, isRelayClass, highTime } = props;
   const { res, format } = useDisplay();
   const newLook = useNewLook();
+  const isFound = useFound(cls.className);
   const options = useMemo<TableOptions>(
     () => ({
       labels: format.labels,
@@ -220,9 +222,21 @@ export function ClassTable(props: {
           {order.map((i) => {
             const row = rows[i]!;
             const mark = highlights(table, row, i == fnq, serverNow, highTime);
-            const rowClass = [i == fnq ? 'firstnonqualifier' : '', mark.row ?? ''].join(' ').trim();
+            const found = isFound(row);
+            const rowClass = [
+              i == fnq ? 'firstnonqualifier' : '',
+              mark.row ?? '',
+              found ? 'found' : '',
+            ]
+              .join(' ')
+              .trim();
             return (
-              <tr key={`${row.dbid}:${row.bib}:${i}`} className={rowClass || undefined}>
+              <tr
+                key={`${row.dbid}:${row.bib}:${i}`}
+                className={rowClass || undefined}
+                ref={found ? scrollToRow : undefined}
+                onAnimationEnd={found ? clearFound : undefined}
+              >
                 {visible.map(([c, col]) => {
                   const className = [c.kind == 'runner' ? '' : 'right', mark.cells.get(col) ?? '']
                     .join(' ')

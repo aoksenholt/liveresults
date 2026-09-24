@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type MouseEvent } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties, type MouseEvent } from 'react';
 import { summarize } from '../domain/races';
 import {
   classListController,
@@ -6,7 +6,7 @@ import {
   type ClassList,
   type RaceInfo,
 } from '../state/controllers';
-import { ClassMenu, ClassPicker } from './ClassMenu';
+import { ClassMenu, ClassPicker, useTabs } from './ClassMenu';
 import { ClassResults } from './ClassResults';
 import { ClubResults } from './ClubResults';
 import { Info, Loading, Message } from './common';
@@ -15,7 +15,9 @@ import { useControllerState, useHashRoute } from './hooks';
 import { LastPassings } from './LastPassings';
 import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
-import type { Route } from './route';
+import { parseHash, type Route } from './route';
+import { RaceSearch } from './Search';
+import { visibleTabs } from './tabs';
 import { ThemeToggle, useNewLook } from './ThemeToggle';
 
 export interface RaceProps {
@@ -62,7 +64,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
         <Loading error={error} text={res._LOADINGCLASSES ?? ''} />
       ) : classList.classes.length == 0 ? (
         <Message>{res._NOCLASSESYET}</Message>
-      ) : newLook && route.kind == 'none' ? null : (
+      ) : (
         <RouteView route={route} raceId={raceId} info={info} classList={classList} />
       )}
       <Info themeToggle={false} />
@@ -89,13 +91,10 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
         <span className="date">{date}</span>
         <ThemeToggle className="navbtn theme-toggle" />
       </div>
-      {newLook ? (
-        <main className="page">
-          {classList && classList.classes.length > 0 && (
-            <ClassPicker items={classList.items} route={route} />
-          )}
-          {content}
-        </main>
+      {newLook && classList && classList.classes.length > 0 ? (
+        <NewLookPage route={route} raceId={raceId} info={info} classList={classList} />
+      ) : newLook ? (
+        <main className="page">{content}</main>
       ) : (
         <div className="container">
           <nav
@@ -108,6 +107,39 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
         </div>
       )}
     </>
+  );
+}
+
+function NewLookPage({ route, ...props }: RaceProps & { route: Route }) {
+  const { raceId, info, classList } = props;
+  const tabs = useTabs(classList.items, route);
+  const [columns, setColumns] = useState(1);
+  const shown = route.kind == 'none' ? [] : visibleTabs(tabs.tabs, tabs.current, columns);
+  return (
+    <main className={columns > 1 ? 'page wide' : 'page'}>
+      <ClassPicker
+        items={classList.items}
+        route={route}
+        tabs={tabs}
+        shown={shown}
+        columns={columns}
+        setColumns={setColumns}
+        search={<RaceSearch raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />}
+      />
+      {info.live && (
+        <LastPassings raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />
+      )}
+      {shown.length > 0 && (
+        <div className="columns" style={{ '--columns': shown.length } as CSSProperties}>
+          {shown.map((hash) => (
+            <div className="column" key={hash}>
+              <RouteView route={parseHash(hash)} {...props} />
+            </div>
+          ))}
+        </div>
+      )}
+      <Info themeToggle={false} />
+    </main>
   );
 }
 

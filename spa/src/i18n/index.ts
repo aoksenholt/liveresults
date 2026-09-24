@@ -50,6 +50,11 @@ const spaStrings: Record<string, Resources> = {
     _THEMEDARK: 'dark',
     _THEMECLASSIC: 'classic',
     _CLOSETAB: 'Close',
+    _SEARCH: 'Search for runner or club',
+    _NOMATCH: 'No matches',
+    _CLUBS: 'Clubs',
+    _RUNNERS: 'Runners',
+    _COLUMNS: 'Classes side by side',
   },
   no: {
     _ALLCLASSES: 'Alle klasser',
@@ -81,6 +86,11 @@ const spaStrings: Record<string, Resources> = {
     _THEMEDARK: 'mørkt',
     _THEMECLASSIC: 'klassisk',
     _CLOSETAB: 'Lukk',
+    _SEARCH: 'Søk etter løper eller klubb',
+    _NOMATCH: 'Ingen treff',
+    _CLUBS: 'Klubber',
+    _RUNNERS: 'Løpere',
+    _COLUMNS: 'Klasser side om side',
   },
 };
 

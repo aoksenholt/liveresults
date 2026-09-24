@@ -21,6 +21,7 @@ import {
 import { isRaceToday, localDate, raceList, type RaceList } from '../domain/races';
 import { relayTeams, type RelayTeam } from '../domain/relay';
 import { scrollViews } from '../domain/scroll';
+import { searchRace, type SearchResult } from '../domain/search';
 import {
   clubResults,
   DEFAULT_TIME_ZONE,
@@ -311,6 +312,23 @@ export const leftInForestController = (
     opts.live ? ORGANIZER_INTERVAL_MS : 0,
     (entries: Entry[]): ResultRow[] => leftInForest(entryRows(entries, classes, opts)),
   );
+
+/** Every runner of the race, fetched once when the search is first used. */
+export function searchController(
+  api: Time4oApi,
+  raceId: string,
+  classes: ClassInfo[],
+  opts: { timeZone: string },
+) {
+  return pollingController(
+    (etag) => api.getEntries(raceId, {}, etag),
+    0,
+    (entries: Entry[]) => {
+      const rows = entryRows(entries, classes, opts);
+      return (query: string): SearchResult => searchRace(rows, query);
+    },
+  );
+}
 
 export interface StartState {
   rows: ResultRow[] | null;

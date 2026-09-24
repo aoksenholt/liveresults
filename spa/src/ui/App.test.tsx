@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { Time4oApi } from '../api/client';
 import type { Entry, Race } from '../api/types';
 import { FIXTURES, midRace } from '../test/fixtures';
@@ -89,6 +89,53 @@ describe('App', () => {
     expect(window.location.hash).toBe(`#${encodeURI(interval.raceClass.name!)}`);
     fireEvent.click(await screen.findByRole('button', { name: `Lukk ${interval.raceClass.name}` }));
     expect(await screen.findByRole('heading', { name: 'Velg klasse' })).toBeInTheDocument();
+  });
+
+  it('finds runners and clubs in the whole race', async () => {
+    renderRace('');
+    const unique = (e: Entry) =>
+      allEntries.filter((o) => o.person?.name == e.person?.name).length == 1;
+    const runner = relay.entries.find((e) => e.person?.name && e.organisation?.id && unique(e))!;
+    const club = runner.organisation!;
+    const search = await screen.findByRole('searchbox', { name: 'Søk etter løper eller klubb' });
+    fireEvent.change(search, { target: { value: runner.person!.name } });
+    const found = await screen.findByRole('region', { name: 'Søk etter løper eller klubb' });
+    const link = await within(found).findByRole('link', { name: runner.person!.name });
+    expect(link.getAttribute('href')).toMatch(/^#H17-20-\d$/);
+    const href = link.getAttribute('href')!;
+    fireEvent.click(link);
+    expect(search).toHaveValue('');
+    window.location.hash = href;
+    const row = await waitFor(() => {
+      const found = document.querySelector('tr.found');
+      expect(found).not.toBeNull();
+      return found!;
+    });
+    expect(row).toHaveTextContent(runner.person!.name!);
+    // jsdom has no AnimationEvent, so React listens for the prefixed event.
+    fireEvent(row.firstElementChild!, new Event('webkitAnimationEnd', { bubbles: true }));
+    await waitFor(() => expect(document.querySelector('tr.found')).toBeNull());
+    fireEvent.change(search, { target: { value: 'zzzz' } });
+    expect(await screen.findByText('Ingen treff')).toBeInTheDocument();
+    fireEvent.change(search, { target: { value: club.name } });
+    expect(
+      await within(screen.getByRole('region')).findByRole('link', { name: club.name }),
+    ).toHaveAttribute('href', `#club::${club.id}`);
+  });
+
+  it('shows opened classes side by side', async () => {
+    renderRace(`#${encodeURI(interval.raceClass.name!)}`);
+    await screen.findByRole('table');
+    window.location.hash = '#plainresults';
+    expect(await screen.findByRole('heading', { name: 'Alle klasser' })).toBeInTheDocument();
+    const columns = screen.getByRole('group', { name: 'Klasser side om side' });
+    fireEvent.click(within(columns).getByRole('button', { name: '2' }));
+    expect(within(columns).getByRole('button', { name: '2' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    expect(await screen.findByRole('heading', { name: /^H 16/ })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Alle klasser' })).toBeInTheDocument();
   });
 
   it('shows class results with club links', async () => {
