@@ -204,57 +204,71 @@ export function ClassTable(props: {
   const fnq = firstNonQualifier(rows, qualificationLimit(cls), false, positions);
   const shown = table.columns.map((c, i) => [c, i] as const).filter(([c]) => c.visible);
   const visible = newLook ? stackRunnerColumns(shown) : shown;
+  const fixed = (c: Column) =>
+    !newLook ? '' : c.kind == 'place' ? 'fixed-place' : c.kind == 'runner' ? 'fixed-name' : '';
 
+  const results = (
+    <table className="results">
+      <thead>
+        <tr>
+          {visible.map(([c, i]) => (
+            <th
+              key={i}
+              className={
+                [c.kind == 'runner' ? '' : 'right', fixed(c)].join(' ').trim() || undefined
+              }
+            >
+              {c.title}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {order.map((i) => {
+          const row = rows[i]!;
+          const mark = highlights(table, row, i == fnq, serverNow, highTime);
+          const found = isFound(row);
+          const rowClass = [
+            i == fnq ? 'firstnonqualifier' : '',
+            mark.row ?? '',
+            found ? 'found' : '',
+          ]
+            .join(' ')
+            .trim();
+          return (
+            <tr
+              key={`${row.dbid}:${row.bib}:${i}`}
+              className={rowClass || undefined}
+              ref={found ? scrollToRow : undefined}
+              onAnimationEnd={found ? clearFound : undefined}
+            >
+              {visible.map(([c, col]) => {
+                const className = [
+                  c.kind == 'runner' ? '' : 'right',
+                  fixed(c),
+                  mark.cells.get(col) ?? '',
+                ]
+                  .join(' ')
+                  .trim();
+                if (c.kind == 'runner')
+                  return (
+                    <td key={col} className={className || undefined}>
+                      <RunnerCell column={c} row={row} />
+                    </td>
+                  );
+                const content = running?.[i]?.get(col) ?? cellHtml(table, c, row);
+                return <td key={col} className={className || undefined} {...html(content)} />;
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
   return (
     <>
       {header}
-      <table className="results">
-        <thead>
-          <tr>
-            {visible.map(([c, i]) => (
-              <th key={i} className={c.kind == 'runner' ? undefined : 'right'}>
-                {c.title}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {order.map((i) => {
-            const row = rows[i]!;
-            const mark = highlights(table, row, i == fnq, serverNow, highTime);
-            const found = isFound(row);
-            const rowClass = [
-              i == fnq ? 'firstnonqualifier' : '',
-              mark.row ?? '',
-              found ? 'found' : '',
-            ]
-              .join(' ')
-              .trim();
-            return (
-              <tr
-                key={`${row.dbid}:${row.bib}:${i}`}
-                className={rowClass || undefined}
-                ref={found ? scrollToRow : undefined}
-                onAnimationEnd={found ? clearFound : undefined}
-              >
-                {visible.map(([c, col]) => {
-                  const className = [c.kind == 'runner' ? '' : 'right', mark.cells.get(col) ?? '']
-                    .join(' ')
-                    .trim();
-                  if (c.kind == 'runner')
-                    return (
-                      <td key={col} className={className || undefined}>
-                        <RunnerCell column={c} row={row} />
-                      </td>
-                    );
-                  const content = running?.[i]?.get(col) ?? cellHtml(table, c, row);
-                  return <td key={col} className={className || undefined} {...html(content)} />;
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {newLook ? <div className="table-scroll">{results}</div> : results}
     </>
   );
 }

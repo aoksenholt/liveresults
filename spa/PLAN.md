@@ -66,6 +66,7 @@ samme som før.
 - [x] Klassevalg med knapper på forsiden, nedtrekksmeny når en klasse er valgt, og valgte klasser som faner som kan lukkes (klassemenyen i sidekolonnen finnes fortsatt i det klassiske utseendet)
 - [x] Søk etter løper, klubb eller startnummer i hele løpet (henter alle deltakerne én gang når søket tas i bruk), der løperen man velger, lyser opp en kort stund i klassen, og visning av 1–4 klasser side om side fra 900 px
 - [x] Med mer enn én kolonne har hver kolonne sin egen nedtrekksmeny i stedet for faner, og tomme kolonner viser «Ingen klasse valgt!». Den første kolonnen følger adressen, de andre fylles med de åpne fanene og blir faner igjen når man går tilbake til én kolonne
+- [x] Plass og navn står fast til venstre mens mellomtidene scroller vannrett i klassetabellen, som frosne kolonner i et regneark, og navnekolonnen er smalere på mobil
 
 ## Fase 5 – Publisering
 
