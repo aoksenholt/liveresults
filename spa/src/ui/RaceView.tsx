@@ -42,7 +42,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
   const route = useHashRoute();
   const mobile = deviceType() == 'mobile';
   const [menuOpen, setMenuOpen] = useState(!mobile);
-  const name = summarize(info.race).name;
+  const { name, date } = summarize(info.race);
 
   useEffect(() => {
     document.title = name;
@@ -67,6 +67,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
           ▤
         </button>
         <span className="title">{name}</span>
+        <span className="date">{date}</span>
         <ThemeToggle className="navbtn theme-toggle" />
       </div>
       <div className="container">

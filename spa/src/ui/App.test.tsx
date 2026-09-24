@@ -155,12 +155,13 @@ describe('App', () => {
     try {
       renderRace('');
       const toggle = await screen.findByRole('button', { name: 'Tema: som enheten' });
-      expect(document.documentElement.dataset.theme).toBe('dark');
+      const root = document.documentElement.dataset;
+      expect([root.look, root.theme]).toEqual(['new', 'dark']);
       fireEvent.click(toggle);
       expect(toggle).toHaveAccessibleName('Tema: lyst');
-      expect(document.documentElement.dataset.theme).toBe('classic');
+      expect([root.look, root.theme]).toEqual(['new', 'light']);
       fireEvent.click(toggle);
-      expect(document.documentElement.dataset.theme).toBe('dark');
+      expect(root.theme).toBe('dark');
       expect(localStorage.getItem('liveres-theme')).toBe('dark');
     } finally {
       vi.unstubAllGlobals();

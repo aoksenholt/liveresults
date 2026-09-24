@@ -1,9 +1,12 @@
-export type Theme = 'classic' | 'dark';
+/** `classic` is the look of the legacy site; `light` and `dark` are the new look. */
+export type Theme = 'classic' | 'light' | 'dark';
 /** `auto` follows the light or dark setting of the device. */
 export type ThemePreference = 'auto' | Theme;
 
 const KEY = 'liveres-theme';
-const PREFERENCES: ThemePreference[] = ['auto', 'classic', 'dark'];
+const PREFERENCES: ThemePreference[] = ['auto', 'light', 'dark', 'classic'];
+/** The classic look is only chosen with `?theme=classic`, so the toggle skips it. */
+const TOGGLE_ORDER: ThemePreference[] = ['auto', 'light', 'dark'];
 
 type ThemeStorage = Pick<Storage, 'getItem' | 'setItem'>;
 type GetStorage = () => ThemeStorage;
@@ -37,7 +40,7 @@ export function initialPreference(param: string | null, storage = localStorage):
 }
 
 export const effectiveTheme = (preference: ThemePreference, prefersDark: boolean): Theme =>
-  preference == 'auto' ? (prefersDark ? 'dark' : 'classic') : preference;
+  preference == 'auto' ? (prefersDark ? 'dark' : 'light') : preference;
 
 export const nextPreference = (preference: ThemePreference): ThemePreference =>
-  PREFERENCES[(PREFERENCES.indexOf(preference) + 1) % PREFERENCES.length]!;
+  TOGGLE_ORDER[(TOGGLE_ORDER.indexOf(preference) + 1) % TOGGLE_ORDER.length]!;

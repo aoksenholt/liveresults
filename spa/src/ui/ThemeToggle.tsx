@@ -32,14 +32,16 @@ interface ThemeState {
 
 export const ThemeContext = createContext<ThemeState | null>(null);
 
-/** Sets `data-theme` on the page before it is painted, so it does not flash. */
+/** Sets `data-look` and `data-theme` on the page before it is painted, so it does not flash. */
 export function useTheme(param: string | null): ThemeState {
   const [preference, setPreference] = useState(() => initialPreference(param));
   const dark = useSyncExternalStore(subscribeDark, prefersDark);
   const theme = effectiveTheme(preference, dark);
 
   useLayoutEffect(() => {
-    document.documentElement.dataset.theme = theme;
+    const root = document.documentElement.dataset;
+    root.look = theme == 'classic' ? 'classic' : 'new';
+    root.theme = theme == 'dark' ? 'dark' : 'light';
   }, [theme]);
 
   const toggle = useCallback(() => {
@@ -52,7 +54,12 @@ export function useTheme(param: string | null): ThemeState {
   return useMemo(() => ({ preference, toggle }), [preference, toggle]);
 }
 
-const ICONS: Record<ThemePreference, string> = { auto: '🌓', classic: '☀️', dark: '🌙' };
+const ICONS: Record<ThemePreference, string> = {
+  auto: '🌓',
+  light: '☀️',
+  dark: '🌙',
+  classic: '◧',
+};
 
 /** An icon for the top bar, or the chosen theme as text for the page footer. */
 export function ThemeToggle({ className, text }: { className?: string; text?: boolean }) {
@@ -61,8 +68,9 @@ export function ThemeToggle({ className, text }: { className?: string; text?: bo
   if (!state) return null;
   const titles: Record<ThemePreference, string | undefined> = {
     auto: res._THEMEAUTO,
-    classic: res._THEMELIGHT,
+    light: res._THEMELIGHT,
     dark: res._THEMEDARK,
+    classic: res._THEMECLASSIC,
   };
   const label = `${res._THEME}: ${titles[state.preference]}`;
   return (

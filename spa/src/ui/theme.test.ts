@@ -17,6 +17,7 @@ describe('initialPreference', () => {
     expect(initialPreference(null, storage())).toBe('auto');
     expect(initialPreference('pink', storage())).toBe('auto');
     expect(initialPreference('dark', storage())).toBe('dark');
+    expect(initialPreference('light', storage())).toBe('light');
     expect(initialPreference('classic', storage())).toBe('classic');
   });
 
@@ -40,16 +41,18 @@ describe('initialPreference', () => {
 describe('effectiveTheme', () => {
   it('uses the device setting for auto', () => {
     expect(effectiveTheme('auto', true)).toBe('dark');
-    expect(effectiveTheme('auto', false)).toBe('classic');
+    expect(effectiveTheme('auto', false)).toBe('light');
     expect(effectiveTheme('classic', true)).toBe('classic');
+    expect(effectiveTheme('light', true)).toBe('light');
     expect(effectiveTheme('dark', false)).toBe('dark');
   });
 });
 
 describe('nextPreference', () => {
-  it('cycles auto, classic and dark', () => {
-    expect(nextPreference('auto')).toBe('classic');
-    expect(nextPreference('classic')).toBe('dark');
+  it('cycles auto, light and dark, and leaves the classic look', () => {
+    expect(nextPreference('auto')).toBe('light');
+    expect(nextPreference('light')).toBe('dark');
     expect(nextPreference('dark')).toBe('auto');
+    expect(nextPreference('classic')).toBe('auto');
   });
 });

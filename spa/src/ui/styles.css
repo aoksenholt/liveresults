@@ -14,26 +14,6 @@
   --hover-row: #c0d6ff;
 }
 
-/* From mattias242/liveresults; chosen by the device setting, the toggle or ?theme=dark. */
-:root[data-theme='dark'] {
-  --bg: #1f1f22;
-  --text: #f2f2f4;
-  --muted: #b3b3ba;
-  --link: #4da3ff;
-  --border: #3a3a40;
-  --panel: #2a2a2e;
-  --panel-text: #f2f2f4;
-  --section: #303036;
-  --hover-row: #303036;
-  --accent: #4da3ff;
-  --accent-text: #08131f;
-  --highlight: #c2410c;
-  --danger: #ff6b6b;
-  --good: #1f5f3a;
-  --warn: #ffd43b;
-  color-scheme: dark;
-}
-
 body,
 td,
 table,
@@ -526,233 +506,6 @@ tr.yellow_row .club {
   background: var(--bg);
 }
 
-:root[data-theme='dark'] .info {
-  color: var(--muted);
-}
-
-:root[data-theme='dark'] table.results tbody tr:nth-child(odd) > td {
-  box-shadow: none;
-}
-
-:root[data-theme='dark'] table.results tbody tr:nth-child(even) > td {
-  box-shadow: inset 0 0 0 9999px rgba(255, 255, 255, 0.07);
-}
-
-:root[data-theme='dark'] :is(.organizer-head, .tooltip .tooltiptext) {
-  background-color: var(--panel);
-  color: var(--panel-text);
-}
-
-:root[data-theme='dark'] .pre_post_start > td {
-  background: #45454b !important;
-}
-
-:root[data-theme='dark'] .firststarter > td {
-  border-top-color: var(--text) !important;
-}
-
-/* Dark theme layout: system font, plain top bar, sidebar from 720 px and stacked on phones. */
-:root[data-theme='dark'] :is(body, td, table, button) {
-  font-family:
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
-}
-
-:root[data-theme='dark'] body {
-  font-size: 87.5%;
-}
-
-:root[data-theme='dark'] a:hover {
-  color: #80bfff;
-}
-
-:root[data-theme='dark'] .bar {
-  padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--border);
-}
-
-:root[data-theme='dark'] .bar .title {
-  font-size: 1.25rem;
-}
-
-:root[data-theme='dark'] .navbtn {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 0.4em;
-}
-
-:root[data-theme='dark'] .navbtn:hover {
-  background: var(--border);
-}
-
-:root[data-theme='dark'] .container {
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-:root[data-theme='dark'] .class-column {
-  min-width: 0;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  font-size: 1em;
-  line-height: 2.4em;
-  background: none;
-  color: var(--text);
-}
-
-:root[data-theme='dark'] .class-column br {
-  display: none;
-}
-
-:root[data-theme='dark'] .class-column hr {
-  border: none;
-  margin: 0.3em 0;
-}
-
-:root[data-theme='dark'] .class-column a:is(:link, :visited) {
-  display: inline-block;
-  margin: 0 0.4rem 0 0;
-  padding: 0 0.7rem;
-  line-height: 2em;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--panel);
-  color: var(--text);
-  white-space: nowrap;
-}
-
-:root[data-theme='dark'] .class-column a:hover {
-  border-color: var(--accent);
-  text-decoration: none;
-}
-
-:root[data-theme='dark'] .class-column a.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-text);
-  font-weight: 600;
-}
-
-:root[data-theme='dark'] .result-column {
-  padding: 0;
-  min-width: 0;
-}
-
-@media (min-width: 720px) {
-  :root[data-theme='dark'] .container {
-    flex-direction: row;
-  }
-
-  :root[data-theme='dark'] .class-column {
-    flex: 0 0 220px;
-    line-height: 1.4em;
-  }
-
-  :root[data-theme='dark'] .class-column br {
-    display: inline;
-  }
-
-  :root[data-theme='dark'] .class-column a:is(:link, :visited) {
-    margin: 0 0.2rem 0.4rem 0;
-  }
-}
-
-:root[data-theme='dark'] .last-passings {
-  border: 1px solid var(--border);
-  border-radius: 0.4em;
-  margin-bottom: 1rem;
-}
-
-/* Dark theme tables: lines between the rows. */
-:root[data-theme='dark'] :is(table.results, table.lists, .race-table) :is(td, th) {
-  border-bottom: 1px solid var(--border);
-}
-
-:root[data-theme='dark'] :is(table.results, table.lists) :is(td, th) {
-  padding: 0.35em 0.5em;
-}
-
-:root[data-theme='dark'] table.results th {
-  color: var(--muted);
-  font-weight: 600;
-}
-
-:root[data-theme='dark'] .scroll .class-header {
-  padding: 0.3em 0.5em;
-}
-
-/* Dark theme highlights, with enough contrast on the dark background. */
-:root[data-theme='dark'] :is(tr.red_row > td, tr.new_fnq > td, .red_cell, .red_cell_sqr) {
-  background: var(--highlight) !important;
-}
-
-:root[data-theme='dark'] td.qualified {
-  background-color: var(--good);
-}
-
-:root[data-theme='dark'] :is(.firstnonqualifier > td, tr.new_fnq > td) {
-  border-top-color: var(--muted) !important;
-}
-
-:root[data-theme='dark'] :is(.time1, .place1, .organizer .late) {
-  color: var(--danger);
-}
-
-:root[data-theme='dark'] :is(.besttime, .estimatebest) {
-  text-decoration-color: var(--danger);
-}
-
-:root[data-theme='dark'] :is(tr.yellow_row > td, tr.yellow_row_new > td) {
-  background: var(--warn) !important;
-}
-
-:root[data-theme='dark'] :is(tr.yellow_row, tr.yellow_row_new) a:is(:link, :visited) {
-  color: #0b3d91;
-}
-
-:root[data-theme='dark'] .organizer-head input:is(.gray, .yellow) {
-  color: #000;
-}
-
-:root[data-theme='dark'] .organizer-head .call-clock {
-  color: var(--warn);
-}
-
-:root[data-theme='dark']
-  :is(tr.red_row, tr.new_fnq, .red_cell, .red_cell_sqr)
-  :is(.time1, .place1) {
-  color: #fff;
-}
-
-:root[data-theme='dark'] :is(tr.red_row, tr.new_fnq, .red_cell, .red_cell_sqr) .besttime {
-  text-decoration-color: #fff;
-}
-
-:root[data-theme='dark'] :is(tr.yellow_row, tr.yellow_row_new) :is(.bib, .club) {
-  color: #000;
-}
-
-:root[data-theme='dark'] .result-column .class-header {
-  margin: 0.3em 0 0.6em;
-}
-
-:root[data-theme='dark'] .race-page {
-  padding: 1rem;
-}
-
-:root[data-theme='dark'] .race-table :is(td, th) {
-  border-bottom: none;
-}
-
-:root[data-theme='dark'] .race-table tr:has(> td + td) > td {
-  border-bottom: 1px solid var(--border);
-}
-
 .bar .theme-toggle {
   margin-left: auto;
   flex-shrink: 0;
@@ -769,4 +522,373 @@ tr.yellow_row .club {
 
 .link-button:hover {
   text-decoration: underline;
+}
+
+.bar .date {
+  display: none;
+}
+
+/*
+ * The new look, after the beta of the new liveresultat.orientering.se. Only colours, spacing and
+ * borders change; the classic rules above still decide what is shown.
+ */
+:root[data-look='new'] {
+  --bg: #faf8f3;
+  --card: #fff;
+  --text: #22292f;
+  --muted: #5a646d;
+  --link: #d14e10;
+  --border: #e6e1d6;
+  --panel: var(--card);
+  --panel-text: var(--text);
+  --section: #f4f1ea;
+  --hover-row: #fef5ef;
+  --accent: #16332b;
+  --accent-text: #fff;
+  --orange: #f2611c;
+  --highlight: #fbd6c4;
+  --highlight-border: #f0ab8d;
+  --danger: #d14e10;
+  --good: #d3eadb;
+  --warn: #ffe27a;
+  --shadow: 0 1px 3px #141e1914;
+  --radius: 12px;
+  color-scheme: light;
+}
+
+:root[data-look='new'][data-theme='dark'] {
+  --bg: #14181b;
+  --card: #1d2429;
+  --text: #e6e2d8;
+  --muted: #98a2a9;
+  --link: #ff8a55;
+  --border: #303941;
+  --section: #232b31;
+  --hover-row: #262d33;
+  --accent: #1e453a;
+  --highlight: #5e2f1a;
+  --highlight-border: #8a4c2b;
+  --danger: #ff8a55;
+  --good: #1f5f3a;
+  --warn: #ffd43b;
+  --shadow: 0 1px 3px #0006;
+  color-scheme: dark;
+}
+
+:root[data-look='new'] :is(body, td, table, button, input, select) {
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
+}
+
+:root[data-look='new'] body {
+  font-size: 87.5%;
+  line-height: 1.5;
+}
+
+:root[data-look='new'] a:hover {
+  color: var(--orange);
+}
+
+:root[data-look='new'] .info {
+  color: var(--muted);
+}
+
+/* Black top bar with the race name and date. */
+:root[data-look='new'] .bar {
+  background: #000;
+  color: #fff;
+  min-height: 56px;
+  padding: 0 1.5rem;
+  gap: 0.75rem;
+  box-sizing: border-box;
+}
+
+:root[data-look='new'] .bar .title {
+  font-size: 1.25rem;
+}
+
+:root[data-look='new'] .bar .date {
+  display: inline;
+  color: #bbb;
+  white-space: nowrap;
+}
+
+:root[data-look='new'] .navbtn {
+  width: 2.2rem;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  font-size: 1.1rem;
+  background: #111;
+  border: 1px solid #444;
+  border-radius: 8px;
+}
+
+:root[data-look='new'] .navbtn:hover {
+  background: #333;
+}
+
+/* Content in a centred column, with the class menu to the left from 720 px. */
+:root[data-look='new'] :is(.container, .race-page, .scroll, .organizer) {
+  max-width: 1160px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+:root[data-look='new'] .container {
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem 1rem;
+}
+
+:root[data-look='new'] .class-column {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 2.8em;
+  background: none;
+  color: var(--text);
+}
+
+:root[data-look='new'] .class-column br {
+  display: none;
+}
+
+:root[data-look='new'] .class-column hr {
+  border: none;
+  margin: 0.3em 0;
+}
+
+:root[data-look='new'] .class-column a:is(:link, :visited) {
+  display: inline-block;
+  margin: 0 0.4rem 0 0;
+  padding: 0 1rem;
+  line-height: 2.5em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+}
+
+:root[data-look='new'] .class-column a:hover {
+  border-color: var(--orange);
+  text-decoration: none;
+}
+
+:root[data-look='new'] .class-column a.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+:root[data-look='new'] .result-column {
+  padding: 0;
+  min-width: 0;
+}
+
+@media (min-width: 720px) {
+  :root[data-look='new'] .container {
+    flex-direction: row;
+  }
+
+  :root[data-look='new'] .class-column {
+    flex: 0 0 220px;
+    line-height: 1.4em;
+  }
+
+  :root[data-look='new'] .class-column br {
+    display: inline;
+  }
+
+  :root[data-look='new'] .class-column a:is(:link, :visited) {
+    margin: 0 0.2rem 0.4rem 0;
+  }
+}
+
+:root[data-look='new'] .result-column .class-header {
+  font-size: 1.5rem;
+  margin: 0.2em 0 0.6em;
+}
+
+/* Tables as cards with lines between the rows. */
+:root[data-look='new'] :is(table.results, table.lists) {
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+:root[data-look='new'] :is(table.results, table.lists) :is(td, th) {
+  padding: 0.45em 0.6em;
+  border-bottom: 1px solid var(--border);
+}
+
+:root[data-look='new'] :is(table.results, table.lists) tbody tr:last-child > td {
+  border-bottom: none;
+}
+
+:root[data-look='new'] table.results th {
+  background: var(--section);
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+:root[data-look='new'] table.results tbody tr:nth-child(odd) > td {
+  box-shadow: none;
+}
+
+:root[data-look='new'] table.results tbody tr:hover > td {
+  background-color: var(--hover-row);
+}
+
+:root[data-look='new'] .last-passings {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+:root[data-look='new'] :is(.organizer-head, .tooltip .tooltiptext) {
+  background-color: var(--card);
+  color: var(--text);
+}
+
+:root[data-look='new'] .organizer-head {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 1rem;
+}
+
+:root[data-look='new'] .organizer-head :is(a:link, a:visited, button) {
+  color: var(--link);
+}
+
+:root[data-look='new'] .organizer .results {
+  margin: 0 1rem;
+  width: calc(100% - 2rem);
+}
+
+:root[data-look='new'] .pre_post_start > td {
+  background: var(--section) !important;
+}
+
+:root[data-look='new'] .firststarter > td {
+  border-top-color: var(--text) !important;
+}
+
+:root[data-look='new'] .scroll .class-header {
+  padding: 0.3em 0.5em;
+}
+
+/* Race list */
+:root[data-look='new'] .race-page {
+  padding: 1.25rem 1rem;
+}
+
+:root[data-look='new'] .race-table tr:has(> td + td) > td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.35em 0.5em 0.35em 0;
+}
+
+:root[data-look='new'] .categoriesheader {
+  color: var(--text);
+  font-size: 1.4rem;
+}
+
+/* Highlights: soft orange for new results with the normal text colour on top. */
+:root[data-look='new'] :is(tr.red_row > td, tr.new_fnq > td, .red_cell, .red_cell_sqr) {
+  color: var(--text);
+  background: var(--highlight) !important;
+}
+
+:root[data-look='new'] :is(tr.red_row, tr.new_fnq) a:is(:link, :visited) {
+  color: var(--text);
+}
+
+:root[data-look='new']
+  :is(tr.red_row, tr.new_fnq, .red_cell, .red_cell_sqr)
+  :is(
+    .plustime,
+    .besttime,
+    .legtime,
+    .estimate,
+    .place,
+    .bestplace,
+    td i,
+    .bib,
+    .club,
+    .time1,
+    .place1
+  ) {
+  color: var(--text);
+}
+
+:root[data-look='new'] :is(tr.red_row, tr.new_fnq, .red_cell, .red_cell_sqr) .besttime {
+  text-decoration-color: var(--danger);
+}
+
+:root[data-look='new'] td.qualified {
+  background-color: var(--good);
+}
+
+:root[data-look='new'] :is(.firstnonqualifier > td, tr.new_fnq > td) {
+  border-top-color: var(--accent) !important;
+}
+
+:root[data-look='new'][data-theme='dark'] :is(.firstnonqualifier > td, tr.new_fnq > td) {
+  border-top-color: var(--muted) !important;
+}
+
+:root[data-look='new'] :is(.time1, .place1, .organizer .late, .pulsing, td i) {
+  color: var(--danger);
+}
+
+:root[data-look='new'] :is(.besttime, .estimatebest) {
+  text-decoration-color: var(--danger);
+}
+
+:root[data-look='new'] :is(tr.yellow_row > td, tr.yellow_row_new > td) {
+  background: var(--warn) !important;
+}
+
+:root[data-look='new'] :is(tr.yellow_row, tr.yellow_row_new) a:is(:link, :visited) {
+  color: #0b3d91;
+}
+
+:root[data-look='new'] :is(tr.yellow_row, tr.yellow_row_new) :is(.bib, .club) {
+  color: #000;
+}
+
+:root[data-look='new'] .organizer-head input:is(.gray, .yellow) {
+  color: #000;
+}
+
+:root[data-look='new'] .organizer-head .call-clock {
+  color: var(--danger);
+}
+
+:root[data-look='new'] :is(table.results, table.lists) a:is(:link, :visited) {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 2px;
+}
+
+:root[data-look='new'] :is(table.results, table.lists) a:hover {
+  text-decoration-color: var(--orange);
 }
