@@ -7,6 +7,8 @@ import {
   leftInForestController,
   ORGANIZER_INTERVAL_MS,
   PASSINGS_INTERVAL_MS,
+  SCROLL_INTERVAL_MS,
+  scrollController,
   startRegistrationController,
 } from './controllers';
 
@@ -99,6 +101,24 @@ describe('lastPassingsController', () => {
     });
     expect(rest.map((p) => p.key)).toEqual(first.slice(0, 2).map((p) => p.key));
     expect(rest.some((p) => p.fresh)).toBe(false);
+    controller.stop();
+  });
+});
+
+describe('scrollController', () => {
+  it('fetches every class in one request and keeps polling', async () => {
+    vi.useFakeTimers();
+    const finished = interval.entries.filter((e) => e.status?.status != 'Active');
+    const { api, fetch } = fakeApi(finished);
+    const controller = scrollController(api, 'r', classes, { ...opts, live: true });
+    controller.start();
+    await vi.advanceTimersByTimeAsync(0);
+    const { views, predictions } = controller.store.get();
+    expect(views!.map((v) => v.results.length)).toEqual([finished.length]);
+    expect(predictions[0]!.active).toBe(false);
+    await vi.advanceTimersByTimeAsync(SCROLL_INTERVAL_MS);
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(JSON.stringify(fetch.mock.calls)).not.toContain('raceClassId');
     controller.stop();
   });
 });

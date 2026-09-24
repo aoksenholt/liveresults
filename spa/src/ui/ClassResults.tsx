@@ -11,6 +11,8 @@ import {
 } from '../domain/classTable';
 import { sprintStage } from '../domain/classList';
 import type { ClassInfo, ResultRow } from '../domain/model';
+import type { ClassView } from '../domain/pipeline';
+import type { Predictions } from '../domain/predicted';
 import { firstNonQualifier, qualificationLimit } from '../domain/ranking';
 import { classResultsController } from '../state/controllers';
 import { html, Loading, Message } from './common';
@@ -98,12 +100,36 @@ function ClassTableView(props: {
   isRelayClass: boolean;
 }) {
   const { cls, raceId, timeZone, live, isRelayClass } = props;
-  const { api, res, format } = useDisplay();
+  const { api } = useDisplay();
   const controller = useMemo(
     () => classResultsController(api, raceId, cls, { timeZone, live }),
     [api, raceId, cls, timeZone, live],
   );
-  const { view, predictions, serverNow, error } = useControllerState(controller);
+  const { views, predictions, serverNow, error } = useControllerState(controller);
+  return (
+    <ClassTable
+      cls={cls}
+      view={views?.[0] ?? null}
+      predictions={predictions[0] ?? null}
+      serverNow={serverNow}
+      error={error}
+      isRelayClass={isRelayClass}
+    />
+  );
+}
+
+export function ClassTable(props: {
+  cls: ClassInfo;
+  view: ClassView | null;
+  predictions: Predictions | null;
+  serverNow: number;
+  error: string | null;
+  isRelayClass: boolean;
+  /** Seconds a new result is highlighted. */
+  highTime?: number;
+}) {
+  const { cls, view, predictions, serverNow, error, isRelayClass, highTime } = props;
+  const { res, format } = useDisplay();
   const options = useMemo<TableOptions>(
     () => ({
       labels: format.labels,
@@ -170,7 +196,7 @@ function ClassTableView(props: {
         <tbody>
           {order.map((i) => {
             const row = rows[i]!;
-            const mark = highlights(table, row, i == fnq, serverNow);
+            const mark = highlights(table, row, i == fnq, serverNow, highTime);
             const rowClass = [i == fnq ? 'firstnonqualifier' : '', mark.row ?? ''].join(' ').trim();
             return (
               <tr key={`${row.dbid}:${row.bib}:${i}`} className={rowClass || undefined}>

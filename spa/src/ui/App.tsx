@@ -5,6 +5,7 @@ import { createDisplay, DisplayContext } from './context';
 import { LEFT_IN_FOREST, OrganizerView, START_REGISTRATION } from './Organizer';
 import { RaceList } from './RaceList';
 import { RaceView } from './RaceView';
+import { ScrollView } from './ScrollView';
 
 export function App({
   api,
@@ -16,6 +17,7 @@ export function App({
   const params = new URLSearchParams(search);
   const comp = params.get('comp');
   const code = params.get('code');
+  const scroll = params.has('scroll');
   const lang = resolveLanguage(params.get('lang'));
   const display = useMemo(() => createDisplay(lang, api ?? new Time4oApi()), [lang, api]);
 
@@ -27,6 +29,8 @@ export function App({
     <DisplayContext value={display}>
       {comp && (code == LEFT_IN_FOREST || code == START_REGISTRATION) ? (
         <OrganizerView raceId={comp} code={code} params={params} />
+      ) : comp && scroll ? (
+        <ScrollView raceId={comp} search={search} />
       ) : comp ? (
         <RaceView raceId={comp} />
       ) : (

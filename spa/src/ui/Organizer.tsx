@@ -19,7 +19,7 @@ import {
 } from '../state/controllers';
 import { Info, Loading, Message } from './common';
 import { useDisplay } from './context';
-import { useControllerState } from './hooks';
+import { useControllerState, useWakeLock } from './hooks';
 import { routeHash } from './route';
 
 export const LEFT_IN_FOREST = '-2';
@@ -93,26 +93,6 @@ function useEventTime(timeZone: string): number {
     return () => clearInterval(timer);
   }, [timeZone]);
   return time;
-}
-
-/** Keeps the screen on at the start and finish, taken on a click as browsers require. */
-function useWakeLock() {
-  useEffect(() => {
-    if (!('wakeLock' in navigator)) return;
-    let lock: WakeLockSentinel | null = null;
-    const request = () => {
-      if (lock && !lock.released) return;
-      navigator.wakeLock
-        .request('screen')
-        .then((l) => (lock = l))
-        .catch(() => {});
-    };
-    document.addEventListener('click', request);
-    return () => {
-      document.removeEventListener('click', request);
-      void lock?.release();
-    };
-  }, []);
 }
 
 function Field({ label, children }: { label: string; children: ReactNode }) {

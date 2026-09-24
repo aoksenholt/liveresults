@@ -38,7 +38,7 @@ Kryss av (`[x]`) etter hvert som steg blir fullført.
 - [x] Siste passeringer, utledet fra `updated`-tidspunktene i deltakerdataene (Time4o har ikke et eget endepunkt for dette): boksen «Siste oppdateringer» øverst på løpssiden mens løpet pågår, med samme utvalg som `getLastPassings` i den gamle koden
 - [x] Løpere som fortsatt er i skogen (startet, ikke i mål): `?comp=<uuid>&code=-2`, som `radio.php`
 - [x] Startvisning ut fra starttider: `?comp=<uuid>&code=0[&openstart]`, med opprop, pip og samme URL-parametere som `radio.php` (uten meldinger og brikkesjekk, som krever LiveRes-databasen)
-- [ ] Rullende målvisning
+- [x] Rullende målvisning: `?comp=<uuid>&scroll[&first=&last=&speed=]`, som `followallscroll.php`, med alle klasser uten mellomtider på én side som ruller av seg selv. Henter alle deltakerne i én forespørsel hvert 15. sekund i stedet for én per klasse
 
 ## Fase 4 – Utseende som mattias242 sitt UI
 

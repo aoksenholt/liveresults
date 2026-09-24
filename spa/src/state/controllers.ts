@@ -1,4 +1,4 @@
-import type { ApiResult, Time4oApi } from '../api/client';
+import type { ApiResult, EntryFilter, Time4oApi } from '../api/client';
 import type { Entry, Race, RaceClass } from '../api/types';
 import { classListItems, relayClassNames, type ClassListItem } from '../domain/classList';
 import type { ClassInfo, ClubResults, GroupedClassResults, ResultRow } from '../domain/model';
@@ -20,6 +20,7 @@ import {
 } from '../domain/predicted';
 import { isRaceToday, localDate, raceList, type RaceList } from '../domain/races';
 import { relayTeams, type RelayTeam } from '../domain/relay';
+import { scrollViews } from '../domain/scroll';
 import {
   clubResults,
   DEFAULT_TIME_ZONE,
@@ -37,6 +38,7 @@ export const CLASS_LIST_INTERVAL_MS = 60000;
 export const CLUB_INTERVAL_MS = 20000;
 export const ORGANIZER_INTERVAL_MS = 15000;
 export const PASSINGS_INTERVAL_MS = 15000;
+export const SCROLL_INTERVAL_MS = 15000;
 
 export interface Loadable<T> {
   data: T | null;
@@ -112,48 +114,54 @@ export const classListController = (api: Time4oApi, raceId: string, live: boolea
   );
 
 export interface ClassState {
-  view: ClassView | null;
-  predictions: Predictions | null;
+  views: ClassView[] | null;
+  /** One per view. */
+  predictions: (Predictions | null)[];
   /** Unix seconds on the server clock, for highlighting recent results. */
   serverNow: number;
   error: string | null;
 }
 
 /**
- * Results of one class, polled while the race is live. Running times are
- * recalculated every whole second like the legacy viewer, which also stops
- * polling once no runner in the class is on course.
+ * Class results polled while the race is live. Running times are recalculated
+ * every whole second like the legacy viewer. `stopWhenDone` stops polling once
+ * no runner is on course, as the legacy class view does.
  */
-export function classResultsController(
+function resultsController(
   api: Time4oApi,
   raceId: string,
-  cls: ClassInfo,
-  opts: { timeZone: string; live: boolean; clock?: Clock },
+  query: EntryFilter,
+  build: (entries: Entry[]) => ClassView[],
+  opts: {
+    timeZone: string;
+    live: boolean;
+    intervalMs: number;
+    stopWhenDone: boolean;
+    clock?: Clock;
+  },
 ): Controller<ClassState> {
   const clock = opts.clock ?? systemClock;
   const store = new Store<ClassState>({
-    view: null,
-    predictions: null,
+    views: null,
+    predictions: [],
     serverNow: clock.now() / 1000,
     error: null,
   });
   let timeDiff = 0;
-  let predData: ClassView['results'] = [];
+  let predData: ResultRow[][] = [];
   let timer: ReturnType<typeof setTimeout> | null = null;
 
   const tick = () => {
-    const view = store.get().view;
-    if (!view) return;
+    const views = store.get().views;
+    if (!views) return;
     const now = clock.now();
-    const predictions = updatePredictedTimes(
-      view,
-      predData,
-      eventClock(now, timeDiff, opts.timeZone),
-      false,
+    const time = eventClock(now, timeDiff, opts.timeZone);
+    const predictions = views.map((view, i) =>
+      updatePredictedTimes(view, predData[i]!, time, false),
     );
     store.set({ predictions, serverNow: (now - timeDiff) / 1000 });
-    if (!predictions.active) {
-      poller.stop();
+    if (!predictions.some((p) => p.active)) {
+      if (opts.stopWhenDone) poller.stop();
       return;
     }
     const ms = now % 1000;
@@ -163,16 +171,16 @@ export function classResultsController(
   const poller = new Poller<Entry[]>({
     request: async (etag) => {
       const start = clock.now();
-      const result = await api.getEntries(raceId, { raceClassId: cls.id }, etag);
+      const result = await api.getEntries(raceId, query, etag);
       if (result.status != 'error' && result.serverDate != null)
         timeDiff = serverTimeDiff(timeDiff, result.serverDate, start, clock.now());
       return result;
     },
-    intervalMs: opts.live ? CLASS_INTERVAL_MS : 0,
+    intervalMs: opts.live ? opts.intervalMs : 0,
     onData: (entries) => {
-      const view = buildClassView(cls, entries, { timeZone: opts.timeZone });
-      predData = structuredClone(view.results);
-      store.set({ view, predictions: null, error: null });
+      const views = build(entries);
+      predData = views.map((v) => structuredClone(v.results));
+      store.set({ views, predictions: views.map(() => null), error: null });
       if (timer) clearTimeout(timer);
       timer = null;
       if (opts.live) tick();
@@ -190,6 +198,39 @@ export function classResultsController(
     },
   };
 }
+
+/** Results of one class; the legacy viewer stops polling once no runner in the class is on course. */
+export const classResultsController = (
+  api: Time4oApi,
+  raceId: string,
+  cls: ClassInfo,
+  opts: { timeZone: string; live: boolean; clock?: Clock },
+) =>
+  resultsController(
+    api,
+    raceId,
+    { raceClassId: cls.id },
+    (entries) => [buildClassView(cls, entries, { timeZone: opts.timeZone })],
+    { ...opts, intervalMs: CLASS_INTERVAL_MS, stopWhenDone: true },
+  );
+
+/**
+ * Every class of followallscroll.php, fetched in one request instead of one per
+ * class. The legacy page asks for results without splits and keeps polling.
+ */
+export const scrollController = (
+  api: Time4oApi,
+  raceId: string,
+  classes: ClassInfo[],
+  opts: { timeZone: string; live: boolean; clock?: Clock },
+) =>
+  resultsController(
+    api,
+    raceId,
+    {},
+    (entries) => scrollViews(entries, classes, { timeZone: opts.timeZone }),
+    { ...opts, intervalMs: SCROLL_INTERVAL_MS, stopWhenDone: false },
+  );
 
 export const clubController = (
   api: Time4oApi,
