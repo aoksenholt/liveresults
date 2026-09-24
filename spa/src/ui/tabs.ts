@@ -58,10 +58,16 @@ export function closeTab(
   return { tabs: rest, next: rest[Math.min(index, rest.length - 1)] ?? '#' };
 }
 
-/** The tabs shown side by side: `columns` tabs in a row that includes the open one. */
-export function visibleTabs(tabs: string[], current: string, columns: number): string[] {
-  const index = tabs.indexOf(current);
-  if (index < 0) return [current];
-  const start = Math.max(0, Math.min(index, tabs.length - columns));
-  return tabs.slice(start, start + columns);
+/**
+ * The pages of the columns after the first, which follows the hash. Going from one column to
+ * more fills them with the other open tabs, and the rest start empty.
+ */
+export function otherColumns(
+  others: string[],
+  tabs: string[],
+  current: string,
+  columns: number,
+): string[] {
+  const pages = others.length > 0 ? others : tabs.filter((t) => t != current);
+  return Array.from({ length: columns - 1 }, (_, i) => pages[i] ?? '');
 }

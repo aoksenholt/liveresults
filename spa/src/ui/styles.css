@@ -685,7 +685,7 @@ tr.yellow_row .club {
   text-decoration: none;
 }
 
-:root[data-look='new'] .class-toolbar select {
+:root[data-look='new'] :is(.class-toolbar, .column) select {
   font-size: 1rem;
   min-width: 14rem;
   padding: 0.5rem 0.75rem;
@@ -813,6 +813,19 @@ tr.yellow_row .club {
   overflow-x: auto;
 }
 
+:root[data-look='new'] .column > select {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+:root[data-look='new'] .empty-column {
+  margin-top: 0.75rem;
+  padding: 1.5rem;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
 @media (min-width: 900px) {
   :root[data-look='new'] .columns-choice {
     display: inline-flex;
@@ -859,10 +872,6 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .tab button:hover {
   color: var(--orange);
-}
-
-:root[data-look='new'] .tab.shown {
-  border-color: var(--accent);
 }
 
 :root[data-look='new'] .tab.active {

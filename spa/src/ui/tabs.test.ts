@@ -1,5 +1,5 @@
 import type { ClassListItem } from '../domain/classList';
-import { closeTab, menuEntries, openTab, visibleTabs } from './tabs';
+import { closeTab, menuEntries, openTab, otherColumns } from './tabs';
 
 const items: ClassListItem[] = [
   { kind: 'class', label: 'H 21', className: 'H 21' },
@@ -46,12 +46,13 @@ describe('tabs', () => {
     expect(closeTab(['#a'], '#a', '#a')).toEqual({ tabs: [], next: '#' });
   });
 
-  it('shows the open tab and the ones after it, or before it at the end', () => {
-    const tabs = ['#a', '#b', '#c', '#d', '#e'];
-    expect(visibleTabs(tabs, '#b', 1)).toEqual(['#b']);
-    expect(visibleTabs(tabs, '#b', 3)).toEqual(['#b', '#c', '#d']);
-    expect(visibleTabs(tabs, '#e', 3)).toEqual(['#c', '#d', '#e']);
-    expect(visibleTabs(tabs.slice(0, 2), '#b', 4)).toEqual(['#a', '#b']);
-    expect(visibleTabs(tabs, '#club::1', 3)).toEqual(['#club::1']);
+  it('fills the other columns with the open tabs, then keeps them when resized', () => {
+    const tabs = ['#a', '#b', '#c'];
+    expect(otherColumns([], tabs, '#b', 2)).toEqual(['#a']);
+    expect(otherColumns([], tabs, '#b', 4)).toEqual(['#a', '#c', '']);
+    expect(otherColumns([], ['#b'], '#b', 3)).toEqual(['', '']);
+    expect(otherColumns(['#x', '#y', ''], tabs, '#b', 2)).toEqual(['#x']);
+    expect(otherColumns(['#x'], tabs, '#b', 3)).toEqual(['#x', '']);
+    expect(otherColumns(['#x'], tabs, '#b', 1)).toEqual([]);
   });
 });
