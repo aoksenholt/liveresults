@@ -3,6 +3,29 @@
   --livered: #f1592a;
   --bkgray: #e6e6e6;
   --bkdark: #555555;
+  --bg: #fff;
+  --text: #000;
+  --muted: dimgrey;
+  --link: var(--livered);
+  --border: #111;
+  --panel: var(--bkdark);
+  --panel-text: #fff;
+  --section: var(--bkgray);
+  --hover-row: #c0d6ff;
+}
+
+/* Opt-in with ?theme=dark while it is tried out, from mattias242/liveresults. */
+:root[data-theme='dark'] {
+  --bg: #1f1f22;
+  --text: #f2f2f4;
+  --muted: #b3b3ba;
+  --link: #4da3ff;
+  --border: #3a3a40;
+  --panel: #2a2a2e;
+  --panel-text: #f2f2f4;
+  --section: #303036;
+  --hover-row: #303036;
+  color-scheme: dark;
 }
 
 body,
@@ -15,7 +38,8 @@ button {
 }
 
 body {
-  background: #fff;
+  background: var(--bg);
+  color: var(--text);
   margin: 0;
   font-size: 75%;
   -webkit-text-size-adjust: none;
@@ -32,7 +56,7 @@ th {
 
 a:link,
 a:visited {
-  color: var(--livered);
+  color: var(--link);
   text-decoration: none;
 }
 
@@ -70,7 +94,7 @@ h1 {
 }
 
 .race-table tr:hover > td {
-  background: #c0d6ff;
+  background: var(--hover-row);
 }
 
 .race-table tr.today {
@@ -83,8 +107,8 @@ h1 {
 
 /* Race page */
 .bar {
-  background: var(--bkdark);
-  color: #fff;
+  background: var(--panel);
+  color: var(--panel-text);
   padding: 3px;
   display: flex;
   align-items: center;
@@ -137,8 +161,8 @@ a.navbtn:visited {
   min-width: 8em;
   max-width: 8em;
   box-sizing: border-box;
-  color: #fff;
-  background: var(--bkdark);
+  color: var(--panel-text);
+  background: var(--panel);
   padding: 3px 3px 3px 10px;
   margin-top: 3px;
   overflow-x: hidden;
@@ -146,7 +170,7 @@ a.navbtn:visited {
 
 .class-column a:link,
 .class-column a:visited {
-  color: #fff;
+  color: var(--panel-text);
 }
 
 .class-column a.active {
@@ -183,7 +207,7 @@ table.results {
 
 table.results th {
   padding: 3px 7px 3px 3px;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--border);
   font-weight: bold;
   text-align: left;
 }
@@ -211,7 +235,7 @@ table.lists .right {
 }
 
 tr.section > td {
-  background-color: var(--bkgray);
+  background-color: var(--section);
 }
 
 tr.section span {
@@ -292,7 +316,7 @@ tr.new_fnq :is(.plustime, .besttime, .legtime, .estimate, .place, .bestplace, td
 }
 
 .besttime {
-  color: #000;
+  color: var(--text);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-decoration-color: red;
@@ -305,7 +329,7 @@ tr.new_fnq :is(.plustime, .besttime, .legtime, .estimate, .place, .bestplace, td
 .bib,
 .estimate,
 .estimatebest {
-  color: dimgrey;
+  color: var(--muted);
 }
 
 .time1,
@@ -330,7 +354,7 @@ tr.new_fnq :is(.plustime, .besttime, .legtime, .estimate, .place, .bestplace, td
 
 .gained,
 .lost {
-  color: #000;
+  color: var(--text);
 }
 
 td i {
@@ -459,8 +483,8 @@ tr.yellow_row .club {
 
 /* Latest updates box of followfull.php */
 .last-passings {
-  background-color: var(--bkdark);
-  color: #fff;
+  background-color: var(--panel);
+  color: var(--panel-text);
   padding: 5px 8px;
   margin-bottom: 3px;
 }
@@ -493,5 +517,30 @@ tr.yellow_row .club {
   z-index: 1;
   margin: 20px 0 0;
   padding-left: 10px;
-  background: white;
+  background: var(--bg);
+}
+
+:root[data-theme='dark'] .info {
+  color: var(--muted);
+}
+
+:root[data-theme='dark'] table.results tbody tr:nth-child(odd) > td {
+  box-shadow: none;
+}
+
+:root[data-theme='dark'] table.results tbody tr:nth-child(even) > td {
+  box-shadow: inset 0 0 0 9999px rgba(255, 255, 255, 0.07);
+}
+
+:root[data-theme='dark'] :is(.organizer-head, .tooltip .tooltiptext) {
+  background-color: var(--panel);
+  color: var(--panel-text);
+}
+
+:root[data-theme='dark'] .pre_post_start > td {
+  background: #45454b !important;
+}
+
+:root[data-theme='dark'] .firststarter > td {
+  border-top-color: var(--text) !important;
 }
