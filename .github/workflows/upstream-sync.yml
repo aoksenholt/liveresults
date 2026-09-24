@@ -1,0 +1,92 @@
+name: Upstream sync
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: upstream-sync
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BRANCH: upstream-sync
+      UPSTREAM: https://github.com/palkitt/liveresults.git
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: spa/.node-version
+
+      - name: Look for new upstream commits
+        id: check
+        run: |
+          git fetch "$UPSTREAM" master:refs/remotes/upstream/master
+          base=origin/main
+          if git rev-parse -q --verify "origin/$BRANCH" >/dev/null; then base="origin/$BRANCH"; fi
+          if git merge-base --is-ancestor upstream/master "$base"; then
+            echo "Nothing new in upstream/master." >> "$GITHUB_STEP_SUMMARY"
+            echo "new=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "new=true" >> "$GITHUB_OUTPUT"
+            echo "base=$base" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Merge upstream/master
+        if: steps.check.outputs.new == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -c "$BRANCH" "${{ steps.check.outputs.base }}"
+          if ! git merge --no-edit upstream/master; then
+            {
+              echo "### Merge conflicts with upstream/master"
+              echo
+              git diff --name-only --diff-filter=U | sed 's/^/- /'
+              echo
+              echo "Merge \`upstream/master\` into \`$BRANCH\` by hand."
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::Merge conflicts with upstream/master"
+            exit 1
+          fi
+          node spa/scripts/convert-lang.mjs
+          git add spa/src/i18n/lang
+          git diff --cached --quiet || git commit -m 'chore(spa): convert language files from upstream'
+          git push origin "$BRANCH"
+
+      - name: Open or update the pull request
+        if: steps.check.outputs.new == 'true'
+        run: |
+          watched=$(git diff --name-only origin/main...upstream/master -- \
+            'web/js/liveresults*.js' 'web/templates/emmalang_*.php' | sed 's/^/- `/; s/$/`/')
+          {
+            echo "New commits in [palkitt/liveresults](https://github.com/palkitt/liveresults) \`master\`:"
+            echo
+            git log --format='- %h %s' origin/main..upstream/master
+            echo
+            echo "### Files the SPA depends on"
+            echo
+            echo "${watched:-None changed.}"
+            echo
+            echo 'The SPA parity tests load `web/js/liveresults*.js`, and `spa/src/i18n/lang/*.json` is generated from `emmalang_*.php` (already converted on this branch). If the SPA checks fail, port the change to `spa/src/domain/`.'
+          } > body.md
+          pr=$(gh pr list --head "$BRANCH" --base main --state open --json number -q '.[0].number')
+          if [ -n "$pr" ]; then
+            gh pr edit "$pr" --body-file body.md
+          else
+            gh pr create --head "$BRANCH" --base main --title 'chore: sync with upstream' --body-file body.md
+          fi
+          # Pushes made with GITHUB_TOKEN do not start other workflows, so start the SPA checks here.
+          gh workflow run spa.yml --ref "$BRANCH"
