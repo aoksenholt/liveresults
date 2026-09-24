@@ -55,7 +55,7 @@ paritetstestene dekker.
 
 ## Fase 5 – Publisering
 
-- [ ] Cloudflare Pages koblet til forken: `main` publiseres automatisk og hver PR får en forhåndsvisning
+- [ ] Cloudflare Pages koblet til forken: `master` publiseres automatisk og hver PR får en forhåndsvisning
 - [ ] Eget domene (valgfritt)
 - [ ] Test under et ekte løp, side om side med den gamle siden
 
@@ -72,7 +72,7 @@ Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene ge
 
 - [ ] Spørre Time4o om grenser for antall forespørsler og vilkår for å bruke API-et
 - [ ] Vurdere å flytte Node-typene til en egen tsconfig for tester, så nettleserkoden ikke ser dem
-- [ ] PR fra `feat/time4o-spa-ui` til `main` i forken
+- [ ] PR fra `feat/time4o-spa-ui` til `master` i forken
 
 ## Utenfor scope
 
