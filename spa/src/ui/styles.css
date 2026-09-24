@@ -1144,3 +1144,158 @@ tr.yellow_row .club {
     found 4s ease-out,
     found-edge 4s ease-out;
 }
+
+/* Front page: a green top like the liveresultat beta, with contour-like rings. */
+:root[data-look='new'] .hero {
+  color: #fff;
+  background:
+    repeating-radial-gradient(circle at 72% 20%, transparent 0 26px, #ffffff0d 26px 27px), #16332b;
+}
+
+:root[data-look='new'] .hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2.25rem;
+  box-sizing: border-box;
+}
+
+:root[data-look='new'] .hero-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+:root[data-look='new'] .hero .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+:root[data-look='new'] .hero h1 {
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0.7em 0 0;
+}
+
+:root[data-look='new'] .hero :is(.navbtn, .language) {
+  color: #fff;
+  background: #ffffff14;
+  border: 1px solid #ffffff38;
+  border-radius: 8px;
+}
+
+:root[data-look='new'] .hero .language {
+  font-size: 1rem;
+  height: 2.2rem;
+  padding: 0 0.5rem;
+}
+
+:root[data-look='new'] .hero .language option {
+  color: #000;
+  background: #fff;
+}
+
+:root[data-look='new'] .today-races {
+  margin: 0.5rem 0 2rem;
+}
+
+:root[data-look='new'] .today-races h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem;
+}
+
+:root[data-look='new'] .today-races h2::before {
+  content: '';
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+:root[data-look='new'] .race-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--orange);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: clip;
+}
+
+:root[data-look='new'] .race-cards li {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 2fr) minmax(0, 1.2fr) auto;
+  grid-template-areas: 'when name organiser eventor';
+  align-items: center;
+  gap: 0.25rem 1rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+:root[data-look='new'] .race-cards li:last-child {
+  border-bottom: none;
+}
+
+:root[data-look='new'] .race-cards .when {
+  grid-area: when;
+  color: var(--muted);
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+:root[data-look='new'] .race-cards .live {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--orange);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+:root[data-look='new'] .race-cards a.name:is(:link, :visited) {
+  grid-area: name;
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+:root[data-look='new'] .race-cards .organiser {
+  grid-area: organiser;
+  color: var(--muted);
+}
+
+:root[data-look='new'] .race-cards a.eventor:is(:link, :visited) {
+  grid-area: eventor;
+  color: var(--muted);
+  font-size: 0.85em;
+}
+
+:root[data-look='new'] .no-races {
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+  :root[data-look='new'] .race-cards li {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'when when'
+      'name eventor'
+      'organiser eventor';
+  }
+
+  :root[data-look='new'] .race-cards .when:empty {
+    display: none;
+  }
+}

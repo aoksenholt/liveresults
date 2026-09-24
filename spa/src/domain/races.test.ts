@@ -1,7 +1,7 @@
 import type { Race } from '../api/types';
 import { FIXTURES } from '../test/fixtures';
 import { createLegacyViewer } from '../test/legacy';
-import { isRaceToday, localDate, raceList, summarize } from './races';
+import { byStartTime, isRaceToday, localDate, localTime, raceList, summarize } from './races';
 
 const race = (id: string, date: string, extra: Partial<Race> = {}): Race => ({
   id,
@@ -19,6 +19,7 @@ describe('summarize', () => {
       name: 'NC/O-Idol',
       organiser: 'Frol il',
       eventorUrl: 'https://eventor.orientering.no/Events/Show/22775',
+      startTime: null,
     });
   });
 
@@ -40,18 +41,51 @@ describe('raceList', () => {
       race('earlier', '2026-05-01'),
     ];
     const list = raceList(races, '2026-09-23');
-    expect(list.today.map((r) => r.id)).toEqual(['today']);
+    expect(list.today.map((t) => t.race.id)).toEqual(['today']);
     expect(
       list.all.map((i) =>
         i.kind == 'year' ? i.year : i.race.id + (i.firstBeforeToday ? '|' : ''),
       ),
     ).toEqual(['2027', 'future', '2026', 'today', 'yesterday|', 'earlier', '2025', 'old']);
   });
+  it("shows today's races as live from the start time of the event", () => {
+    const event = (startDate: string, startTime?: string) => ({ event: { startDate, startTime } });
+    const races = [
+      race('evening', '2026-09-23', event('2026-09-23', '18:30:00')),
+      race('morning', '2026-09-23', event('2026-09-23', '10:00:00')),
+      race('second-day', '2026-09-23', event('2026-09-22', '19:00:00')),
+      race('no-time', '2026-09-23'),
+    ];
+    const live = (now: string) =>
+      raceList(races, '2026-09-23', now)
+        .today.filter((t) => t.live)
+        .map((t) => t.race.id)
+        .sort();
+    expect(live('12:00')).toEqual(['morning', 'no-time', 'second-day']);
+    expect(live('18:30')).toEqual(['evening', 'morning', 'no-time', 'second-day']);
+    expect(
+      raceList(races, '2026-09-23').today.find((t) => t.race.id == 'evening')?.race,
+    ).toMatchObject({ startTime: '18:30' });
+  });
+
+  it('orders today by start time for the new look', () => {
+    const at = (id: string, startTime?: string) =>
+      race(id, '2026-09-23', { event: { startDate: '2026-09-23', startTime } });
+    const today = raceList(
+      [at('evening', '19:30:00'), at('none'), at('afternoon', '17:00:00')],
+      '2026-09-23',
+    ).today;
+    expect(byStartTime(today).map((t) => t.race.id)).toEqual(['none', 'afternoon', 'evening']);
+  });
 });
 
 describe('dates', () => {
   it('gives the calendar date in the event time zone', () => {
     expect(localDate(Date.parse('2026-09-22T22:30:00Z'), 'Europe/Oslo')).toBe('2026-09-23');
+  });
+
+  it('gives the clock time in the event time zone', () => {
+    expect(localTime(Date.parse('2026-09-22T22:30:00Z'), 'Europe/Oslo')).toBe('00:30');
   });
 
   it.each([

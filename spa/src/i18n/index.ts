@@ -56,6 +56,12 @@ const spaStrings: Record<string, Resources> = {
     _RUNNERS: 'Runners',
     _COLUMNS: 'Classes side by side',
     _FREEZE: 'Freeze place and name',
+    _TAGLINE: 'Live results for orienteering',
+    _TODAYSRACES: "Today's races",
+    _NORACESTODAY: 'No races today',
+    _LIVE: 'Live',
+    _STARTSAT: 'Starts',
+    _LANGUAGE: 'Language',
   },
   no: {
     _ALLCLASSES: 'Alle klasser',
@@ -93,6 +99,12 @@ const spaStrings: Record<string, Resources> = {
     _RUNNERS: 'Løpere',
     _COLUMNS: 'Klasser side om side',
     _FREEZE: 'Lås plass og navn',
+    _TAGLINE: 'Liveresultater for orientering',
+    _TODAYSRACES: 'Dagens løp',
+    _NORACESTODAY: 'Ingen løp i dag',
+    _LIVE: 'Live',
+    _STARTSAT: 'Start',
+    _LANGUAGE: 'Språk',
   },
 };
 
@@ -114,6 +126,24 @@ const languages: Record<string, Resources> = {
 };
 
 export const LANGUAGES = Object.keys(languages);
+
+/** Each language in its own words, for the language picker. */
+export const LANGUAGE_NAMES: Record<string, string> = {
+  bg: 'Български',
+  cz: 'Čeština',
+  de: 'Deutsch',
+  en: 'English',
+  es: 'Español',
+  fi: 'Suomi',
+  fr: 'Français',
+  hu: 'Magyar',
+  it: 'Italiano',
+  no: 'Norsk',
+  pl: 'Polski',
+  pt: 'Português',
+  ru: 'Русский',
+  sv: 'Svenska',
+};
 
 export function resolveLanguage(lang: string | null | undefined): string {
   return lang && lang in languages ? lang : DEFAULT_LANGUAGE;

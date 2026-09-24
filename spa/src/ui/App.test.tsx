@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { Time4oApi } from '../api/client';
 import type { Entry, Race } from '../api/types';
+import { localDate } from '../domain/races';
 import { FIXTURES, midRace } from '../test/fixtures';
 import { App } from './App';
 
@@ -60,6 +61,18 @@ describe('App', () => {
       'href',
       'https://eventor.orientering.no/Events/Show/123',
     );
+  });
+
+  it("shows today's races in a card on the front page", async () => {
+    const today = { ...race, date: `${localDate(Date.now())}T00:00:00Z` };
+    render(<App api={fakeApi(allEntries, today)} search="?lang=no" />);
+    expect(
+      screen.getByRole('heading', { name: 'Liveresultater for orientering' }),
+    ).toBeInTheDocument();
+    const card = (await screen.findByRole('heading', { name: 'Dagens løp' })).closest('section')!;
+    expect(await within(card).findByRole('link', { name: 'Testløpet' })).toBeInTheDocument();
+    expect(within(card).getByText('Live')).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: 'Språk' })).toHaveValue('no');
   });
 
   it('shows the class menu and asks for a class', async () => {
