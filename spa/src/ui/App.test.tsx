@@ -17,13 +17,13 @@ const race: Race = {
 };
 const allEntries = [...interval.entries, ...relay.entries];
 
-function fakeApi(entries = allEntries, raceInfo = race) {
+function fakeApi(entries = allEntries, raceInfo = race, races = [raceInfo]) {
   const json = (data: unknown) =>
     Promise.resolve(new Response(JSON.stringify({ data }), { status: 200 }));
   return new Time4oApi('https://t/', (url) => {
     const u = new URL(url);
     const path = u.pathname;
-    if (path == '/race') return json([raceInfo]);
+    if (path == '/race') return json(races);
     if (path == '/race/race-1') return json(raceInfo);
     if (path == '/race/race-1/raceClass') return json([interval.raceClass, relay.raceClass]);
     if (path == '/race/race-1/entry') {
@@ -52,8 +52,8 @@ afterEach(() => {
 });
 
 describe('App', () => {
-  it('lists races with links to the race page', async () => {
-    render(<App api={fakeApi()} search="?lang=no" />);
+  it('lists races with links to the race page in the classic look', async () => {
+    render(<App api={fakeApi()} search="?lang=no&theme=classic" />);
     const link = await screen.findByRole('link', { name: 'Testløpet' });
     expect(link).toHaveAttribute('href', '?comp=race-1&lang=no');
     expect(screen.getByText('Velg løp')).toBeInTheDocument();
@@ -61,6 +61,32 @@ describe('App', () => {
       'href',
       'https://eventor.orientering.no/Events/Show/123',
     );
+  });
+
+  it('finds races by year or search on the front page', async () => {
+    const races = [
+      race,
+      { ...race, id: 'race-2', title: 'Vårløpet', date: '2021-04-01T00:00:00Z' },
+      { ...race, id: 'race-3', title: 'Høstløpet', date: '2021-10-01T00:00:00Z' },
+    ];
+    render(<App api={fakeApi(allEntries, race, races)} search="?lang=no" />);
+    const all = (await screen.findByRole('heading', { name: 'Alle løp' })).closest('section')!;
+    const names = () =>
+      within(all)
+        .queryAllByRole('link', { name: /løpet$/ })
+        .map((a) => a.textContent);
+    expect(names()).toEqual(['Høstløpet', 'Vårløpet']);
+    expect(within(all).getByText('2 løp 2021')).toBeInTheDocument();
+    fireEvent.click(within(all).getByRole('button', { name: '2020' }));
+    expect(names()).toEqual(['Testløpet']);
+    expect(within(all).getByRole('link', { name: 'Eventor' })).toHaveAttribute(
+      'href',
+      'https://eventor.orientering.no/Events/Show/123',
+    );
+    fireEvent.change(within(all).getByRole('searchbox'), { target: { value: 'ok test' } });
+    expect(names()).toEqual(['Høstløpet', 'Vårløpet', 'Testløpet']);
+    fireEvent.change(within(all).getByRole('searchbox'), { target: { value: 'zzzz' } });
+    expect(within(all).getByText('Ingen treff')).toBeInTheDocument();
   });
 
   it("shows today's races in a card on the front page", async () => {

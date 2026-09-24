@@ -23,6 +23,10 @@ export interface TodayRace {
 export interface RaceList {
   today: TodayRace[];
   all: RaceListItem[];
+  /** Public races, newest first. */
+  races: RaceSummary[];
+  /** The local date the list was made for. */
+  date: string;
 }
 
 /** Calendar date (YYYY-MM-DD) of `nowMs` in the given time zone. */
@@ -90,10 +94,54 @@ export function raceList(races: Race[], today: string, now = '23:59'): RaceList 
   return {
     today: todays.map((race) => ({ race, live: race.startTime == null || race.startTime <= now })),
     all,
+    races: list,
+    date: today,
   };
 }
 
 /** Today's races in the order they start; races without a start time come first. */
 export function byStartTime(today: TodayRace[]): TodayRace[] {
   return [...today].sort((a, b) => (a.race.startTime ?? '').localeCompare(b.race.startTime ?? ''));
+}
+
+/** The date `days` days after (or before) a YYYY-MM-DD date. */
+export function addDays(date: string, days: number): string {
+  return new Date(Date.parse(date) + days * 86400000).toISOString().slice(0, 10);
+}
+
+/** Races of the last `days` days before today, newest first. */
+export function recentRaces(races: RaceSummary[], today: string, days = 7): RaceSummary[] {
+  const from = addDays(today, -days);
+  return races.filter((r) => r.date >= from && r.date < today);
+}
+
+/** Races of the next `days` days after today, soonest first. */
+export function upcomingRaces(races: RaceSummary[], today: string, days = 7): RaceSummary[] {
+  const to = addDays(today, days);
+  return races.filter((r) => r.date > today && r.date <= to).reverse();
+}
+
+/** The years that have races, newest first. */
+export function raceYears(races: RaceSummary[]): string[] {
+  return [...new Set(races.map((r) => r.date.slice(0, 4)))].sort().reverse();
+}
+
+/** Races whose name or organiser contains every word of the query, in any year. */
+export function findRaces(races: RaceSummary[], query: string): RaceSummary[] {
+  const words = query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  return races.filter((r) => {
+    const text = `${r.name} ${r.organiser}`.toLocaleLowerCase();
+    return words.every((w) => text.includes(w));
+  });
+}
+
+/** Short date with the weekday, like "tor. 24. sep.", in the language of the page. */
+export function formatRaceDate(date: string, lang: string): string {
+  const locale = lang == 'cz' ? 'cs' : lang == 'no' ? 'nb' : lang;
+  return new Intl.DateTimeFormat(locale, {
+    timeZone: 'UTC',
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+  }).format(Date.parse(date));
 }

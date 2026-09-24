@@ -1,7 +1,20 @@
 import type { Race } from '../api/types';
 import { FIXTURES } from '../test/fixtures';
 import { createLegacyViewer } from '../test/legacy';
-import { byStartTime, isRaceToday, localDate, localTime, raceList, summarize } from './races';
+import {
+  addDays,
+  byStartTime,
+  findRaces,
+  formatRaceDate,
+  isRaceToday,
+  localDate,
+  localTime,
+  raceList,
+  raceYears,
+  recentRaces,
+  summarize,
+  upcomingRaces,
+} from './races';
 
 const race = (id: string, date: string, extra: Partial<Race> = {}): Race => ({
   id,
@@ -76,6 +89,52 @@ describe('raceList', () => {
       '2026-09-23',
     ).today;
     expect(byStartTime(today).map((t) => t.race.id)).toEqual(['none', 'afternoon', 'evening']);
+  });
+});
+
+describe('the race list of the new look', () => {
+  const races = raceList(
+    [
+      race('last-year', '2025-12-30', { event: { organisers: [{ name: 'Nydalens SK' }] } }),
+      race('eight-days-ago', '2026-09-15'),
+      race('week-ago', '2026-09-16', { title: 'Nattcup Nydalen' }),
+      race('yesterday', '2026-09-22'),
+      race('today', '2026-09-23'),
+      race('tomorrow', '2026-09-24'),
+      race('in-a-week', '2026-09-30'),
+      race('later', '2026-10-01'),
+    ],
+    '2026-09-23',
+  ).races;
+  const ids = (list: { id: string }[]) => list.map((r) => r.id);
+
+  it('has the races of the last seven days, newest first', () => {
+    expect(ids(recentRaces(races, '2026-09-23'))).toEqual(['yesterday', 'week-ago']);
+  });
+
+  it('has the races of the next seven days, soonest first', () => {
+    expect(ids(upcomingRaces(races, '2026-09-23'))).toEqual(['tomorrow', 'in-a-week']);
+  });
+
+  it('lists the years with races', () => {
+    expect(raceYears(races)).toEqual(['2026', '2025']);
+  });
+
+  it('finds races by name or organiser in every year', () => {
+    expect(ids(findRaces(races, 'nydal'))).toEqual(['week-ago', 'last-year']);
+    expect(ids(findRaces(races, 'NATTCUP  nydalen'))).toEqual(['week-ago']);
+    expect(findRaces(races, '')).toHaveLength(races.length);
+  });
+
+  it('counts days across months and years', () => {
+    expect(addDays('2026-09-23', -30)).toBe('2026-08-24');
+    expect(addDays('2026-12-30', 3)).toBe('2027-01-02');
+  });
+
+  it('writes the date with the weekday in the language of the page', () => {
+    expect(formatRaceDate('2026-09-24', 'en')).toBe('Thu, Sep 24');
+    expect(formatRaceDate('2026-09-24', 'no')).toBe('tor. 24. sep.');
+    expect(formatRaceDate('2026-09-24', 'cz')).toMatch(/24/);
   });
 });
 
