@@ -109,6 +109,7 @@ describe('App', () => {
     ).toHaveAttribute('href', `#${encodeURI(interval.raceClass.name!)}`);
     expect(within(menu).getByRole('link', { name: 'Alle klasser' })).toBeInTheDocument();
     expect(screen.getByText('Testløpet')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Velg løp' })).toHaveAttribute('href', '?lang=no');
   });
 
   it('opens chosen classes as tabs in the new look', async () => {

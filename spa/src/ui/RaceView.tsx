@@ -13,6 +13,7 @@ import { Info, Loading, Message } from './common';
 import { deviceType, useDisplay } from './context';
 import { useControllerState, useHashRoute } from './hooks';
 import { LastPassings } from './LastPassings';
+import { Logo } from './Logo';
 import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
 import { parseHash, type Route } from './route';
@@ -74,9 +75,21 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
   return (
     <>
       <div className="bar">
-        <a className="navbtn" href={`?lang=${lang}`} title={res._CHOOSECMP}>
-          ☰
-        </a>
+        {newLook ? (
+          <a
+            className="back"
+            href={`?lang=${lang}`}
+            title={res._CHOOSECMP}
+            aria-label={res._CHOOSECMP}
+          >
+            <span aria-hidden="true">←</span>
+            <Logo />
+          </a>
+        ) : (
+          <a className="navbtn" href={`?lang=${lang}`} title={res._CHOOSECMP}>
+            ☰
+          </a>
+        )}
         {!newLook && (
           <button
             className="navbtn"

@@ -636,6 +636,29 @@ tr.yellow_row .club {
   background: #333;
 }
 
+:root[data-look='new'] .bar .back {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+:root[data-look='new'] .bar .back .logo {
+  width: 30px;
+  height: 30px;
+}
+
+:root[data-look='new'] .bar .back:hover span {
+  transform: translateX(-3px);
+}
+
+:root[data-look='new'] .bar .back span {
+  transition: transform 0.15s;
+}
+
 /* Content in a centred column. */
 :root[data-look='new'] :is(.page, .race-page, .scroll, .organizer) {
   max-width: 1160px;
@@ -1215,9 +1238,20 @@ tr.yellow_row .club {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
+  min-width: 0;
   margin-right: auto;
-  font-size: 1.35rem;
+  font-size: clamp(1.1rem, 4.5vw, 1.35rem);
   font-weight: 700;
+}
+
+:root[data-look='new'] .hero .brand-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:root[data-look='new'] .hero .logo {
+  flex-shrink: 0;
 }
 
 :root[data-look='new'] .hero h1 {
@@ -1228,6 +1262,7 @@ tr.yellow_row .club {
 }
 
 :root[data-look='new'] .hero :is(.navbtn, .language) {
+  flex-shrink: 0;
   color: #fff;
   background: #ffffff14;
   border: 1px solid #ffffff38;
@@ -1418,5 +1453,35 @@ tr.yellow_row .club {
 
   :root[data-look='new'] .race-cards .when:empty {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  :root[data-look='new'] .bar {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'back title toggle'
+      'back date toggle';
+    column-gap: 0.75rem;
+    padding: 0.4rem 1rem;
+  }
+
+  :root[data-look='new'] .bar .back {
+    grid-area: back;
+  }
+
+  :root[data-look='new'] .bar .title {
+    grid-area: title;
+    font-size: 1.05rem;
+  }
+
+  :root[data-look='new'] .bar .date {
+    grid-area: date;
+    font-size: 0.8rem;
+  }
+
+  :root[data-look='new'] .bar .theme-toggle {
+    grid-area: toggle;
   }
 }
