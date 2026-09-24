@@ -80,6 +80,8 @@ const spaStrings: Record<string, Resources> = {
     _MEN: 'Men',
     _OTHERCLASSES: 'Other classes',
     _RECENTCLASSES: 'Opened recently',
+    _NEWVERSION: 'A new version of the page is ready.',
+    _RELOAD: 'Reload',
     _CLASSES: 'Classes',
   },
   no: {
@@ -142,6 +144,8 @@ const spaStrings: Record<string, Resources> = {
     _MEN: 'Herrer',
     _OTHERCLASSES: 'Andre klasser',
     _RECENTCLASSES: 'Sist åpnet',
+    _NEWVERSION: 'En ny versjon av siden er klar.',
+    _RELOAD: 'Last inn på nytt',
     _CLASSES: 'Klasser',
   },
 };
