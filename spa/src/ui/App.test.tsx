@@ -257,6 +257,20 @@ describe('App', () => {
     expect(await within(box).findAllByText(/med tiden|fikk ny status/)).toHaveLength(3);
   });
 
+  it('lets the user fold the latest updates into one line', async () => {
+    const today = { ...race, date: new Date(Date.now() - 3600000).toISOString() };
+    render(<App api={fakeApi(allEntries, today)} search="?comp=race-1&lang=no" />);
+    const toggle = await screen.findByRole('button', { name: /^Siste oppdateringer/ });
+    const box = toggle.closest('section')!;
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    expect(await within(box).findAllByRole('link')).toHaveLength(3);
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    expect(within(box).queryAllByRole('link')).toHaveLength(0);
+    expect(toggle).toHaveTextContent(/med tiden|fikk ny status/);
+    expect(localStorage.getItem('liveres-passings-collapsed')).toBe('1');
+  });
+
   it('shows every class without splits on the scrolling page', async () => {
     render(<App api={fakeApi()} search="?comp=race-1&lang=no&scroll" />);
     const headers = await screen.findAllByRole('heading', { level: 2 });
