@@ -610,6 +610,14 @@ tr.yellow_row .club {
   padding: 0 1.5rem;
   gap: 0.75rem;
   box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  transition: transform 0.22s;
+}
+
+:root[data-look='new'] .bar.bar-hidden {
+  transform: translateY(-100%);
 }
 
 :root[data-look='new'] .bar .title {
@@ -986,6 +994,34 @@ tr.yellow_row .club {
   background: var(--section);
   font-size: 0.85em;
   font-weight: 600;
+}
+
+/* The fixed copy of the header row of `ResultsTable`, shown while the table is scrolled past. */
+:root[data-look='new'] .float-head {
+  display: none;
+  position: fixed;
+  top: 0;
+  z-index: 20;
+  overflow: hidden;
+  transition: top 0.22s;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 18%);
+}
+
+:root[data-look='new'] .float-head table.results {
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+:root[data-look='new'] .float-head table.results th {
+  box-sizing: border-box;
+  border-bottom: none;
+}
+
+:root[data-look='new'] .float-head table.results :is(.fixed-place, .fixed-name) {
+  position: relative;
+  left: auto;
+  z-index: 1;
 }
 
 :root[data-look='new'] table.results tbody tr:nth-child(odd) > td {

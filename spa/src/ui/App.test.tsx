@@ -241,6 +241,24 @@ describe('App', () => {
     expect(name()).not.toHaveClass('fixed-name');
   });
 
+  it('opens the club of a runner in a tab named after the club', async () => {
+    renderRace(`#${encodeURI(interval.raceClass.name!)}`);
+    const table = await screen.findByRole('table');
+    const clubLink = within(table).getAllByRole('link')[0]!;
+    const href = clubLink.getAttribute('href')!;
+    fireEvent.click(clubLink);
+    window.location.hash = href;
+    await waitFor(() =>
+      expect(
+        screen.getAllByRole('button', { name: /^Lukk / }).map((b) => b.getAttribute('aria-label')),
+      ).toEqual([`Lukk ${interval.raceClass.name}`, `Lukk ${clubLink.textContent}`]),
+    );
+    const tabs = screen.getByRole('button', {
+      name: `Lukk ${clubLink.textContent}`,
+    }).parentElement!;
+    expect(within(tabs).getByRole('link')).toHaveAttribute('href', href);
+  });
+
   it('shows club results', async () => {
     const org = interval.entries.find((e) => e.organisation?.id != null)!.organisation!;
     renderRace(`#club::${org.id}`);

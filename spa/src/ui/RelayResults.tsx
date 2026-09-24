@@ -4,6 +4,7 @@ import { relayCells } from '../domain/relay';
 import { relayController } from '../state/controllers';
 import { html, Loading, Message } from './common';
 import { useDisplay } from './context';
+import { ResultsTable } from './ResultsTable';
 import { useControllerState } from './hooks';
 import type { RaceProps } from './RaceView';
 
@@ -33,21 +34,24 @@ export function RelayResults({
   return (
     <>
       <h2 className="class-header">{data.className}</h2>
-      <table className="results">
-        <thead>
-          <tr>
-            <th className="right">#</th>
-            <th className="right">№</th>
-            <th>{res._NAME}</th>
-            <th className="right">Total</th>
-            <th className="right"></th>
-            <th className="right"></th>
-            <th className="right">±Tet</th>
-            <th className="right">Etappe</th>
-            <th className="right"></th>
-            <th className="right">m/km</th>
-          </tr>
-        </thead>
+      <ResultsTable
+        head={
+          <thead>
+            <tr>
+              <th className="right">#</th>
+              <th className="right">№</th>
+              <th>{res._NAME}</th>
+              <th className="right">Total</th>
+              <th className="right"></th>
+              <th className="right"></th>
+              <th className="right">±Tet</th>
+              <th className="right">Etappe</th>
+              <th className="right"></th>
+              <th className="right">m/km</th>
+            </tr>
+          </thead>
+        }
+      >
         <tbody>
           {data.teams.map((team, i) => {
             const c = cells[i]!;
@@ -75,7 +79,7 @@ export function RelayResults({
             );
           })}
         </tbody>
-      </table>
+      </ResultsTable>
     </>
   );
 }

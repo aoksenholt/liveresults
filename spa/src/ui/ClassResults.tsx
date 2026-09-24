@@ -21,6 +21,8 @@ import { clearFound, scrollToRow, useFound } from './found';
 import { useFrozenColumns } from './frozen';
 import { useControllerState } from './hooks';
 import type { RaceProps } from './RaceView';
+import { ResultsTable } from './ResultsTable';
+import { namePage } from './pageNames';
 import { routeHash } from './route';
 import { useNewLook } from './ThemeToggle';
 
@@ -60,8 +62,9 @@ export function ClubLink({
   text: string;
   className: string;
 }) {
+  const href = routeHash({ kind: 'club', clubId: String(row.clubId) });
   return (
-    <a className={className} href={routeHash({ kind: 'club', clubId: String(row.clubId) })}>
+    <a className={className} href={href} onClick={() => namePage(href, row.club || text)}>
       {text}
     </a>
   );
@@ -215,68 +218,62 @@ export function ClassTable(props: {
           ? 'fixed-name'
           : '';
 
-  const results = (
-    <table className="results">
-      <thead>
-        <tr>
-          {visible.map(([c, i]) => (
-            <th
-              key={i}
-              className={
-                [c.kind == 'runner' ? '' : 'right', fixed(c)].join(' ').trim() || undefined
-              }
-            >
-              {c.title}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {order.map((i) => {
-          const row = rows[i]!;
-          const mark = highlights(table, row, i == fnq, serverNow, highTime);
-          const found = isFound(row);
-          const rowClass = [
-            i == fnq ? 'firstnonqualifier' : '',
-            mark.row ?? '',
-            found ? 'found' : '',
-          ]
-            .join(' ')
-            .trim();
-          return (
-            <tr
-              key={`${row.dbid}:${row.bib}:${i}`}
-              className={rowClass || undefined}
-              ref={found ? scrollToRow : undefined}
-              onAnimationEnd={found ? clearFound : undefined}
-            >
-              {visible.map(([c, col]) => {
-                const className = [
-                  c.kind == 'runner' ? '' : 'right',
-                  fixed(c),
-                  mark.cells.get(col) ?? '',
-                ]
-                  .join(' ')
-                  .trim();
-                if (c.kind == 'runner')
-                  return (
-                    <td key={col} className={className || undefined}>
-                      <RunnerCell column={c} row={row} />
-                    </td>
-                  );
-                const content = running?.[i]?.get(col) ?? cellHtml(table, c, row);
-                return <td key={col} className={className || undefined} {...html(content)} />;
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+  const head = (
+    <thead>
+      <tr>
+        {visible.map(([c, i]) => (
+          <th
+            key={i}
+            className={[c.kind == 'runner' ? '' : 'right', fixed(c)].join(' ').trim() || undefined}
+          >
+            {c.title}
+          </th>
+        ))}
+      </tr>
+    </thead>
+  );
+  const body = (
+    <tbody>
+      {order.map((i) => {
+        const row = rows[i]!;
+        const mark = highlights(table, row, i == fnq, serverNow, highTime);
+        const found = isFound(row);
+        const rowClass = [i == fnq ? 'firstnonqualifier' : '', mark.row ?? '', found ? 'found' : '']
+          .join(' ')
+          .trim();
+        return (
+          <tr
+            key={`${row.dbid}:${row.bib}:${i}`}
+            className={rowClass || undefined}
+            ref={found ? scrollToRow : undefined}
+            onAnimationEnd={found ? clearFound : undefined}
+          >
+            {visible.map(([c, col]) => {
+              const className = [
+                c.kind == 'runner' ? '' : 'right',
+                fixed(c),
+                mark.cells.get(col) ?? '',
+              ]
+                .join(' ')
+                .trim();
+              if (c.kind == 'runner')
+                return (
+                  <td key={col} className={className || undefined}>
+                    <RunnerCell column={c} row={row} />
+                  </td>
+                );
+              const content = running?.[i]?.get(col) ?? cellHtml(table, c, row);
+              return <td key={col} className={className || undefined} {...html(content)} />;
+            })}
+          </tr>
+        );
+      })}
+    </tbody>
   );
   return (
     <>
       {header}
-      {newLook ? <div className="table-scroll">{results}</div> : results}
+      <ResultsTable head={head}>{body}</ResultsTable>
     </>
   );
 }

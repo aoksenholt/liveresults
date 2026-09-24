@@ -2,6 +2,7 @@ import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { classGroups, type ClassListItem } from '../domain/classList';
 import { useDisplay } from './context';
 import { useFrozenColumns } from './frozen';
+import { usePageName } from './pageNames';
 import { routeHash, type Route } from './route';
 import { useStoredList } from './stored';
 import { closeTab, menuEntries, openTab, rememberPage, type MenuEntry } from './tabs';
@@ -171,7 +172,9 @@ export function useTabs(items: ClassListItem[], route: Route): Tabs {
   };
   const openAll = (hashes: string[]) =>
     setState((s) => ({ ...s, tabs: hashes.reduce((t, h) => openTab(t, h, entries), s.tabs) }));
-  const label = (hash: string) => entries.find((e) => e.hash == hash)?.label ?? hash;
+  const pageName = usePageName();
+  const label = (hash: string) =>
+    entries.find((e) => e.hash == hash)?.label ?? pageName(hash) ?? hash;
   return { entries, tabs, current, close, openAll, label };
 }
 

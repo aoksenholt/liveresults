@@ -18,6 +18,7 @@ import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
 import { parseHash, type Route } from './route';
 import { RaceSearch } from './Search';
+import { useTopBar } from './topBar';
 import { otherColumns } from './tabs';
 import { ThemeToggle, useNewLook } from './ThemeToggle';
 
@@ -47,6 +48,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
   const mobile = deviceType() == 'mobile';
   const [menuOpen, setMenuOpen] = useState(!mobile);
   const { name, date } = summarize(info.race);
+  const [barRef, barClass] = useTopBar(newLook);
 
   useEffect(() => {
     document.title = name;
@@ -74,7 +76,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
 
   return (
     <>
-      <div className="bar">
+      <div className={barClass} ref={barRef}>
         {newLook ? (
           <a
             className="back"

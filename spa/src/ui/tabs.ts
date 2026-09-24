@@ -40,9 +40,10 @@ export function menuEntries(
   return entries;
 }
 
-/** Pages from the menu get a tab when they are opened; other pages, such as clubs, do not. */
+/** Pages from the menu and clubs get a tab when they are opened; other pages do not. */
 export function openTab(tabs: string[], hash: string, entries: MenuEntry[]): string[] {
-  if (tabs.includes(hash) || !entries.some((e) => e.hash == hash)) return tabs;
+  const tabbed = entries.some((e) => e.hash == hash) || parseHash(hash).kind == 'club';
+  if (tabs.includes(hash) || !tabbed) return tabs;
   return [...tabs, hash];
 }
 

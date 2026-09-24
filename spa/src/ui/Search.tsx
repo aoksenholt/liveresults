@@ -6,6 +6,7 @@ import { Loading } from './common';
 import { useDisplay } from './context';
 import { markFound } from './found';
 import { useControllerState } from './hooks';
+import { namePage } from './pageNames';
 import { routeHash } from './route';
 import type { MenuEntry } from './tabs';
 
@@ -88,7 +89,13 @@ function SearchResults({
               <ul>
                 {found.clubs.slice(0, MAX_CLUBS).map((c) => (
                   <li key={c.id}>
-                    <a href={routeHash({ kind: 'club', clubId: String(c.id) })} onClick={onPick}>
+                    <a
+                      href={routeHash({ kind: 'club', clubId: String(c.id) })}
+                      onClick={() => {
+                        namePage(routeHash({ kind: 'club', clubId: String(c.id) }), c.name);
+                        onPick();
+                      }}
+                    >
                       {c.name}
                     </a>{' '}
                     <span className="count">({c.runners})</span>

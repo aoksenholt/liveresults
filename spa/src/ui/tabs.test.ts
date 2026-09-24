@@ -30,11 +30,13 @@ describe('menuEntries', () => {
 describe('tabs', () => {
   const entries = menuEntries(items, labels);
 
-  it('opens a tab once for pages in the menu', () => {
+  it('opens a tab once for pages in the menu and clubs', () => {
     const tabs = openTab([], '#H%2021', entries);
     expect(tabs).toEqual(['#H%2021']);
     expect(openTab(tabs, '#H%2021', entries)).toBe(tabs);
-    expect(openTab(tabs, '#club::12', entries)).toBe(tabs);
+    expect(openTab(tabs, '#H%2099', entries)).toBe(tabs);
+    expect(openTab(tabs, '', entries)).toBe(tabs);
+    expect(openTab(tabs, '#club::12', entries)).toEqual(['#H%2021', '#club::12']);
     expect(openTab(tabs, '#startlist', entries)).toEqual(['#H%2021', '#startlist']);
   });
 
