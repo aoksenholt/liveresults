@@ -103,8 +103,8 @@ Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene ge
 ## Løse tråder
 
 - [ ] Spørre Time4o om grenser for antall forespørsler og vilkår for å bruke API-et
-- [ ] Lenken «Organizer guide» nederst på siden peker til palkitt sin guide
-- [ ] Vurdere å flytte Node-typene til en egen tsconfig for tester, så nettleserkoden ikke ser dem
+- [x] Lenken «Organizer guide» nederst på siden pekte til palkitt sin guide, som handler om C#-klienten. Den er fjernet
+- [x] Node-, Vitest- og jest-dom-typene er flyttet til `tsconfig.test.json`, så nettleserkoden ikke ser dem
 - [x] PR fra `feat/time4o-spa-ui` til `main` i forken
 
 ## Utenfor scope
