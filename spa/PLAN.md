@@ -47,10 +47,10 @@ Få SPA-en til å se ut som [mattias242/liveresults](https://github.com/mattias2
 paritetstestene dekker.
 
 - [x] Mørkt tema med CSS-variabler (`--bg`, `--panel`, `--panel-alt`, `--text`, `--muted`, `--accent` blå, `--border`) og `color-scheme: dark`. Slås på med `?theme=dark` og huskes i nettleseren (`?theme=classic` slår av). Det gamle utseendet er standard til det nye er testet under et ekte løp
-- [ ] Systemfont, enkel topplinje (`app-header`) og layout med sidekolonne til venstre fra 720 px og stablet på mobil
-- [ ] Klassemeny som «piller» (avrundede knapper) med blå markering av valgt klasse
-- [ ] Resultattabeller med linjer mellom radene, annenhver rad i `--panel-alt`, og tabeller som scroller vannrett på smale skjermer
-- [ ] Tilpasse fargene for markeringer (nye resultater, beste tid, plass 1, kvalifiseringsgrense, estimater) så de er lesbare på mørk bakgrunn
+- [x] Systemfont, enkel topplinje (`app-header`) og layout med sidekolonne til venstre fra 720 px og stablet på mobil
+- [x] Klassemeny som «piller» (avrundede knapper) med blå markering av valgt klasse
+- [x] Resultattabeller med linjer mellom radene, annenhver rad i `--panel-alt`, og tabeller som scroller vannrett på smale skjermer
+- [x] Tilpasse fargene for markeringer (nye resultater, beste tid, plass 1, kvalifiseringsgrense, estimater) så de er lesbare på mørk bakgrunn: dempet oransje for nye resultater, mørkegrønn kvalifisering, lysere rødt for beste tid og sen start, og mykere gult i startvisningen
 - [ ] Vurdere en bryter for lyst og mørkt tema, eller følge `prefers-color-scheme`
 
 ## Fase 5 – Publisering

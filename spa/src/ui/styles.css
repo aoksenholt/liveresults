@@ -25,6 +25,12 @@
   --panel-text: #f2f2f4;
   --section: #303036;
   --hover-row: #303036;
+  --accent: #4da3ff;
+  --accent-text: #08131f;
+  --highlight: #c2410c;
+  --danger: #ff6b6b;
+  --good: #1f5f3a;
+  --warn: #ffd43b;
   color-scheme: dark;
 }
 
@@ -543,4 +549,206 @@ tr.yellow_row .club {
 
 :root[data-theme='dark'] .firststarter > td {
   border-top-color: var(--text) !important;
+}
+
+/* Dark theme layout: system font, plain top bar, sidebar from 720 px and stacked on phones. */
+:root[data-theme='dark'] :is(body, td, table, button) {
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+:root[data-theme='dark'] body {
+  font-size: 87.5%;
+}
+
+:root[data-theme='dark'] a:hover {
+  color: #80bfff;
+}
+
+:root[data-theme='dark'] .bar {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+:root[data-theme='dark'] .bar .title {
+  font-size: 1.25rem;
+}
+
+:root[data-theme='dark'] .navbtn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.4em;
+}
+
+:root[data-theme='dark'] .navbtn:hover {
+  background: var(--border);
+}
+
+:root[data-theme='dark'] .container {
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+:root[data-theme='dark'] .class-column {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 2.4em;
+  background: none;
+  color: var(--text);
+}
+
+:root[data-theme='dark'] .class-column br {
+  display: none;
+}
+
+:root[data-theme='dark'] .class-column hr {
+  border: none;
+  margin: 0.3em 0;
+}
+
+:root[data-theme='dark'] .class-column a:is(:link, :visited) {
+  display: inline-block;
+  margin: 0 0.4rem 0 0;
+  padding: 0 0.7rem;
+  line-height: 2em;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+:root[data-theme='dark'] .class-column a:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+:root[data-theme='dark'] .class-column a.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+:root[data-theme='dark'] .result-column {
+  padding: 0;
+  min-width: 0;
+}
+
+@media (min-width: 720px) {
+  :root[data-theme='dark'] .container {
+    flex-direction: row;
+  }
+
+  :root[data-theme='dark'] .class-column {
+    flex: 0 0 220px;
+    line-height: 1.4em;
+  }
+
+  :root[data-theme='dark'] .class-column br {
+    display: inline;
+  }
+
+  :root[data-theme='dark'] .class-column a:is(:link, :visited) {
+    margin: 0 0.2rem 0.4rem 0;
+  }
+}
+
+:root[data-theme='dark'] .last-passings {
+  border: 1px solid var(--border);
+  border-radius: 0.4em;
+  margin-bottom: 1rem;
+}
+
+/* Dark theme tables: lines between the rows. */
+:root[data-theme='dark'] :is(table.results, table.lists, .race-table) :is(td, th) {
+  border-bottom: 1px solid var(--border);
+}
+
+:root[data-theme='dark'] :is(table.results, table.lists) :is(td, th) {
+  padding: 0.35em 0.5em;
+}
+
+:root[data-theme='dark'] table.results th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+:root[data-theme='dark'] .scroll .class-header {
+  padding: 0.3em 0.5em;
+}
+
+/* Dark theme highlights, with enough contrast on the dark background. */
+:root[data-theme='dark'] :is(tr.red_row > td, tr.new_fnq > td, .red_cell, .red_cell_sqr) {
+  background: var(--highlight) !important;
+}
+
+:root[data-theme='dark'] td.qualified {
+  background-color: var(--good);
+}
+
+:root[data-theme='dark'] :is(.firstnonqualifier > td, tr.new_fnq > td) {
+  border-top-color: var(--muted) !important;
+}
+
+:root[data-theme='dark'] :is(.time1, .place1, .organizer .late) {
+  color: var(--danger);
+}
+
+:root[data-theme='dark'] :is(.besttime, .estimatebest) {
+  text-decoration-color: var(--danger);
+}
+
+:root[data-theme='dark'] :is(tr.yellow_row > td, tr.yellow_row_new > td) {
+  background: var(--warn) !important;
+}
+
+:root[data-theme='dark'] :is(tr.yellow_row, tr.yellow_row_new) a:is(:link, :visited) {
+  color: #0b3d91;
+}
+
+:root[data-theme='dark'] .organizer-head input:is(.gray, .yellow) {
+  color: #000;
+}
+
+:root[data-theme='dark'] .organizer-head .call-clock {
+  color: var(--warn);
+}
+
+:root[data-theme='dark']
+  :is(tr.red_row, tr.new_fnq, .red_cell, .red_cell_sqr)
+  :is(.time1, .place1) {
+  color: #fff;
+}
+
+:root[data-theme='dark'] :is(tr.red_row, tr.new_fnq, .red_cell, .red_cell_sqr) .besttime {
+  text-decoration-color: #fff;
+}
+
+:root[data-theme='dark'] :is(tr.yellow_row, tr.yellow_row_new) :is(.bib, .club) {
+  color: #000;
+}
+
+:root[data-theme='dark'] .result-column .class-header {
+  margin: 0.3em 0 0.6em;
+}
+
+:root[data-theme='dark'] .race-page {
+  padding: 1rem;
+}
+
+:root[data-theme='dark'] .race-table :is(td, th) {
+  border-bottom: none;
+}
+
+:root[data-theme='dark'] .race-table tr:has(> td + td) > td {
+  border-bottom: 1px solid var(--border);
 }
