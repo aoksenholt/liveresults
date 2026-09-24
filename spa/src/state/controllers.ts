@@ -1,7 +1,15 @@
 import type { ApiResult, Time4oApi } from '../api/client';
 import type { Entry, Race, RaceClass } from '../api/types';
 import { classListItems, relayClassNames, type ClassListItem } from '../domain/classList';
-import type { ClassInfo, ClubResults, GroupedClassResults } from '../domain/model';
+import type { ClassInfo, ClubResults, GroupedClassResults, ResultRow } from '../domain/model';
+import {
+  entryRows,
+  leftInForest,
+  startMarks,
+  startRegistration,
+  type StartMark,
+  type StartWindow,
+} from '../domain/organizer';
 import { buildClassView, type ClassView } from '../domain/pipeline';
 import {
   eventClock,
@@ -26,6 +34,7 @@ import { Store } from './store';
 export const CLASS_INTERVAL_MS = 3000;
 export const CLASS_LIST_INTERVAL_MS = 60000;
 export const CLUB_INTERVAL_MS = 20000;
+export const ORGANIZER_INTERVAL_MS = 15000;
 
 export interface Loadable<T> {
   data: T | null;
@@ -246,3 +255,89 @@ export const listController = (
       numEntries: entries.length,
     }),
   );
+
+/** Runners on course or not started; the legacy view stops polling when the race is not today. */
+export const leftInForestController = (
+  api: Time4oApi,
+  raceId: string,
+  classes: ClassInfo[],
+  opts: { timeZone: string; live: boolean },
+) =>
+  pollingController(
+    (etag) => api.getEntries(raceId, {}, etag),
+    opts.live ? ORGANIZER_INTERVAL_MS : 0,
+    (entries: Entry[]): ResultRow[] => leftInForest(entryRows(entries, classes, opts)),
+  );
+
+export interface StartState {
+  rows: ResultRow[] | null;
+  marks: StartMark[];
+  /** Seconds since midnight in the event time zone. */
+  time: number;
+  error: string | null;
+}
+
+export interface StartController extends Controller<StartState> {
+  setWindow(w: StartWindow): void;
+}
+
+/**
+ * The start registration view, which always polls like the legacy one and
+ * refilters the runners every whole second so they appear at their call time.
+ */
+export function startRegistrationController(
+  api: Time4oApi,
+  raceId: string,
+  classes: ClassInfo[],
+  opts: {
+    timeZone: string;
+    window: StartWindow;
+    clock?: Clock;
+    onBeep?: (long: boolean) => void;
+  },
+): StartController {
+  const clock = opts.clock ?? systemClock;
+  const time = () => eventClock(clock.now(), 0, opts.timeZone) / 100;
+  const store = new Store<StartState>({ rows: null, marks: [], time: time(), error: null });
+  let win = opts.window;
+  let timer: ReturnType<typeof setTimeout> | null = null;
+
+  const filter = (patch: Partial<StartState> = {}) => {
+    const rows = patch.rows ?? store.get().rows;
+    if (!rows) return 0;
+    const now = time();
+    const { marks, beep } = startMarks(rows, now, win);
+    store.set({ ...patch, marks, time: now });
+    return beep;
+  };
+
+  const tick = (patch?: Partial<StartState>) => {
+    if (timer) clearTimeout(timer);
+    const beep = filter(patch);
+    if (beep > 0) opts.onBeep?.(beep == 2);
+    const ms = clock.now() % 1000;
+    timer = setTimeout(tick, ms > 800 ? 2000 - ms : 1000 - ms);
+  };
+
+  const poller = new Poller<Entry[]>({
+    request: (etag) => api.getEntries(raceId, {}, etag),
+    intervalMs: ORGANIZER_INTERVAL_MS,
+    onData: (entries) =>
+      tick({ rows: startRegistration(entryRows(entries, classes, opts)), error: null }),
+    onError: (error) => store.set({ error }),
+  });
+
+  return {
+    store,
+    start: () => poller.start(),
+    stop: () => {
+      poller.stop();
+      if (timer) clearTimeout(timer);
+      timer = null;
+    },
+    setWindow: (w) => {
+      win = w;
+      filter();
+    },
+  };
+}

@@ -1,4 +1,7 @@
 # LiveRes
+
+> **This is a modified fork** of Pål Kittilsen's [palkitt/liveresults](https://github.com/palkitt/liveresults), maintained by Anders B. Øksenholt since September 2026. It adds a standalone Time4o results app in [`spa/`](spa/). The rest of the repository follows upstream, and the text below is upstream's. It is licensed under the GNU LGPL v3 like upstream; see [LICENSE](LICENSE).
+
 LiveRes is a client-server system for publishing live results from sport events. The web frontend is published here: http://liveres.live. Admin page requires user/password. For questions and to get login information contact: Pål Kittilsen, pal.kittilsen@gmail.com
 
 [Norwegian user guide](https://palkitt.github.io/liveresults/guide_no)

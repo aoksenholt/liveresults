@@ -20,7 +20,7 @@ export function Info() {
       <br />
       Organizer guide: <a href="https://palkitt.github.io/liveresults/guide_no">Guide</a>
       <br />
-      &copy; Liveresults: <a href="https://github.com/palkitt/liveresults">Source code</a>
+      &copy; Liveresults: <a href="https://github.com/aoksenholt/liveresults">Source code</a>
     </div>
   );
 }

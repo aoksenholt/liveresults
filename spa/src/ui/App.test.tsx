@@ -1,7 +1,7 @@
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { Time4oApi } from '../api/client';
 import type { Entry, Race } from '../api/types';
-import { FIXTURES } from '../test/fixtures';
+import { FIXTURES, midRace } from '../test/fixtures';
 import { App } from './App';
 
 const interval = FIXTURES.interval!;
@@ -14,9 +14,9 @@ const race: Race = {
   identifierType: 'Norway',
   identifier: '123',
 };
-const entries = [...interval.entries, ...relay.entries];
+const allEntries = [...interval.entries, ...relay.entries];
 
-function fakeApi() {
+function fakeApi(entries = allEntries) {
   const json = (data: unknown) =>
     Promise.resolve(new Response(JSON.stringify({ data }), { status: 200 }));
   return new Time4oApi('https://t/', (url) => {
@@ -84,7 +84,7 @@ describe('App', () => {
     const org = interval.entries.find((e) => e.organisation?.id != null)!.organisation!;
     renderRace(`#club::${org.id}`);
     const table = await screen.findByRole('table');
-    const expected = entries.filter((e) => e.organisation?.id == org.id).length;
+    const expected = allEntries.filter((e) => e.organisation?.id == org.id).length;
     expect(within(table).getAllByRole('row')).toHaveLength(expected + 1);
   });
 
@@ -100,5 +100,25 @@ describe('App', () => {
     renderRace('#plainresults');
     expect(await screen.findByRole('heading', { name: 'Alle klasser' })).toBeInTheDocument();
     expect(screen.getAllByText(interval.raceClass.name!).length).toBeGreaterThan(1);
+  });
+
+  it('shows runners left in forest with a filter', async () => {
+    const live = midRace(allEntries);
+    render(<App api={fakeApi(live)} search="?comp=race-1&code=-2&lang=no" />);
+    const table = await screen.findByRole('table');
+    const count = within(table).getAllByRole('row').length - 1;
+    expect(count).toBeGreaterThan(1);
+    expect(screen.getByText(`Antall: ${count}`)).toBeInTheDocument();
+    fireEvent.change(screen.getByPlaceholderText('filter...'), { target: { value: 'zzzz' } });
+    expect(within(table).getAllByRole('row')).toHaveLength(1);
+  });
+
+  it('shows the start registration with a link to free start', async () => {
+    render(<App api={fakeApi()} search="?comp=race-1&code=0&calltime=4&lang=no" />);
+    expect(await screen.findByText('Startregistrering')).toBeInTheDocument();
+    expect(screen.getByText('Type: Tidsstart')).toBeInTheDocument();
+    expect(await screen.findByRole('table')).toBeInTheDocument();
+    const link = screen.getByRole('link', { name: /Bytt starttype/ });
+    expect(link.getAttribute('href')).toMatch(/calltime=4.*&openstart$/);
   });
 });
