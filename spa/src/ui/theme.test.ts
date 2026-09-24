@@ -1,34 +1,55 @@
-import { resolveTheme } from './theme';
+import { effectiveTheme, initialPreference, nextPreference, savePreference } from './theme';
 
 function storage(initial: Record<string, string> = {}) {
   const data = new Map(Object.entries(initial));
-  return {
+  return () => ({
     getItem: (k: string) => data.get(k) ?? null,
     setItem: (k: string, v: string) => void data.set(k, v),
-    data,
-  };
+  });
 }
 
-describe('resolveTheme', () => {
-  it('is classic unless dark is asked for', () => {
-    expect(resolveTheme(null, () => storage())).toBe('classic');
-    expect(resolveTheme('pink', () => storage())).toBe('classic');
-    expect(resolveTheme('dark', () => storage())).toBe('dark');
+const blocked = () => {
+  throw new Error('blocked');
+};
+
+describe('initialPreference', () => {
+  it('follows the device unless something else is chosen', () => {
+    expect(initialPreference(null, storage())).toBe('auto');
+    expect(initialPreference('pink', storage())).toBe('auto');
+    expect(initialPreference('dark', storage())).toBe('dark');
+    expect(initialPreference('classic', storage())).toBe('classic');
   });
 
-  it('remembers the theme from the URL', () => {
+  it('remembers the theme from the URL and the toggle', () => {
     const s = storage();
-    resolveTheme('dark', () => s);
-    expect(resolveTheme(null, () => s)).toBe('dark');
-    resolveTheme('classic', () => s);
-    expect(resolveTheme(null, () => s)).toBe('classic');
+    initialPreference('dark', s);
+    expect(initialPreference(null, s)).toBe('dark');
+    savePreference('classic', s);
+    expect(initialPreference(null, s)).toBe('classic');
+    initialPreference('auto', s);
+    expect(initialPreference(null, s)).toBe('auto');
   });
 
   it('works when storage is blocked', () => {
-    const blocked = () => {
-      throw new Error('blocked');
-    };
-    expect(resolveTheme('dark', blocked)).toBe('dark');
-    expect(resolveTheme(null, blocked)).toBe('classic');
+    expect(initialPreference('dark', blocked)).toBe('dark');
+    expect(initialPreference(null, blocked)).toBe('auto');
+    expect(() => savePreference('dark', blocked)).not.toThrow();
+  });
+});
+
+describe('effectiveTheme', () => {
+  it('uses the device setting for auto', () => {
+    expect(effectiveTheme('auto', true)).toBe('dark');
+    expect(effectiveTheme('auto', false)).toBe('classic');
+    expect(effectiveTheme('classic', true)).toBe('classic');
+    expect(effectiveTheme('dark', false)).toBe('dark');
+  });
+});
+
+describe('nextPreference', () => {
+  it('cycles auto, classic and dark', () => {
+    expect(nextPreference('auto')).toBe('classic');
+    expect(nextPreference('classic')).toBe('dark');
+    expect(nextPreference('dark')).toBe('auto');
   });
 });

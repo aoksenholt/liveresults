@@ -44,6 +44,10 @@ const spaStrings: Record<string, Resources> = {
     _SWITCHSTARTTYPE: 'Switch start type',
     _SOUND: 'Sound on/off',
     _COUNT: 'Count',
+    _THEME: 'Theme',
+    _THEMEAUTO: 'as the device',
+    _THEMELIGHT: 'light',
+    _THEMEDARK: 'dark',
   },
   no: {
     _ALLCLASSES: 'Alle klasser',
@@ -69,6 +73,10 @@ const spaStrings: Record<string, Resources> = {
     _SWITCHSTARTTYPE: 'Bytt starttype',
     _SOUND: 'Lyd av/på',
     _COUNT: 'Antall',
+    _THEME: 'Tema',
+    _THEMEAUTO: 'som enheten',
+    _THEMELIGHT: 'lyst',
+    _THEMEDARK: 'mørkt',
   },
 };
 

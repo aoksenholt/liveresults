@@ -16,6 +16,7 @@ import { LastPassings } from './LastPassings';
 import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
 import { routeHash, type Route } from './route';
+import { ThemeToggle } from './ThemeToggle';
 
 export interface RaceProps {
   raceId: string;
@@ -66,6 +67,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
           ▤
         </button>
         <span className="title">{name}</span>
+        <ThemeToggle className="navbtn theme-toggle" />
       </div>
       <div className="container">
         <nav className={menuOpen ? 'class-column' : 'class-column closed'} onClick={closeOnMobile}>
@@ -82,7 +84,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
           ) : (
             <RouteView route={route} raceId={raceId} info={info} classList={classList} />
           )}
-          <Info />
+          <Info themeToggle={false} />
         </main>
       </div>
     </>

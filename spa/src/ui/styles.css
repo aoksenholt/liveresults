@@ -14,7 +14,7 @@
   --hover-row: #c0d6ff;
 }
 
-/* Opt-in with ?theme=dark while it is tried out, from mattias242/liveresults. */
+/* From mattias242/liveresults; chosen by the device setting, the toggle or ?theme=dark. */
 :root[data-theme='dark'] {
   --bg: #1f1f22;
   --text: #f2f2f4;
@@ -751,4 +751,22 @@ tr.yellow_row .club {
 
 :root[data-theme='dark'] .race-table tr:has(> td + td) > td {
   border-bottom: 1px solid var(--border);
+}
+
+.bar .theme-toggle {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--link);
+  cursor: pointer;
+}
+
+.link-button:hover {
+  text-decoration: underline;
 }
