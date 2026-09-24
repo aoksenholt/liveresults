@@ -13,6 +13,7 @@ import {
   initialPreference,
   nextPreference,
   savePreference,
+  type Theme,
   type ThemePreference,
 } from './theme';
 
@@ -27,6 +28,7 @@ const prefersDark = () => window.matchMedia?.(DARK_QUERY).matches ?? false;
 
 interface ThemeState {
   preference: ThemePreference;
+  theme: Theme;
   toggle: () => void;
 }
 
@@ -51,8 +53,14 @@ export function useTheme(param: string | null): ThemeState {
       return next;
     });
   }, []);
-  return useMemo(() => ({ preference, toggle }), [preference, toggle]);
+  return useMemo(() => ({ preference, theme, toggle }), [preference, theme, toggle]);
 }
+
+/** Without a theme, as in component tests, the page has the classic look. */
+export const useNewLook = () => {
+  const theme = useContext(ThemeContext)?.theme;
+  return theme != null && theme != 'classic';
+};
 
 const ICONS: Record<ThemePreference, string> = {
   auto: '🌓',

@@ -47,6 +47,7 @@ function renderRace(hash: string) {
 
 afterEach(() => {
   window.location.hash = '';
+  localStorage.clear();
 });
 
 describe('App', () => {
@@ -137,6 +138,16 @@ describe('App', () => {
     expect(headers[0]).toHaveTextContent(interval.raceClass.name!);
     expect(screen.queryByText('Siste oppdateringer')).not.toBeInTheDocument();
     const firstTable = screen.getAllByRole('table')[0]!;
+    expect(
+      within(firstTable)
+        .getAllByRole('columnheader')
+        .map((h) => h.textContent),
+    ).toEqual(['#', 'Navn / Klubb', '№', 'Start', 'Mål', 'Diff']);
+  });
+
+  it('keeps separate name and club columns in the classic look', async () => {
+    render(<App api={fakeApi()} search="?comp=race-1&lang=no&scroll&theme=classic" />);
+    const firstTable = (await screen.findAllByRole('table'))[0]!;
     expect(
       within(firstTable)
         .getAllByRole('columnheader')
