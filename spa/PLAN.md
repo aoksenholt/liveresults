@@ -36,8 +36,8 @@ Kryss av (`[x]`) etter hvert som steg blir fullført.
 ## Fase 3 – Visninger mens løpet pågår
 
 - [ ] Siste passeringer, utledet fra `updated`-tidspunktene i deltakerdataene (Time4o har ikke et eget endepunkt for dette)
-- [ ] Løpere som fortsatt er i skogen (startet, ikke i mål)
-- [ ] Startvisning ut fra starttider
+- [x] Løpere som fortsatt er i skogen (startet, ikke i mål): `?comp=<uuid>&code=-2`, som `radio.php`
+- [x] Startvisning ut fra starttider: `?comp=<uuid>&code=0[&openstart]`, med opprop, pip og samme URL-parametere som `radio.php` (uten meldinger og brikkesjekk, som krever LiveRes-databasen)
 - [ ] Rullende målvisning
 
 ## Fase 4 – Utseende som mattias242 sitt UI
@@ -55,7 +55,7 @@ paritetstestene dekker.
 
 ## Fase 5 – Publisering
 
-- [ ] Cloudflare Pages koblet til forken: `main` publiseres automatisk og hver PR får en forhåndsvisning
+- [x] Cloudflare Pages koblet til forken: `main` publiseres automatisk og hver PR får en forhåndsvisning
 - [ ] Eget domene (valgfritt)
 - [ ] Test under et ekte løp, side om side med den gamle siden
 
@@ -72,7 +72,7 @@ Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene ge
 
 - [ ] Spørre Time4o om grenser for antall forespørsler og vilkår for å bruke API-et
 - [ ] Vurdere å flytte Node-typene til en egen tsconfig for tester, så nettleserkoden ikke ser dem
-- [ ] PR fra `feat/time4o-spa-ui` til `main` i forken
+- [x] PR fra `feat/time4o-spa-ui` til `main` i forken
 
 ## Utenfor scope
 

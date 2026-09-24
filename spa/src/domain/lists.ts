@@ -117,12 +117,12 @@ export function sprintList(
   return columns;
 }
 
-function startBib(bib: number): string {
+export function startBib(bib: number): string {
   if (bib < 0) return `${(-bib / 100) | 0}-${-bib % 100}`;
   return bib > 0 ? String(bib) : '';
 }
 
-function ecards(row: ResultRow): string {
+export function ecards(row: ResultRow): string {
   const [e1, e2] = [num(row.ecard1), num(row.ecard2)];
   if (e1 > 0) return e2 > 0 ? `${row.ecard1} / ${row.ecard2}` : row.ecard1;
   return e2 > 0 ? row.ecard2 : '';

@@ -370,3 +370,89 @@ td i {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+/* Organizer views of the legacy radio.php */
+.organizer-head {
+  background-color: #555556;
+  color: #fff;
+  padding: 10px;
+  margin: 3px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
+
+.organizer-head a:link,
+.organizer-head a:visited,
+.organizer-head button {
+  color: #fff;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.organizer-head label {
+  text-align: right;
+}
+
+.organizer-head label > span:first-child {
+  display: inline-block;
+  width: 50px;
+}
+
+.organizer-head input {
+  width: 40px;
+}
+
+.organizer-head input.gray {
+  background-color: lightgray;
+}
+
+.organizer-head input.yellow {
+  background-color: yellow;
+}
+
+.organizer-head .clock {
+  display: inline-block;
+  width: 60px;
+  text-align: right;
+}
+
+.organizer-head .call-clock {
+  color: yellow;
+}
+
+.organizer .results {
+  margin: 3px;
+  width: calc(100% - 6px);
+}
+
+.organizer .late {
+  color: red;
+}
+
+.firststarter > td {
+  border-top: 5px solid black !important;
+}
+
+.pre_post_start > td {
+  background: #dfdfdf !important;
+  box-shadow: none !important;
+}
+
+tr.yellow_row > td,
+tr.yellow_row_new > td {
+  color: #000;
+  background: #ff0 !important;
+  box-shadow: none !important;
+}
+
+tr.yellow_row_new > td {
+  border-top: 2px solid grey !important;
+}
+
+tr.yellow_row .bib,
+tr.yellow_row .club {
+  color: #000;
+}

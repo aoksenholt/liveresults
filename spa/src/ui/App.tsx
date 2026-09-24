@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { Time4oApi } from '../api/client';
 import { resolveLanguage } from '../i18n';
 import { createDisplay, DisplayContext } from './context';
+import { LEFT_IN_FOREST, OrganizerView, START_REGISTRATION } from './Organizer';
 import { RaceList } from './RaceList';
 import { RaceView } from './RaceView';
 
@@ -14,6 +15,7 @@ export function App({
 }) {
   const params = new URLSearchParams(search);
   const comp = params.get('comp');
+  const code = params.get('code');
   const lang = resolveLanguage(params.get('lang'));
   const display = useMemo(() => createDisplay(lang, api ?? new Time4oApi()), [lang, api]);
 
@@ -23,7 +25,13 @@ export function App({
 
   return (
     <DisplayContext value={display}>
-      {comp ? <RaceView raceId={comp} /> : <RaceList />}
+      {comp && (code == LEFT_IN_FOREST || code == START_REGISTRATION) ? (
+        <OrganizerView raceId={comp} code={code} params={params} />
+      ) : comp ? (
+        <RaceView raceId={comp} />
+      ) : (
+        <RaceList />
+      )}
     </DisplayContext>
   );
 }
