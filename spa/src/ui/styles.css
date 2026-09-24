@@ -709,10 +709,13 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .columns-choice {
   gap: 0.35rem;
+}
+
+:root[data-look='new'] .freeze-toggle {
   margin-left: auto;
 }
 
-:root[data-look='new'] .columns-choice button {
+:root[data-look='new'] :is(.columns-choice button, .freeze-toggle) {
   display: inline-flex;
   padding: 0.4rem 0.5rem;
   color: var(--text);
@@ -722,15 +725,15 @@ tr.yellow_row .club {
   cursor: pointer;
 }
 
-:root[data-look='new'] .columns-choice svg {
+:root[data-look='new'] :is(.columns-choice, .freeze-toggle) svg {
   fill: currentColor;
 }
 
-:root[data-look='new'] .columns-choice button:hover {
+:root[data-look='new'] :is(.columns-choice button, .freeze-toggle):hover {
   border-color: var(--orange);
 }
 
-:root[data-look='new'] .columns-choice button[aria-pressed='true'] {
+:root[data-look='new'] :is(.columns-choice button, .freeze-toggle)[aria-pressed='true'] {
   color: var(--orange);
   border-color: var(--orange);
   background: var(--hover-row);

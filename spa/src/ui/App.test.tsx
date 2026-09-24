@@ -154,6 +154,20 @@ describe('App', () => {
     expect(clubLink.getAttribute('href')).toMatch(/^#club::\d+$/);
   });
 
+  it('freezes place and name when the user asks for it', async () => {
+    renderRace(`#${encodeURI(interval.raceClass.name!)}`);
+    const table = await screen.findByRole('table');
+    const name = () => within(table).getByRole('columnheader', { name: 'Navn / Klubb' });
+    expect(name()).not.toHaveClass('fixed-name');
+    const freeze = screen.getByRole('button', { name: 'Lås plass og navn' });
+    fireEvent.click(freeze);
+    expect(freeze).toHaveAttribute('aria-pressed', 'true');
+    expect(name()).toHaveClass('fixed-name');
+    expect(localStorage.getItem('liveres-frozen')).toBe('1');
+    fireEvent.click(freeze);
+    expect(name()).not.toHaveClass('fixed-name');
+  });
+
   it('shows club results', async () => {
     const org = interval.entries.find((e) => e.organisation?.id != null)!.organisation!;
     renderRace(`#club::${org.id}`);

@@ -55,6 +55,7 @@ const spaStrings: Record<string, Resources> = {
     _CLUBS: 'Clubs',
     _RUNNERS: 'Runners',
     _COLUMNS: 'Classes side by side',
+    _FREEZE: 'Freeze place and name',
   },
   no: {
     _ALLCLASSES: 'Alle klasser',
@@ -91,6 +92,7 @@ const spaStrings: Record<string, Resources> = {
     _CLUBS: 'Klubber',
     _RUNNERS: 'Løpere',
     _COLUMNS: 'Klasser side om side',
+    _FREEZE: 'Lås plass og navn',
   },
 };
 

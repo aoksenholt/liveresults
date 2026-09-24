@@ -18,6 +18,7 @@ import { classResultsController } from '../state/controllers';
 import { html, Loading, Message } from './common';
 import { useDisplay } from './context';
 import { clearFound, scrollToRow, useFound } from './found';
+import { useFrozenColumns } from './frozen';
 import { useControllerState } from './hooks';
 import type { RaceProps } from './RaceView';
 import { routeHash } from './route';
@@ -154,6 +155,7 @@ export function ClassTable(props: {
   const { res, format } = useDisplay();
   const newLook = useNewLook();
   const isFound = useFound(cls.className);
+  const [frozen] = useFrozenColumns();
   const options = useMemo<TableOptions>(
     () => ({
       labels: format.labels,
@@ -205,7 +207,13 @@ export function ClassTable(props: {
   const shown = table.columns.map((c, i) => [c, i] as const).filter(([c]) => c.visible);
   const visible = newLook ? stackRunnerColumns(shown) : shown;
   const fixed = (c: Column) =>
-    !newLook ? '' : c.kind == 'place' ? 'fixed-place' : c.kind == 'runner' ? 'fixed-name' : '';
+    !newLook || !frozen
+      ? ''
+      : c.kind == 'place'
+        ? 'fixed-place'
+        : c.kind == 'runner'
+          ? 'fixed-name'
+          : '';
 
   const results = (
     <table className="results">
