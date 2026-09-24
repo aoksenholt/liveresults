@@ -15,6 +15,7 @@ import { raceListController } from '../state/controllers';
 import { Info, Loading } from './common';
 import { deviceType, useDisplay } from './context';
 import { useControllerState } from './hooks';
+import { Logo } from './Logo';
 import { ThemeToggle, useNewLook } from './ThemeToggle';
 
 function HeaderRow() {
@@ -118,15 +119,6 @@ function AllRaces({ data }: { data: RaceListData }) {
   );
 }
 
-function Logo() {
-  return (
-    <svg className="logo" width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
-      <rect width="36" height="36" rx="3" fill="#fff" />
-      <path d="M36 0V33a3 3 0 0 1-3 3H0Z" fill="var(--orange)" />
-    </svg>
-  );
-}
-
 function LanguagePicker() {
   const { lang, res } = useDisplay();
   const choose = (value: string) => {
@@ -159,7 +151,7 @@ function Hero() {
         <div className="hero-top">
           <span className="brand">
             <Logo />
-            {res._TITLE}
+            <span className="brand-name">{res._TITLE}</span>
           </span>
           <ThemeToggle className="navbtn theme-toggle" />
           <LanguagePicker />
