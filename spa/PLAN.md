@@ -74,7 +74,7 @@ Løpslisten har fortsatt det gamle utseendet med én tabell per år. Den skal se
 forsiden av betaen (`live.eoc2026.lt/beta`). To PR-er: først toppfelt og dagens løp, så siste
 og kommende løp med filter.
 
-- [ ] ☰-knappen («Velg løp») i topplinjen blir klemt smal på mobil når løpsnavnet er langt, og skal ikke krympe
+- [x] ☰-knappen («Velg løp») i topplinjen blir klemt smal på mobil når løpsnavnet er langt, og skal ikke krympe
 - [ ] Toppfelt med skogsgrønn bakgrunn, logo, «Liveresultater for orientering» og knapper for tema og språk
 - [ ] «Dagens løp» som et kort med oransje kant til venstre, **LIVE**-merke på løp som pågår, og løpsnavn og arrangør på hver rad
 - [ ] «Siste løp» fra de siste sju dagene og kommende løp som egne kort i stedet for én lang tabell per år

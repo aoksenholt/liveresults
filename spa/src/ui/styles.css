@@ -101,6 +101,10 @@ h1 {
   gap: 0.5em;
 }
 
+.bar .navbtn {
+  flex-shrink: 0;
+}
+
 .bar .title {
   font-weight: bold;
   overflow: hidden;
