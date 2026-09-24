@@ -68,6 +68,20 @@ samme som før.
 - [x] Med mer enn én kolonne har hver kolonne sin egen nedtrekksmeny i stedet for faner, og tomme kolonner viser «Ingen klasse valgt!». Den første kolonnen følger adressen, de andre fylles med de åpne fanene og blir faner igjen når man går tilbake til én kolonne
 - [x] Plass og navn kan låses til venstre mens mellomtidene scroller vannrett i klassetabellen, som frosne kolonner i et regneark, og navnekolonnen er da smalere på mobil. Brukeren slår det på med en knapp ved siden av søket, og valget huskes i nettleseren (av som standard)
 
+## Fase 4c – Løpslisten som i betaen
+
+Løpslisten har fortsatt det gamle utseendet med én tabell per år. Den skal se ut som
+forsiden av betaen (`live.eoc2026.lt/beta`). To PR-er: først toppfelt og dagens løp, så siste
+og kommende løp med filter.
+
+- [ ] ☰-knappen («Velg løp») i topplinjen blir klemt smal på mobil når løpsnavnet er langt, og skal ikke krympe
+- [ ] Toppfelt med skogsgrønn bakgrunn, logo, «Liveresultater for orientering» og knapper for tema og språk
+- [ ] «Dagens løp» som et kort med oransje kant til venstre, **LIVE**-merke på løp som pågår, og løpsnavn og arrangør på hver rad
+- [ ] «Siste løp» fra de siste sju dagene og kommende løp som egne kort i stedet for én lang tabell per år
+- [ ] Filterknapper eller søk etter løp og arrangør (betaen filtrerer på land, men Time4o-løpene er stort sett norske)
+- [ ] På mobil står arrangøren på en egen linje under løpsnavnet
+- [ ] Oversette overskrifter som fortsatt er på engelsk, som «LIVE TODAY!»
+
 ## Fase 5 – Publisering
 
 - [x] Cloudflare Pages koblet til forken: `main` publiseres automatisk og hver PR får en forhåndsvisning
@@ -87,6 +101,7 @@ Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene ge
 ## Løse tråder
 
 - [ ] Spørre Time4o om grenser for antall forespørsler og vilkår for å bruke API-et
+- [ ] Lenken «Organizer guide» nederst på siden peker til palkitt sin guide
 - [ ] Vurdere å flytte Node-typene til en egen tsconfig for tester, så nettleserkoden ikke ser dem
 - [x] PR fra `feat/time4o-spa-ui` til `main` i forken
 
