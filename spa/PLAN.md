@@ -87,6 +87,7 @@ og kommende løp med filter.
 - [x] Overskriftsraden i resultattabellene blir stående øverst i vinduet når man scroller nedover, også når tabellen scroller sideveis og med låste kolonner
 - [x] Den svarte topplinjen med løpsnavnet glir bort når man scroller nedover og kommer tilbake når man scroller oppover, som på betaen. Overskriftsraden i tabellen legger seg da under den
 - [x] På løpssiden går «← logo» tilbake til løpslisten i stedet for ☰, og på mobil står datoen under løpsnavnet. Temaknappen på forsiden blir ikke lenger klemt smal på mobil
+- [x] Sider som står åpne får vite om ny versjon: hvert 5. minutt og når fanen blir synlig igjen sammenlignes `version.json` fra bygget med versjonen som kjører. Er fanen skjult, eller det er den scrollende siden, lastes den på nytt med en gang; ellers vises et banner med «Last inn på nytt»
 
 ## Fase 5 – Publisering
 
