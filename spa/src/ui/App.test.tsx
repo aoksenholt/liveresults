@@ -123,19 +123,26 @@ describe('App', () => {
     ).toHaveAttribute('href', `#club::${club.id}`);
   });
 
-  it('shows opened classes side by side', async () => {
-    renderRace(`#${encodeURI(interval.raceClass.name!)}`);
+  it('has a class picker in each column when there is more than one', async () => {
+    const h16 = `#${encodeURI(interval.raceClass.name!)}`;
+    renderRace(h16);
     await screen.findByRole('table');
     window.location.hash = '#plainresults';
     expect(await screen.findByRole('heading', { name: 'Alle klasser' })).toBeInTheDocument();
     const columns = screen.getByRole('group', { name: 'Klasser side om side' });
-    fireEvent.click(within(columns).getByRole('button', { name: '2' }));
-    expect(within(columns).getByRole('button', { name: '2' })).toHaveAttribute(
-      'aria-pressed',
-      'true',
-    );
+    fireEvent.click(within(columns).getByRole('button', { name: '3' }));
+    const pickers = screen.getAllByRole('combobox', { name: 'Velg klasse' });
+    expect(pickers.map((p) => (p as HTMLSelectElement).value)).toEqual(['#plainresults', h16, '']);
     expect(await screen.findByRole('heading', { name: /^H 16/ })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Alle klasser' })).toBeInTheDocument();
+    expect(screen.getByText('Ingen klasse valgt!')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^Lukk / })).not.toBeInTheDocument();
+    fireEvent.change(pickers[2]!, { target: { value: '#startlist' } });
+    expect(screen.queryByText('Ingen klasse valgt!')).not.toBeInTheDocument();
+    fireEvent.click(within(columns).getByRole('button', { name: '1' }));
+    expect(screen.getAllByRole('combobox', { name: 'Velg klasse' })).toHaveLength(1);
+    expect(
+      screen.getAllByRole('button', { name: /^Lukk / }).map((b) => b.getAttribute('aria-label')),
+    ).toEqual([`Lukk ${interval.raceClass.name}`, 'Lukk Alle klasser', 'Lukk Startliste']);
   });
 
   it('shows class results with club links', async () => {

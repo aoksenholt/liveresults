@@ -83,6 +83,8 @@ export interface Tabs {
   tabs: string[];
   current: string;
   close: (hash: string) => void;
+  /** Opens a tab for each page, for the columns when going back to one. */
+  openAll: (hashes: string[]) => void;
   label: (hash: string) => string;
 }
 
@@ -103,8 +105,39 @@ export function useTabs(items: ClassListItem[], route: Route): Tabs {
     setState({ tabs: rest, shown });
     if (next) window.location.hash = next;
   };
+  const openAll = (hashes: string[]) =>
+    setState((s) => ({ ...s, tabs: hashes.reduce((t, h) => openTab(t, h, entries), s.tabs) }));
   const label = (hash: string) => entries.find((e) => e.hash == hash)?.label ?? hash;
-  return { entries, tabs, current, close, label };
+  return { entries, tabs, current, close, openAll, label };
+}
+
+/** A drop-down of every page of the menu; other pages, such as clubs, show the placeholder. */
+export function PageSelect({
+  entries,
+  value,
+  onChange,
+}: {
+  entries: MenuEntry[];
+  value: string;
+  onChange: (hash: string) => void;
+}) {
+  const { res } = useDisplay();
+  return (
+    <select
+      aria-label={res._CHOOSECLASS}
+      value={entries.some((e) => e.hash == value) ? value : ''}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      <option value="" disabled>
+        {res._CHOOSECLASS}
+      </option>
+      {entries.map((e) => (
+        <option key={e.hash} value={e.hash}>
+          {e.label}
+        </option>
+      ))}
+    </select>
+  );
 }
 
 export const MAX_COLUMNS = 4;
@@ -125,13 +158,13 @@ function ColumnsIcon({ columns }: { columns: number }) {
 
 /**
  * The class picker of the new look: class buttons until a class is chosen, then a drop-down
- * with every page of the menu, the number of pages side by side and a tab for each page opened.
+ * with every page of the menu and a tab for each page opened. With more than one column, each
+ * column has its own drop-down instead.
  */
 export function ClassPicker({
   items,
   route,
   tabs: { entries, tabs, current, close, label },
-  shown,
   columns,
   setColumns,
   search,
@@ -139,7 +172,6 @@ export function ClassPicker({
   items: ClassListItem[];
   route: Route;
   tabs: Tabs;
-  shown: string[];
   columns: number;
   setColumns: (columns: number) => void;
   search: ReactNode;
@@ -150,21 +182,12 @@ export function ClassPicker({
   return (
     <section className="class-picker">
       <div className="class-toolbar">
-        {chosen && (
-          <select
-            aria-label={res._CHOOSECLASS}
-            value={entries.some((e) => e.hash == current) ? current : ''}
-            onChange={(e) => (window.location.hash = e.target.value)}
-          >
-            <option value="" disabled>
-              {res._CHOOSECLASS}
-            </option>
-            {entries.map((e) => (
-              <option key={e.hash} value={e.hash}>
-                {e.label}
-              </option>
-            ))}
-          </select>
+        {chosen && columns == 1 && (
+          <PageSelect
+            entries={entries}
+            value={current}
+            onChange={(hash) => (window.location.hash = hash)}
+          />
         )}
         {search}
         {chosen && (
@@ -190,15 +213,10 @@ export function ClassPicker({
           </nav>
         </>
       )}
-      {chosen && tabs.length > 0 && (
+      {chosen && columns == 1 && tabs.length > 0 && (
         <nav className="tabs">
           {tabs.map((hash) => (
-            <span
-              key={hash}
-              className={
-                hash == current ? 'tab active' : shown.includes(hash) ? 'tab shown' : 'tab'
-              }
-            >
+            <span key={hash} className={hash == current ? 'tab active' : 'tab'}>
               <a href={hash}>{label(hash)}</a>
               <button onClick={() => close(hash)} aria-label={`${res._CLOSETAB} ${label(hash)}`}>
                 ×

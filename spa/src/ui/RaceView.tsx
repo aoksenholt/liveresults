@@ -6,7 +6,7 @@ import {
   type ClassList,
   type RaceInfo,
 } from '../state/controllers';
-import { ClassMenu, ClassPicker, useTabs } from './ClassMenu';
+import { ClassMenu, ClassPicker, PageSelect, useTabs } from './ClassMenu';
 import { ClassResults } from './ClassResults';
 import { ClubResults } from './ClubResults';
 import { Info, Loading, Message } from './common';
@@ -17,7 +17,7 @@ import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
 import { parseHash, type Route } from './route';
 import { RaceSearch } from './Search';
-import { visibleTabs } from './tabs';
+import { otherColumns } from './tabs';
 import { ThemeToggle, useNewLook } from './ThemeToggle';
 
 export interface RaceProps {
@@ -111,29 +111,53 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
 }
 
 function NewLookPage({ route, ...props }: RaceProps & { route: Route }) {
+  const { res } = useDisplay();
   const { raceId, info, classList } = props;
   const tabs = useTabs(classList.items, route);
   const [columns, setColumns] = useState(1);
-  const shown = route.kind == 'none' ? [] : visibleTabs(tabs.tabs, tabs.current, columns);
+  const [others, setOthers] = useState<string[]>([]);
+  const chooseColumns = (n: number) => {
+    if (n == 1) tabs.openAll(others.filter((h) => h != ''));
+    setOthers(otherColumns(others, tabs.tabs, tabs.current, n));
+    setColumns(n);
+  };
+  const choose = (i: number, hash: string) =>
+    setOthers((pages) => pages.map((p, j) => (j == i ? hash : p)));
+  const pane = (hash: string) =>
+    hash == '' ? (
+      <div className="empty-column">{res._NOCLASSCHOSEN}</div>
+    ) : (
+      <RouteView route={parseHash(hash)} {...props} />
+    );
   return (
     <main className={columns > 1 ? 'page wide' : 'page'}>
       <ClassPicker
         items={classList.items}
         route={route}
         tabs={tabs}
-        shown={shown}
         columns={columns}
-        setColumns={setColumns}
+        setColumns={chooseColumns}
         search={<RaceSearch raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />}
       />
       {info.live && (
         <LastPassings raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />
       )}
-      {shown.length > 0 && (
-        <div className="columns" style={{ '--columns': shown.length } as CSSProperties}>
-          {shown.map((hash) => (
-            <div className="column" key={hash}>
-              <RouteView route={parseHash(hash)} {...props} />
+      {route.kind == 'none' ? null : columns == 1 ? (
+        pane(tabs.current)
+      ) : (
+        <div className="columns" style={{ '--columns': columns } as CSSProperties}>
+          <div className="column">
+            <PageSelect
+              entries={tabs.entries}
+              value={tabs.current}
+              onChange={(hash) => (window.location.hash = hash)}
+            />
+            {pane(tabs.current)}
+          </div>
+          {others.map((hash, i) => (
+            <div className="column" key={i}>
+              <PageSelect entries={tabs.entries} value={hash} onChange={(h) => choose(i, h)} />
+              {pane(hash)}
             </div>
           ))}
         </div>
