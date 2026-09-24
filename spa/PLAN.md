@@ -55,7 +55,7 @@ paritetstestene dekker.
 
 ## Fase 5 – Publisering
 
-- [ ] Cloudflare Pages koblet til forken: `master` publiseres automatisk og hver PR får en forhåndsvisning
+- [ ] Cloudflare Pages koblet til forken: `main` publiseres automatisk og hver PR får en forhåndsvisning
 - [ ] Eget domene (valgfritt)
 - [ ] Test under et ekte løp, side om side med den gamle siden
 
@@ -64,7 +64,7 @@ paritetstestene dekker.
 Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene genereres fra
 `web/templates/emmalang_*.php`. Endringer i upstream som påvirker SPA-en, gir derfor røde tester.
 
-- [ ] Planlagt GitHub Actions-workflow som henter `upstream/master` og åpner en PR fra `upstream-sync` når det finnes nye commits, med liste over endrede filer i `web/js/liveresults*.js` og `emmalang_*.php`. Workflowen stopper ved merge-konflikter
+- [ ] Planlagt GitHub Actions-workflow som henter `upstream/master` og åpner en PR fra `upstream-sync` mot `main` når det finnes nye commits, med liste over endrede filer i `web/js/liveresults*.js` og `emmalang_*.php`. Workflowen stopper ved merge-konflikter
 - [ ] Workflowen kjører `npm run convert-lang` og legger oppdaterte `lang/*.json` inn i PR-en
 - [ ] (Valgfritt) Claude Code GitHub Action som foreslår portering til `src/domain/` når paritetstestene feiler. Krever API-nøkkel som secret og koster litt per kjøring
 
@@ -72,7 +72,7 @@ Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene ge
 
 - [ ] Spørre Time4o om grenser for antall forespørsler og vilkår for å bruke API-et
 - [ ] Vurdere å flytte Node-typene til en egen tsconfig for tester, så nettleserkoden ikke ser dem
-- [ ] PR fra `feat/time4o-spa-ui` til `master` i forken
+- [ ] PR fra `feat/time4o-spa-ui` til `main` i forken
 
 ## Utenfor scope
 
