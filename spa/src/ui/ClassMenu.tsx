@@ -1,6 +1,7 @@
 import { Fragment, useMemo, useState, type ReactNode } from 'react';
 import type { ClassListItem } from '../domain/classList';
 import { useDisplay } from './context';
+import { useFrozenColumns } from './frozen';
 import { routeHash, type Route } from './route';
 import { closeTab, menuEntries, openTab, type MenuEntry } from './tabs';
 
@@ -161,6 +162,25 @@ function ColumnsIcon({ columns }: { columns: number }) {
  * with every page of the menu and a tab for each page opened. With more than one column, each
  * column has its own drop-down instead.
  */
+function FreezeToggle() {
+  const { res } = useDisplay();
+  const [frozen, toggle] = useFrozenColumns();
+  return (
+    <button
+      className="freeze-toggle"
+      aria-label={res._FREEZE}
+      title={res._FREEZE}
+      aria-pressed={frozen}
+      onClick={toggle}
+    >
+      <svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true">
+        <rect width="7" height="12" rx="1.5" />
+        <rect x="8.5" y="0.5" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" />
+      </svg>
+    </button>
+  );
+}
+
 export function ClassPicker({
   items,
   route,
@@ -190,6 +210,7 @@ export function ClassPicker({
           />
         )}
         {search}
+        {chosen && <FreezeToggle />}
         {chosen && (
           <div className="columns-choice" role="group" aria-label={res._COLUMNS}>
             {counts.map((n) => (
