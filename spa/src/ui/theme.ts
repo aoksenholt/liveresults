@@ -1,11 +1,19 @@
 export type Theme = 'classic' | 'dark';
+/** `auto` follows the light or dark setting of the device. */
+export type ThemePreference = 'auto' | Theme;
 
 const KEY = 'liveres-theme';
+const PREFERENCES: ThemePreference[] = ['auto', 'classic', 'dark'];
 
 type ThemeStorage = Pick<Storage, 'getItem' | 'setItem'>;
+type GetStorage = () => ThemeStorage;
+const localStorage: GetStorage = () => window.localStorage;
+
+const parse = (value: string | null): ThemePreference | null =>
+  PREFERENCES.find((p) => p == value) ?? null;
 
 // Even reading `localStorage` throws when the browser blocks it, e.g. in third-party iframes.
-function read(storage: () => ThemeStorage): string | null {
+function read(storage: GetStorage): string | null {
   try {
     return storage().getItem(KEY);
   } catch {
@@ -13,18 +21,23 @@ function read(storage: () => ThemeStorage): string | null {
   }
 }
 
-/** `?theme=` wins and is remembered, since links between pages do not carry it. */
-export function resolveTheme(
-  param: string | null,
-  storage: () => ThemeStorage = () => window.localStorage,
-): Theme {
-  const theme = (param ?? read(storage)) == 'dark' ? 'dark' : 'classic';
-  if (param != null) {
-    try {
-      storage().setItem(KEY, theme);
-    } catch {
-      // The theme then only lasts for this page.
-    }
+export function savePreference(preference: ThemePreference, storage = localStorage) {
+  try {
+    storage().setItem(KEY, preference);
+  } catch {
+    // The choice then only lasts for this page.
   }
-  return theme;
 }
+
+/** `?theme=` wins and is remembered, since links between pages do not carry it. */
+export function initialPreference(param: string | null, storage = localStorage): ThemePreference {
+  const fromUrl = parse(param);
+  if (fromUrl) savePreference(fromUrl, storage);
+  return fromUrl ?? parse(read(storage)) ?? 'auto';
+}
+
+export const effectiveTheme = (preference: ThemePreference, prefersDark: boolean): Theme =>
+  preference == 'auto' ? (prefersDark ? 'dark' : 'classic') : preference;
+
+export const nextPreference = (preference: ThemePreference): ThemePreference =>
+  PREFERENCES[(PREFERENCES.indexOf(preference) + 1) % PREFERENCES.length]!;

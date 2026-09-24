@@ -143,4 +143,28 @@ describe('App', () => {
         .map((h) => h.textContent),
     ).toEqual(['#', 'Navn', 'Klubb', '№', 'Start', 'Mål', 'Diff']);
   });
+
+  it('follows the device theme until the toggle picks one', async () => {
+    localStorage.clear();
+    const matchMedia = vi.fn(() => ({
+      matches: true,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }));
+    vi.stubGlobal('matchMedia', matchMedia);
+    try {
+      renderRace('');
+      const toggle = await screen.findByRole('button', { name: 'Tema: som enheten' });
+      expect(document.documentElement.dataset.theme).toBe('dark');
+      fireEvent.click(toggle);
+      expect(toggle).toHaveAccessibleName('Tema: lyst');
+      expect(document.documentElement.dataset.theme).toBe('classic');
+      fireEvent.click(toggle);
+      expect(document.documentElement.dataset.theme).toBe('dark');
+      expect(localStorage.getItem('liveres-theme')).toBe('dark');
+    } finally {
+      vi.unstubAllGlobals();
+      localStorage.clear();
+    }
+  });
 });
