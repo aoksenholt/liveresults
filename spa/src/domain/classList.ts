@@ -134,3 +134,44 @@ export function sprintStage(className: string): number {
   if (/\s*FINALE\b|F\s*\d+/.test(c)) return 3;
   return -1;
 }
+
+export type ClassGroupKind = 'women' | 'men' | 'other';
+
+export interface ClassGroup {
+  kind: ClassGroupKind;
+  /** The links of the menu, a relay or sprint class followed by its legs or heats. */
+  items: ClassListItem[];
+}
+
+const groupOf = (sex: string | undefined): ClassGroupKind =>
+  sex == 'F' ? 'women' : sex == 'M' ? 'men' : 'other';
+
+const age = (name: string) => Number(name.match(/\d+/)?.[0] ?? 0);
+
+/**
+ * The class menu split into women, men and other classes by the sex Time4o gives each class,
+ * for the class buttons of the new look, with the women's and men's classes by age. Returns
+ * a single group when the race does not tell them apart.
+ */
+export function classGroups(items: ClassListItem[], sexes: Map<string, string>): ClassGroup[] {
+  const segments: { name: string; sex?: string; items: ClassListItem[] }[] = [];
+  for (const item of items) {
+    if (item.kind == 'relay' || item.kind == 'sprint' || item.kind == 'class') {
+      const name = item.kind == 'class' ? item.label : item.title.trim();
+      const sex = item.kind == 'sprint' ? undefined : sexes.get(item.className);
+      segments.push({ name, sex, items: [item] });
+    } else if (item.kind == 'leg' || item.kind == 'heat') {
+      const segment = segments.at(-1);
+      segment?.items.push(item);
+      if (segment && segment.sex == null) segment.sex = sexes.get(item.className);
+    }
+  }
+  const groups = (['women', 'men', 'other'] as const)
+    .map((kind) => {
+      const own = segments.filter((s) => groupOf(s.sex) == kind);
+      if (kind != 'other') own.sort((a, b) => age(a.name) - age(b.name));
+      return { kind, items: own.flatMap((s) => s.items) };
+    })
+    .filter((g) => g.items.length > 0);
+  return groups.length > 1 ? groups : [{ kind: 'other', items: segments.flatMap((s) => s.items) }];
+}

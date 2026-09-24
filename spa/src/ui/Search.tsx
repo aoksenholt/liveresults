@@ -1,17 +1,27 @@
 import { useMemo, useState } from 'react';
 import type { ClassInfo } from '../domain/model';
+import { searchClasses } from '../domain/search';
 import { searchController } from '../state/controllers';
 import { Loading } from './common';
 import { useDisplay } from './context';
 import { markFound } from './found';
 import { useControllerState } from './hooks';
 import { routeHash } from './route';
+import type { MenuEntry } from './tabs';
 
+const MAX_CLASSES = 10;
 const MAX_CLUBS = 10;
 const MAX_RUNNERS = 20;
 
-/** Search for runners and clubs in the whole race. */
-export function RaceSearch(props: { raceId: string; classes: ClassInfo[]; timeZone: string }) {
+interface SearchProps {
+  raceId: string;
+  classes: ClassInfo[];
+  entries: MenuEntry[];
+  timeZone: string;
+}
+
+/** Search for runners, clubs and classes in the whole race. */
+export function RaceSearch(props: SearchProps) {
   const { res } = useDisplay();
   const [query, setQuery] = useState('');
   const [used, setUsed] = useState(false);
@@ -37,16 +47,11 @@ export function RaceSearch(props: { raceId: string; classes: ClassInfo[]; timeZo
 function SearchResults({
   raceId,
   classes,
+  entries,
   timeZone,
   query,
   onPick,
-}: {
-  raceId: string;
-  classes: ClassInfo[];
-  timeZone: string;
-  query: string;
-  onPick: () => void;
-}) {
+}: SearchProps & { query: string; onPick: () => void }) {
   const { api, res } = useDisplay();
   const controller = useMemo(
     () => searchController(api, raceId, classes, { timeZone }),
@@ -54,12 +59,27 @@ function SearchResults({
   );
   const { data: search, error } = useControllerState(controller);
   const found = useMemo(() => search?.(query), [search, query]);
+  const foundClasses = useMemo(() => searchClasses(entries, query), [entries, query]);
   return (
     <div className="search-results" role="region" aria-label={res._SEARCH}>
+      {foundClasses.length > 0 && (
+        <>
+          <h3>{res._CLASSES}</h3>
+          <ul>
+            {foundClasses.slice(0, MAX_CLASSES).map((e) => (
+              <li key={e.hash}>
+                <a href={e.hash} onClick={onPick}>
+                  {e.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
       {!found ? (
         <Loading error={error} text={res._LOADINGRESULTS ?? ''} />
       ) : found.clubs.length + found.runners.length == 0 ? (
-        <p>{res._NOMATCH}</p>
+        foundClasses.length == 0 && <p>{res._NOMATCH}</p>
       ) : (
         <>
           {found.clubs.length > 0 && (

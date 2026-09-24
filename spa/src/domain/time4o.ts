@@ -27,6 +27,13 @@ export function normalizeClasses(classes: RaceClass[]): ClassInfo[] {
   return classes.flatMap((c) => normalizeClass(c));
 }
 
+/** The sex of each class as Time4o gives it, by the class names of `normalizeClasses`. */
+export function classSexes(classes: RaceClass[]): Map<string, string> {
+  return new Map(
+    classes.flatMap((c) => normalizeClass(c).map((info) => [info.className, c.sex ?? ''] as const)),
+  );
+}
+
 export function normalizeClass(classEntry: RaceClass): ClassInfo[] {
   const relay = classEntry.eventForm == 'Relay';
   const resultListMode = classEntry.resultListMode ?? null;

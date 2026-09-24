@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 
 /**
  * An on/off choice remembered in `localStorage`, shared by every component that uses it.
@@ -37,4 +37,25 @@ export function storedFlag(key: string, initial: () => boolean): () => [boolean,
     const value = useSyncExternalStore(subscribe, read);
     return [value, () => save(!value)];
   };
+}
+
+/** A list of strings remembered in `localStorage` for the component that uses it. */
+export function useStoredList(key: string): [string[], (list: string[]) => void] {
+  const [list, setList] = useState<string[]>(() => {
+    try {
+      const stored: unknown = JSON.parse(window.localStorage.getItem(key) ?? '[]');
+      return Array.isArray(stored) ? stored.filter((s) => typeof s == 'string') : [];
+    } catch {
+      return [];
+    }
+  });
+  const save = (value: string[]) => {
+    setList(value);
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch {
+      // The list then only lasts for this page.
+    }
+  };
+  return [list, save];
 }
