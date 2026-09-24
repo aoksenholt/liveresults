@@ -20,8 +20,6 @@ export function Info({ themeToggle = true }: { themeToggle?: boolean }) {
     <div className="info">
       Timing data from Time4o: <a href="https://time4o.com/">time4o.com</a>
       <br />
-      Organizer guide: <a href="https://palkitt.github.io/liveresults/guide_no">Guide</a>
-      <br />
       &copy; Liveresults: <a href="https://github.com/aoksenholt/liveresults">Source code</a>
       {themeToggle && (
         <>
