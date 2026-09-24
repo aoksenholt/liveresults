@@ -1,6 +1,11 @@
-import { useEffect, useMemo } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import {
   byStartTime,
+  findRaces,
+  formatRaceDate,
+  raceYears,
+  recentRaces,
+  upcomingRaces,
   type RaceList as RaceListData,
   type RaceSummary,
   type TodayRace,
@@ -165,13 +170,11 @@ function Hero() {
   );
 }
 
-function TodayRow({ today: { race, live } }: { today: TodayRace }) {
-  const { lang, res } = useDisplay();
+function CardRow({ race, when }: { race: RaceSummary; when: ReactNode }) {
+  const { lang } = useDisplay();
   return (
     <li>
-      <span className="when">
-        {live ? <span className="live">{res._LIVE}</span> : `${res._STARTSAT} ${race.startTime}`}
-      </span>
+      <span className="when">{when}</span>
       <a className="name" href={`?comp=${encodeURIComponent(race.id)}&lang=${lang}`}>
         {race.name}
       </a>
@@ -185,27 +188,170 @@ function TodayRow({ today: { race, live } }: { today: TodayRace }) {
   );
 }
 
-function NewRaceList({ data }: { data: RaceListData }) {
+function TodaysRaces({ today }: { today: TodayRace[] }) {
   const { res } = useDisplay();
   return (
+    <section className="race-section today-races">
+      <h2>{res._TODAYSRACES}</h2>
+      {today.length > 0 ? (
+        <ul className="race-cards today">
+          {byStartTime(today).map(({ race, live }) => (
+            <CardRow
+              key={race.id}
+              race={race}
+              when={
+                live ? (
+                  <span className="live">{res._LIVE}</span>
+                ) : (
+                  `${res._STARTSAT} ${race.startTime}`
+                )
+              }
+            />
+          ))}
+        </ul>
+      ) : (
+        <p className="no-races">{res._NORACESTODAY}</p>
+      )}
+    </section>
+  );
+}
+
+function DatedCards({ races }: { races: RaceSummary[] }) {
+  const { lang } = useDisplay();
+  return (
+    <ul className="race-cards">
+      {races.map((race) => (
+        <CardRow key={race.id} race={race} when={formatRaceDate(race.date, lang)} />
+      ))}
+    </ul>
+  );
+}
+
+const SHORT_LIST = 8;
+
+function RaceSection({
+  title,
+  info,
+  races,
+}: {
+  title: string;
+  info: string;
+  races: RaceSummary[];
+}) {
+  const { res } = useDisplay();
+  const [all, setAll] = useState(false);
+  if (races.length == 0) return null;
+  const long = races.length > SHORT_LIST + 2;
+  return (
+    <section className="race-section">
+      <h2>{title}</h2>
+      <p className="section-info">{info}</p>
+      <DatedCards races={long && !all ? races.slice(0, SHORT_LIST) : races} />
+      {long && (
+        <button type="button" className="show-all" onClick={() => setAll(!all)}>
+          {all ? res._SHOWFEWER : `${res._SHOWALL} ${races.length} ${res._RACES}`}
+        </button>
+      )}
+    </section>
+  );
+}
+
+const PAGE_SIZE = 50;
+
+/** Every race, one year at a time, or the races that match the search in any year. */
+function AllRacesSection({ races, date }: { races: RaceSummary[]; date: string }) {
+  const { res } = useDisplay();
+  const years = useMemo(() => raceYears(races), [races]);
+  const [year, setYear] = useState(() =>
+    years.includes(date.slice(0, 4)) ? date.slice(0, 4) : (years[0] ?? ''),
+  );
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(0);
+  const top = useRef<HTMLElement>(null);
+  const turnTo = (p: number) => {
+    setPage(p);
+    top.current?.scrollIntoView?.({ block: 'start' });
+  };
+  const searching = query.trim() != '';
+  const shown = useMemo(
+    () => (searching ? findRaces(races, query) : races.filter((r) => r.date.startsWith(year))),
+    [races, query, searching, year],
+  );
+  const pages = Math.max(1, Math.ceil(shown.length / PAGE_SIZE));
+  const current = Math.min(page, pages - 1);
+
+  return (
+    <section className="race-section all-races" ref={top}>
+      <h2>{res._ALLRACES}</h2>
+      <p className="section-info">{res._ALLRACESINFO}</p>
+      <input
+        type="search"
+        className="race-search"
+        placeholder={res._SEARCHRACE}
+        aria-label={res._SEARCHRACE}
+        value={query}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setPage(0);
+        }}
+      />
+      {!searching && (
+        <div className="year-chips" role="group" aria-label={res._YEAR}>
+          {years.map((y) => (
+            <button
+              key={y}
+              type="button"
+              aria-pressed={y == year}
+              onClick={() => {
+                setYear(y);
+                setPage(0);
+              }}
+            >
+              {y}
+            </button>
+          ))}
+        </div>
+      )}
+      <p className="race-count">
+        {shown.length} {res._RACES}
+        {searching ? '' : ` ${year}`}
+      </p>
+      {shown.length > 0 ? (
+        <DatedCards races={shown.slice(current * PAGE_SIZE, (current + 1) * PAGE_SIZE)} />
+      ) : (
+        <p className="no-races">{res._NOMATCH}</p>
+      )}
+      {pages > 1 && (
+        <nav className="pager">
+          <button type="button" disabled={current == 0} onClick={() => turnTo(current - 1)}>
+            ← {res._PREVIOUS}
+          </button>
+          <span>
+            {res._PAGE} {current + 1} / {pages}
+          </span>
+          <button type="button" disabled={current == pages - 1} onClick={() => turnTo(current + 1)}>
+            {res._NEXT} →
+          </button>
+        </nav>
+      )}
+    </section>
+  );
+}
+
+function NewRaceList({ data }: { data: RaceListData }) {
+  const { res } = useDisplay();
+  const recent = useMemo(() => recentRaces(data.races, data.date), [data]);
+  const upcoming = useMemo(() => upcomingRaces(data.races, data.date), [data]);
+  return (
     <>
-      <section className="today-races">
-        <h2>{res._TODAYSRACES}</h2>
-        {data.today.length > 0 ? (
-          <ul className="race-cards">
-            {byStartTime(data.today).map((t) => (
-              <TodayRow key={t.race.id} today={t} />
-            ))}
-          </ul>
-        ) : (
-          <p className="no-races">{res._NORACESTODAY}</p>
-        )}
-      </section>
-      <table className="race-table">
-        <tbody>
-          <AllRaces data={data} />
-        </tbody>
-      </table>
+      <TodaysRaces today={data.today} />
+      <RaceSection title={res._RECENTRACES ?? ''} info={res._RECENTINFO ?? ''} races={recent} />
+      <RaceSection
+        title={res._UPCOMINGRACES ?? ''}
+        info={res._UPCOMINGINFO ?? ''}
+        races={upcoming}
+      />
+      <AllRacesSection races={data.races} date={data.date} />
       <Info themeToggle={false} />
     </>
   );

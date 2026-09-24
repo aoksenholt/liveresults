@@ -68,7 +68,7 @@ samme som før.
 - [x] Med mer enn én kolonne har hver kolonne sin egen nedtrekksmeny i stedet for faner, og tomme kolonner viser «Ingen klasse valgt!». Den første kolonnen følger adressen, de andre fylles med de åpne fanene og blir faner igjen når man går tilbake til én kolonne
 - [x] Plass og navn kan låses til venstre mens mellomtidene scroller vannrett i klassetabellen, som frosne kolonner i et regneark, og navnekolonnen er da smalere på mobil. Brukeren slår det på med en knapp ved siden av søket, og valget huskes i nettleseren (av som standard)
 
-## Fase 4c – Løpslisten som i betaen
+## Fase 4c – Løpslisten som i betaen ✅
 
 Løpslisten har fortsatt det gamle utseendet med én tabell per år. Den skal se ut som
 forsiden av betaen (`live.eoc2026.lt/beta`). To PR-er: først toppfelt og dagens løp, så siste
@@ -77,10 +77,10 @@ og kommende løp med filter.
 - [x] ☰-knappen («Velg løp») i topplinjen blir klemt smal på mobil når løpsnavnet er langt, og skal ikke krympe
 - [x] Toppfelt med skogsgrønn bakgrunn, logo, «Liveresultater for orientering» og knapper for tema og språk
 - [x] «Dagens løp» som et kort med oransje kant til venstre, **LIVE**-merke på løp som pågår, og løpsnavn og arrangør på hver rad. Time4o har ikke noe eget live-flagg, så et løp regnes som live fra starttiden til arrangementet (`event.startTime`) den første dagen, og hele dagen ellers. Løpene står i rekkefølge etter starttid
-- [ ] «Siste løp» fra de siste sju dagene og kommende løp som egne kort i stedet for én lang tabell per år
-- [ ] Filterknapper eller søk etter løp og arrangør (betaen filtrerer på land, men Time4o-løpene er stort sett norske)
-- [ ] På mobil står arrangøren på en egen linje under løpsnavnet
-- [ ] Oversette overskrifter som fortsatt er på engelsk, som «LIVE TODAY!»
+- [x] «Siste løp» fra de siste sju dagene og «Kommende løp» de neste sju dagene som egne kort (de åtte første, med knapp for å vise alle), og «Alle løp» ett år om gangen med årsknapper, antall løp og 50 løp per side, i stedet for én lang tabell per år. Datoene vises med ukedag på sidens språk
+- [x] Søk etter løp og arrangør i alle år (betaen filtrerer også på land, men Time4o-løpene er stort sett norske)
+- [x] På mobil står arrangøren på en egen linje under løpsnavnet
+- [x] Oversette overskrifter som fortsatt er på engelsk, som «LIVE TODAY!» (det klassiske utseendet beholder overskriftene fra den gamle siden)
 
 ## Fase 5 – Publisering
 

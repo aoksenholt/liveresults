@@ -1199,16 +1199,21 @@ tr.yellow_row .club {
   background: #fff;
 }
 
-:root[data-look='new'] .today-races {
-  margin: 0.5rem 0 2rem;
+:root[data-look='new'] .race-section {
+  margin: 0.5rem 0 2.25rem;
 }
 
-:root[data-look='new'] .today-races h2 {
+:root[data-look='new'] .race-section h2 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 1.5rem;
   margin: 0 0 0.75rem;
+}
+
+:root[data-look='new'] .race-section .section-info {
+  color: var(--muted);
+  margin: -0.5rem 0 0.9rem;
 }
 
 :root[data-look='new'] .today-races h2::before {
@@ -1225,15 +1230,18 @@ tr.yellow_row .club {
   padding: 0;
   background: var(--card);
   border: 1px solid var(--border);
-  border-left: 4px solid var(--orange);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: clip;
 }
 
+:root[data-look='new'] .race-cards.today {
+  border-left: 4px solid var(--orange);
+}
+
 :root[data-look='new'] .race-cards li {
   display: grid;
-  grid-template-columns: 6.5rem minmax(0, 2fr) minmax(0, 1.2fr) auto;
+  grid-template-columns: 6.5rem minmax(0, 2fr) minmax(0, 1.2fr) 4rem;
   grid-template-areas: 'when name organiser eventor';
   align-items: center;
   gap: 0.25rem 1rem;
@@ -1278,11 +1286,78 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .race-cards a.eventor:is(:link, :visited) {
   grid-area: eventor;
+  justify-self: end;
   color: var(--muted);
   font-size: 0.85em;
 }
 
 :root[data-look='new'] .no-races {
+  color: var(--muted);
+}
+
+:root[data-look='new'] .race-cards li:hover {
+  background: var(--hover-row);
+}
+
+:root[data-look='new'] .race-search {
+  box-sizing: border-box;
+  width: min(100%, 26rem);
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+}
+
+:root[data-look='new'] .year-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.9rem 0 0;
+}
+
+:root[data-look='new'] :is(.year-chips, .pager) button,
+:root[data-look='new'] .race-section .show-all {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+:root[data-look='new'] .year-chips button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+:root[data-look='new'] .pager button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+:root[data-look='new'] .race-section .show-all {
+  display: block;
+  margin: 0.75rem auto 0;
+}
+
+:root[data-look='new'] .race-count {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0.9rem 0 0.5rem;
+}
+
+:root[data-look='new'] .pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
   color: var(--muted);
 }
 
