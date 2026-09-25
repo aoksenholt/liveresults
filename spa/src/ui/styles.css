@@ -466,6 +466,12 @@ tr.yellow_row_new > td {
   border-top: 2px solid grey !important;
 }
 
+tr.green_row > td {
+  color: #000;
+  background: #0f0 !important;
+  box-shadow: none !important;
+}
+
 tr.yellow_row .bib,
 tr.yellow_row .club {
   color: #000;
