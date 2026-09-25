@@ -301,6 +301,39 @@ describe('App', () => {
     expect(link.getAttribute('href')).toMatch(/calltime=4.*&openstart$/);
   });
 
+  it('shows the latest finish times like radio.php with code 1000', async () => {
+    render(<App api={fakeApi()} search="?comp=race-1&code=1000&lang=no" />);
+    const table = await screen.findByRole('table');
+    expect(screen.getByRole('combobox', { name: 'Sted' })).toHaveValue('1000');
+    const heads = within(table)
+      .getAllByRole('columnheader')
+      .map((h) => h.textContent);
+    expect(heads).toEqual(['Tidsp.', '№', 'Navn', 'Klubb', 'Klasse', '#', 'Tid', 'Diff']);
+    const rows = within(table).getAllByRole('row').length - 1;
+    expect(rows).toBeGreaterThan(1);
+    expect(rows).toBeLessThanOrEqual(40);
+    fireEvent.change(screen.getByPlaceholderText('filter...'), { target: { value: 'zzzz' } });
+    expect(within(table).getAllByRole('row')).toHaveLength(1);
+  });
+
+  it('lets the user pick the control of the passings', async () => {
+    render(<App api={fakeApi()} search="?comp=race-1&code=-1&lang=no" />);
+    const picker = await screen.findByRole('combobox', { name: 'Sted' });
+    await screen.findByRole('table');
+    const options = within(picker)
+      .getAllByRole('option')
+      .map((o) => o.textContent);
+    expect(options.slice(0, 2)).toEqual(['Alle poster', 'Mål']);
+    const control = within(picker).getAllByRole('option')[2]!;
+    expect(control.textContent).toMatch(/^Post \d+ \(\d+ klasser\)$/);
+    fireEvent.change(picker, { target: { value: control.getAttribute('value') } });
+    expect(window.location.search).toContain(`code=${control.getAttribute('value')}`);
+    const table = await screen.findByRole('table');
+    expect(within(table).getAllByRole('columnheader')[0]).toHaveTextContent('Sted');
+    expect(within(table).getAllByRole('row').length).toBeGreaterThan(1);
+    window.history.replaceState(null, '', '/');
+  });
+
   it('shows the latest updates on live race pages', async () => {
     const today = { ...race, date: new Date(Date.now() - 3600000).toISOString() };
     render(<App api={fakeApi(allEntries, today)} search="?comp=race-1&lang=no" />);

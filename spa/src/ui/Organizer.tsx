@@ -8,10 +8,13 @@ import {
   type OrganizerRow,
   type StartWindow,
 } from '../domain/organizer';
+import { FINISH, radioControls, radioPassing } from '../domain/passings';
 import { eventClock } from '../domain/predicted';
 import { summarize } from '../domain/races';
+import type { Resources } from '../i18n';
 import {
   classListController,
+  lastPassingsController,
   leftInForestController,
   raceController,
   startRegistrationController,
@@ -24,6 +27,14 @@ import { routeHash } from './route';
 
 export const LEFT_IN_FOREST = '-2';
 export const START_REGISTRATION = '0';
+const ALL_PASSINGS = '-1';
+const FINISH_PASSINGS = String(FINISH);
+// Besides -2 and 0, the passings of every control (-1), the finish (1000) or one control.
+const isPassingsCode = (code: string) => code == ALL_PASSINGS || /^([1-9]\d{0,2}|1000)$/.test(code);
+export const isOrganizerCode = (code: string | null) =>
+  code == LEFT_IN_FOREST || code == START_REGISTRATION || (code != null && isPassingsCode(code));
+
+const RADIO_LINES = 40;
 
 interface OrganizerProps {
   raceId: string;
@@ -49,15 +60,24 @@ export function OrganizerView({
   return <OrganizerClasses raceId={raceId} info={info} code={code} params={params} />;
 }
 
-function OrganizerClasses({ code, ...props }: Omit<OrganizerProps, 'classes'> & { code: string }) {
+function OrganizerClasses({
+  code: initialCode,
+  ...props
+}: Omit<OrganizerProps, 'classes'> & { code: string }) {
   const { api, res } = useDisplay();
+  const [code, setCode] = useState(initialCode);
   const controller = useMemo(
     () => classListController(api, props.raceId, props.info.live),
     [api, props.raceId, props.info.live],
   );
   const { data, error } = useControllerState(controller);
   const name = summarize(props.info.race).name;
-  const title = code == START_REGISTRATION ? res._STARTREGISTRATION : res._LEFTINFOREST;
+  const title =
+    code == START_REGISTRATION
+      ? res._STARTREGISTRATION
+      : code == LEFT_IN_FOREST
+        ? res._LEFTINFOREST
+        : passingsTitle(code, res);
 
   useEffect(() => {
     document.title = `${title} – ${name}`;
@@ -71,6 +91,18 @@ function OrganizerClasses({ code, ...props }: Omit<OrganizerProps, 'classes'> & 
         <Loading error={error} text={res._LOADINGCLASSES ?? ''} />
       ) : code == START_REGISTRATION ? (
         <StartRegistration classes={data.classes} {...props} />
+      ) : isPassingsCode(code) ? (
+        <RadioPassings
+          classes={data.classes}
+          code={code}
+          onCode={(c) => {
+            setCode(c);
+            const url = new URL(window.location.href);
+            url.searchParams.set('code', c);
+            window.history.replaceState(null, '', url);
+          }}
+          {...props}
+        />
       ) : (
         <LeftInForest classes={data.classes} {...props} />
       )}
@@ -378,6 +410,128 @@ function StartRegistration({ raceId, info, classes, params }: OrganizerProps) {
                 </tr>
               );
             })}
+          </tbody>
+        </table>
+      )}
+    </>
+  );
+}
+
+/** The passings of the legacy radio.php, newest first, with the new ones marked. */
+const passingsTitle = (code: string, res: Resources) =>
+  code == ALL_PASSINGS
+    ? res._ALLCONTROLS
+    : code == FINISH_PASSINGS
+      ? res._CONTROLFINISH
+      : `${res._CONTROL} ${code}`;
+
+function RadioPassings({
+  raceId,
+  info,
+  classes,
+  code,
+  onCode,
+}: OrganizerProps & { code: string; onCode: (code: string) => void }) {
+  const { api, res, format } = useDisplay();
+  const control = code == ALL_PASSINGS ? undefined : Number(code);
+  const numbers = useMemo(() => {
+    const listed = radioControls(classes).map((c) => ({
+      code: String(c.number),
+      classes: c.classes,
+    }));
+    const known = [ALL_PASSINGS, FINISH_PASSINGS, ...listed.map((c) => c.code)].includes(code);
+    return known ? listed : [...listed, { code, classes: 0 }];
+  }, [classes, code]);
+  const controller = useMemo(
+    () =>
+      lastPassingsController(api, raceId, classes, {
+        timeZone: info.timeZone,
+        limit: RADIO_LINES,
+        control,
+      }),
+    [api, raceId, classes, info.timeZone, control],
+  );
+  const { data, error } = useControllerState(controller);
+  const [filter, setFilter] = useState('');
+  const time = useEventTime(info.timeZone);
+  const finish = res._CONTROLFINISH ?? '';
+  const rows = useMemo(
+    () =>
+      (data ?? []).map((p) => ({
+        key: p.key,
+        fresh: p.fresh,
+        ...radioPassing(p, format, info.timeZone, finish),
+      })),
+    [data, format, info.timeZone, finish],
+  );
+  const shown = rows.filter((r) =>
+    matchesSearch(
+      [r.bib, r.name, r.club, r.className, r.controlName].join('  ').toLowerCase(),
+      filter,
+    ),
+  );
+
+  return (
+    <>
+      <div className="organizer-head">
+        <select
+          className="control-select"
+          aria-label={res._WHERE}
+          value={code}
+          onChange={(e) => onCode(e.target.value)}
+        >
+          <option value={ALL_PASSINGS}>{res._ALLCONTROLS}</option>
+          <option value={FINISH_PASSINGS}>{res._CONTROLFINISH}</option>
+          {numbers.map((c) => (
+            <option key={c.code} value={c.code}>
+              {passingsTitle(c.code, res)}
+              {c.classes > 0 && ` (${c.classes} ${res._CLASSESCOUNT})`}
+            </option>
+          ))}
+        </select>
+        <span />
+        <FilterField value={filter} onChange={setFilter} />
+        <Field label={res._NOW ?? ''}>
+          <span className="clock">{clockText(time)}</span>
+        </Field>
+      </div>
+      {!data ? (
+        <Loading error={error} text={res._LOADINGRESULTS ?? ''} />
+      ) : rows.length == 0 ? (
+        <Message>{res._NOPASSINGS}</Message>
+      ) : (
+        <table className="results">
+          <thead>
+            <tr>
+              {control != FINISH && <th>{res._WHERE}</th>}
+              <th>{res._PASSTIME}</th>
+              <th className="right">№</th>
+              <th>{res._NAME}</th>
+              <th>{res._CLUB}</th>
+              <th>{res._CLASS}</th>
+              <th className="right">#</th>
+              <th className="right">{res._TIME}</th>
+              <th className="right">Diff</th>
+            </tr>
+          </thead>
+          <tbody>
+            {shown.map((r) => (
+              <tr key={r.key} className={r.fresh ? r.highlight : undefined}>
+                {control != FINISH && <td>{r.controlName}</td>}
+                <td>{r.passtime}</td>
+                <td className="right">
+                  <Bib bib={r.bib} />
+                </td>
+                <td>{r.name}</td>
+                <td>{r.club}</td>
+                <td>
+                  <ClassLink raceId={raceId} className={r.className} />
+                </td>
+                <td className="right">{r.place}</td>
+                <td className="right">{r.time}</td>
+                <td className="right">{r.diff}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
