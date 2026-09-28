@@ -414,12 +414,15 @@ export interface ShownPassing extends Passing {
   fresh: boolean;
 }
 
-/** The latest updates box of followfull.php, which only polls while the race is live. */
+/**
+ * The latest updates box of followfull.php, which only polls while the race is live, and with
+ * `limit` and `control` the passings of the legacy radio.php.
+ */
 export function lastPassingsController(
   api: Time4oApi,
   raceId: string,
   classes: ClassInfo[],
-  opts: { timeZone: string },
+  opts: { timeZone: string; limit?: number; control?: number },
 ) {
   let seen: Set<string> | null = null;
   return pollingController(
@@ -427,7 +430,12 @@ export function lastPassingsController(
     PASSINGS_INTERVAL_MS,
     (entries: Entry[]): ShownPassing[] => {
       const previous = seen;
-      const passings = lastPassings(entryRows(entries, classes, opts), classes).map((p) => {
+      const passings = lastPassings(
+        entryRows(entries, classes, opts),
+        classes,
+        opts.limit,
+        opts.control,
+      ).map((p) => {
         const key = `${p.dbid}:${p.control}:${p.changed}`;
         return { ...p, key, fresh: previous != null && !previous.has(key) };
       });

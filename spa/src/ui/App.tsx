@@ -3,7 +3,7 @@ import { Time4oApi } from '../api/client';
 import { resolveLanguage } from '../i18n';
 import { createDisplay, DisplayContext } from './context';
 import { NewVersion } from './NewVersion';
-import { LEFT_IN_FOREST, OrganizerView, START_REGISTRATION } from './Organizer';
+import { isOrganizerCode, OrganizerView } from './Organizer';
 import { RaceList } from './RaceList';
 import { RaceView } from './RaceView';
 import { ScrollView } from './ScrollView';
@@ -19,6 +19,7 @@ export function App({
   const params = new URLSearchParams(search);
   const comp = params.get('comp');
   const code = params.get('code');
+  const organizer = isOrganizerCode(code);
   const scroll = params.has('scroll');
   const lang = resolveLanguage(params.get('lang'));
   const theme = useTheme(params.get('theme'));
@@ -31,7 +32,7 @@ export function App({
   return (
     <DisplayContext value={display}>
       <ThemeContext value={theme}>
-        {comp && (code == LEFT_IN_FOREST || code == START_REGISTRATION) ? (
+        {comp && code && organizer ? (
           <OrganizerView raceId={comp} code={code} params={params} />
         ) : comp && scroll ? (
           <ScrollView raceId={comp} search={search} />
