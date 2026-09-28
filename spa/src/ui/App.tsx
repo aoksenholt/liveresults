@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { Time4oApi } from '../api/client';
 import { resolveLanguage } from '../i18n';
 import { createDisplay, DisplayContext } from './context';
+import { NewVersion } from './NewVersion';
 import { isOrganizerCode, OrganizerView } from './Organizer';
 import { RaceList } from './RaceList';
 import { RaceView } from './RaceView';
@@ -40,6 +41,7 @@ export function App({
         ) : (
           <RaceList />
         )}
+        <NewVersion reloadAtOnce={!!comp && scroll} />
       </ThemeContext>
     </DisplayContext>
   );
