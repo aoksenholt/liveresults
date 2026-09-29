@@ -96,6 +96,10 @@ og kommende løp med filter.
 - [ ] Eget domene (valgfritt)
 - [ ] Test under et ekte løp, side om side med den gamle siden
 
+## Ideer
+
+- [ ] Favorittløpere: brukeren merker løpere (f.eks. med en stjerne i resultattabellen eller i søket), og en egen visning viser passeringer, plassering og tid for favorittene på tvers av klasser. Favorittene huskes per løp i nettleseren. «Siste oppdateringer» kan få et valg for bare favorittene
+
 ## Synk med upstream
 
 Paritetstestene laster den gamle visningskoden fra `web/js/`, og språkfilene genereres fra
