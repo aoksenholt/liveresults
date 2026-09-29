@@ -195,6 +195,11 @@ table.results {
   width: 100%;
 }
 
+/* `--table-scale` comes from the text size buttons of the race page. */
+:is(table.results, table.lists) {
+  font-size: calc(var(--table-scale, 1) * 1em);
+}
+
 table.results th {
   padding: 3px 7px 3px 3px;
   border-bottom: 1px solid var(--border);
@@ -521,6 +526,22 @@ tr.yellow_row .club {
   flex-shrink: 0;
 }
 
+.bar .table-size {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.2em;
+  margin-left: auto;
+}
+
+.bar .table-size + .theme-toggle {
+  margin-left: 0;
+}
+
+.navbtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
 .link-button {
   background: none;
   border: none;
@@ -648,6 +669,25 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .navbtn:hover {
   background: #333;
+}
+
+:root[data-look='new'] .navbtn:disabled {
+  background: #111;
+}
+
+:root[data-look='new'] .table-size .navbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 2.2rem;
+  padding: 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+:root[data-look='new'] .table-size .size-reset {
+  min-width: 3.4rem;
+  font-variant-numeric: tabular-nums;
 }
 
 :root[data-look='new'] .bar .back {
@@ -1337,7 +1377,7 @@ tr.yellow_row .club {
   }
 
   :root[data-look='new'] :is(table.results, table.lists) {
-    font-size: 0.85em;
+    font-size: calc(var(--table-scale, 1) * 0.85em);
     line-height: 1.25;
   }
 
@@ -1631,10 +1671,10 @@ tr.yellow_row .club {
 @media (max-width: 600px) {
   :root[data-look='new'] .bar {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
     grid-template-areas:
-      'back title toggle'
-      'back date toggle';
+      'back title size toggle'
+      'back date size toggle';
     column-gap: 0.75rem;
     padding: 0.4rem 1rem;
   }
@@ -1655,6 +1695,14 @@ tr.yellow_row .club {
 
   :root[data-look='new'] .bar .theme-toggle {
     grid-area: toggle;
+  }
+
+  :root[data-look='new'] .bar .table-size {
+    grid-area: size;
+  }
+
+  :root[data-look='new'] .table-size .size-reset {
+    display: none;
   }
 }
 

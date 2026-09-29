@@ -1,27 +1,32 @@
 import { useState, useSyncExternalStore } from 'react';
 
 /**
- * An on/off choice remembered in `localStorage`, shared by every component that uses it.
- * `initial` gives the value until the user has chosen.
+ * A choice remembered in `localStorage`, shared by every component that uses it.
+ * `initial` gives the value until the user has chosen, or when the stored text does not parse.
  */
-export function storedFlag(key: string, initial: () => boolean): () => [boolean, () => void] {
+function storedValue<T>(
+  key: string,
+  initial: () => T,
+  parse: (stored: string) => T | null,
+  format: (value: T) => string,
+): () => [T, (value: T) => void] {
   const listeners = new Set<() => void>();
-  let fallback: boolean | null = null;
+  let fallback: T | null = null;
 
   // Even reading `localStorage` throws when the browser blocks it, e.g. in third-party iframes.
-  const read = (): boolean => {
+  const read = (): T => {
     try {
       const stored = window.localStorage.getItem(key);
-      return stored == null ? initial() : stored == '1';
+      return (stored == null ? null : parse(stored)) ?? initial();
     } catch {
       return fallback ?? initial();
     }
   };
 
-  const save = (value: boolean) => {
+  const save = (value: T) => {
     fallback = value;
     try {
-      window.localStorage.setItem(key, value ? '1' : '0');
+      window.localStorage.setItem(key, format(value));
     } catch {
       // The choice then only lasts for this page.
     }
@@ -33,10 +38,29 @@ export function storedFlag(key: string, initial: () => boolean): () => [boolean,
     return () => listeners.delete(listener);
   };
 
+  return () => [useSyncExternalStore(subscribe, read), save];
+}
+
+/** An on/off choice remembered in `localStorage`; the setter flips it. */
+export function storedFlag(key: string, initial: () => boolean): () => [boolean, () => void] {
+  const use = storedValue(
+    key,
+    initial,
+    (s) => s == '1',
+    (v) => (v ? '1' : '0'),
+  );
   return () => {
-    const value = useSyncExternalStore(subscribe, read);
+    const [value, save] = use();
     return [value, () => save(!value)];
   };
+}
+
+/** A whole number remembered in `localStorage`. */
+export function storedNumber(
+  key: string,
+  initial: () => number,
+): () => [number, (n: number) => void] {
+  return storedValue(key, initial, (s) => (/^-?\d+$/.test(s) ? Number(s) : null), String);
 }
 
 /** A list of strings remembered in `localStorage` for the component that uses it. */
