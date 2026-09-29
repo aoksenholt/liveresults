@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { classGroups, type ClassListItem } from '../domain/classList';
 import { useDisplay } from './context';
 import { useFrozenColumns } from './frozen';
@@ -274,6 +274,16 @@ export function ClassPicker({
     if (next != recent) setRecent(next);
   }, [current, entries, recent, setRecent]);
   const counts = Array.from({ length: MAX_COLUMNS }, (_, i) => i + 1);
+  const tabBar = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const bar = tabBar.current;
+    const active = bar?.querySelector('.tab.active');
+    if (!bar || !active) return;
+    const left = active.getBoundingClientRect().left - bar.getBoundingClientRect().left;
+    const right = left + active.getBoundingClientRect().width - bar.clientWidth;
+    if (left < 0) bar.scrollLeft += left;
+    else if (right > 0) bar.scrollLeft += right;
+  }, [current, tabs]);
   return (
     <section className="class-picker">
       <div className="class-toolbar">
@@ -314,7 +324,7 @@ export function ClassPicker({
         </>
       )}
       {chosen && columns == 1 && tabs.length > 0 && (
-        <nav className="tabs">
+        <nav className="tabs" ref={tabBar}>
           {tabs.map((hash) => (
             <span key={hash} className={hash == current ? 'tab active' : 'tab'}>
               <a href={hash}>{label(hash)}</a>
