@@ -3,12 +3,13 @@ import type { ClassInfo } from '../domain/model';
 import { passingRow, passingText, type PassingStrings } from '../domain/passings';
 import { lastPassingsController, type ShownPassing } from '../state/controllers';
 import { useDisplay } from './context';
+import { FollowChooser, FunnelIcon, type Follow } from './FollowClasses';
 import { useControllerState } from './hooks';
 import { routeHash } from './route';
 import { storedChoice } from './stored';
 
 const SHOWN = 3;
-const COUNTED = 10;
+export const COUNTED = 10;
 
 export type PassingsView = 'open' | 'strip' | 'hidden';
 
@@ -73,7 +74,10 @@ export function LastPassings({
 
 const noSubscribe = () => () => {};
 
-/** The latest updates of a live race, polled once for the box and the toolbar button. */
+/**
+ * Every update of a live race, polled once for the box and the toolbar button, which show those
+ * of the classes followed.
+ */
 export function useLastPassings(
   raceId: string,
   classes: ClassInfo[],
@@ -83,7 +87,7 @@ export function useLastPassings(
   const { api } = useDisplay();
   const controller = useMemo(
     () =>
-      live ? lastPassingsController(api, raceId, classes, { timeZone, limit: COUNTED }) : null,
+      live ? lastPassingsController(api, raceId, classes, { timeZone, limit: Infinity }) : null,
     [api, raceId, classes, timeZone, live],
   );
   useEffect(() => {
@@ -125,14 +129,26 @@ export function usePassingsPanel(passings: ShownPassing[] | null): PassingsPanel
 export function PassingsBox({
   passings,
   panel: { view, setView },
+  follow,
   timeZone,
 }: {
   passings: ShownPassing[] | null;
   panel: PassingsPanel;
+  follow: Follow;
   timeZone: string;
 }) {
   const { res, format } = useDisplay();
-  if (view == 'hidden' || !passings?.length) return null;
+  const filtered = follow.names != null;
+  // A box without updates only shows when the classes chosen have none, so they can be changed.
+  if (view == 'hidden' || !passings || (passings.length == 0 && !filtered)) return null;
+  const empty = <p className="passings-empty">{res._NOFOLLOWEDPASSINGS}</p>;
+  const pages = follow.groups.flatMap((g) => g.pages);
+  const chosen = pages.filter((p) => p.classes.every((c) => follow.names?.has(c))).length;
+  const scope = !filtered
+    ? ''
+    : follow.followed == 'tabs'
+      ? res._TABS
+      : `${chosen} ${res._CLASSESCOUNT}`;
   const rows = passings
     .slice(0, SHOWN)
     .map((p) => ({ ...passingRow(p, format, timeZone, res._CONTROLFINISH ?? ''), p }));
@@ -160,20 +176,30 @@ export function PassingsBox({
           onClick={() => setView('open')}
         >
           <span className="live-dot" aria-hidden="true" />
-          <span className="passing-name">{latest!.name}</span>
-          <span className="passing-where">{latest!.controlName}</span>
-          <span className={latest!.isStatus ? 'passing-time status' : 'passing-time'}>
-            {latest!.time}
-          </span>
-          {latest!.place && (
-            <span className={latest!.place == '1' ? 'passing-place first' : 'passing-place'}>
-              {latest!.place}.
+          {filtered && (
+            <span className="follow-mark" title={scope}>
+              <FunnelIcon size={14} />
             </span>
           )}
-          <span className="passing-class">{latest!.className}</span>
+          {latest ? (
+            <>
+              <span className="passing-name">{latest.name}</span>
+              <span className="passing-where">{latest.controlName}</span>
+              <span className={latest.isStatus ? 'passing-time status' : 'passing-time'}>
+                {latest.time}
+              </span>
+              {latest.place && (
+                <span className={latest.place == '1' ? 'passing-place first' : 'passing-place'}>
+                  {latest.place}.
+                </span>
+              )}
+              <span className="passing-class">{latest.className}</span>
+            </>
+          ) : (
+            <span className="passings-empty">{res._NOFOLLOWEDPASSINGS}</span>
+          )}
           <span className="chevron" aria-hidden="true" />
         </button>
-        {hide}
       </section>
     );
   }
@@ -188,10 +214,13 @@ export function PassingsBox({
           onClick={() => setView('strip')}
         >
           <b>{res._LASTPASSINGS}</b>
+          {scope && <span className="follow-scope">· {scope}</span>}
           <span className="chevron" aria-hidden="true" />
         </button>
+        <FollowChooser follow={follow} />
         {hide}
       </div>
+      {rows.length == 0 && empty}
       <ol className="passing-rows">
         {rows.map(({ p, ...row }) => (
           <li key={p.key} className={p.fresh ? 'passing-row fresh' : 'passing-row'}>

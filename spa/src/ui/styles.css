@@ -1278,6 +1278,9 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .passings-hide {
   flex-shrink: 0;
+  min-width: 2rem;
+  min-height: 2rem;
+  margin-left: 0.5rem;
   padding: 0 0.2em;
   border: none;
   background: none;
@@ -1289,6 +1292,58 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .passings-hide:hover {
   color: var(--orange);
+}
+
+:root[data-look='new'] .follow-chooser .chooser-button {
+  padding: 0.2rem;
+}
+
+:root[data-look='new'] .follow-chooser .chooser-menu {
+  min-width: 14em;
+  max-height: min(60vh, 28rem);
+}
+
+:root[data-look='new'] .follow-chooser fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  margin: 0.3rem 0 0;
+  padding: 0.3rem 0 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+:root[data-look='new'] .follow-chooser .follow-group {
+  font-weight: 600;
+}
+
+:root[data-look='new'] .follow-scope {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--orange);
+}
+
+:root[data-look='new'] .follow-mark {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--orange);
+}
+
+:root[data-look='new'] .passings-empty {
+  margin: 0.4rem 0 0.2rem;
+  color: var(--muted);
+}
+
+:root[data-look='new'] .last-passings.strip .passings-empty {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:root[data-look='new'] .passing-rows:empty {
+  display: none;
 }
 
 :root[data-look='new'] .passings-button {

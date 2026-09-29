@@ -83,3 +83,36 @@ export function rememberPage(recent: string[], hash: string, entries: MenuEntry[
   if (recent[0] == hash) return recent;
   return [hash, ...recent.filter((h) => h != hash)].slice(0, MAX_RECENT);
 }
+
+const sprintKey = (plainKey: string) => plainKey.replace(/^plainresultsclass_/, '');
+
+/** The classes of a menu page: a class, or every leg or heat under a relay or sprint title. */
+export function pageClasses(items: ClassListItem[], hash: string): string[] {
+  const route = parseHash(hash);
+  if (route.kind == 'class') return [route.className];
+  const at = items.findIndex((i) =>
+    i.kind == 'relay'
+      ? route.kind == 'relay' && i.className == route.className
+      : i.kind == 'sprint' && route.kind == 'sprint' && sprintKey(i.plainKey) == route.key,
+  );
+  if (at < 0) return [];
+  const names: string[] = [];
+  for (const item of items.slice(at + 1)) {
+    if (item.kind == 'leg' || item.kind == 'heat') names.push(item.className);
+    else if (item.kind == 'relay' || item.kind == 'sprint' || item.kind == 'class') break;
+  }
+  return names;
+}
+
+export interface FollowPage extends MenuEntry {
+  classes: string[];
+}
+
+/** The pages to follow in the latest updates, one per class, relay or sprint title. */
+export function followPages(items: ClassListItem[], group: ClassListItem[]): FollowPage[] {
+  const titles = group.filter((i) => i.kind == 'relay' || i.kind == 'sprint' || i.kind == 'class');
+  return menuEntries(titles, { allClasses: '', startList: '' })
+    .slice(0, -2)
+    .map((e) => ({ ...e, classes: pageClasses(items, e.hash) }))
+    .filter((p) => p.classes.length > 0);
+}

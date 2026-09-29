@@ -221,3 +221,53 @@ export function passingRow(
     isStatus: !time && p.status != Status.OK && p.status != Status.FinishedUnordered,
   };
 }
+
+/** The classes the latest updates box follows: every class, those of the open tabs, or a list. */
+export type FollowedClasses = 'all' | 'tabs' | string[];
+
+export function parseFollowedClasses(text: string): FollowedClasses | null {
+  if (text == 'all' || text == 'tabs') return text;
+  try {
+    const list: unknown = JSON.parse(text);
+    return Array.isArray(list) ? list.filter((s) => typeof s == 'string') : null;
+  } catch {
+    return null;
+  }
+}
+
+export const formatFollowedClasses = (followed: FollowedClasses) =>
+  typeof followed == 'string' ? followed : JSON.stringify(followed);
+
+/** The names of the classes followed, or null for every class, as without open class tabs. */
+export function followedNames(followed: FollowedClasses, tabClasses: string[]): Set<string> | null {
+  if (followed == 'all' || (followed == 'tabs' && tabClasses.length == 0)) return null;
+  return new Set(followed == 'tabs' ? tabClasses : followed);
+}
+
+/** The newest `limit` passings in the classes followed. */
+export function followedPassings<P extends Passing>(
+  passings: P[],
+  names: Set<string> | null,
+  limit: number,
+): P[] {
+  return (names ? passings.filter((p) => names.has(p.className)) : passings).slice(0, limit);
+}
+
+/**
+ * Follows or stops following the classes of one menu page, e.g. every leg of a relay. Following
+ * every class again gives 'all', so classes added later are followed too.
+ */
+export function toggleFollowed(
+  followed: FollowedClasses,
+  page: string[],
+  every: string[],
+  tabClasses: string[],
+): FollowedClasses {
+  const names = followedNames(followed, tabClasses) ?? new Set(every);
+  const on = page.every((c) => names.has(c));
+  for (const c of page) {
+    if (on) names.delete(c);
+    else names.add(c);
+  }
+  return every.every((c) => names.has(c)) ? 'all' : every.filter((c) => names.has(c));
+}

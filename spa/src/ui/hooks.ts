@@ -1,4 +1,4 @@
-import { useEffect, useSyncExternalStore } from 'react';
+import { useEffect, useSyncExternalStore, type RefObject } from 'react';
 import type { Controller } from '../state/controllers';
 import { parseHash, type Route } from './route';
 
@@ -40,4 +40,23 @@ export function useWakeLock() {
       void lock?.release();
     };
   }, []);
+}
+
+/** Closes a menu on Escape or a click outside `root`. */
+export function useDismiss(open: boolean, close: () => void, root: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    if (!open) return;
+    const dismiss = (e: Event) => {
+      if (
+        e instanceof KeyboardEvent ? e.key == 'Escape' : !root.current?.contains(e.target as Node)
+      )
+        close();
+    };
+    document.addEventListener('pointerdown', dismiss);
+    document.addEventListener('keydown', dismiss);
+    return () => {
+      document.removeEventListener('pointerdown', dismiss);
+      document.removeEventListener('keydown', dismiss);
+    };
+  }, [open, close, root]);
 }

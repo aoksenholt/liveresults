@@ -354,6 +354,8 @@ describe('App', () => {
     expect(strip).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryAllByRole('listitem')).toHaveLength(0);
     expect(localStorage.getItem('liveres-passings-view')).toBe('strip');
+    expect(screen.queryByRole('button', { name: 'Skjul siste oppdateringer' })).toBeNull();
+    fireEvent.click(strip);
     fireEvent.click(screen.getByRole('button', { name: 'Skjul siste oppdateringer' }));
     expect(screen.queryByRole('button', { name: 'Siste oppdateringer' })).not.toBeInTheDocument();
     expect(localStorage.getItem('liveres-passings-view')).toBe('hidden');
@@ -365,6 +367,25 @@ describe('App', () => {
     expect(
       screen.queryByRole('button', { name: 'Vis siste oppdateringer' }),
     ).not.toBeInTheDocument();
+  });
+
+  it('lets the user choose the classes of the latest updates', async () => {
+    const today = { ...race, date: new Date(Date.now() - 3600000).toISOString() };
+    render(<App api={fakeApi(allEntries, today)} search="?comp=race-1&lang=no" />);
+    const box = (await screen.findByRole('button', { name: /^Siste oppdateringer/ })).closest(
+      'section',
+    )!;
+    expect(await within(box).findAllByRole('listitem')).toHaveLength(3);
+    fireEvent.click(within(box).getByRole('button', { name: 'Velg klasser' }));
+    for (let b = checkedBox(); b; b = checkedBox()) fireEvent.click(b);
+    expect(within(box).queryAllByRole('listitem')).toHaveLength(0);
+    expect(
+      within(box).getByText('Ingen oppdateringer i klassene du har valgt'),
+    ).toBeInTheDocument();
+    expect(localStorage.getItem('liveres-passings-classes-race-1')).toBe('[]');
+    fireEvent.click(within(box).getByRole('radio', { name: 'Alle klasser' }));
+    expect(within(box).getAllByRole('listitem')).toHaveLength(3);
+    expect(localStorage.getItem('liveres-passings-classes-race-1')).toBe('all');
   });
 
   it('shows every class without splits on the scrolling page', async () => {
@@ -416,3 +437,7 @@ describe('App', () => {
     }
   });
 });
+
+function checkedBox() {
+  return screen.queryAllByRole<HTMLInputElement>('checkbox').find((b) => b.checked);
+}
