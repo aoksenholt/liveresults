@@ -12,12 +12,18 @@ function storedValue<T>(
 ): () => [T, (value: T) => void] {
   const listeners = new Set<() => void>();
   let fallback: T | null = null;
+  // `useSyncExternalStore` needs the same value until the text changes, also for lists.
+  let parsed: { text: string; value: T | null } | null = null;
+  const parseOnce = (text: string) => {
+    if (parsed?.text != text) parsed = { text, value: parse(text) };
+    return parsed.value;
+  };
 
   // Even reading `localStorage` throws when the browser blocks it, e.g. in third-party iframes.
   const read = (): T => {
     try {
       const stored = window.localStorage.getItem(key);
-      return (stored == null ? null : parse(stored)) ?? initial();
+      return (stored == null ? null : parseOnce(stored)) ?? initial();
     } catch {
       return fallback ?? initial();
     }
@@ -63,6 +69,20 @@ export function storedNumber(
   return storedValue(key, initial, (s) => (/^-?\d+$/.test(s) ? Number(s) : null), String);
 }
 
+/** One of a few named choices remembered in `localStorage`. */
+export function storedChoice<T extends string>(
+  key: string,
+  choices: readonly T[],
+  initial: () => T,
+): () => [T, (value: T) => void] {
+  return storedValue(
+    key,
+    initial,
+    (s) => choices.find((c) => c == s) ?? null,
+    (v) => v,
+  );
+}
+
 /** A list of strings remembered in `localStorage` for the component that uses it. */
 export function useStoredList(key: string): [string[], (list: string[]) => void] {
   const [list, setList] = useState<string[]>(() => {
@@ -82,4 +102,22 @@ export function useStoredList(key: string): [string[], (list: string[]) => void]
     }
   };
   return [list, save];
+}
+
+/** A choice remembered in `localStorage` for each key, e.g. for each race. */
+export function storedPerKey<T>(
+  prefix: string,
+  initial: () => T,
+  parse: (stored: string) => T | null,
+  format: (value: T) => string,
+): (key: string) => [T, (value: T) => void] {
+  const hooks = new Map<string, () => [T, (value: T) => void]>();
+  return (key) => {
+    let hook = hooks.get(key);
+    if (!hook) {
+      hook = storedValue(prefix + key, initial, parse, format);
+      hooks.set(key, hook);
+    }
+    return hook();
+  };
 }

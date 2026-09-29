@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type CSSProperties, type MouseEvent } from 'react';
+import { followedPassings } from '../domain/passings';
 import { summarize } from '../domain/races';
 import {
   classListController,
@@ -10,9 +11,17 @@ import { ClassMenu, ClassPicker, PageSelect, useTabs } from './ClassMenu';
 import { ClassResults } from './ClassResults';
 import { ClubResults } from './ClubResults';
 import { Info, Loading, Message } from './common';
+import { useFollow } from './FollowClasses';
 import { deviceType, useDisplay } from './context';
 import { useControllerState, useHashRoute } from './hooks';
-import { LastPassings } from './LastPassings';
+import {
+  COUNTED,
+  LastPassings,
+  PassingsBox,
+  PassingsButton,
+  useLastPassings,
+  usePassingsPanel,
+} from './LastPassings';
 import { Logo } from './Logo';
 import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
@@ -133,6 +142,13 @@ function NewLookPage({ route, ...props }: RaceProps & { route: Route }) {
   const { res } = useDisplay();
   const { raceId, info, classList } = props;
   const tabs = useTabs(classList.items, route);
+  const allPassings = useLastPassings(raceId, classList.classes, info.timeZone, info.live);
+  const follow = useFollow(raceId, classList.items, classList.sexes, tabs.tabs);
+  const passings = useMemo(
+    () => allPassings && followedPassings(allPassings, follow.names, COUNTED),
+    [allPassings, follow.names],
+  );
+  const passingsPanel = usePassingsPanel(passings);
   const [columns, setColumns] = useState(1);
   const [others, setOthers] = useState<string[]>([]);
   const chooseColumns = (n: number) => {
@@ -166,10 +182,14 @@ function NewLookPage({ route, ...props }: RaceProps & { route: Route }) {
             timeZone={info.timeZone}
           />
         }
+        actions={<PassingsButton panel={passingsPanel} />}
       />
-      {info.live && (
-        <LastPassings raceId={raceId} classes={classList.classes} timeZone={info.timeZone} />
-      )}
+      <PassingsBox
+        passings={passings}
+        panel={passingsPanel}
+        follow={follow}
+        timeZone={info.timeZone}
+      />
       {route.kind == 'none' ? null : columns == 1 ? (
         pane(tabs.current)
       ) : (

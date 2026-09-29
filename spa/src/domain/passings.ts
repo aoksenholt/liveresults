@@ -22,6 +22,7 @@ export interface Passing {
 }
 
 export const FINISH = 1000;
+export const UNORDERED_TIME = -999;
 const HIDDEN_STATUS: number[] = [Status.NotClassified, Status.OnCourse, Status.NotStarted];
 const num = (v: unknown) => (typeof v == 'number' ? v : Number(v) || 0);
 const behind = (v: unknown) => (typeof v == 'number' ? v : null);
@@ -187,4 +188,86 @@ export function radioPassing(
     highlight:
       p.status >= 1 && p.status <= 6 ? 'yellow_row' : ok && p.place == 1 ? 'green_row' : 'red_row',
   };
+}
+
+export interface PassingRow extends RadioPassing {
+  /** The status replaces the time, e.g. DNF. */
+  isStatus: boolean;
+}
+
+/**
+ * The parts of one latest update for the two-line rows of the new look. Unordered classes
+ * (negative codes, or the finish status) show neither place nor diff, as `passingText`.
+ * Their running time comes as the `UNORDERED_TIME` control, named "Time" by the legacy
+ * converter, with the finished status in place of the time; it is shown as the finish.
+ */
+export function passingRow(
+  p: Passing,
+  f: DisplayFormat,
+  timeZone: string,
+  finishName: string,
+): PassingRow {
+  const row = radioPassing(p, f, timeZone, finishName);
+  const unordered = p.control < 0;
+  const time = p.control == UNORDERED_TIME;
+  return {
+    ...row,
+    controlName: time ? finishName : row.controlName,
+    time: time
+      ? formatTime(p.time, 0, f.labels, f.language, { showTenths: !!f.showTenths })
+      : row.time,
+    place: unordered ? '' : row.place,
+    diff: unordered ? '' : row.diff,
+    isStatus: !time && p.status != Status.OK && p.status != Status.FinishedUnordered,
+  };
+}
+
+/** The classes the latest updates box follows: every class, those of the open tabs, or a list. */
+export type FollowedClasses = 'all' | 'tabs' | string[];
+
+export function parseFollowedClasses(text: string): FollowedClasses | null {
+  if (text == 'all' || text == 'tabs') return text;
+  try {
+    const list: unknown = JSON.parse(text);
+    return Array.isArray(list) ? list.filter((s) => typeof s == 'string') : null;
+  } catch {
+    return null;
+  }
+}
+
+export const formatFollowedClasses = (followed: FollowedClasses) =>
+  typeof followed == 'string' ? followed : JSON.stringify(followed);
+
+/** The names of the classes followed, or null for every class, as without open class tabs. */
+export function followedNames(followed: FollowedClasses, tabClasses: string[]): Set<string> | null {
+  if (followed == 'all' || (followed == 'tabs' && tabClasses.length == 0)) return null;
+  return new Set(followed == 'tabs' ? tabClasses : followed);
+}
+
+/** The newest `limit` passings in the classes followed. */
+export function followedPassings<P extends Passing>(
+  passings: P[],
+  names: Set<string> | null,
+  limit: number,
+): P[] {
+  return (names ? passings.filter((p) => names.has(p.className)) : passings).slice(0, limit);
+}
+
+/**
+ * Follows or stops following the classes of one menu page, e.g. every leg of a relay. Following
+ * every class again gives 'all', so classes added later are followed too.
+ */
+export function toggleFollowed(
+  followed: FollowedClasses,
+  page: string[],
+  every: string[],
+  tabClasses: string[],
+): FollowedClasses {
+  const names = followedNames(followed, tabClasses) ?? new Set(every);
+  const on = page.every((c) => names.has(c));
+  for (const c of page) {
+    if (on) names.delete(c);
+    else names.add(c);
+  }
+  return every.every((c) => names.has(c)) ? 'all' : every.filter((c) => names.has(c));
 }

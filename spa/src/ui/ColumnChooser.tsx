@@ -1,6 +1,7 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import type { ColumnChoice } from '../domain/columns';
 import { useDisplay } from './context';
+import { useDismiss } from './hooks';
 
 /** The `columns-3-cog` icon of Lucide (ISC licence). */
 function ColumnsCogIcon() {
@@ -49,21 +50,7 @@ export function ColumnChooser({
   const root = useRef<HTMLDivElement>(null);
   const menuId = useId();
 
-  useEffect(() => {
-    if (!open) return;
-    const close = (e: Event) => {
-      if (
-        e instanceof KeyboardEvent ? e.key == 'Escape' : !root.current?.contains(e.target as Node)
-      )
-        setOpen(false);
-    };
-    document.addEventListener('pointerdown', close);
-    document.addEventListener('keydown', close);
-    return () => {
-      document.removeEventListener('pointerdown', close);
-      document.removeEventListener('keydown', close);
-    };
-  }, [open]);
+  useDismiss(open, () => setOpen(false), root);
 
   const anyHidden = choices.some((c) => hidden.has(c.key));
   return (

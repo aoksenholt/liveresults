@@ -1,5 +1,14 @@
 import type { ClassListItem } from '../domain/classList';
-import { closeTab, MAX_RECENT, menuEntries, openTab, otherColumns, rememberPage } from './tabs';
+import {
+  closeTab,
+  followPages,
+  MAX_RECENT,
+  menuEntries,
+  openTab,
+  otherColumns,
+  pageClasses,
+  rememberPage,
+} from './tabs';
 
 const items: ClassListItem[] = [
   { kind: 'class', label: 'H 21', className: 'H 21' },
@@ -80,5 +89,23 @@ describe('rememberPage', () => {
   it(`keeps the last ${MAX_RECENT}`, () => {
     const many = Array.from({ length: MAX_RECENT }, (_, i) => `#old${i}`);
     expect(rememberPage(many, '#H%2021', entries)).toEqual(['#H%2021', ...many.slice(0, -1)]);
+  });
+});
+
+describe('pageClasses', () => {
+  it('gives the classes of a class, relay or sprint page', () => {
+    expect(pageClasses(items, '#H%2021')).toEqual(['H 21']);
+    expect(pageClasses(items, '#relay::H17-20-1')).toEqual(['H17-20-1']);
+    expect(pageClasses(items, '#plainresultsclass_H21')).toEqual(['H21 KV1']);
+    expect(pageClasses(items, '#club::12')).toEqual([]);
+    expect(pageClasses(items, '#startlist')).toEqual([]);
+  });
+
+  it('lists one page to follow per class, relay or sprint title', () => {
+    expect(followPages(items, items)).toEqual([
+      { hash: '#H%2021', label: 'H 21', classes: ['H 21'] },
+      { hash: '#relay::H17-20-1', label: 'H17-20', classes: ['H17-20-1'] },
+      { hash: '#plainresultsclass_H21', label: 'Sprint', classes: ['H21 KV1'] },
+    ]);
   });
 });

@@ -4,10 +4,15 @@ import type { DisplayFormat } from './format';
 import { entryRows } from './organizer';
 import {
   FINISH,
+  followedNames,
+  followedPassings,
   lastPassings,
+  parseFollowedClasses,
+  passingRow,
   passingText,
   radioControls,
   radioPassing,
+  toggleFollowed,
   type Passing,
   type PassingStrings,
 } from './passings';
@@ -213,5 +218,99 @@ describe('radioPassing', () => {
       controlName: '2.4 km',
       bib: '12-3',
     });
+  });
+});
+
+describe('passingRow', () => {
+  const base: Passing = {
+    dbid: 1,
+    bib: 101,
+    name: 'Ola Nordmann',
+    club: 'Nordmarka OK',
+    className: 'H21',
+    control: FINISH,
+    controlName: '',
+    time: 193000,
+    status: 0,
+    place: 3,
+    behind: 8300,
+    changed: seconds('2026-09-19T11:34:32+00:00'),
+  };
+  const row = (p: Partial<Passing>) => passingRow({ ...base, ...p }, format, 'Europe/Oslo', 'Mål');
+
+  it('splits a finish into where, time, place and diff', () => {
+    expect(row({})).toMatchObject({
+      passtime: '13:34:32',
+      controlName: 'Mål',
+      name: 'Ola Nordmann',
+      className: 'H21',
+      time: '32:10',
+      place: '3',
+      diff: '+1:23',
+      isStatus: false,
+    });
+    expect(row({ control: 1031, controlName: '2.4 km' }).controlName).toBe('2.4 km');
+  });
+
+  it('shows a status instead of the time, without place or diff', () => {
+    expect(row({ status: 2, place: 0, behind: null })).toMatchObject({
+      time: 'DNF',
+      place: '',
+      diff: '',
+      isStatus: true,
+    });
+    expect(row({ status: 13, place: 0, behind: null })).toMatchObject({
+      time: 'Fullf.',
+      isStatus: false,
+    });
+  });
+
+  it('shows the time of an unordered class as the finish', () => {
+    expect(
+      row({ control: -999, controlName: 'Time', time: 121800, status: 13, place: 0, behind: 0 }),
+    ).toMatchObject({ controlName: 'Mål', time: '20:18', place: '', diff: '', isStatus: false });
+  });
+
+  it('leaves out place and diff in unordered classes', () => {
+    expect(row({ control: -1031, controlName: '2.4 km', place: 1 })).toMatchObject({
+      time: '32:10',
+      place: '',
+      diff: '',
+    });
+  });
+});
+
+describe('followed classes', () => {
+  const every = ['D17-', 'H17-', 'Stafett-1', 'Stafett-2'];
+
+  it('reads what was stored and ignores the rest', () => {
+    expect(parseFollowedClasses('all')).toBe('all');
+    expect(parseFollowedClasses('tabs')).toBe('tabs');
+    expect(parseFollowedClasses('["H17-",3]')).toEqual(['H17-']);
+    expect(parseFollowedClasses('{')).toBeNull();
+    expect(parseFollowedClasses('{}')).toBeNull();
+  });
+
+  it('follows every class, the tabs or a list', () => {
+    expect(followedNames('all', ['H17-'])).toBeNull();
+    expect(followedNames('tabs', [])).toBeNull();
+    expect(followedNames('tabs', ['H17-'])).toEqual(new Set(['H17-']));
+    expect(followedNames([], ['H17-'])).toEqual(new Set());
+  });
+
+  it('keeps the newest passings of the classes followed', () => {
+    const p = (className: string, changed: number) => ({ className, changed }) as Passing;
+    const passings = [p('H17-', 3), p('D17-', 2), p('H17-', 1)];
+    expect(followedPassings(passings, null, 2)).toEqual(passings.slice(0, 2));
+    expect(followedPassings(passings, new Set(['H17-']), 5)).toEqual([passings[0], passings[2]]);
+  });
+
+  it('toggles every class of a page and gives all back when all are followed', () => {
+    const relay = ['Stafett-1', 'Stafett-2'];
+    const noRelay = toggleFollowed('all', relay, every, []);
+    expect(noRelay).toEqual(['D17-', 'H17-']);
+    expect(toggleFollowed(['D17-', 'Stafett-1'], relay, every, [])).toEqual(['D17-', ...relay]);
+    expect(toggleFollowed(noRelay, relay, every, [])).toBe('all');
+    expect(toggleFollowed('tabs', ['D17-'], every, ['H17-'])).toEqual(['D17-', 'H17-']);
   });
 });
