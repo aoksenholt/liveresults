@@ -5,6 +5,7 @@ import { entryRows } from './organizer';
 import {
   FINISH,
   lastPassings,
+  passingRow,
   passingText,
   radioControls,
   radioPassing,
@@ -212,6 +213,65 @@ describe('radioPassing', () => {
     expect(row({ control: 1031, controlName: '2.4 km', bib: -1203 })).toMatchObject({
       controlName: '2.4 km',
       bib: '12-3',
+    });
+  });
+});
+
+describe('passingRow', () => {
+  const base: Passing = {
+    dbid: 1,
+    bib: 101,
+    name: 'Ola Nordmann',
+    club: 'Nordmarka OK',
+    className: 'H21',
+    control: FINISH,
+    controlName: '',
+    time: 193000,
+    status: 0,
+    place: 3,
+    behind: 8300,
+    changed: seconds('2026-09-19T11:34:32+00:00'),
+  };
+  const row = (p: Partial<Passing>) => passingRow({ ...base, ...p }, format, 'Europe/Oslo', 'Mål');
+
+  it('splits a finish into where, time, place and diff', () => {
+    expect(row({})).toMatchObject({
+      passtime: '13:34:32',
+      controlName: 'Mål',
+      name: 'Ola Nordmann',
+      className: 'H21',
+      time: '32:10',
+      place: '3',
+      diff: '+1:23',
+      isStatus: false,
+    });
+    expect(row({ control: 1031, controlName: '2.4 km' }).controlName).toBe('2.4 km');
+  });
+
+  it('shows a status instead of the time, without place or diff', () => {
+    expect(row({ status: 2, place: 0, behind: null })).toMatchObject({
+      time: 'DNF',
+      place: '',
+      diff: '',
+      isStatus: true,
+    });
+    expect(row({ status: 13, place: 0, behind: null })).toMatchObject({
+      time: 'Fullf.',
+      isStatus: false,
+    });
+  });
+
+  it('shows the time of an unordered class as the finish', () => {
+    expect(
+      row({ control: -999, controlName: 'Time', time: 121800, status: 13, place: 0, behind: 0 }),
+    ).toMatchObject({ controlName: 'Mål', time: '20:18', place: '', diff: '', isStatus: false });
+  });
+
+  it('leaves out place and diff in unordered classes', () => {
+    expect(row({ control: -1031, controlName: '2.4 km', place: 1 })).toMatchObject({
+      time: '32:10',
+      place: '',
+      diff: '',
     });
   });
 });

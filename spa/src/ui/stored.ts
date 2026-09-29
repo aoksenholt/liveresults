@@ -63,6 +63,20 @@ export function storedNumber(
   return storedValue(key, initial, (s) => (/^-?\d+$/.test(s) ? Number(s) : null), String);
 }
 
+/** One of a few named choices remembered in `localStorage`. */
+export function storedChoice<T extends string>(
+  key: string,
+  choices: readonly T[],
+  initial: () => T,
+): () => [T, (value: T) => void] {
+  return storedValue(
+    key,
+    initial,
+    (s) => choices.find((c) => c == s) ?? null,
+    (v) => v,
+  );
+}
+
 /** A list of strings remembered in `localStorage` for the component that uses it. */
 export function useStoredList(key: string): [string[], (list: string[]) => void] {
   const [list, setList] = useState<string[]>(() => {

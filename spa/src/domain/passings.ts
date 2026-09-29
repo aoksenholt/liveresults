@@ -22,6 +22,7 @@ export interface Passing {
 }
 
 export const FINISH = 1000;
+export const UNORDERED_TIME = -999;
 const HIDDEN_STATUS: number[] = [Status.NotClassified, Status.OnCourse, Status.NotStarted];
 const num = (v: unknown) => (typeof v == 'number' ? v : Number(v) || 0);
 const behind = (v: unknown) => (typeof v == 'number' ? v : null);
@@ -186,5 +187,37 @@ export function radioPassing(
     diff: ok && p.behind != null && p.behind >= 0 ? `+${diff}` : '',
     highlight:
       p.status >= 1 && p.status <= 6 ? 'yellow_row' : ok && p.place == 1 ? 'green_row' : 'red_row',
+  };
+}
+
+export interface PassingRow extends RadioPassing {
+  /** The status replaces the time, e.g. DNF. */
+  isStatus: boolean;
+}
+
+/**
+ * The parts of one latest update for the two-line rows of the new look. Unordered classes
+ * (negative codes, or the finish status) show neither place nor diff, as `passingText`.
+ * Their running time comes as the `UNORDERED_TIME` control, named "Time" by the legacy
+ * converter, with the finished status in place of the time; it is shown as the finish.
+ */
+export function passingRow(
+  p: Passing,
+  f: DisplayFormat,
+  timeZone: string,
+  finishName: string,
+): PassingRow {
+  const row = radioPassing(p, f, timeZone, finishName);
+  const unordered = p.control < 0;
+  const time = p.control == UNORDERED_TIME;
+  return {
+    ...row,
+    controlName: time ? finishName : row.controlName,
+    time: time
+      ? formatTime(p.time, 0, f.labels, f.language, { showTenths: !!f.showTenths })
+      : row.time,
+    place: unordered ? '' : row.place,
+    diff: unordered ? '' : row.diff,
+    isStatus: !time && p.status != Status.OK && p.status != Status.FinishedUnordered,
   };
 }

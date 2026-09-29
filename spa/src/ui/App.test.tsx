@@ -339,21 +339,32 @@ describe('App', () => {
     render(<App api={fakeApi(allEntries, today)} search="?comp=race-1&lang=no" />);
     expect(await screen.findByText('Siste oppdateringer')).toBeInTheDocument();
     const box = screen.getByText('Siste oppdateringer').closest('section')!;
-    expect(await within(box).findAllByText(/med tiden|fikk ny status/)).toHaveLength(3);
+    expect(await within(box).findAllByRole('listitem')).toHaveLength(3);
   });
 
-  it('lets the user fold the latest updates into one line', async () => {
+  it('lets the user fold the latest updates into the newest one and hide them', async () => {
     const today = { ...race, date: new Date(Date.now() - 3600000).toISOString() };
     render(<App api={fakeApi(allEntries, today)} search="?comp=race-1&lang=no" />);
-    const toggle = await screen.findByRole('button', { name: /^Siste oppdateringer/ });
-    const box = toggle.closest('section')!;
-    expect(toggle).toHaveAttribute('aria-expanded', 'true');
-    expect(await within(box).findAllByRole('link')).toHaveLength(3);
-    fireEvent.click(toggle);
-    expect(toggle).toHaveAttribute('aria-expanded', 'false');
-    expect(within(box).queryAllByRole('link')).toHaveLength(0);
-    expect(toggle).toHaveTextContent(/med tiden|fikk ny status/);
-    expect(localStorage.getItem('liveres-passings-collapsed')).toBe('1');
+    const open = await screen.findByRole('button', { name: /^Siste oppdateringer/ });
+    expect(open).toHaveAttribute('aria-expanded', 'true');
+    const box = open.closest('section')!;
+    expect(await within(box).findAllByRole('listitem')).toHaveLength(3);
+    fireEvent.click(open);
+    const strip = screen.getByRole('button', { name: 'Siste oppdateringer' });
+    expect(strip).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryAllByRole('listitem')).toHaveLength(0);
+    expect(localStorage.getItem('liveres-passings-view')).toBe('strip');
+    fireEvent.click(screen.getByRole('button', { name: 'Skjul siste oppdateringer' }));
+    expect(screen.queryByRole('button', { name: 'Siste oppdateringer' })).not.toBeInTheDocument();
+    expect(localStorage.getItem('liveres-passings-view')).toBe('hidden');
+    fireEvent.click(screen.getByRole('button', { name: 'Vis siste oppdateringer' }));
+    expect(screen.getByRole('button', { name: 'Siste oppdateringer' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
+    expect(
+      screen.queryByRole('button', { name: 'Vis siste oppdateringer' }),
+    ).not.toBeInTheDocument();
   });
 
   it('shows every class without splits on the scrolling page', async () => {

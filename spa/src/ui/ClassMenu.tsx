@@ -256,6 +256,7 @@ export function ClassPicker({
   columns,
   setColumns,
   search,
+  actions,
 }: {
   raceId: string;
   items: ClassListItem[];
@@ -265,6 +266,8 @@ export function ClassPicker({
   columns: number;
   setColumns: (columns: number) => void;
   search: ReactNode;
+  /** Buttons after the search, also on the race front page. */
+  actions?: ReactNode;
 }) {
   const { res } = useDisplay();
   const chosen = route.kind != 'none';
@@ -295,6 +298,7 @@ export function ClassPicker({
           />
         )}
         {search}
+        {actions}
         {chosen && <FreezeToggle />}
         {chosen && (
           <div className="columns-choice" role="group" aria-label={res._COLUMNS}>
