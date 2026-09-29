@@ -1305,8 +1305,25 @@ tr.yellow_row .club {
     padding: 0.35rem 0.5rem;
   }
 
-  :root[data-look='new'] .class-picker .tabs {
-    display: none;
+  :root[data-look='new'] .tabs {
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  :root[data-look='new'] .tab {
+    flex-shrink: 0;
+  }
+
+  :root[data-look='new'] .tab a:is(:link, :visited) {
+    padding: 0.3rem 0.1rem 0.3rem 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  :root[data-look='new'] .tab button {
+    padding: 0.3rem 0.5rem;
   }
 
   :root[data-look='new'] .last-passings {
