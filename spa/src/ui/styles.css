@@ -1275,6 +1275,75 @@ tr.yellow_row .club {
   }
 }
 
+/* Phones get as many runners and splits on screen as the legacy page does. */
+@media (max-width: 600px) {
+  :root[data-look='new'] .page {
+    padding: 0.6rem 0.5rem;
+  }
+
+  :root[data-look='new'] .class-picker {
+    margin-bottom: 0.6rem;
+  }
+
+  :root[data-look='new'] .class-toolbar {
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+  }
+
+  :root[data-look='new'] .class-toolbar select {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 40%;
+  }
+
+  :root[data-look='new'] .class-toolbar .search {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  :root[data-look='new'] :is(.class-toolbar select, .search input) {
+    padding: 0.35rem 0.5rem;
+  }
+
+  :root[data-look='new'] .class-picker .tabs {
+    display: none;
+  }
+
+  :root[data-look='new'] .last-passings {
+    padding: 0.4rem 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+
+  :root[data-look='new'] .page .class-header {
+    font-size: 1.15rem;
+    margin: 0 0 0.4em;
+  }
+
+  :root[data-look='new'] :is(table.results, table.lists) {
+    font-size: 0.85em;
+    line-height: 1.25;
+  }
+
+  :root[data-look='new'] :is(table.results, table.lists) :is(td, th) {
+    padding: 0.3em;
+  }
+
+  :root[data-look='new'] table.results a.club:is(:link, :visited) {
+    display: inline-block;
+    font-size: 0.85em;
+    line-height: 1.1;
+  }
+
+  :root[data-look='new'] table.results .fixed-place {
+    width: 2em;
+    min-width: 2em;
+  }
+
+  :root[data-look='new'] table.results .fixed-name {
+    left: 2em;
+  }
+}
+
 /* The runner picked in the search lights up for a moment. */
 @keyframes found {
   0%,
