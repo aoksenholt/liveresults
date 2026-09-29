@@ -18,6 +18,8 @@ import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
 import { parseHash, type Route } from './route';
 import { RaceSearch } from './Search';
+import { TableSizeButtons } from './TableSizeButtons';
+import { useTableScale } from './tableSize';
 import { useTopBar } from './topBar';
 import { otherColumns } from './tabs';
 import { ThemeToggle, useNewLook } from './ThemeToggle';
@@ -45,6 +47,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
   const { data: classList, error } = useControllerState(controller);
   const route = useHashRoute();
   const newLook = useNewLook();
+  useTableScale();
   const mobile = deviceType() == 'mobile';
   const [menuOpen, setMenuOpen] = useState(!mobile);
   const { name, date } = summarize(info.race);
@@ -104,6 +107,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
         )}
         <span className="title">{name}</span>
         <span className="date">{date}</span>
+        <TableSizeButtons />
         <ThemeToggle className="navbtn theme-toggle" />
       </div>
       {newLook && classList && classList.classes.length > 0 ? (
