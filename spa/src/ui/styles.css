@@ -116,6 +116,65 @@ h1 {
   font-size: 1.3em;
 }
 
+.class-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.class-heading .class-header {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.column-chooser {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.chooser-button {
+  display: inline-flex;
+  padding: 0.25em;
+  color: inherit;
+  background: none;
+  border: 1px solid #999;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+
+.chooser-button.changed {
+  border-color: currentColor;
+}
+
+.chooser-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.3em);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  min-width: 10em;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 0.5em;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
+}
+
+.chooser-menu label {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.chooser-menu .show-all {
+  margin-top: 0.3em;
+}
+
 .navbtn {
   border: none;
   background: #000;
@@ -1016,6 +1075,66 @@ tr.yellow_row .club {
   margin: 0.2em 0 0.6em;
 }
 
+:root[data-look='new'] .page .class-heading {
+  margin: 0.3rem 0 0.9rem;
+}
+
+:root[data-look='new'] .page .class-heading .class-header {
+  margin: 0;
+}
+
+:root[data-look='new'] .chooser-button {
+  padding: 0.3rem;
+  color: var(--text);
+  background: var(--card);
+  border-color: var(--border);
+  border-radius: 6px;
+}
+
+:root[data-look='new'] .chooser-button:hover,
+:root[data-look='new'] .chooser-button[aria-expanded='true'] {
+  border-color: var(--orange);
+}
+
+:root[data-look='new'] .chooser-button.changed {
+  color: var(--orange);
+  border-color: var(--orange);
+  background: var(--hover-row);
+}
+
+:root[data-look='new'] .chooser-menu {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+:root[data-look='new'] .chooser-menu label {
+  padding: 0.2rem 0.3rem;
+  border-radius: 4px;
+}
+
+:root[data-look='new'] .chooser-menu label:hover {
+  background: var(--hover-row);
+}
+
+:root[data-look='new'] .chooser-menu input {
+  accent-color: var(--orange);
+}
+
+:root[data-look='new'] .chooser-menu .show-all {
+  padding: 0.35rem 0.5rem;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+:root[data-look='new'] .chooser-menu .show-all:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 /* Tables as cards with lines between the rows. */
 :root[data-look='new'] :is(table.results, table.lists) {
   border-collapse: separate;
@@ -1374,6 +1493,10 @@ tr.yellow_row .club {
   :root[data-look='new'] .page .class-header {
     font-size: 1.15rem;
     margin: 0 0 0.4em;
+  }
+
+  :root[data-look='new'] .page .class-heading {
+    margin: 0 0 0.45rem;
   }
 
   :root[data-look='new'] :is(table.results, table.lists) {
