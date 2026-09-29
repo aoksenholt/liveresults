@@ -10,6 +10,13 @@ import {
   type TableOptions,
 } from '../domain/classTable';
 import { sprintStage } from '../domain/classList';
+import {
+  columnChoices,
+  hiddenIn,
+  showAllColumns,
+  toggleColumn,
+  withoutHidden,
+} from '../domain/columns';
 import type { ClassInfo, ResultRow } from '../domain/model';
 import type { ClassView } from '../domain/pipeline';
 import type { Predictions } from '../domain/predicted';
@@ -17,8 +24,10 @@ import { firstNonQualifier, qualificationLimit } from '../domain/ranking';
 import { classResultsController } from '../state/controllers';
 import { html, Loading, Message } from './common';
 import { useDisplay } from './context';
+import { ColumnChooser } from './ColumnChooser';
 import { clearFound, scrollToRow, useFound } from './found';
 import { useFrozenColumns } from './frozen';
+import { useHiddenColumns } from './hiddenColumns';
 import { useControllerState } from './hooks';
 import type { RaceProps } from './RaceView';
 import { ResultsTable } from './ResultsTable';
@@ -135,6 +144,7 @@ function ClassTableView(props: {
   return (
     <ClassTable
       cls={cls}
+      raceId={raceId}
       view={views?.[0] ?? null}
       predictions={predictions[0] ?? null}
       serverNow={serverNow}
@@ -146,6 +156,8 @@ function ClassTableView(props: {
 
 export function ClassTable(props: {
   cls: ClassInfo;
+  /** The race whose hidden columns apply; without it the table has no column chooser. */
+  raceId?: string;
   view: ClassView | null;
   predictions: Predictions | null;
   serverNow: number;
@@ -154,11 +166,12 @@ export function ClassTable(props: {
   /** Seconds a new result is highlighted. */
   highTime?: number;
 }) {
-  const { cls, view, predictions, serverNow, error, isRelayClass, highTime } = props;
+  const { cls, raceId, view, predictions, serverNow, error, isRelayClass, highTime } = props;
   const { res, format } = useDisplay();
   const newLook = useNewLook();
   const isFound = useFound(cls.className);
   const [frozen] = useFrozenColumns();
+  const [hiddenColumns, setHiddenColumns] = useHiddenColumns(raceId);
   const options = useMemo<TableOptions>(
     () => ({
       labels: format.labels,
@@ -181,12 +194,31 @@ export function ClassTable(props: {
     [table, predictions],
   );
 
-  const header = (
+  const hidden = useMemo(() => hiddenIn(hiddenColumns, cls.className), [hiddenColumns, cls]);
+
+  const rows = table?.view.results ?? [];
+  const title = (
     <h2 className="class-header">
       {cls.className}
       {view && <RunnerCount results={view.results} />}
     </h2>
   );
+  const header =
+    raceId === undefined ? (
+      title
+    ) : (
+      <div className="class-heading">
+        {title}
+        {table && rows.length > 0 && (
+          <ColumnChooser
+            choices={columnChoices(table.columns, isRelayClass, res._CLUB ?? '')}
+            hidden={hidden}
+            onToggle={(key) => setHiddenColumns(toggleColumn(hiddenColumns, cls.className, key))}
+            onShowAll={() => setHiddenColumns(showAllColumns(hiddenColumns, cls.className))}
+          />
+        )}
+      </div>
+    );
   if (!table)
     return (
       <>
@@ -194,7 +226,6 @@ export function ClassTable(props: {
         <Loading error={error} text={res._LOADINGRESULTS ?? ''} />
       </>
     );
-  const rows = table.view.results;
   if (rows.length == 0)
     return (
       <>
@@ -207,7 +238,7 @@ export function ClassTable(props: {
   const order = rows.map((_, i) => i);
   if (positions) order.sort((a, b) => positions[a]! - positions[b]! || a - b);
   const fnq = firstNonQualifier(rows, qualificationLimit(cls), false, positions);
-  const shown = table.columns.map((c, i) => [c, i] as const).filter(([c]) => c.visible);
+  const shown = withoutHidden(table.columns, isRelayClass, hidden);
   const visible = newLook ? stackRunnerColumns(shown) : shown;
   const fixed = (c: Column) =>
     !newLook || !frozen
