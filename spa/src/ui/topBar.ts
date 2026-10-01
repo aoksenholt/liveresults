@@ -19,7 +19,7 @@ const SLACK = 4;
  * the user scrolls down and comes back as soon as they scroll up.
  */
 export function useTopBar(enabled: boolean) {
-  const bar = useRef<HTMLDivElement>(null);
+  const bar = useRef<HTMLElement>(null);
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {

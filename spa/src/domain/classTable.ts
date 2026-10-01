@@ -282,6 +282,8 @@ function renderer(table: ClassTable) {
   };
 }
 
+export const ON_COURSE_CELL = '<span class="pulsing">◉</span>';
+
 /**
  * Cells replaced by running times for runners on course, keyed by column index,
  * ported from the rendering part of the legacy `updatePredictedTimes`.
@@ -302,7 +304,7 @@ export function predictedCells(
 
   return pred.running.map((run) => {
     if (!run) return null;
-    const cells = new Map<number, string>([[0, '<span class="pulsing">◉</span>']]);
+    const cells = new Map<number, string>([[0, ON_COURSE_CELL]]);
     let elapsedStr = `<i>${time(run.elapsed)}</i>`;
 
     if (view.splitcontrols.length == 0) {

@@ -112,7 +112,7 @@ function ClassButtons({
       {recent.length > 0 && (
         <section className="class-group recent">
           <h3>{res._RECENTCLASSES}</h3>
-          <nav>
+          <nav aria-label={res._RECENTCLASSES}>
             {recent.map((hash) => (
               <a key={hash} href={hash}>
                 {label(hash)}
@@ -125,13 +125,13 @@ function ClassButtons({
         {groups.map((group) => (
           <section key={group.kind} className={`class-group ${group.kind}`}>
             {groups.length > 1 && <h3>{res[GROUP_TITLES[group.kind]]}</h3>}
-            <nav>
+            <nav aria-label={groups.length > 1 ? res[GROUP_TITLES[group.kind]] : res._CHOOSECLASS}>
               <MenuItems items={group.items} current={current} />
             </nav>
           </section>
         ))}
       </div>
-      <nav className="class-lists">
+      <nav className="class-lists" aria-label={res._LISTS}>
         <MenuLink route={{ kind: 'plainresults' }} current={current}>
           {res._ALLCLASSES}
         </MenuLink>
@@ -153,15 +153,27 @@ export interface Tabs {
   label: (hash: string) => string;
 }
 
-/** The tabs of the new look: every page opened from the menu, until it is closed. */
-export function useTabs(items: ClassListItem[], route: Route): Tabs {
+function useMenuEntries(items: ClassListItem[]): MenuEntry[] {
   const { res } = useDisplay();
-  const current = routeHash(route);
-  const entries = useMemo(
+  return useMemo(
     () =>
       menuEntries(items, { allClasses: res._ALLCLASSES ?? '', startList: res._STARTLIST ?? '' }),
     [items, res],
   );
+}
+
+/** The name of a page of the menu, or of one named by `namePage`, such as a club. */
+export function usePageLabel(items: ClassListItem[]): (hash: string) => string | undefined {
+  const entries = useMenuEntries(items);
+  const pageName = usePageName();
+  return (hash) => entries.find((e) => e.hash == hash)?.label ?? pageName(hash);
+}
+
+/** The tabs of the new look: every page opened from the menu, until it is closed. */
+export function useTabs(items: ClassListItem[], route: Route): Tabs {
+  const current = routeHash(route);
+  const entries = useMenuEntries(items);
+  const pageLabel = usePageLabel(items);
   const [{ tabs, shown }, setState] = useState({ tabs: [] as string[], shown: '' });
   // A tab only opens when the page changes, so a closed tab stays closed until the hash follows.
   if (shown != current) setState({ tabs: openTab(tabs, current, entries), shown: current });
@@ -172,9 +184,7 @@ export function useTabs(items: ClassListItem[], route: Route): Tabs {
   };
   const openAll = (hashes: string[]) =>
     setState((s) => ({ ...s, tabs: hashes.reduce((t, h) => openTab(t, h, entries), s.tabs) }));
-  const pageName = usePageName();
-  const label = (hash: string) =>
-    entries.find((e) => e.hash == hash)?.label ?? pageName(hash) ?? hash;
+  const label = (hash: string) => pageLabel(hash) ?? hash;
   return { entries, tabs, current, close, openAll, label };
 }
 
@@ -328,10 +338,12 @@ export function ClassPicker({
         </>
       )}
       {chosen && columns == 1 && tabs.length > 0 && (
-        <nav className="tabs" ref={tabBar}>
+        <nav className="tabs" ref={tabBar} aria-label={res._OPENTABS}>
           {tabs.map((hash) => (
             <span key={hash} className={hash == current ? 'tab active' : 'tab'}>
-              <a href={hash}>{label(hash)}</a>
+              <a href={hash} aria-current={hash == current ? 'page' : undefined}>
+                {label(hash)}
+              </a>
               <button onClick={() => close(hash)} aria-label={`${res._CLOSETAB} ${label(hash)}`}>
                 ×
               </button>

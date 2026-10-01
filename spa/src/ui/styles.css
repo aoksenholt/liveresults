@@ -106,6 +106,7 @@ h1 {
 }
 
 .bar .title {
+  margin: 0;
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -367,6 +368,19 @@ tr.new_fnq :is(.plustime, .besttime, .legtime, .estimate, .place, .bestplace, td
 .pulsing {
   animation: blinker 1s ease-in-out infinite;
   color: var(--livered);
+}
+
+/* Read by screen readers only. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .besttime {
@@ -693,6 +707,26 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .info a {
   text-decoration: underline;
+}
+
+/* Room for the top bar and the fixed table header, so they do not hide what has focus (WCAG 2.4.11). */
+:root[data-look='new'] {
+  scroll-padding-top: 6rem;
+}
+
+/* Blinking stops within five seconds (WCAG 2.2.2), like the pulse of `.live-dot`. */
+:root[data-look='new'] .pulsing {
+  animation-iteration-count: 5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-look='new'] *,
+  :root[data-look='new'] ::before,
+  :root[data-look='new'] ::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
 }
 
 /* Black top bar with the race name and date. */
@@ -1274,7 +1308,7 @@ tr.yellow_row .club {
   height: 0.55em;
   border-radius: 50%;
   background: var(--orange);
-  animation: live-pulse 2s ease-in-out infinite;
+  animation: live-pulse 2s ease-in-out 2;
 }
 
 @keyframes live-pulse {

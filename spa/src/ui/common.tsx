@@ -17,7 +17,7 @@ export function Loading({ error, text }: { error: string | null; text: string })
 /** Pages with the theme toggle in the top bar leave it out here. */
 export function Info({ themeToggle = true }: { themeToggle?: boolean }) {
   return (
-    <div className="info">
+    <footer className="info">
       Timing data from Time4o: <a href="https://time4o.com/">time4o.com</a>
       <br />
       &copy; Liveresults: <a href="https://github.com/aoksenholt/liveresults">Source code</a>
@@ -27,6 +27,6 @@ export function Info({ themeToggle = true }: { themeToggle?: boolean }) {
           <ThemeToggle className="link-button" text />
         </>
       )}
-    </div>
+    </footer>
   );
 }

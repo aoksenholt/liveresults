@@ -32,5 +32,7 @@ export function useFound(className: string): (row: ResultRow) => boolean {
   return (row) => f != null && f.className == className && f.dbid == row.dbid && f.bib == row.bib;
 }
 
+const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
 export const scrollToRow = (row: HTMLElement | null) =>
-  row?.scrollIntoView?.({ block: 'center', behavior: 'smooth' });
+  row?.scrollIntoView?.({ block: 'center', behavior: reducedMotion() ? 'auto' : 'smooth' });

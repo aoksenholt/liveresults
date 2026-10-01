@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type CSSProperties, type MouseEvent } from 'react';
 import { followedPassings } from '../domain/passings';
+import type { ClassListItem } from '../domain/classList';
 import { summarize } from '../domain/races';
 import {
   classListController,
@@ -7,7 +8,7 @@ import {
   type ClassList,
   type RaceInfo,
 } from '../state/controllers';
-import { ClassMenu, ClassPicker, PageSelect, useTabs } from './ClassMenu';
+import { ClassMenu, ClassPicker, PageSelect, usePageLabel, useTabs } from './ClassMenu';
 import { ClassResults } from './ClassResults';
 import { ClubResults } from './ClubResults';
 import { FavouritesButton, FavouritesView, useFavourites } from './Favourites';
@@ -26,7 +27,7 @@ import {
 import { Logo } from './Logo';
 import { ListResults } from './ListResults';
 import { RelayResults } from './RelayResults';
-import { parseHash, type Route } from './route';
+import { parseHash, routeHash, type Route } from './route';
 import { RaceSearch } from './Search';
 import { TableSizeButtons } from './TableSizeButtons';
 import { useTableScale } from './tableSize';
@@ -39,6 +40,8 @@ export interface RaceProps {
   info: RaceInfo;
   classList: ClassList;
 }
+
+const NO_ITEMS: ClassListItem[] = [];
 
 export function RaceView({ raceId }: { raceId: string }) {
   const { api, res } = useDisplay();
@@ -63,9 +66,11 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
   const { name, date } = summarize(info.race);
   const [barRef, barClass] = useTopBar(newLook);
 
+  const pageLabel = usePageLabel(classList?.items ?? NO_ITEMS);
+  const page = route.kind == 'none' ? undefined : pageLabel(routeHash(route));
   useEffect(() => {
-    document.title = name;
-  }, [name]);
+    document.title = page ? `${page} – ${name}` : name;
+  }, [page, name]);
 
   const closeOnMobile = (e: MouseEvent) => {
     if (mobile && (e.target as HTMLElement).closest('a')) setMenuOpen(false);
@@ -89,7 +94,7 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
 
   return (
     <>
-      <div className={barClass} ref={barRef}>
+      <header className={barClass} ref={barRef}>
         {newLook ? (
           <a
             className="back"
@@ -115,11 +120,11 @@ function RaceContent({ raceId, info }: { raceId: string; info: RaceInfo }) {
             ▤
           </button>
         )}
-        <span className="title">{name}</span>
+        <h1 className="title">{name}</h1>
         <span className="date">{date}</span>
         <TableSizeButtons />
         <ThemeToggle className="navbtn theme-toggle" />
-      </div>
+      </header>
       {newLook && classList && classList.classes.length > 0 ? (
         <NewLookPage route={route} raceId={raceId} info={info} classList={classList} />
       ) : newLook ? (

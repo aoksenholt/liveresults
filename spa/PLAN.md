@@ -110,14 +110,14 @@ Prioritert, mest effekt på mobil først:
 - [x] 2.5.8 Målstørrelse: stjerna før navnet var 14×14 px og klubblenken under navnet 11 px høy på telefon, tett inntil hverandre (axe: 45 treff per klasse). Begge har nå en klikkflate på minst 24 px med padding og negativ marg, og klubben under en stjerne starter under navnet, så klikkflatene ikke overlapper. Stjerna uten favoritt har fått en farge med 3:1 kontrast (1.4.11)
 - [x] 1.4.3 Kontrast: oransje `#d14e10` på `#faf8f3` ga 4,11:1 i lyst tema (krav 4,5:1), og hvit tekst på `#f2611c` 3,23:1. Lenker og rød tekst er nå `#b8440d` i lyst tema, og merkene med hvit tekst (plass 1 i passeringene, LIVE, telleren) har `--badge` `#c4490f`
 - [x] 1.4.1 Bruk av farge: lenkene i bunnteksten ble bare skilt med farge fra teksten rundt (1,38:1). De er nå understreket
-- [ ] 2.4.11 Fokus ikke skjult: ved tabbing bakover havner fokus under `.float-head`-kopien av tabellhodet. `scroll-padding-top`/`scroll-margin-top` etter topplinja og tabellhodet
-- [ ] 2.2.2 Pause, stopp, skjul: «◉» for løpere i skogen blinker uten stopp, og LIVE-prikken pulserer. Stoppe etter fem sekunder eller med `prefers-reduced-motion`, som også bør dempe de andre animasjonene
-- [ ] 4.1.3 Statusmeldinger: hele «Siste oppdateringer» er `aria-live="polite"`, så skjermlesere leser hver ny rad hvert 15. sekund. Begrense til en kort melding, eller bare når boksen er åpen
-- [ ] 4.1.2/2.4.4 Navn: tomme klubblenker (`#club::0`) uten tekst for løpere uten klubb på rullesiden. Ingen lenke når klubben mangler
-- [ ] 1.3.1 Struktur: tom `th` i klubbtabellen, ingen `main`-landemerke og ingen `h1`, topplinja ligger utenfor landemerker og klassegruppene på forsiden har flere `nav` uten navn
-- [ ] 2.4.2 Sidetittel: tittelen er bare løpsnavnet; ta med klassen, klubben eller favoritter
-- [ ] «◉» leses som et symbol av skjermlesere; gi det en tekst som «i skogen»
-- [ ] axe-core i testene (`App.test.tsx` eller et eget skript) så nye feil fanges
+- [x] 2.4.11 Fokus ikke skjult: ved tabbing bakover havnet fokus under `.float-head`-kopien av tabellhodet. Det nye utseendet har nå `scroll-padding-top` på 6rem, så topplinja og tabellhodet ikke dekker det som har fokus
+- [x] 2.2.2 Pause, stopp, skjul: «◉» for løpere i skogen blinket uten stopp, og LIVE-prikken pulserte. Begge stopper etter rundt fem sekunder i det nye utseendet, og med `prefers-reduced-motion` stopper alle animasjoner og overganger, og søket ruller uten glidende bevegelse
+- [x] 4.1.3 Statusmeldinger: hele «Siste oppdateringer» var `aria-live="polite"`, så skjermlesere leste hver ny rad hvert 15. sekund. Nå leser en skjult statuslinje bare den nyeste oppdateringen i én setning, og ikke ved første lasting eller når boksen er skjult
+- [x] 4.1.2/2.4.4 Navn: løpere uten klubb fikk en tom klubblenke (`#club::0`). Nå er det ingen lenke når klubben mangler
+- [x] 1.3.1 Struktur: de tomme `th`-ene i klubb- og stafettabellen har en skjult tekst, topplinja er `header` med løpsnavnet som `h1` (skjult `h1` på rullesiden og passeringsvisningen), innholdet ligger i `main` og bunnteksten i `footer`. Klassegruppene, sist åpnede klasser, listene og fanene har navn på `nav`, og den åpne fanen har `aria-current`
+- [x] 2.4.2 Sidetittel: tittelen er nå siden og løpet, som «H 21-E – O-Festival lang», «Favoritter – …» eller klubbnavnet
+- [x] «◉» leses som «I løypa» (`role="img"` med `aria-label`)
+- [x] axe-core i testene: `App.test.tsx` kjører axe på løpslisten, forsiden av løpet, klasse, stafett, lister, klubb, favoritter, rullesiden og arrangørvisningene, med kontrast og målstørrelse slått av siden jsdom ikke har layout. Ny gjennomgang i Chrome ga ingen brudd i lyst og mørkt tema, og det klassiske utseendet er uendret
 
 ## Ideer
 

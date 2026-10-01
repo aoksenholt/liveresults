@@ -3,6 +3,7 @@ import {
   cellHtml,
   classTable,
   highlights,
+  ON_COURSE_CELL,
   predictedCells,
   runnerClub,
   runnerName,
@@ -72,6 +73,7 @@ export function ClubLink({
   text: string;
   className: string;
 }) {
+  if (!text) return null;
   const href = routeHash({ kind: 'club', clubId: String(row.clubId) });
   return (
     <a className={className} href={href} onClick={() => namePage(href, row.club || text)}>
@@ -300,6 +302,14 @@ export function ClassTable(props: {
                   </td>
                 );
               const content = running?.[i]?.get(col) ?? cellHtml(table, c, row);
+              if (content == ON_COURSE_CELL)
+                return (
+                  <td key={col} className={className || undefined}>
+                    <span className="pulsing" role="img" aria-label={res._ONCOURSE}>
+                      ◉
+                    </span>
+                  </td>
+                );
               return <td key={col} className={className || undefined} {...html(content)} />;
             })}
           </tr>

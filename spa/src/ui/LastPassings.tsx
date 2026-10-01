@@ -44,13 +44,7 @@ export function LastPassings({
     [api, raceId, classes, timeZone],
   );
   const { data } = useControllerState(controller);
-  const strings: PassingStrings = {
-    finished: res._LASTPASSFINISHED ?? '',
-    passed: res._LASTPASSPASSED ?? '',
-    withTime: res._LASTPASSWITHTIME ?? '',
-    withStatus: res._LASTPASSWITHSTATUS ?? '',
-    newStatus: res._NEWSTATUS ?? '',
-  };
+  const strings = usePassingStrings();
   const lines = (data ?? []).map((p) => ({ ...passingText(p, format, strings, timeZone), p }));
   const list = (
     <div className="passings-container">
@@ -65,10 +59,50 @@ export function LastPassings({
   );
 
   return (
-    <section className="last-passings" aria-live="polite">
+    <section className="last-passings">
       <b>{res._LASTPASSINGS}</b>
       {list}
+      <PassingsAnnouncer passings={data} timeZone={timeZone} />
     </section>
+  );
+}
+
+function usePassingStrings(): PassingStrings {
+  const { res } = useDisplay();
+  return {
+    finished: res._LASTPASSFINISHED ?? '',
+    passed: res._LASTPASSPASSED ?? '',
+    withTime: res._LASTPASSWITHTIME ?? '',
+    withStatus: res._LASTPASSWITHSTATUS ?? '',
+    newStatus: res._NEWSTATUS ?? '',
+  };
+}
+
+/**
+ * Tells screen readers about the newest update as one sentence, instead of reading out the whole
+ * box on every poll (WCAG 4.1.3). The updates there were when the box opened are not announced.
+ */
+function PassingsAnnouncer({
+  passings,
+  timeZone,
+}: {
+  passings: ShownPassing[] | null;
+  timeZone: string;
+}) {
+  const { format } = useDisplay();
+  const strings = usePassingStrings();
+  const [first, setFirst] = useState<string | null>();
+  const newest = passings?.[0];
+  if (first === undefined && passings) setFirst(newest?.key ?? null);
+  let message = '';
+  if (newest && first !== undefined && newest.key != first) {
+    const line = passingText(newest, format, strings, timeZone);
+    message = `${line.passtime}: ${line.name} (${line.className}) ${line.text}`;
+  }
+  return (
+    <p className="visually-hidden" role="status">
+      {message}
+    </p>
   );
 }
 
@@ -170,7 +204,7 @@ export function PassingsBox({
   if (view == 'strip') {
     const [latest] = rows;
     return (
-      <section className="last-passings strip" aria-live="polite">
+      <section className="last-passings strip">
         <button
           type="button"
           className="passings-toggle"
@@ -203,12 +237,13 @@ export function PassingsBox({
           )}
           <span className="chevron" aria-hidden="true" />
         </button>
+        <PassingsAnnouncer passings={passings} timeZone={timeZone} />
       </section>
     );
   }
 
   return (
-    <section className="last-passings" aria-live="polite">
+    <section className="last-passings">
       <div className="passings-head">
         <button
           type="button"
@@ -229,6 +264,7 @@ export function PassingsBox({
           <PassingItem key={p.key} row={row} fresh={p.fresh} />
         ))}
       </ol>
+      <PassingsAnnouncer passings={passings} timeZone={timeZone} />
     </section>
   );
 }
