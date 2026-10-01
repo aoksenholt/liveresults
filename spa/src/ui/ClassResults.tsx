@@ -25,6 +25,7 @@ import { classResultsController } from '../state/controllers';
 import { html, Loading, Message } from './common';
 import { useDisplay } from './context';
 import { ColumnChooser } from './ColumnChooser';
+import { FavouriteStar } from './Favourites';
 import { clearFound, scrollToRow, useFound } from './found';
 import { useFrozenColumns } from './frozen';
 import { useHiddenColumns } from './hiddenColumns';
@@ -79,9 +80,14 @@ export function ClubLink({
   );
 }
 
-function RunnerCell({ column, row }: { column: Column; row: ResultRow }) {
+function RunnerCell({ column, row, raceId }: { column: Column; row: ResultRow; raceId?: string }) {
   const { format } = useDisplay();
-  const name = <span className="runner-name">{runnerName(row, format.maxNameLength)}</span>;
+  const name = (
+    <>
+      <FavouriteStar raceId={raceId} row={row} />
+      <span className="runner-name">{runnerName(row, format.maxNameLength)}</span>
+    </>
+  );
   const club = runnerClub(row, format.maxClubLength);
   switch (column.layout) {
     case 'club':
@@ -290,7 +296,7 @@ export function ClassTable(props: {
               if (c.kind == 'runner')
                 return (
                   <td key={col} className={className || undefined}>
-                    <RunnerCell column={c} row={row} />
+                    <RunnerCell column={c} row={row} raceId={raceId} />
                   </td>
                 );
               const content = running?.[i]?.get(col) ?? cellHtml(table, c, row);

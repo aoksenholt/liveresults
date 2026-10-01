@@ -222,11 +222,14 @@ export function passingRow(
   };
 }
 
-/** The classes the latest updates box follows: every class, those of the open tabs, or a list. */
-export type FollowedClasses = 'all' | 'tabs' | string[];
+/**
+ * The classes the latest updates box follows: every class, those of the open tabs, a list, or
+ * none but the favourite runners.
+ */
+export type FollowedClasses = 'all' | 'tabs' | 'favourites' | string[];
 
 export function parseFollowedClasses(text: string): FollowedClasses | null {
-  if (text == 'all' || text == 'tabs') return text;
+  if (text == 'all' || text == 'tabs' || text == 'favourites') return text;
   try {
     const list: unknown = JSON.parse(text);
     return Array.isArray(list) ? list.filter((s) => typeof s == 'string') : null;
@@ -241,16 +244,23 @@ export const formatFollowedClasses = (followed: FollowedClasses) =>
 /** The names of the classes followed, or null for every class, as without open class tabs. */
 export function followedNames(followed: FollowedClasses, tabClasses: string[]): Set<string> | null {
   if (followed == 'all' || (followed == 'tabs' && tabClasses.length == 0)) return null;
+  if (followed == 'favourites') return new Set();
   return new Set(followed == 'tabs' ? tabClasses : followed);
 }
 
-/** The newest `limit` passings in the classes followed. */
+/** The newest `limit` passings in the classes followed, or of the `runners` when given. */
 export function followedPassings<P extends Passing>(
   passings: P[],
   names: Set<string> | null,
   limit: number,
+  runners: Set<number> | null = null,
 ): P[] {
-  return (names ? passings.filter((p) => names.has(p.className)) : passings).slice(0, limit);
+  const shown = runners
+    ? passings.filter((p) => runners.has(p.dbid))
+    : names
+      ? passings.filter((p) => names.has(p.className))
+      : passings;
+  return shown.slice(0, limit);
 }
 
 /**

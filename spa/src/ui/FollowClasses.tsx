@@ -26,6 +26,10 @@ export interface Follow {
   setFollowed: (followed: FollowedClasses) => void;
   /** The classes followed, or null for every class. */
   names: Set<string> | null;
+  /** The favourite runners when only they are followed. */
+  runners: Set<number> | null;
+  /** Every favourite runner of the race. */
+  favourites: Set<number>;
   tabClasses: string[];
   groups: { kind: keyof typeof GROUP_TITLES; pages: FollowPage[] }[];
   every: string[];
@@ -37,6 +41,7 @@ export function useFollow(
   items: ClassListItem[],
   sexes: Map<string, string>,
   tabs: string[],
+  favourites: Set<number>,
 ): Follow {
   const [followed, setFollowed] = useStoredFollowed(raceId);
   const groups = useMemo(
@@ -48,7 +53,8 @@ export function useFollow(
   const tabKey = tabs.flatMap((h) => pageClasses(items, h)).join('\n');
   const tabClasses = useMemo(() => (tabKey ? tabKey.split('\n') : []), [tabKey]);
   const names = useMemo(() => followedNames(followed, tabClasses), [followed, tabClasses]);
-  return { followed, setFollowed, names, tabClasses, groups, every };
+  const runners = followed == 'favourites' ? favourites : null;
+  return { followed, setFollowed, names, runners, favourites, tabClasses, groups, every };
 }
 
 /** The `funnel` icon of Lucide (ISC licence). */
@@ -96,7 +102,7 @@ function GroupBox({
 /** A menu of the classes to follow in the latest updates. */
 export function FollowChooser({ follow }: { follow: Follow }) {
   const { res } = useDisplay();
-  const { followed, setFollowed, names, tabClasses, groups, every } = follow;
+  const { followed, setFollowed, names, tabClasses, groups, every, favourites } = follow;
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -128,6 +134,16 @@ export function FollowChooser({ follow }: { follow: Follow }) {
             <input type="radio" checked={followed == 'tabs'} onChange={() => setFollowed('tabs')} />
             {res._FOLLOWTABS}
           </label>
+          {(favourites.size > 0 || followed == 'favourites') && (
+            <label>
+              <input
+                type="radio"
+                checked={followed == 'favourites'}
+                onChange={() => setFollowed('favourites')}
+              />
+              {res._FOLLOWFAVOURITES}
+            </label>
+          )}
           {groups.map((g) => {
             const classes = g.pages.flatMap((p) => p.classes);
             return (

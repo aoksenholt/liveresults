@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import type { ClassInfo } from '../domain/model';
-import { passingRow, passingText, type PassingStrings } from '../domain/passings';
+import { passingRow, passingText, type PassingRow, type PassingStrings } from '../domain/passings';
 import { lastPassingsController, type ShownPassing } from '../state/controllers';
 import { useDisplay } from './context';
 import { FollowChooser, FunnelIcon, type Follow } from './FollowClasses';
@@ -141,14 +141,17 @@ export function PassingsBox({
   const filtered = follow.names != null;
   // A box without updates only shows when the classes chosen have none, so they can be changed.
   if (view == 'hidden' || !passings || (passings.length == 0 && !filtered)) return null;
-  const empty = <p className="passings-empty">{res._NOFOLLOWEDPASSINGS}</p>;
+  const noneText = follow.runners ? res._NOFAVOURITEPASSINGS : res._NOFOLLOWEDPASSINGS;
+  const empty = <p className="passings-empty">{noneText}</p>;
   const pages = follow.groups.flatMap((g) => g.pages);
   const chosen = pages.filter((p) => p.classes.every((c) => follow.names?.has(c))).length;
   const scope = !filtered
     ? ''
     : follow.followed == 'tabs'
       ? res._TABS
-      : `${chosen} ${res._CLASSESCOUNT}`;
+      : follow.followed == 'favourites'
+        ? res._FAVOURITESSCOPE
+        : `${chosen} ${res._CLASSESCOUNT}`;
   const rows = passings
     .slice(0, SHOWN)
     .map((p) => ({ ...passingRow(p, format, timeZone, res._CONTROLFINISH ?? ''), p }));
@@ -196,7 +199,7 @@ export function PassingsBox({
               <span className="passing-class">{latest.className}</span>
             </>
           ) : (
-            <span className="passings-empty">{res._NOFOLLOWEDPASSINGS}</span>
+            <span className="passings-empty">{noneText}</span>
           )}
           <span className="chevron" aria-hidden="true" />
         </button>
@@ -223,33 +226,35 @@ export function PassingsBox({
       {rows.length == 0 && empty}
       <ol className="passing-rows">
         {rows.map(({ p, ...row }) => (
-          <li key={p.key} className={p.fresh ? 'passing-row fresh' : 'passing-row'}>
-            <div className="passing-who">
-              <span className="passing-name">{row.name}</span>
-              <a
-                className="passing-class"
-                href={routeHash({ kind: 'class', className: row.className })}
-              >
-                {row.className}
-              </a>
-              <span className="passing-clock">{row.passtime}</span>
-            </div>
-            <div className="passing-what">
-              <span className="passing-where">{row.controlName}</span>
-              <span className={row.isStatus ? 'passing-time status' : 'passing-time'}>
-                {row.time}
-              </span>
-              {row.place && (
-                <span className={row.place == '1' ? 'passing-place first' : 'passing-place'}>
-                  {row.place}.
-                </span>
-              )}
-              {row.diff && <span className="passing-diff">{row.diff}</span>}
-            </div>
-          </li>
+          <PassingItem key={p.key} row={row} fresh={p.fresh} />
         ))}
       </ol>
     </section>
+  );
+}
+
+/** One update in two lines: who, in which class and when, then where, time, place and diff. */
+export function PassingItem({ row, fresh = false }: { row: PassingRow; fresh?: boolean }) {
+  return (
+    <li className={fresh ? 'passing-row fresh' : 'passing-row'}>
+      <div className="passing-who">
+        <span className="passing-name">{row.name}</span>
+        <a className="passing-class" href={routeHash({ kind: 'class', className: row.className })}>
+          {row.className}
+        </a>
+        <span className="passing-clock">{row.passtime}</span>
+      </div>
+      <div className="passing-what">
+        <span className="passing-where">{row.controlName}</span>
+        <span className={row.isStatus ? 'passing-time status' : 'passing-time'}>{row.time}</span>
+        {row.place && (
+          <span className={row.place == '1' ? 'passing-place first' : 'passing-place'}>
+            {row.place}.
+          </span>
+        )}
+        {row.diff && <span className="passing-diff">{row.diff}</span>}
+      </div>
+    </li>
   );
 }
 

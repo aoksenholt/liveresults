@@ -10,6 +10,7 @@ import {
 import { ClassMenu, ClassPicker, PageSelect, useTabs } from './ClassMenu';
 import { ClassResults } from './ClassResults';
 import { ClubResults } from './ClubResults';
+import { FavouritesButton, FavouritesView, useFavourites } from './Favourites';
 import { Info, Loading, Message } from './common';
 import { useFollow } from './FollowClasses';
 import { deviceType, useDisplay } from './context';
@@ -143,10 +144,11 @@ function NewLookPage({ route, ...props }: RaceProps & { route: Route }) {
   const { raceId, info, classList } = props;
   const tabs = useTabs(classList.items, route);
   const allPassings = useLastPassings(raceId, classList.classes, info.timeZone, info.live);
-  const follow = useFollow(raceId, classList.items, classList.sexes, tabs.tabs);
+  const favourites = useFavourites(raceId).ids;
+  const follow = useFollow(raceId, classList.items, classList.sexes, tabs.tabs, favourites);
   const passings = useMemo(
-    () => allPassings && followedPassings(allPassings, follow.names, COUNTED),
-    [allPassings, follow.names],
+    () => allPassings && followedPassings(allPassings, follow.names, COUNTED, follow.runners),
+    [allPassings, follow.names, follow.runners],
   );
   const passingsPanel = usePassingsPanel(passings);
   const [columns, setColumns] = useState(1);
@@ -182,7 +184,12 @@ function NewLookPage({ route, ...props }: RaceProps & { route: Route }) {
             timeZone={info.timeZone}
           />
         }
-        actions={<PassingsButton panel={passingsPanel} />}
+        actions={
+          <>
+            <FavouritesButton raceId={raceId} />
+            <PassingsButton panel={passingsPanel} />
+          </>
+        }
       />
       <PassingsBox
         passings={passings}
@@ -224,6 +231,8 @@ function RouteView({ route, ...props }: RaceProps & { route: Route }) {
       return <ClubResults key={route.clubId} clubId={route.clubId} {...props} />;
     case 'relay':
       return <RelayResults key={route.className} className={route.className} {...props} />;
+    case 'favourites':
+      return <FavouritesView {...props} />;
     case 'startlist':
     case 'plainresults':
       return <ListResults key={route.kind} type={route.kind} {...props} />;

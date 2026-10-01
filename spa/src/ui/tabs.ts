@@ -40,9 +40,10 @@ export function menuEntries(
   return entries;
 }
 
-/** Pages from the menu and clubs get a tab when they are opened; other pages do not. */
+/** Pages from the menu, clubs and the favourites get a tab when they are opened; other pages do not. */
 export function openTab(tabs: string[], hash: string, entries: MenuEntry[]): string[] {
-  const tabbed = entries.some((e) => e.hash == hash) || parseHash(hash).kind == 'club';
+  const kind = parseHash(hash).kind;
+  const tabbed = entries.some((e) => e.hash == hash) || kind == 'club' || kind == 'favourites';
   if (tabs.includes(hash) || !tabbed) return tabs;
   return [...tabs, hash];
 }

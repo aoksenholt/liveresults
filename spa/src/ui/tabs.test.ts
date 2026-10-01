@@ -47,6 +47,7 @@ describe('tabs', () => {
     expect(openTab(tabs, '', entries)).toBe(tabs);
     expect(openTab(tabs, '#club::12', entries)).toEqual(['#H%2021', '#club::12']);
     expect(openTab(tabs, '#startlist', entries)).toEqual(['#H%2021', '#startlist']);
+    expect(openTab(tabs, '#favourites', entries)).toEqual(['#H%2021', '#favourites']);
   });
 
   it('moves to a neighbour when the open tab is closed', () => {

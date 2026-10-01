@@ -388,6 +388,55 @@ describe('App', () => {
     expect(localStorage.getItem('liveres-passings-classes-race-1')).toBe('all');
   });
 
+  it('marks favourites with a star and shows them on their own page', async () => {
+    renderRace(`#${encodeURIComponent(interval.raceClass.name!)}`);
+    const [star] = await screen.findAllByRole('button', { name: /^Legg til i favoritter: / });
+    const name = star!.getAttribute('aria-label')!.replace(/^.*?: /, '');
+    fireEvent.click(star!);
+    expect(screen.getByRole('button', { name: `Fjern fra favoritter: ${name}` })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    expect(JSON.parse(localStorage.getItem('liveres-favourites-race-1')!)).toHaveLength(1);
+    fireEvent.click(screen.getByRole('link', { name: 'Favoritter (1)' }));
+    expect(await screen.findByRole('heading', { name: 'Favoritter' })).toBeInTheDocument();
+    const table = await screen.findByRole('table');
+    expect(within(table).getAllByRole('row')).toHaveLength(2);
+    expect(within(table).getByText(name)).toBeInTheDocument();
+    expect(within(table).getByRole('link', { name: interval.raceClass.name! })).toBeInTheDocument();
+    fireEvent.click(within(table).getByRole('button', { name: `Fjern fra favoritter: ${name}` }));
+    expect(screen.getByText(/^Ingen favoritter ennå/)).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /^Favoritter \(/ })).not.toBeInTheDocument();
+  });
+
+  it('lets the latest updates follow only the favourites', async () => {
+    const today = { ...race, date: new Date(Date.now() - 3600000).toISOString() };
+    // The anonymised fixtures of different races share person ids, so only one is used here.
+    render(<App api={fakeApi(interval.entries, today)} search="?comp=race-1&lang=no" />);
+    const box = (await screen.findByRole('button', { name: /^Siste oppdateringer/ })).closest(
+      'section',
+    )!;
+    const [first] = await within(box).findAllByRole('listitem');
+    const name = first!.querySelector('.passing-name')!.textContent!;
+    fireEvent.click(within(box).getByRole('button', { name: 'Velg klasser' }));
+    expect(within(box).queryByRole('radio', { name: 'Favorittene mine' })).not.toBeInTheDocument();
+    fireEvent.click(within(box).getByRole('button', { name: 'Velg klasser' }));
+    fireEvent.change(screen.getByRole('searchbox'), { target: { value: name } });
+    const results = await screen.findByRole('region', { name: /^Søk/ });
+    fireEvent.click(
+      (
+        await within(results).findAllByRole('button', { name: `Legg til i favoritter: ${name}` })
+      )[0]!,
+    );
+    fireEvent.click(within(box).getByRole('button', { name: 'Velg klasser' }));
+    fireEvent.click(within(box).getByRole('radio', { name: 'Favorittene mine' }));
+    expect(localStorage.getItem('liveres-passings-classes-race-1')).toBe('favourites');
+    const rows = within(box).getAllByRole('listitem');
+    expect(rows.length).toBeGreaterThan(0);
+    for (const row of rows) expect(row.querySelector('.passing-name')).toHaveTextContent(name);
+    expect(within(box).getByText('· favorittene')).toBeInTheDocument();
+  });
+
   it('shows every class without splits on the scrolling page', async () => {
     render(<App api={fakeApi()} search="?comp=race-1&lang=no&scroll" />);
     const headers = await screen.findAllByRole('heading', { level: 2 });

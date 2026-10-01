@@ -98,7 +98,7 @@ og kommende løp med filter.
 
 ## Ideer
 
-- [ ] Favorittløpere: brukeren merker løpere (f.eks. med en stjerne i resultattabellen eller i søket), og en egen visning viser passeringer, plassering og tid for favorittene på tvers av klasser. Favorittene huskes per løp i nettleseren. «Siste oppdateringer» kan få et valg for bare favorittene
+- [x] Favorittløpere: en stjerne foran navnet i klassetabellene, klubbtabellen og søket merker løpere (bare i det nye utseendet). Siden `#favourites` (stjerneknapp med antall i verktøylinja) viser favorittene på tvers av klasser med plassering, tid og siste post, og alle passeringene deres. Favorittene huskes per løp i nettleseren, og trakten i «Siste oppdateringer» har valget «Favorittene mine»
 
 ## Synk med upstream
 

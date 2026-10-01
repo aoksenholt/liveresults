@@ -4,6 +4,7 @@ import { searchClasses } from '../domain/search';
 import { searchController } from '../state/controllers';
 import { Loading } from './common';
 import { useDisplay } from './context';
+import { FavouriteStar } from './Favourites';
 import { markFound } from './found';
 import { useControllerState } from './hooks';
 import { namePage } from './pageNames';
@@ -110,6 +111,7 @@ function SearchResults({
               <ul>
                 {found.runners.slice(0, MAX_RUNNERS).map((r, i) => (
                   <li key={`${r.dbid}-${r.class}-${i}`}>
+                    <FavouriteStar raceId={raceId} row={r} />
                     <a
                       href={routeHash({ kind: 'class', className: r.class })}
                       onClick={() => {
