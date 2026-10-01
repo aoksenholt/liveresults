@@ -1815,6 +1815,30 @@ tr.yellow_row .club {
     min-width: 0;
   }
 
+  :root[data-look='new'] .bar {
+    position: relative;
+  }
+
+  :root[data-look='new'] .class-toolbar.docked {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    padding: 0.5rem;
+    background: var(--bg);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 18%);
+    transform: translateY(calc(-100% - 8px));
+  }
+
+  :root[data-look='new'] .class-toolbar.dock-slide {
+    transition: transform 0.22s;
+  }
+
+  :root[data-look='new'] .class-toolbar.dock-shown {
+    transform: none;
+  }
+
   :root[data-look='new'] :is(.class-toolbar select, .search input) {
     padding: 0.35rem 0.5rem;
   }

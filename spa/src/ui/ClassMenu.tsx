@@ -5,6 +5,7 @@ import { useFrozenColumns } from './frozen';
 import { usePageName } from './pageNames';
 import { routeHash, type Route } from './route';
 import { useStoredList } from './stored';
+import { toolbarSlot } from './topBar';
 import { closeTab, menuEntries, openTab, rememberPage, type MenuEntry } from './tabs';
 
 function MenuLink({
@@ -299,31 +300,33 @@ export function ClassPicker({
   }, [current, tabs]);
   return (
     <section className="class-picker">
-      <div className="class-toolbar">
-        {chosen && columns == 1 && (
-          <PageSelect
-            entries={entries}
-            value={current}
-            onChange={(hash) => (window.location.hash = hash)}
-          />
-        )}
-        {search}
-        {actions}
-        {chosen && <FreezeToggle />}
-        {chosen && (
-          <div className="columns-choice" role="group" aria-label={res._COLUMNS}>
-            {counts.map((n) => (
-              <button
-                key={n}
-                aria-label={String(n)}
-                aria-pressed={n == columns}
-                onClick={() => setColumns(n)}
-              >
-                <ColumnsIcon columns={n} />
-              </button>
-            ))}
-          </div>
-        )}
+      <div ref={toolbarSlot}>
+        <div className="class-toolbar">
+          {chosen && columns == 1 && (
+            <PageSelect
+              entries={entries}
+              value={current}
+              onChange={(hash) => (window.location.hash = hash)}
+            />
+          )}
+          {search}
+          {actions}
+          {chosen && <FreezeToggle />}
+          {chosen && (
+            <div className="columns-choice" role="group" aria-label={res._COLUMNS}>
+              {counts.map((n) => (
+                <button
+                  key={n}
+                  aria-label={String(n)}
+                  aria-pressed={n == columns}
+                  onClick={() => setColumns(n)}
+                >
+                  <ColumnsIcon columns={n} />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       {!chosen && (
         <>
