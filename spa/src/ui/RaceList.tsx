@@ -72,14 +72,14 @@ export function RaceList() {
     return (
       <>
         <Hero />
-        <div className="race-page">
+        <main className="race-page">
           {data ? <NewRaceList data={data} /> : <Loading error={error} text="…" />}
-        </div>
+        </main>
       </>
     );
   if (!data) return <Loading error={error} text="…" />;
   return (
-    <div className="race-page">
+    <main className="race-page">
       <table className="race-table">
         <tbody>
           <Heading>LIVE TODAY!</Heading>
@@ -94,7 +94,7 @@ export function RaceList() {
         </tbody>
       </table>
       <Info />
-    </div>
+    </main>
   );
 }
 

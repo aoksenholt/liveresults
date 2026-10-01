@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import axe from 'axe-core';
 import { Time4oApi } from '../api/client';
 import type { Entry, Race } from '../api/types';
 import { localDate } from '../domain/races';
@@ -485,6 +486,69 @@ describe('App', () => {
       localStorage.clear();
     }
   });
+});
+
+// jsdom has no layout, so contrast and target sizes are checked in a browser.
+async function axeViolations() {
+  const result = await axe.run(document.body, {
+    runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'],
+    rules: { 'color-contrast': { enabled: false }, 'target-size': { enabled: false } },
+  });
+  return result.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target).join(', ')}`);
+}
+
+describe('accessibility', () => {
+  const today = { ...race, date: new Date(Date.now() - 3600000).toISOString() };
+  const live = (search: string) =>
+    render(
+      <App api={fakeApi(midRace(allEntries), today)} search={`?comp=race-1&lang=no${search}`} />,
+    );
+
+  it.each(['', '&theme=classic'])('has no axe violations on the race list (%s)', async (theme) => {
+    render(<App api={fakeApi()} search={`?lang=no${theme}`} />);
+    await screen.findAllByRole('link', { name: 'Testløpet' });
+    expect(await axeViolations()).toEqual([]);
+  });
+
+  it.each([
+    ['', ''],
+    [`#${encodeURIComponent(interval.raceClass.name!)}`, ''],
+    [`#relay::${relay.raceClass.name!.replace(/-?$/, '-')}1`, ''],
+    ['#plainresults', ''],
+    ['#startlist', ''],
+    [`#${encodeURIComponent(interval.raceClass.name!)}`, '&theme=classic'],
+  ])('has no axe violations on the race page %s %s', async (hash, theme) => {
+    window.location.hash = hash;
+    live(theme);
+    await screen.findByText('Siste oppdateringer');
+    if (hash) await screen.findAllByRole(hash.startsWith('#plain') ? 'heading' : 'table');
+    expect(await axeViolations()).toEqual([]);
+  });
+
+  it('has no axe violations on the club and favourites pages', async () => {
+    const org = interval.entries.find((e) => e.organisation?.id != null)!.organisation!;
+    localStorage.setItem(
+      'liveres-favourites-race-1',
+      JSON.stringify([interval.entries[0]!.person!.id]),
+    );
+    window.location.hash = `#club::${org.id}`;
+    live('');
+    await screen.findByRole('table');
+    expect(await axeViolations()).toEqual([]);
+    window.location.hash = '#favourites';
+    await screen.findByRole('heading', { name: 'Favoritter' });
+    await screen.findByRole('table');
+    expect(await axeViolations()).toEqual([]);
+  });
+
+  it.each(['&code=-2', '&code=0', '&code=1000', '&scroll'])(
+    'has no axe violations on the organizer and scrolling pages (%s)',
+    async (search) => {
+      live(search);
+      await screen.findAllByRole('table');
+      expect(await axeViolations()).toEqual([]);
+    },
+  );
 });
 
 function checkedBox() {

@@ -97,7 +97,8 @@ function ScrollResults({
   const { views, predictions, serverNow, error } = useControllerState(controller);
   if (!views) return <Loading error={error} text={res._LOADINGRESULTS ?? ''} />;
   return (
-    <div className="scroll">
+    <main className="scroll">
+      <h1 className="visually-hidden">{summarize(info.race).name}</h1>
       {classes.map((cls, i) => (
         <section key={cls.className}>
           <ClassTable
@@ -111,6 +112,6 @@ function ScrollResults({
           />
         </section>
       ))}
-    </div>
+    </main>
   );
 }

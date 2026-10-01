@@ -46,7 +46,9 @@ export function ClubResults({ clubId, raceId, info, classList }: RaceProps & { c
               <th className="right">№</th>
               <th className="right">{res._START}</th>
               <th className="right">{res._CONTROLFINISH}</th>
-              <th className="right"></th>
+              <th className="right">
+                <span className="visually-hidden">Diff</span>
+              </th>
               {list.hasPace && <th className="right">m/km</th>}
             </tr>
           </thead>

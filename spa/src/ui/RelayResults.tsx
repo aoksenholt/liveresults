@@ -42,11 +42,17 @@ export function RelayResults({
               <th className="right">№</th>
               <th>{res._NAME}</th>
               <th className="right">Total</th>
-              <th className="right"></th>
-              <th className="right"></th>
+              <th className="right">
+                <span className="visually-hidden">Total diff</span>
+              </th>
+              <th className="right">
+                <span className="visually-hidden">±#</span>
+              </th>
               <th className="right">±Tet</th>
               <th className="right">Etappe</th>
-              <th className="right"></th>
+              <th className="right">
+                <span className="visually-hidden">Etappe diff</span>
+              </th>
               <th className="right">m/km</th>
             </tr>
           </thead>

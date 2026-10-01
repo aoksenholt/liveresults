@@ -86,7 +86,8 @@ function OrganizerClasses({
   useWakeLock();
 
   return (
-    <div className="organizer">
+    <main className="organizer">
+      <h1 className="visually-hidden">{`${title} – ${name}`}</h1>
       {!data ? (
         <Loading error={error} text={res._LOADINGCLASSES ?? ''} />
       ) : code == START_REGISTRATION ? (
@@ -107,7 +108,7 @@ function OrganizerClasses({
         <LeftInForest classes={data.classes} {...props} />
       )}
       <Info />
-    </div>
+    </main>
   );
 }
 
