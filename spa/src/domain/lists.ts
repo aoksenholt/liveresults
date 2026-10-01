@@ -165,12 +165,7 @@ const startSortable = (start: number) => (start < 0 ? 99999999 : start);
 
 /** The legacy club table: ordered by place, start time and bib, with the columns rendered as HTML. */
 export function clubList(results: ResultRow[], f: DisplayFormat): ClubList {
-  const { time, clock } = timeFormatter(f);
-  const plain = (t: number, status: number) => formatTime(t, status, f.labels, f.language);
-  const placeTag = (place: string) =>
-    `<span class="place"> ${num(place) < 10 ? '&numsp;' : ''}&#10072;${num(place) > 0 ? place : '-'}&#10072;</span>`;
-  const isNum = (v: unknown) => !isNaN(parseInt(String(v)));
-  const rows = results
+  const sorted = results
     .map((r, i) => ({ r, i }))
     .sort(
       (a, b) =>
@@ -179,27 +174,37 @@ export function clubList(results: ResultRow[], f: DisplayFormat): ClubList {
         Math.abs(a.r.bib) - Math.abs(b.r.bib) ||
         a.i - b.i,
     )
-    .map(({ r }) => ({
-      row: r,
-      name: r.name.length > f.maxNameLength ? nameShort(r.name, f.maxNameLength) : r.name,
-      bib:
-        r.bib < 0
-          ? `<span class="bib">${(-r.bib / 100) | 0}</span>`
-          : r.bib > 0
-            ? `<span class="bib">${r.bib}</span>`
-            : '',
-      start: r.start == 0 ? '' : clock(r.start, true),
-      finish: !isNum(r.result)
-        ? String(r.result)
-        : r.place == '-' || r.place == '' || r.place == 'F'
-          ? plain(r.result, r.status)
-          : time(r.result, 0) + placeTag(r.place),
-      diff: !isNum(r.timeplus)
-        ? String(r.timeplus)
-        : r.status == 0
-          ? `<span class="plustime">+${plain(num(r.timeplus), r.status)}</span>`
+    .map(({ r }) => r);
+  return { hasPace: results.some((r) => r.pace > 0), rows: clubRows(sorted, f) };
+}
+
+/** The columns of the legacy club table for runners in any order. */
+export function clubRows(results: ResultRow[], f: DisplayFormat): ClubRow[] {
+  const { time, clock } = timeFormatter(f);
+  const plain = (t: number, status: number) => formatTime(t, status, f.labels, f.language);
+  const placeTag = (place: string) =>
+    `<span class="place"> ${num(place) < 10 ? '&numsp;' : ''}&#10072;${num(place) > 0 ? place : '-'}&#10072;</span>`;
+  const isNum = (v: unknown) => !isNaN(parseInt(String(v)));
+  return results.map((r) => ({
+    row: r,
+    name: r.name.length > f.maxNameLength ? nameShort(r.name, f.maxNameLength) : r.name,
+    bib:
+      r.bib < 0
+        ? `<span class="bib">${(-r.bib / 100) | 0}</span>`
+        : r.bib > 0
+          ? `<span class="bib">${r.bib}</span>`
           : '',
-      pace: r.status == 0 && r.pace > 0 ? `<span class="plustime">${plain(r.pace, 0)}</span>` : '',
-    }));
-  return { hasPace: results.some((r) => r.pace > 0), rows };
+    start: r.start == 0 ? '' : clock(r.start, true),
+    finish: !isNum(r.result)
+      ? String(r.result)
+      : r.place == '-' || r.place == '' || r.place == 'F'
+        ? plain(r.result, r.status)
+        : time(r.result, 0) + placeTag(r.place),
+    diff: !isNum(r.timeplus)
+      ? String(r.timeplus)
+      : r.status == 0
+        ? `<span class="plustime">+${plain(num(r.timeplus), r.status)}</span>`
+        : '',
+    pace: r.status == 0 && r.pace > 0 ? `<span class="plustime">${plain(r.pace, 0)}</span>` : '',
+  }));
 }

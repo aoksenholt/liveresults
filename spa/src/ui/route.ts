@@ -4,6 +4,7 @@ export type Route =
   | { kind: 'club'; clubId: string }
   | { kind: 'relay'; className: string }
   | { kind: 'startlist' }
+  | { kind: 'favourites' }
   | { kind: 'plainresults' }
   | { kind: 'sprint'; key: string };
 
@@ -17,12 +18,13 @@ function decode(s: string): string {
   }
 }
 
-/** Hash links of the legacy followfull.php; split time views are not supported. */
+/** Hash links of the legacy followfull.php and the favourites page; split time views are not supported. */
 export function parseHash(hash: string): Route {
   const h = decode(hash.replace(/^#/, ''));
   if (!h) return { kind: 'none' };
   if (h == 'startlist') return { kind: 'startlist' };
   if (h == 'plainresults') return { kind: 'plainresults' };
+  if (h == 'favourites') return { kind: 'favourites' };
   if (h.startsWith(SPRINT_PREFIX)) return { kind: 'sprint', key: h.slice(SPRINT_PREFIX.length) };
   if (h.startsWith('club::')) return { kind: 'club', clubId: h.slice(6) };
   if (h.startsWith('relay::')) return { kind: 'relay', className: h.slice(7) };

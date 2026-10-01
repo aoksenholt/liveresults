@@ -286,6 +286,7 @@ describe('followed classes', () => {
   it('reads what was stored and ignores the rest', () => {
     expect(parseFollowedClasses('all')).toBe('all');
     expect(parseFollowedClasses('tabs')).toBe('tabs');
+    expect(parseFollowedClasses('favourites')).toBe('favourites');
     expect(parseFollowedClasses('["H17-",3]')).toEqual(['H17-']);
     expect(parseFollowedClasses('{')).toBeNull();
     expect(parseFollowedClasses('{}')).toBeNull();
@@ -296,6 +297,7 @@ describe('followed classes', () => {
     expect(followedNames('tabs', [])).toBeNull();
     expect(followedNames('tabs', ['H17-'])).toEqual(new Set(['H17-']));
     expect(followedNames([], ['H17-'])).toEqual(new Set());
+    expect(followedNames('favourites', ['H17-'])).toEqual(new Set());
   });
 
   it('keeps the newest passings of the classes followed', () => {
@@ -305,6 +307,16 @@ describe('followed classes', () => {
     expect(followedPassings(passings, new Set(['H17-']), 5)).toEqual([passings[0], passings[2]]);
   });
 
+  it('keeps the newest passings of the favourite runners', () => {
+    const p = (dbid: number, className: string) => ({ dbid, className }) as Passing;
+    const passings = [p(1, 'H17-'), p(2, 'D17-'), p(1, 'Stafett-1'), p(3, 'H17-')];
+    expect(followedPassings(passings, new Set(), 5, new Set([1]))).toEqual([
+      passings[0],
+      passings[2],
+    ]);
+    expect(followedPassings(passings, new Set(), 1, new Set([1, 2]))).toEqual([passings[0]]);
+  });
+
   it('toggles every class of a page and gives all back when all are followed', () => {
     const relay = ['Stafett-1', 'Stafett-2'];
     const noRelay = toggleFollowed('all', relay, every, []);
@@ -312,5 +324,6 @@ describe('followed classes', () => {
     expect(toggleFollowed(['D17-', 'Stafett-1'], relay, every, [])).toEqual(['D17-', ...relay]);
     expect(toggleFollowed(noRelay, relay, every, [])).toBe('all');
     expect(toggleFollowed('tabs', ['D17-'], every, ['H17-'])).toEqual(['D17-', 'H17-']);
+    expect(toggleFollowed('favourites', ['D17-'], every, ['H17-'])).toEqual(['D17-']);
   });
 });

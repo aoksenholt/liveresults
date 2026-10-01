@@ -318,6 +318,19 @@ export const leftInForestController = (
     (entries: Entry[]): ResultRow[] => leftInForest(entryRows(entries, classes, opts)),
   );
 
+/** Every runner of the race for the favourites page, polled while the race is live. */
+export const favouritesController = (
+  api: Time4oApi,
+  raceId: string,
+  classes: ClassInfo[],
+  opts: { timeZone: string; live: boolean },
+) =>
+  pollingController(
+    (etag) => api.getEntries(raceId, {}, etag),
+    opts.live ? PASSINGS_INTERVAL_MS : 0,
+    (entries: Entry[]): ResultRow[] => entryRows(entries, classes, opts),
+  );
+
 /** Every runner of the race, fetched once when the search is first used. */
 export function searchController(
   api: Time4oApi,

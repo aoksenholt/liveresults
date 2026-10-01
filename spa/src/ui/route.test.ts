@@ -11,6 +11,7 @@ describe('hash routes', () => {
     ['#relay::H17-1', { kind: 'relay', className: 'H17-1' }],
     ['#startlist', { kind: 'startlist' }],
     ['#plainresults', { kind: 'plainresults' }],
+    ['#favourites', { kind: 'favourites' }],
     ['#plainresultsclass_H21 Sprint', { kind: 'sprint', key: 'H21 Sprint' }],
     ['#splits::H21::course::1', { kind: 'none' }],
     ['#50%', { kind: 'class', className: '50%' }],
@@ -25,6 +26,7 @@ describe('hash routes', () => {
     { kind: 'sprint', key: 'H21 | Sprint' },
     { kind: 'startlist' },
     { kind: 'plainresults' },
+    { kind: 'favourites' },
   ])('round-trips %o', (route) => {
     expect(parseHash(routeHash(route))).toEqual(route);
   });

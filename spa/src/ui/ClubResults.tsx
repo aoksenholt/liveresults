@@ -4,6 +4,7 @@ import { clubController } from '../state/controllers';
 import { RunnerCount } from './ClassResults';
 import { html, Loading, Message } from './common';
 import { useDisplay } from './context';
+import { FavouriteStar } from './Favourites';
 import { ResultsTable } from './ResultsTable';
 import { useControllerState } from './hooks';
 import type { RaceProps } from './RaceView';
@@ -55,7 +56,10 @@ export function ClubResults({ clubId, raceId, info, classList }: RaceProps & { c
           {list.rows.map((r, i) => (
             <tr key={`${r.row.dbid}:${i}`}>
               <td className="right">{r.row.place}</td>
-              <td>{r.name}</td>
+              <td>
+                <FavouriteStar raceId={raceId} row={r.row} />
+                {r.name}
+              </td>
               <td>
                 <a href={routeHash({ kind: 'class', className: r.row.class })}>{r.row.class}</a>
               </td>

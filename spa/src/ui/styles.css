@@ -1367,6 +1367,73 @@ tr.yellow_row .club {
   margin-left: 0;
 }
 
+:root[data-look='new'] .favourites-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.3em;
+  margin-left: auto;
+  padding: 0.4rem 0.5rem;
+  color: var(--orange);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+
+:root[data-look='new'] .favourites-button:hover {
+  border-color: var(--orange);
+}
+
+:root[data-look='new'] .favourites-button ~ :is(.passings-button, .freeze-toggle) {
+  margin-left: 0;
+}
+
+:root[data-look='new'] .favourite-star {
+  display: inline-flex;
+  vertical-align: -0.1em;
+  margin: 0 0.3em 0 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--border);
+  cursor: pointer;
+}
+
+:root[data-look='new'] .favourite-star:hover,
+:root[data-look='new'] .favourite-star.on {
+  color: var(--orange);
+}
+
+:root[data-look='new'] .favourites :is(th, td) {
+  white-space: nowrap;
+}
+
+/* The name takes the room left, so the other columns stay by their headers. */
+:root[data-look='new'] .favourites th.wide {
+  width: 100%;
+}
+
+:root[data-look='new'] .favourites .latest {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+:root[data-look='new'] .favourites .latest-where {
+  color: var(--muted);
+}
+
+:root[data-look='new'] .favourite-passings {
+  margin-top: 1.5rem;
+}
+
+:root[data-look='new'] .favourite-passings h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+}
+
 :root[data-look='new'] .passings-button .unseen {
   position: absolute;
   top: -0.45rem;
