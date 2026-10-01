@@ -627,8 +627,9 @@ tr.yellow_row .club {
   --card: #fff;
   --text: #22292f;
   --muted: #5a646d;
-  --link: #d14e10;
+  --link: #b8440d;
   --border: #e6e1d6;
+  --icon-off: #8f8a80;
   --panel: var(--card);
   --panel-text: var(--text);
   --section: #f4f1ea;
@@ -636,9 +637,10 @@ tr.yellow_row .club {
   --accent: #16332b;
   --accent-text: #fff;
   --orange: #f2611c;
+  --badge: #c4490f;
   --highlight: #fbd6c4;
   --highlight-border: #f0ab8d;
-  --danger: #d14e10;
+  --danger: #b8440d;
   --good: #d3eadb;
   --warn: #ffe27a;
   --shadow: 0 1px 3px #141e1914;
@@ -653,6 +655,7 @@ tr.yellow_row .club {
   --muted: #98a2a9;
   --link: #ff8a55;
   --border: #303941;
+  --icon-off: #6b767e;
   --section: #232b31;
   --hover-row: #262d33;
   --accent: #1e453a;
@@ -686,6 +689,10 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .info {
   color: var(--muted);
+}
+
+:root[data-look='new'] .info a {
+  text-decoration: underline;
 }
 
 /* Black top bar with the race name and date. */
@@ -1391,15 +1398,21 @@ tr.yellow_row .club {
   margin-left: 0;
 }
 
+/* A hit area of 24 px (WCAG 2.5.8) around the 14 px star, without moving the name. */
 :root[data-look='new'] .favourite-star {
   display: inline-flex;
   vertical-align: -0.1em;
-  margin: 0 0.3em 0 0;
-  padding: 0;
+  margin: -5px 0 -5px -5px;
+  padding: 5px;
   border: none;
   background: none;
-  color: var(--border);
+  color: var(--icon-off);
   cursor: pointer;
+}
+
+/* The club under a star starts below the name, so its hit area stays clear of the star. */
+:root[data-look='new'] .favourite-star ~ a.club {
+  margin-left: 19px;
 }
 
 :root[data-look='new'] .favourite-star:hover,
@@ -1441,7 +1454,7 @@ tr.yellow_row .club {
   min-width: 1.1rem;
   padding: 0 0.25rem;
   border-radius: 999px;
-  background: var(--orange);
+  background: var(--badge);
   color: #fff;
   font-size: 0.7rem;
   font-weight: 700;
@@ -1534,7 +1547,7 @@ tr.yellow_row .club {
 
 :root[data-look='new'] .passing-place.first {
   color: #fff;
-  background: var(--orange);
+  background: var(--badge);
 }
 
 :root[data-look='new'] .passing-diff {
@@ -1693,8 +1706,11 @@ tr.yellow_row .club {
 }
 
 :root[data-look='new'] table.results a.club:is(:link, :visited) {
+  display: inline-block;
   font-size: 0.85em;
   color: var(--muted);
+  padding-block: 7px;
+  margin-block: -7px;
 }
 
 :root[data-look='new'] table.results a.relayclub:is(:link, :visited) {
@@ -1986,7 +2002,7 @@ tr.yellow_row .club {
   padding: 0.1rem 0.45rem;
   border-radius: 4px;
   color: #fff;
-  background: var(--orange);
+  background: var(--badge);
   font-size: 0.85em;
   font-weight: 700;
   letter-spacing: 0.04em;

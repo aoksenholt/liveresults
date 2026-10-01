@@ -96,6 +96,29 @@ og kommende løp med filter.
 - [ ] Eget domene (valgfritt)
 - [ ] Test under et ekte løp, side om side med den gamle siden
 
+## Fase 6 – Universell utforming (WCAG 2.2 AA)
+
+Gjennomgang 2026-10-01 med axe-core 4.13 (WCAG 2.2 AA og best practice) på løpslisten, forsiden
+av løpet, klasse, klubb, startliste, favoritter, rullesiden og passeringsvisningen, i lyst,
+mørkt og klassisk tema på 320, 390 og 1280 px, pluss manuell sjekk av tastatur, fokus,
+tekstavstand, 200 % tekst og liggende telefon. Reflow, tekstavstand, 200 % tekst og liggende
+visning var i orden, og alle knapper hadde synlig fokus og navn. Det klassiske utseendet har
+de samme feilene som den gamle siden, og rettes ikke her.
+
+Prioritert, mest effekt på mobil først:
+
+- [x] 2.5.8 Målstørrelse: stjerna før navnet var 14×14 px og klubblenken under navnet 11 px høy på telefon, tett inntil hverandre (axe: 45 treff per klasse). Begge har nå en klikkflate på minst 24 px med padding og negativ marg, og klubben under en stjerne starter under navnet, så klikkflatene ikke overlapper. Stjerna uten favoritt har fått en farge med 3:1 kontrast (1.4.11)
+- [x] 1.4.3 Kontrast: oransje `#d14e10` på `#faf8f3` ga 4,11:1 i lyst tema (krav 4,5:1), og hvit tekst på `#f2611c` 3,23:1. Lenker og rød tekst er nå `#b8440d` i lyst tema, og merkene med hvit tekst (plass 1 i passeringene, LIVE, telleren) har `--badge` `#c4490f`
+- [x] 1.4.1 Bruk av farge: lenkene i bunnteksten ble bare skilt med farge fra teksten rundt (1,38:1). De er nå understreket
+- [ ] 2.4.11 Fokus ikke skjult: ved tabbing bakover havner fokus under `.float-head`-kopien av tabellhodet. `scroll-padding-top`/`scroll-margin-top` etter topplinja og tabellhodet
+- [ ] 2.2.2 Pause, stopp, skjul: «◉» for løpere i skogen blinker uten stopp, og LIVE-prikken pulserer. Stoppe etter fem sekunder eller med `prefers-reduced-motion`, som også bør dempe de andre animasjonene
+- [ ] 4.1.3 Statusmeldinger: hele «Siste oppdateringer» er `aria-live="polite"`, så skjermlesere leser hver ny rad hvert 15. sekund. Begrense til en kort melding, eller bare når boksen er åpen
+- [ ] 4.1.2/2.4.4 Navn: tomme klubblenker (`#club::0`) uten tekst for løpere uten klubb på rullesiden. Ingen lenke når klubben mangler
+- [ ] 1.3.1 Struktur: tom `th` i klubbtabellen, ingen `main`-landemerke og ingen `h1`, topplinja ligger utenfor landemerker og klassegruppene på forsiden har flere `nav` uten navn
+- [ ] 2.4.2 Sidetittel: tittelen er bare løpsnavnet; ta med klassen, klubben eller favoritter
+- [ ] «◉» leses som et symbol av skjermlesere; gi det en tekst som «i skogen»
+- [ ] axe-core i testene (`App.test.tsx` eller et eget skript) så nye feil fanges
+
 ## Ideer
 
 - [x] Favorittløpere: en stjerne foran navnet i klassetabellene, klubbtabellen og søket merker løpere (bare i det nye utseendet). Siden `#favourites` (stjerneknapp med antall i verktøylinja) viser favorittene på tvers av klasser med plassering, tid og siste post, og alle passeringene deres. Favorittene huskes per løp i nettleseren, og trakten i «Siste oppdateringer» har valget «Favorittene mine»
