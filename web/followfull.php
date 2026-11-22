@@ -8,7 +8,7 @@ if (isset($_GET['lang']))
 $isEmmaComp = isset($_GET['emma']);
 $isTime4oComp = isset($_GET['time4o']);
 $isLiveResComp = (!$isEmmaComp && !$isTime4oComp);
-$isSpeaker = isset($_GET['speaker']);
+$isSpeaker = !$isEmmaComp && isset($_GET['speaker']);
 $compID = $_GET['comp'];
 $Time4oID = "";
 $LiveResID = "";
@@ -22,15 +22,17 @@ include_once("templates/config.php");
 $isLocal = ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_NAME'] == 'localhost');
 
 if ($isEmmaComp) {
-  $url = "https://liveresultat.orientering.se/api.php?method=getcompetitioninfo&comp=" . $compID;
+  $url = "https://api.orienteering.services/competitions/" . rawurlencode($compID);
   $json = file_get_contents($url);
-  $json = preg_replace('/[[:cntrl:]]/', '', $json);
-  $json = str_replace('"O"', 'O', $json);
-  $currentComp = json_decode($json, true);
+  $currentComp = $json === false ? null : json_decode($json, true);
+  if (!isset($currentComp["name"], $currentComp["date"], $currentComp["organizer"], $currentComp["timediff"])) {
+    http_response_code(502);
+    exit("Unable to load Emma competition information.");
+  }
   $compName = $currentComp["name"];
   $compDate = $currentComp["date"];
-  $eventTimeZoneDiff = $currentComp["timediff"];
-  $timeZone = getTimeZone($eventTimeZoneDiff);
+  $eventTimeZoneDiff = (int)$currentComp["timediff"];
+  $timeZone = !empty($currentComp["timezone"]) ? $currentComp["timezone"] : getTimeZone($eventTimeZoneDiff);
   $organizer = $currentComp["organizer"];
   $showInfo = false;
   $showEcardTimes = false;
@@ -351,7 +353,7 @@ echo ("<?xml version=\"1.0\" encoding=\"$CHARSET\" ?>\n");
       // Set date and time zone
       res.compDate = "<?= $compDate ?>";
       res.eventTimeZoneDiff = <?= $eventTimeZoneDiff ?>;
-      res.timeZone = "<?= $timeZone ?>";
+      res.timeZone = <?= json_encode($timeZone, JSON_HEX_TAG) ?>;
 
       // Insert comp name
       var compName = "<?= addslashes($compName) ?>";
