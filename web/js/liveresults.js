@@ -34,7 +34,7 @@ var LiveResults;
       this.showTimesInSprint = false;
       this.showCourseResults = false;
       this.showTenthOfSecond = false;
-      this.lastChanged = 0;
+      this.lastchanged = 0;
       this.clubUpdateInterval = 20000;
       this.classUpdateInterval = 60000;
       this.inactiveTimeout = 30 * 60;
@@ -57,7 +57,7 @@ var LiveResults;
       this.lastRunnerListHash = "";
       this.lastPassingsSince = "";
       this.lastPassingsSinceDbid = 0;
-      this.lastPassingsUpdateHash = "";
+      this.lastPassingsUpdateEtag = "";
       this.passingsQueue = [];
       this.isAnimatingPassings = false;
       this.lastRadioPassingsUpdateHash = "";
@@ -125,9 +125,10 @@ var LiveResults;
         }
       }
       else if (EmmaServer) {
-        this.updateInterval = 15000;
+        this.updateInterval = 10000;
         this.radioUpdateInterval = 5000;
-        this.apiURL = "https://liveresultat.orientering.se/api.php";
+        this.apiURL = "https://api.orienteering.services/competitions/";
+        // https://api.orienteering.services/competitions/37565/classresults?class=H14
         this.radioURL = "";
         this.messageURL = "";
       }
@@ -223,16 +224,18 @@ var LiveResults;
         headers: headers,
         dataType: "json",
         success: function (data, status, resp) {
-          if (_this.Time4oServer) {
+          if (_this.Time4oServer || _this.EmmaServer) {
             data = data || {};
             if (resp.status == 200) {
-              _this.lastRunnerListHash = resp.getResponseHeader("etag").slice(1, -1);
+              var etag = _this._extractEtag(resp);
+              if (etag)
+                _this.lastRunnerListHash = etag;
               data.status = "OK";
             }
             else if (resp.status == 304) {
               data.status = "NOT MODIFIED";
             }
-            data.lastChanged = false;
+            data.lastchanged = false;
             data.rt = _this.classUpdateInterval / 1000;
           }
           _this.handleUpdateRunnerListResponse(data);
@@ -268,6 +271,10 @@ var LiveResults;
         URLextra = "race/" + this.competitionId + "/raceClass";
         headers = this.lastClassListHash ? { 'If-None-Match': this.lastClassListHash } : {};
       }
+      else if (this.EmmaServer) {
+        URLextra = this.competitionId + "/classes";
+        headers = this.lastClassListHash ? { 'If-None-Match': this.lastClassListHash } : {};
+      }
       else {
         URLextra = "?comp=" + this.competitionId + "&method=getclasses&last_hash=" + this.lastClassListHash;
         headers = {};
@@ -277,16 +284,18 @@ var LiveResults;
         headers: headers,
         dataType: "json",
         success: function (data, status, resp) {
-          if (_this.Time4oServer) {
+          if (_this.Time4oServer || _this.EmmaServer) {
             data = data || {};
             if (resp.status == 200) {
-              _this.lastClassListHash = resp.getResponseHeader("etag").slice(1, -1);
+              var etag = _this._extractEtag(resp);
+              if (etag)
+                _this.lastClassListHash = etag;
               data.status = "OK";
             }
             else if (resp.status == 304) {
               data.status = "NOT MODIFIED";
             }
-            data.lastChanged = false;
+            data.lastchanged = false;
             data.rt = _this.classUpdateInterval / 1000;
           }
           _this.handleUpdateClassListResponse(data, first);
@@ -307,7 +316,7 @@ var LiveResults;
           data = this.Time4oClassesToLiveres(data);
           this.activeClasses = data.classes;
         }
-        else
+        else if (!this.EmmaServer)
           this.lastClassListHash = data.hash;
         this.courseNames = data.courses;
         if (data.infotext)
@@ -339,8 +348,8 @@ var LiveResults;
           const sprintFiRe = this.Time4oServer ? /\bFinale$/ : /\|\s*Finale/;
 
           for (var i = 0; i < nClass; i++) {
-            var className = classes[i].className;
-            var classNameNext = (i < nClass - 1 ? classes[i + 1].className : "");
+            var className = this.EmmaServer ? classes[i] : classes[i].className;
+            var classNameNext = (i == nClass - 1 ? "" : (this.EmmaServer ? classes[i + 1] : classes[i + 1].className));
             this.courses[className] = (classes[i].courses != undefined ? classes[i].courses : []);
             var relay = relayNext;
             var sprint = sprintNext;
@@ -1548,17 +1557,46 @@ var LiveResults;
       this.currentTable.columns.adjust();
     };
 
+    // Keep ETags exactly as returned by the server, including weak tags: W/"..."
+    AjaxViewer.prototype._normalizeEtag = function (etag) {
+      if (etag == null)
+        return "";
+      return String(etag).trim();
+    };
+
+    AjaxViewer.prototype._extractEtag = function (resp) {
+      if (!resp)
+        return "";
+      var etag = resp.getResponseHeader("etag");
+      return this._normalizeEtag(etag);
+    };
+
+    AjaxViewer.prototype._ifNoneMatchHeader = function (etag) {
+      var normalized = this._normalizeEtag(etag);
+      return normalized ? { 'If-None-Match': normalized } : {};
+    };
+
 
     //Request data for the last-passings div
     AjaxViewer.prototype.updateLastPassings = function () {
       var _this = this;
+      var URLextra = "";
       if (this.updateAutomatically && this.autoUpdateLastPassings && !this.Time4oServer) {
+        var reqHeaders = {};
+        if (this.EmmaServer) {
+          URLextra = this.competitionId + "/passings";
+          reqHeaders = this._ifNoneMatchHeader(this.lastPassingsUpdateEtag);
+        }
+        else {
+          URLextra = "comp=" + this.competitionId + "&method=getlastpassings&lang=" + this.language;
+          URLextra += "&since=" + encodeURIComponent(this.lastPassingsSince) + "&since_dbid=" + this.lastPassingsSinceDbid;
+        }
         $.ajax({
-          url: this.apiURL,
-          data: "comp=" + this.competitionId + "&method=getlastpassings&lang=" + this.language
-            + (this.EmmaServer ? "&last_hash=" + this.lastPassingsUpdateHash : "&since=" + encodeURIComponent(this.lastPassingsSince) + "&since_dbid=" + this.lastPassingsSinceDbid),
+          url: this.apiURL + URLextra,
+          headers: reqHeaders,
+          data: {},
           dataType: "json",
-          success: function (data) { _this.handleUpdateLastPassings(data); },
+          success: function (data, status, resp) { _this.handleUpdateLastPassings(data, status, resp); },
           error: function () {
             _this.passingsUpdateTimer = setTimeout(function () { _this.updateLastPassings(); }, _this.updateInterval);
           }
@@ -1568,12 +1606,37 @@ var LiveResults;
 
 
     //Handle response for updating the last passings
-    AjaxViewer.prototype.handleUpdateLastPassings = function (data) {
+    AjaxViewer.prototype.handleUpdateLastPassings = function (data, status, resp) {
       var _this = this;
-      if (data.rt > 0)
-        this.updateInterval = data.rt * 1000;
+      if (this.EmmaServer) {
+        data = data || {};
+        if (resp && resp.status == 200) {
+          var etag = _this._extractEtag(resp);
+          if (etag)
+            _this.lastPassingsUpdateEtag = etag;
+          data.status = "OK";
+        }
+        else if (resp && resp.status == 304) {
+          data.status = "NOT MODIFIED";
+        }
+        data.rt = _this.updateInterval / 1000;
+      }
+      if (data.rt > 0) {
+        var nextInterval = data.rt * 1000;
+        this.updateInterval = (this.EmmaServer ? Math.max(10000, nextInterval) : nextInterval);
+      }
       if (data != null && data.status == "OK" && data.passings != null) {
-        if (data.since !== undefined) {
+        if (this.EmmaServer) {
+          var emmaContainer = $("#" + _this.lastPassingsDiv);
+          if (!emmaContainer.find(".passings-inner").length)
+            emmaContainer.html("<div class='passings-inner'></div>");
+          var emmaInner = emmaContainer.find(".passings-inner")[0];
+          emmaInner.innerHTML = "";
+          $.each(data.passings, function (key, value) {
+            if (key < 3)
+              emmaInner.insertAdjacentHTML("beforeend", _this._buildPassingLineHtml(value));
+          });
+        } else if (data.since !== undefined) {
           var isInitial = (_this.lastPassingsSince === "");
           _this.lastPassingsSince = data.since;
           _this.lastPassingsSinceDbid = data.since_dbid || 0;
@@ -1597,9 +1660,9 @@ var LiveResults;
             if (!_this.isAnimatingPassings)
               _this._processPassingsQueue();
           }
-        } else if (data.hash !== _this.lastPassingsUpdateHash) {
+        } else if (data.hash !== _this.lastPassingsUpdateEtag) {
           // Fallback for servers without 'since' support (e.g. EmmaServer): static refresh on hash change
-          _this.lastPassingsUpdateHash = data.hash;
+          _this.lastPassingsUpdateEtag = data.hash;
           var container = $("#" + _this.lastPassingsDiv);
           if (!container.find(".passings-inner").length)
             container.html("<div class='passings-inner'></div>");
@@ -1615,11 +1678,16 @@ var LiveResults;
         this.passingsUpdateTimer = setTimeout(function () { _this.updateLastPassings(); }, _this.updateInterval);
     };
 
+
     AjaxViewer.prototype._buildPassingLineHtml = function (value) {
-      var runnerName = (value.runnerName.length > this.maxNameLength ? this.nameShort(value.runnerName) : value.runnerName);
-      var status = value["status"];
-      var place = value["place"];
+      var status = this.EmmaServer ? 0 : value["status"];
+      var runnerName = this.EmmaServer ? value.name : value.runnerName;
+      var passtime = this.EmmaServer ? this.formatTime(value["wallClock"], 0, false, true, true, true) : value.passtime;
+      var time = this.EmmaServer ? this.formatTime(value["time"], status, this.showTenthOfSecond, true, false) : value.time;
+      if (runnerName.length > this.maxNameLength)
+        runnerName = this.nameShort(runnerName);
       var code = value["control"];
+      var place = value["place"];
       var cl = value["class"];
       if (cl && cl.length > 0)
         cl = cl.replace("'", "\\'");
@@ -1629,13 +1697,12 @@ var LiveResults;
         var bibFormat = bib < 0 ? ((-bib / 100 | 0) + "-" + (-bib % 100)) : bib;
         bibStr = " (<a href=\"javascript:LiveResults.Instance.searchBib(" + bib + ")\">" + bibFormat + "</a>) ";
       }
-      var placeStr = (code > 0 && place > 0 && status == 0 ? " (" + place + ")" : "");
-      return "<div class='passing-line'>" + value.passtime + ": " + bibStr + runnerName
+      var placeStr = (code > 0 && place > 0 && status == 0 ? " (" + place + ")" : ""); return "<div class='passing-line'>" + passtime + ": " + bibStr + runnerName
         + " (<a href=\"javascript:LiveResults.Instance.chooseClass('" + cl + "')\">" + value["class"] + "</a>) "
         + (code == 1000 && status > 0 && status < 7 ? this.resources["_NEWSTATUS"] :
           (code == 1000 ? this.resources["_LASTPASSFINISHED"] : this.resources["_LASTPASSPASSED"] + " " + value["controlName"])
           + " " + (status == 13 ? this.resources["_LASTPASSWITHSTATUS"] : this.resources["_LASTPASSWITHTIME"])) + " "
-        + value["time"] + placeStr + "</div>";
+        + time + placeStr + "</div>";
     };
 
     AjaxViewer.prototype._processPassingsQueue = function () {
@@ -1777,9 +1844,11 @@ var LiveResults;
       if (this.updateAutomatically) {
         if (this.currentTable != null) {
           var preTime = new Date().getTime();
+          var reqData = "comp=" + this.competitionId + "&method=getclasseslastchanged&last_hash=" + this.lastClassHash;
           $.ajax({
             url: this.apiURL,
-            data: "comp=" + this.competitionId + "&method=getclasseslastchanged&last_hash=" + this.lastClassHash,
+            headers: "",
+            data: reqData,
             dataType: "json",
             success: function (data, status, resp) {
               var expTime = false;
@@ -1825,11 +1894,15 @@ var LiveResults;
         if (!data.active && !$('#liveIndicator').find('span').hasClass('notLiveClient'))
           $('#liveIndicator').html('<span class="notLiveClient" id="liveIndicator">◉</span>');
         if (data.status == "OK") {
-          var index = data.lastchanged.findIndex(function (item) {
-            return item.class === _this.curClassName;
-          });
-          this.lastClassHash = data.hash;
-          if (data.lastchanged[index].lastchanged > this.lastChanged) {
+          var index = -1;
+          if (Array.isArray(data.lastchanged)) {
+            index = data.lastchanged.findIndex(function (item) {
+              return item.class === _this.curClassName;
+            });
+          }
+          if (!this.EmmaServer)
+            this.lastClassHash = data.hash;
+          if (index >= 0 && data.lastchanged[index].lastchanged > this.lastchanged) {
             this.checkForClassUpdate();
             return;
           }
@@ -1858,6 +1931,10 @@ var LiveResults;
           URLextra = "race/" + this.competitionId + "/entry?raceClassId=" +
             this.activeClasses?.find(c => c.className === this.curClassName).id;
           headers = this.lastClassHash ? { 'If-None-Match': this.lastClassHash } : {};
+        }
+        else if (this.EmmaServer) {
+          URLextra = this.competitionId + "/classresults?class=" + encodeURIComponent(this.curClassName);
+          headers = this._ifNoneMatchHeader(this.lastClassHash);
         }
         else {
           URLextra = "?comp=" + this.competitionId + "&method=getclassresults&unformattedTimes=true&class="
@@ -1891,7 +1968,24 @@ var LiveResults;
                 else if (resp.status == 304) {
                   data.status = "NOT MODIFIED";
                 };
-                data.lastChanged = false;
+                data.lastchanged = false;
+                data.rt = _this.updateInterval / 1000;
+              }
+              else if (_this.EmmaServer) {
+                expTime = new Date(resp.getResponseHeader("date")).getTime() + _this.updateInterval;
+                data = data || {};
+                if (resp.status == 200) {
+                  var etag = _this._extractEtag(resp);
+                  if (etag)
+                    _this.lastClassHash = etag;
+                  data.status = "OK";
+                  if (data.splitcontrols == undefined && data.splitControls != undefined)
+                    data.splitcontrols = data.splitControls;
+                }
+                else if (resp.status == 304) {
+                  data.status = "NOT MODIFIED";
+                }
+                data.lastchanged = false;
                 data.rt = _this.updateInterval / 1000;
               }
               else
@@ -1999,7 +2093,7 @@ var LiveResults;
             var newResults = table.data().toArray();
             this.animateTable(oldResults, newResults, this.animTime);
 
-            if (!newData.lastChanged && !this.Time4oServer)
+            if (!newData.lastchanged && !this.Time4oServer && !this.EmmaServer)
               this.lastClassHash = newData.hash;
 
             setTimeout(function () { _this.startPredictedTimeTimer(); }, this.animTime + 200);
@@ -2009,7 +2103,7 @@ var LiveResults;
       catch { }
       if (this.isCompToday()) {
         if (newData?.lastchanged) {
-          this.lastChanged = newData.lastchanged;
+          this.lastchanged = newData.lastchanged;
           this.resUpdateTimeout = setTimeout(function () { _this.checkForChanges(); }, this.updateInterval);
         }
         else
@@ -2032,6 +2126,10 @@ var LiveResults;
       if (this.Time4oServer) {
         URLextra = "race/" + this.competitionId + "/entry?organisationId=" + this.curClubName;
         headers = this.lastClubHash ? { 'If-None-Match': this.lastClubHash } : {};
+      }
+      else if (this.EmmaServer) {
+        URLextra = this.competitionId + "/clubresults?club=" + encodeURIComponent(this.curClubName);
+        headers = this._ifNoneMatchHeader(this.lastClubHash);
       }
       else {
         URLextra = "?comp=" + this.competitionId + "&method=getclubresults&unformattedTimes=true&club="
@@ -2056,6 +2154,21 @@ var LiveResults;
             else if (resp.status == 304) {
               data.status = "NOT MODIFIED";
             };
+            data.lastchanged = false;
+            data.rt = _this.clubUpdateInterval / 1000;
+          }
+          else if (_this.EmmaServer) {
+            expTime.setTime(new Date(resp.getResponseHeader("date")).getTime() + _this.clubUpdateInterval);
+            data = data || {};
+            if (resp.status == 200) {
+              var etag = _this._extractEtag(resp);
+              if (etag)
+                _this.lastClubHash = etag;
+              data.status = "OK";
+            }
+            else if (resp.status == 304) {
+              data.status = "NOT MODIFIED";
+            }
             data.lastchanged = false;
             data.rt = _this.clubUpdateInterval / 1000;
           }
@@ -2124,7 +2237,7 @@ var LiveResults;
         clubScrollBody.scrollTop(posTop);
         window.scrollTo(scrollX, scrollY);
         this.animateTable(oldData, data.results, this.animTime, false, true);
-        if (!this.Time4oServer)
+        if (!this.Time4oServer && !this.EmmaServer)
           this.lastClubHash = data.hash;
       }
       if (this.isCompToday()) {
@@ -2188,7 +2301,10 @@ var LiveResults;
       var preTime = new Date().getTime();
       var URLextra = "";
 
-      if (!this.Time4oServer) {
+      if (this.EmmaServer) {
+        URLextra = this.competitionId + "/classresults?class=" + encodeURIComponent(className);
+      }
+      else if (!this.Time4oServer) {
         var callStr = "";
         if (className == "plainresults")
           callStr = "&method=getplainresults&unformattedTimes=true";
@@ -2236,6 +2352,17 @@ var LiveResults;
                 data.type = "classresults";
               data.rt = _this.updateInterval / 1000;
             }
+            else if (_this.EmmaServer) {
+              expTime = new Date(resp.getResponseHeader("date")).getTime() + _this.updateInterval;
+              data = data || {};
+              var etag = _this._extractEtag(resp);
+              if (etag)
+                _this.lastClassHash = etag;
+              data.status = "OK";
+              data.rt = _this.updateInterval / 1000;
+              if (data.splitcontrols == undefined && data.splitControls != undefined)
+                data.splitcontrols = data.splitControls;
+            }
             else
               expTime = new Date(resp.getResponseHeader("expires")).getTime();
           }
@@ -2252,10 +2379,19 @@ var LiveResults;
       if (this.curClassName == null)
         return;
 
+      if (this.EmmaServer && data != null) {
+        if (data.status == undefined)
+          data.status = "OK";
+        if (data.rt == undefined)
+          data.rt = this.updateInterval / 1000;
+        if (data.splitcontrols == undefined && data.splitControls != undefined)
+          data.splitcontrols = data.splitControls;
+      }
+
       if (data != null && data.rt != undefined && data.rt > 0)
         this.updateInterval = data.rt * 1000;
       if (data != null && data.lastchanged != undefined)
-        this.lastChanged = data.lastchanged;
+        this.lastchanged = data.lastchanged;
 
       if (expTime) {
         var lastUpdate = new Date();
@@ -3167,12 +3303,12 @@ var LiveResults;
             }
           }
 
-          if (!this.Time4oServer)
+          if (!this.Time4oServer && !this.EmmaServer)
             this.lastClassHash = data.hash;
           this.updateClassRunnerCount(data.results);
           if (this.isCompToday()) {
             this.updatePredictedTimes(true); // Insert times only
-            if (this.lastChanged)
+            if (this.lastchanged)
               this.resUpdateTimeout = setTimeout(function () { _this.checkForChanges(); }, this.updateInterval);
             else
               this.resUpdateTimeout = setTimeout(function () { _this.checkForClassUpdate(); }, this.updateInterval);
@@ -3492,8 +3628,7 @@ var LiveResults;
         URLextra = "race/" + this.competitionId + "/entry?organisationId=" + clubName;
       }
       else {
-        URLextra = "?comp=" + this.competitionId + "&method=getclubresults&unformattedTimes=true&club="
-          + encodeURIComponent(clubName) + (this.isMultiDayEvent ? "&includetotal=true" : "");
+        URLextra = this.competitionId + "/clubresults?club=" + encodeURIComponent(clubName);
       }
 
       $.ajax({
@@ -3511,6 +3646,15 @@ var LiveResults;
                 data.status = "OK";
                 data.rt = _this.clubUpdateInterval / 1000;
               }
+            }
+            else if (_this.EmmaServer) {
+              expTime = new Date(resp.getResponseHeader("date")).getTime() + _this.clubUpdateInterval;
+              var etag = _this._extractEtag(resp);
+              if (etag)
+                _this.lastClubHash = etag;
+              data = data || {};
+              data.status = "OK";
+              data.rt = _this.clubUpdateInterval / 1000;
             }
             else
               expTime = new Date(resp.getResponseHeader("expires")).getTime();
@@ -3865,7 +4009,7 @@ var LiveResults;
           this.currentTable.buttons(0, null).containers().appendTo($('#colSelector'));
           if (!this.fixedTable)
             this.updateScrollY();
-          if (!this.Time4oServer)
+          if (!this.Time4oServer && !this.EmmaServer)
             this.lastClubHash = data.hash;
         }
       }

@@ -169,16 +169,15 @@ echo ("<?xml version=\"1.0\" encoding=\"$CHARSET\" ?>\n");
       </tr>
       <?php
       if ($emma)
-        $url = "https://liveresultat.orientering.se/api.php?method=getcompetitions";
+        $url = "https://api.orienteering.services/competitions";
       else if ($local)
         $url = "http://localhost/api/api.php?method=getcompetitions";
       else
         $url = "https://api.liveres.live/api.php?method=getcompetitions";
-      $json = file_get_contents($url);
+      $json = @file_get_contents($url) ?: '';
       $json = preg_replace('/[[:cntrl:]]/', '', $json);
-      $json = str_replace('"O"', 'O', $json);
       $data = json_decode($json, true);
-      $comps = $data["competitions"];
+      $comps = $data["competitions"] ?? [];
 
       if (!$emma) {
         $existingTime4oIds = array();
@@ -189,9 +188,9 @@ echo ("<?xml version=\"1.0\" encoding=\"$CHARSET\" ?>\n");
         }
         if (!$local) {
           $url = "https://center.time4o.com/api/v1/race";
-          $json = file_get_contents($url);
+          $json = @file_get_contents($url) ?: '';
           $data = json_decode($json, true);
-          $compsTime4o = $data["data"];
+          $compsTime4o = $data["data"] ?? [];
 
 
           foreach ($compsTime4o as $key => &$c) {
