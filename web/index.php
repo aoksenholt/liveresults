@@ -169,14 +169,13 @@ echo ("<?xml version=\"1.0\" encoding=\"$CHARSET\" ?>\n");
       </tr>
       <?php
       if ($emma)
-        $url = "https://liveresultat.orientering.se/api.php?method=getcompetitions";
+        $url = "https://api.orienteering.services/competitions";
       else if ($local)
         $url = "http://localhost/api/api.php?method=getcompetitions";
       else
         $url = "https://api.liveres.live/api.php?method=getcompetitions";
       $json = @file_get_contents($url) ?: '';
       $json = preg_replace('/[[:cntrl:]]/', '', $json);
-      $json = str_replace('"O"', 'O', $json);
       $data = json_decode($json, true);
       $comps = $data["competitions"] ?? [];
 
